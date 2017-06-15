@@ -1,0 +1,27 @@
+[submodule "Solumax/AuthClient"]
+	path = Solumax/AuthClient
+	url = git@bitbucket.org:rezariantono/solumax2_auth_client.git
+[submodule "Solumax/PhpHelper"]
+	path = Solumax/PhpHelper
+	url = git@bitbucket.org:rezariantono/solumax2_php_helper.git
+[submodule "resources/angular"]
+	path = resources/angular
+	url = git@bitbucket.org:rezariantono/solumax2_spa_dependencies.git
+[submodule "Solumax/FileManager"]
+	path = Solumax/FileManager
+	url = git@bitbucket.org:rezariantono/solumax2_file_manager.git
+[submodule "Solumax/TransactionClient"]
+	path = Solumax/TransactionClient
+	url = git@bitbucket.org:rezariantono/solumax2_transaction_client.git
+[submodule "public/standard"]
+	path = public/standard
+	url = git@bitbucket.org:rezariantono/publicfolder.git
+[submodule "Wala/Jwt"]
+	path = Wala/Jwt
+	url = git@bitbucket.org:rezariantono/wala2_jwt.git
+[submodule "Solumax/Setting"]
+	path = Solumax/Setting
+	url = git@bitbucket.org:rezariantono/solumax2_setting.git
+[submodule "Solumax/Logger"]
+	path = Solumax/Logger
+	url = git@bitbucket.org:rezariantono/solumax2_logger3.git
