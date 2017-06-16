@@ -28,33 +28,17 @@ class LeasingOrderController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
 
-    public function select($id, Request $request) {
-
+    public function assignFromLeasingOrder($id, Request $request) {
+        
         $salesOrder = $this->salesOrder->find($id);
+        $leasingOrder = \Gelora\CreditSales\App\LeasingOrder\LeasingOrderModel::find($request->get('leasing_order_id'));
 
-        $leasingOrder = \Gelora\CreditSales\App\LeasingOrder\LeasingOrderModel::
-                find($request->get('leasing_order_id'));
-
-        $validation = $salesOrder->validate()->leasingOrder()->onSelect($leasingOrder);
+        $validation = $salesOrder->validate()->leasingOrder()->onAssignFromLeasingOrder($leasingOrder);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
 
-        $salesOrder->action()->leasingOrder()->onSelect($leasingOrder);
-
-        return $this->formatItem($salesOrder);
-    }
-
-    public function deselect($id, Request $request) {
-
-        $salesOrder = $this->salesOrder->find($id);
-
-        $validation = $salesOrder->validate()->leasingOrder()->onDeselect();
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }
-
-        $salesOrder->action()->leasingOrder()->onDeselect();
+        $salesOrder->action()->leasingOrder()->onAssignFromLeasingOrder($leasingOrder);
 
         return $this->formatItem($salesOrder);
     }

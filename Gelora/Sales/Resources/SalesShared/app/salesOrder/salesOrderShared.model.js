@@ -41,12 +41,9 @@ geloraSalesShared
             update: function(id, leasingOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/', { leasingOrder : leasingOrder }, { params: params })
             },
-            select: function(id, leasingOrder, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/select/', { leasing_order_id: leasingOrder.id }, { params: params })
-            },
-            deselect: function(id, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/deselect/', {}, { params: params })
-            },
+            assignFromLeasingOrder: function(id, leasingOrderId, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id : leasingOrderId }, { params: params })  
+            }
         }
 
         salesOrder.document = {

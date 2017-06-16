@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnDeselect {
+class OnAssignFromLeasingOrder {
     
     protected $salesOrder;
     
@@ -12,9 +12,11 @@ class OnDeselect {
         $this->salesOrder = $salesOrder;
     }
     
-    public function action() {
+    public function action($leasingOrder) {
         
-        $this->salesOrder->leasing_order_id = null;
+        $this->salesOrder->leasingOrder = $leasingOrder->toArray();
+        
+        $leasingOrder->action()->onAssignToSalesOrder();
         
         $this->salesOrder->save();
     }

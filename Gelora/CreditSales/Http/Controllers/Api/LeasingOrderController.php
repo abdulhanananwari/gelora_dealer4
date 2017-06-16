@@ -20,7 +20,7 @@ class LeasingOrderController extends Controller {
     public function index(Request $request) {
 
         $query = $this->leasingOrder->newQuery();
-        
+
         if ($request->get('leasing_personnel_access') == 'true') {
 
             $leasingPersonnel = \Gelora\CreditSales\App\LeasingPersonnel\LeasingPersonnelModel::
@@ -59,69 +59,17 @@ class LeasingOrderController extends Controller {
         if ($request->has('sub_leasing_id')) {
             $query->where('subLeasing.id', $request->get('sub_leasing_id'));
         }
-        
+
         if ($request->has('sub_leasing_name')) {
             $query->where('subLeasing.name', 'LIKE', '%' . $request->get('sub_leasing_name') . '%');
         }
-        
+
         $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
-        
-        if ($request->get('validated') == true) {
-            switch ($request->get('validated')) {
-                case 'true':
-                    $query->whereNotNull('validated_at');
-                    break;
-                case 'false':
-                    $query->whereNull('validated_at');
-                    break;
-                default:
-                    break;
-            }
-        }
 
-        if ($request->has('invoice_generated')) {
-            switch ($request->get('invoice_generated')) {
-                case 'true':
-                    $query->whereNotNull('invoice_generated_at');
-                    break;
-                case 'false':
-                    $query->whereNull('invoice_generated_at');
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        if ($request->has('unit_delivered')) {
-            
-            $subquery = clone $query;
-            $filter = $subquery->get(['id'])->pluck('id');
-            
-            switch ($request->get('unit_delivered')) {
-                case 'true':
-                    $filter = \Gelora\Sales\App\SalesOrder\SalesOrderModel::
-                                    whereIn('leasing_order_id', $filter)
-                                    ->whereNotNull('delivery_id')
-                                    ->get(['leasing_order_id'])->pluck('leasing_order_id');
-                    $query->whereIn('id', $filter);
-                    break;
-                case 'false':
-                    $filter = \Gelora\Sales\App\SalesOrder\SalesOrderModel::
-                                    whereIn('leasing_order_id', $filter)
-                                    ->whereNull('delivery_id')
-                                    ->get(['leasing_order_id'])->pluck('leasing_order_id');
-                    $query->whereIn('id', $filter);
-                    break;
-                default:
-                    break;
-            }            
-        }
-        
         if ($request->has('paginate')) {
-            
+
             $leasingOrders = $query->paginate($request->get('paginate', 20));
             return $this->formatCollection($leasingOrders, [], $leasingOrders);
-            
         } else {
 
             $leasingOrders = $query->get();
@@ -146,7 +94,7 @@ class LeasingOrderController extends Controller {
             return $this->formatErrors($validation);
         }
 
-        $leasingOrder->action()->onCreate();
+        $leasingOrder->action()->onCreateOrUpdate();
 
         return $this->formatItem($leasingOrder);
     }
@@ -162,7 +110,7 @@ class LeasingOrderController extends Controller {
             return $this->formatErrors($validation);
         }
 
-        $leasingOrder->action()->onUpdate();
+        $leasingOrder->action()->onCreateOrUpdate();
 
         return $this->formatItem($leasingOrder);
     }
