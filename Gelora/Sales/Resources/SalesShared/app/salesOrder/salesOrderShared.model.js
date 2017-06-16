@@ -38,6 +38,9 @@ geloraSalesShared
         }
 
         salesOrder.leasingOrder = {
+            update: function(id, leasingOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/', { leasingOrder : leasingOrder }, { params: params })
+            },
             select: function(id, leasingOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/select/', { leasing_order_id: leasingOrder.id }, { params: params })
             },

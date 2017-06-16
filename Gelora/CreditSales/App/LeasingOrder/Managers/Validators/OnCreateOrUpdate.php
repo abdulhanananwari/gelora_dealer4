@@ -38,8 +38,9 @@ class OnCreateOrUpdate {
                     'subLeasing' => 'required',
                     'on_the_road' => 'required|numeric',
                     'dp_po' => 'required|numeric',
+                    'tenor' => 'required|numeric|max:50',
+                    'cicilan' => 'required|numeric',
                     'leasing_payable' => 'required|numeric',
-                    'po_number' => 'required',
                         ], [
                     'mainLeasing.required' => 'Leasing utama harus dipilih',
                     'subLeasing.required' => 'Leasing cabang harus dipilih',

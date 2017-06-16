@@ -13,6 +13,21 @@ class LeasingOrderController extends SalesOrderController {
         parent::__construct();
     }
 
+    public function update($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->leasingOrder($request->get('leasingOrder'));
+
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->leasingOrder()->onUpdate();
+
+        return $this->formatItem($salesOrder);
+    }
+
     public function select($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);

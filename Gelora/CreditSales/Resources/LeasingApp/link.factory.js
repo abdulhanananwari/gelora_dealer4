@@ -31,12 +31,6 @@ geloraDealerLeasingApp
 					leasing: {
 						base: apps.dealer.creditSales + 'api/leasing/'
 					},
-					leasingPromo: {
-						base: apps.dealer.creditSales + 'api/leasing-promo/'
-					},
-					leasingProgram: {
-						base: apps.dealer.creditSales + 'api/leasing-program/'
-					},
 					leasingPersonnel: {
 						base: apps.dealer.creditSales + 'api/leasing-personnel/'
 					},

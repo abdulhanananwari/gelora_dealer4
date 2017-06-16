@@ -4,6 +4,7 @@ namespace Gelora\CreditSales\Http\Controllers\Api;
 
 use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
 use Illuminate\Http\Request;
+use MongoDB\BSON\ObjectID;
 
 class LeasingController extends Controller {
 
@@ -20,6 +21,14 @@ class LeasingController extends Controller {
     public function index(Request $request) {
 
         $query = $this->leasing->newQuery();
+
+        if ($request->get('leasing_personnel_access') == 'true') {
+
+            $leasingPersonnel = \Gelora\CreditSales\App\LeasingPersonnel\LeasingPersonnelModel::
+                    where('user.id', \ParsedJwt::getByKey('sub'))->first();
+
+            $query->where('_id', new ObjectID($leasingPersonnel->leasing->_id));
+        }
 
         $leasings = $query->get();
 

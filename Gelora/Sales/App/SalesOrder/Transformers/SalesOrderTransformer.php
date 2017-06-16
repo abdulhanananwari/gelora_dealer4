@@ -22,16 +22,16 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'registration' => (object) $salesOrder->registration,
             
             'vehicle'  => (object) $salesOrder->vehicle,
-            'delivery_request' => (object) $salesOrder->delivery_request,
+            'deliveryRequest' => (object) $salesOrder->deliveryRequest,
             'mediator' =>  (object) $salesOrder->mediator,
             'salesPersonnel' => (object) $salesOrder->salesPersonnel,
+            
+            'leasingOrder' => (object) $salesOrder->leasingOrder,
 
             
             'indent' => $salesOrder->indent,
             'plafond' => $salesOrder->plafond,
             
-            'kondisi_jual' => $salesOrder->sales_condition,
-
             'sales_condition' => $salesOrder->sales_condition,
             'payment_type' => $salesOrder->payment_type,
             
@@ -66,6 +66,8 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             
             'delivery' => (object) $salesOrder->delivery
         ];
+        
+        $transformed['leasingOrder'] = Partials\LeasingOrder::transform($salesOrder);
         
         return array_merge(
                 $transformed,

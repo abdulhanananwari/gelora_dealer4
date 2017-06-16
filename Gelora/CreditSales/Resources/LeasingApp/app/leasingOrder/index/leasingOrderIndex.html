@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h4>Daftar PO</h4>
+		
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Leasing</th>
+						<th>Cabang Leasing</th>
+						<th>Nomor PO</th>
+						<th>OTR</th>
+						<th>DP PO</th>
+						<th>Piutang Leasing</th>
+						<th>DP Bayar</th>
+						<th>Tenor</th>
+						<th>Cicilan</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="order in ctrl.leasingOrders">
+						<td>{{order.mainLeasing.name}}</td>
+						<td>{{order.subLeasing.name}}</td>
+						<td>{{order.po_number}}</td>
+						<td>{{order.on_the_road | number}}</td>
+						<td>{{order.dp_po | number}}</td>
+						<td>{{order.leasing_payable | number}}</td>
+						<td>{{order.dp_bayar}}</td>
+						<td>{{order.tenor}}</td>
+						<td>{{order.cicilan | number}}</td>
+						<td><a ui-sref="leasingOrderShow({id: order.id,mainLeasingId:order.mainLeasing.id,salesOrderId:order.sales_order_id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,16 +1,12 @@
 <div class="row">
-	<div class="col-sm-12">
-
-		<div>
-			<label>Utama</label>
-			<select ng-options="leasing as leasing.mainLeasing.name for leasing in leasings" ng-model="leasing"></select>
-		</div>
-
-		<div ng-show="forceSubLeasing">
-			<label>Cabang</label>
-			<select ng-options="subLeasing as subLeasing.name for subLeasing in leasing.subLeasings" ng-model="subLeasing"></select>
-		</div>
-
-		<button class="btn btn-block btn-warning" ng-click="select(leasing.mainLeasing, subLeasing)">Pilih</button>
-	</div>
+    <div class="col-sm-12">
+        <div>
+            <label>Utama</label>
+            <select ng-options="leasing as leasing.mainLeasing.name for leasing in leasings" ng-model="leasing" ng-change="select(leasing.mainLeasing, subLeasing)"></select>
+        </div>
+        <div>
+            <label>Cabang</label>
+            <select ng-options="subLeasing as subLeasing.name for subLeasing in leasing.subLeasings" ng-model="subLeasing" ng-change="select(leasing.mainLeasing, subLeasing)"></select>
+        </div>
+    </div>
 </div>

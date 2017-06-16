@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>PO {{ leasingOrder.id || 'Baru' }}</h4>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <h5>Leasing</h5>
+        <leasing-selector selected-main-leasing="leasingOrder.mainLeasing" selected-sub-leasing="leasingOrder.subLeasing"></leasing-selector>
+        <br>
+        <label>Leasing ID</label>
+        <input type="text" ng-model="leasingOrder.mainLeasing.id" readonly>
+        <label>Leasing Name</label>
+        <input type="text" ng-model="leasingOrder.mainLeasing.name" readonly>
+        <label>Cabang Leasing ID</label>
+        <input type="text" ng-model="leasingOrder.subLeasing.id" readonly>
+        <label>Cabang Leasing Name</label>
+        <input type="text" ng-model="leasingOrder.subLeasing.name" readonly>
+    </div>
+    <div class="col-sm-3">
+        <h5>Detail PO</h5>
+        <label>Nama Kustomer</label>
+        <input type="text" ng-model="leasingOrder.customer.name">
+        <label>Alamat Kustomer</label>
+        <textarea rows="5" style="height: 5em;" ng-model="leasingOrder.customer.address"></textarea>
+        <label>Nama STNK</label>
+        <input type="text" ng-model="leasingOrder.registration.name">
+        <label>Alamat STNK</label>
+        <textarea rows="5" style="height: 5em;" ng-model="leasingOrder.registration.address"></textarea>
+        <vehicle-model-finder color-selectable="false" direct-selection="true" params='{"current":"true"}' selected-model="leasingOrder.vehicle">
+        </vehicle-model-finder>
+    </div>
+    <div class="col-sm-3">
+        <h5>Keuangan PO</h5>
+        <label>Nomor PO</label>
+        <input type="text" ng-model="leasingOrder.po_number">
+        <label>OTR</label>
+        <input type="number" ng-model="leasingOrder.on_the_road">
+        <label>DP PO</label>
+        <input type="number" ng-model="leasingOrder.dp_po">
+        <!-- <label>Piutang Leasing</label>
+        <input type="number" ng-model="leasingOrder.leasing_payable" auto-calculator="leasingOrder.on_the_road-leasingOrder.dp_po"> -->
+        <label>DP Bayar <small>Tidak perlu diisi jika sama dengan DP PO</small></label>
+        <input type="number" ng-model="leasingOrder.dp_bayar">
+        <label>Tenor</label>
+        <input type="number" ng-model="leasingOrder.tenor">
+        <label>Cicilan</label>
+        <input type="number" ng-model="leasingOrder.cicilan">
+    </div>
+    <div class="col-sm-3">
+        <label>Catatan</label>
+        <textarea ng-model="leasingOrder.note" style="height:5em;" rows="5"></textarea>
+        <div>
+            <h5>PO</h5>
+            <file-manager-upload path="leasing-order" subpath="po" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedPoFile" on-file-uploaded="leasingOrder.po_file_uuid=uploadedPoFile.uuid;ctrl.store(leasingOrder);"></file-manager-upload>
+            <file-manager-show ng-if="leasingOrder.po_file_uuid" display-type="downloadButton" file-uuid="{{leasingOrder.po_file_uuid}}"></file-manager-show>
+            <h5>Memo</h5>
+            <file-manager-upload path="leasing-order" subpath="memo" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedMemoFile" on-file-uploaded="leasingOrder.memo_file_uuid=uploadedMemoFile.uuid;ctrl.store(leasingOrder);"></file-manager-upload>
+            <file-manager-show ng-if="leasingOrder.memo_file_uuid" display-type="downloadButton" file-uuid="{{leasingOrder.memo_file_uuid}}"></file-manager-show>
+        </div>
+    </div>
+</div>
+<button ng-if="!leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="onStore()">Simpan</button>

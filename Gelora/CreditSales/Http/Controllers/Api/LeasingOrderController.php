@@ -20,6 +20,14 @@ class LeasingOrderController extends Controller {
     public function index(Request $request) {
 
         $query = $this->leasingOrder->newQuery();
+        
+        if ($request->get('leasing_personnel_access') == 'true') {
+
+            $leasingPersonnel = \Gelora\CreditSales\App\LeasingPersonnel\LeasingPersonnelModel::
+                    where('user.id', \ParsedJwt::getByKey('sub'))->first();
+
+            $query->where('mainLeasing.id', $leasingPersonnel['leasing']['mainLeasing']['id']);
+        }
 
         if ($request->has('sales_order_id')) {
             if ($request->get('sales_order_id') == 'null') {
@@ -51,9 +59,13 @@ class LeasingOrderController extends Controller {
         if ($request->has('sub_leasing_id')) {
             $query->where('subLeasing.id', $request->get('sub_leasing_id'));
         }
+        
         if ($request->has('sub_leasing_name')) {
             $query->where('subLeasing.name', 'LIKE', '%' . $request->get('sub_leasing_name') . '%');
         }
+        
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        
         if ($request->get('validated') == true) {
             switch ($request->get('validated')) {
                 case 'true':
@@ -104,10 +116,17 @@ class LeasingOrderController extends Controller {
                     break;
             }            
         }
-
-        $leasingOrders = $query->get();
         
-        return $this->formatCollection($leasingOrders);
+        if ($request->has('paginate')) {
+            
+            $leasingOrders = $query->paginate($request->get('paginate', 20));
+            return $this->formatCollection($leasingOrders, [], $leasingOrders);
+            
+        } else {
+
+            $leasingOrders = $query->get();
+            return $this->formatCollection($leasingOrders);
+        }
     }
 
     public function get($id, Request $request) {
