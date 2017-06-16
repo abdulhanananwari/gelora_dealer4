@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <a class="btn btn-md btn-block btn-warning" ui-sref="salesProgramShow">Tambah Program</a>
+
+        <input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.active" ng-change="ctrl.load(ctrl.filter)">
+        <label>Hanya yg aktif saja</label>
+        <br>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nama Program</th>
+                        <th>Sales Program ID</th>
+                        <th>Nominal</th>
+                        <th>Periode Sales Program Mulai</th>
+                        <th>Periode Sales Program Sampai</th>
+                        <th>Aktif</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="salesProgram in ctrl.salesPrograms">
+                        <td>{{salesProgram.name}}</td>
+                        <td>{{salesProgram.code}}</td>
+                        <td>{{salesProgram.value}}</td>
+                        <td>{{salesProgram.valid_from}}</td>
+                        <td>{{salesProgram.valid_until}}</td>
+                        <td>{{salesProgram.active}}</td>
+                        <td><a ui-sref="salesProgramShow({id:salesProgram.id})">Buka</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

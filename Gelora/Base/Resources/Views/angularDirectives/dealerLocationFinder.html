@@ -1,0 +1,17 @@
+<div class="dropdown dropdown-scroll">
+	<button class="btn btn-block btn-primary dropdown-toogle" id="location-dropdown-{{modalId}}" data-toggle="dropdown">{{ location.name || 'Lokasi Belum Dipilih'}}    <span class="caret"></span></button>
+	
+	<ul class="dropdown-menu" role="menu" aria-labelledby="location-dropdown-{{modalId}}">
+		<li role="presentation">
+			<div class="input-group input-group-sm search-control">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-search"></span>
+				</span>
+				<input type="text" class="form-control" placeholder="Cari Lokasi" ng-model="query">
+			</div>
+		</li>
+		<li ng-click="select(repeatedLocation)" ng-repeat="repeatedLocation in locations | filter:query">
+			<a>{{repeatedLocation.id}} &nbsp; {{repeatedLocation.name}}</a>
+		</li>
+	</ul>
+</div>

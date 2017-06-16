@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<dealer-unit-search selected-unit="selectedUnit" on-unit-selected="ctrl.selectUnit(selectedUnit.id)"></dealer-unit-search>
+
+		<div class="table-responsive">
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th>Brand</th>
+						<th>Nama Type</th>
+						<th>Kode Type</th>
+						<th>Nama Warna</th>
+						<th>Kode Warna</th>
+						<th>No Mesin</th>
+						<th>No Rangka</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="unit in ctrl.units">
+						<td>{{unit.brand}}</td>
+						<td>{{unit.type_name}}</td>
+						<td>{{unit.type_code}}</td>
+						<td>{{unit.color_name}}</td>
+						<td>{{unit.color_code}}</td>
+						<td>{{unit.engine_number}}</td>
+						<td>{{unit.chasis_number}}</td>
+						<td><a ui-sref="unitShow({id:unit.id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<pagination pagination="ctrl.meta.pagination" page="page" on-load-page="ctrl.get(page)"></pagination>
+			
+	</div>
+</div>

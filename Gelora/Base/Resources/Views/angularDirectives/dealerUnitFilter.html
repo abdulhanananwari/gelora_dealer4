@@ -1,0 +1,40 @@
+<div class="well">
+	<!-- <div class="row">
+		<div class="col-sm-6">
+
+			<label>Nomor Mesin</label>
+			<input type="text" ng-model="filter.engine_number">
+
+		</div>
+		<div class="col-sm-6">
+			
+
+			<label>Nomor Rangka</label>
+			<input type="text" ng-model="filter.chasis_number">
+
+			
+		</div>
+	</div> -->
+
+	<div class="row">
+		<div class="col-sm-6">
+			
+			<label>Hasil Per Halaman</label>
+			<input type="text" ng-model="filter.paginate" name="paginate">
+
+		</div>
+		<div class="col-sm-6">
+
+
+			<label>Pengurutan</label>
+			<select ng-model="filter.order" ng-init="asc" name="order">
+				<option value="likeness">Termirip (nama)</option>
+				<option value="asc">Terlama</option>
+				<option value="desc">Terbaru</option>
+			</select>
+
+		</div>
+	</div>
+
+	<button class="btn btn-block btn-info" ng-click="search(filter)">Cari</button>
+</div>

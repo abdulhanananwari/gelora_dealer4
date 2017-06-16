@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>{{ctrl.salesProgram.code ? (ctrl.salesProgram.name + ' | ' +ctrl.salesProgram.code) : 'Baru'}}</h4><hr>
+        <!--  -->
+        <label>Nama Program</label>
+        <input type="text" ng-model="ctrl.salesProgram.name">
+        
+        <label>Sales Program ID</label>
+        <input type="text" ng-model="ctrl.salesProgram.code">
+
+        <label>Nominal</label>
+        <input type="number" ng-model="ctrl.salesProgram.value">
+        <label>Periode Sales Program Mulai</label>
+        <input type="text" ng-model="ctrl.salesProgram.valid_from" class="date">
+        <label>Periode Sales Program Sampai</label>
+        <input type="text" ng-model="ctrl.salesProgram.valid_until" class="date">
+
+        <button class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.salesProgram)">Simpan</button>
+    </div>
+</div>

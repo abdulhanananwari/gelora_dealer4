@@ -77,6 +77,18 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
         ],
+        
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MDB_HOST', 'localhost'),
+            'port'     => env('MDB_PORT', 27017),
+            'database' => env('DB_DATABASE'),
+            'username' => env('MDB_USERNAME'),
+            'password' => env('MDB_PASSWORD'),
+            'options'  => [
+                'database' => 'admin' // sets the authentication database required by mongo 3
+            ]
+        ],
 
     ],
 

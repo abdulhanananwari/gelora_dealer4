@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+           <h4>Setting Police Registration</h4>
+           <small>Setting Format Email</small>
+           <hr>
+           <div class="table">
+               <table class="table">
+                    <tr ng-repeat="formatSubjectEmail in ctrl.formatSubjectEmail">
+                        <td>{{ formatSubjectEmail.name}}</td>
+                        <td><textarea ng-model="ctrl.settings.polRegSubjectEmail[formatSubjectEmail.code]"></textarea></td>
+                    </tr>
+               </table>
+           </div>
+        </div>
+       <button class="btn btn-block" ng-click="ctrl.update('SUBJECT_EMAIL', ctrl.settings.polRegSubjectEmail)">Update</button>
+    </div>
+</div>

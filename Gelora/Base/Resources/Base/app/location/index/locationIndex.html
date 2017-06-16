@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <a class="btn btn-md btn-block btn-warning" ui-sref="locationShow">Tambah Lokasi</a>
+
+        <br>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Kapasitas</th>
+                        <th>Aktif</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="location in ctrl.locations">
+                        <td>{{location.name}}</td>
+                        <td>{{location.capacity}}</td>
+                        <td>{{location.active}}</td>
+                        <td><a ui-sref="locationShow({id:location.id})">Buka</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Tambah Baru</h4>
+
+		<entity-finder-modal
+			class="recompile"
+			selected-entity="selectedEntity"
+			on-entity-selected="ctrl.addDriver(selectedEntity);"
+			additional-params="{'is_linked_to_user':'true'}">
+		</entity-finder-modal>
+
+		<hr>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nama</th>
+						<th>Hapus</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="driver in ctrl.driver.data_1">
+						<td>{{driver.user_id}}</td>
+						<td>{{driver.name}}</td>
+						<td><button class="btn btn-xs btn-warning" ng-click="ctrl.removeDriver(driver)">Hapus</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<button class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.driver)">Simpan</button>
+
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <h4>Setting Agreement BPKB</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Setting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="agreementBPKB in ctrl.agreementBPKB">
+                            <td>{{ agreementBPKB.name}}</td>
+                            <td><textarea ng-model="ctrl.settings.settingAgreementBPKB.from[agreementBPKB.code]"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Kontent</p>
+                            <td>
+                                <textarea style="height: 8em !important; white-space: pre-line;" ng-model="ctrl.settings.settingAgreementBPKB.content"></textarea>   
+                            </td>
+                        </tr>
+                        <tr>
+                           <td colspan="2">
+                               <p><strong>Keterangan :</strong></p>
+                               <p>**LEASING_NAME** adalah nama leasing yang akan terisi otomatis oleh sistem</p>
+                               <p>**LEASING_ADDRESS** adalah alamat leasing yang akan terisi otomatis oleh sistem</p>
+                               <p class="text-danger"> Perhatian :
+                               Diharapkan user untuk tidak menghapus atau merubah penulisan **LEASING_NAME** dan **LEASING_ADDRESS** </p>
+                           </td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-block" ng-click="ctrl.update('AGREEMENT_BPKB', ctrl.settings.settingAgreementBPKB)">Update</button>
+            </div>
+        </div>
+</div>

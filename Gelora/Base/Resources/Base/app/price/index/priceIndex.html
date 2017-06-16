@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<a class="btn btn-block btn-primary" ui-sref="priceShow">Tambah Harga Dasar Baru</a>
+		<a class="btn btn-block btn-warning" ui-sref="priceUpload">Upload dari CSV</a>
+		<button class="btn btn-block btn-warning" ng-click="ctrl.download()">Download CSV</button>
+		<br>
+
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Model Name</th>
+						<th>Model Code</th>
+						<th>Plafond Group</th>
+						<th>COG</th>
+						<th>OFF the Road</th>
+						<th>ON the Road</th>
+						<th>Tanggal Dibuat</th>
+						<th>Tanggal Diupdate</th>
+
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="price in ctrl.prices">
+						<td>{{ price.model_id }}</td>
+						<td>{{ price.model_name }}</td>
+						<td>{{ price.model_code }}</td>
+						<td>{{ price.plafond_group }}</td>
+						<td>{{ price.cost_of_good | number }}</td>
+						<td>{{ price.off_the_road | number}}</td>
+						<td>{{ price.on_the_road | number }}</td>
+						<td>{{ price.created_at }}</td>
+						<td>{{ price.updated_at }}</td>
+						<td><a ui-sref="priceShow({id:price.model_id})">Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<button class="btn btn-danger btn-block" ng-click="ctrl.synchronize()">Synchronize Model dengan kendaraan.hondagelora.com</button>
+		<br>
+		
+	</div>
+</div>
+
+<fullscreen-loading ng-if="ctrl.loading"></fullscreen-loading>

@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
+    return redirect('/gelora/base/index.html');
     return view('welcome');
 });

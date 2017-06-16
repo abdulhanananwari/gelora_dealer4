@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-sm-12">
+		
+		<div class="well">
+
+			<h4>Upload Harga  <a href="/application-files/price-upload.csv">Template</a></h4>
+
+
+			<input type="file"  id="csv-file">
+			<button class="btn btn-block btn-sm" ng-click="ctrl.loadFile()" ng-if="ctrl.models">Load File</button>
+
+			<br>
+
+			<p><small>* Ketik 'UNCHANGED' jika properties tidak dirubah</small></p>
+
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th>ID Model</th>
+					<th>Nama Model</th>
+					<th>Kode Model</th>
+					<th>HPP</th>
+					<th>Off The Road</th>
+					<th>On The Road</th>
+					<th>Notice</th>
+					<th>Max Jasa STNK</th>
+					<th>Jenis</th>
+					<th>Hapus</th>
+				</tr>
+				<tbody>
+					<tr ng-repeat="price in ctrl.prices">
+						<td>{{ price.model_id }}</td>
+						<td>{{ price.model.name }}</td>
+						<td>{{ price.model.code }}</td>
+						<td>
+							<p>{{ price.cost_of_good | number }}</p>
+							<p>{{ price.existingPrice.cost_of_good | number }}</p>
+						</td>
+						<td>
+							<p>{{ price.off_the_road | number }}</p>
+							<p>{{ price.existingPrice.off_the_road | number }}</p>
+						</td>
+						<td>
+							<p>{{ price.on_the_road | number }}</p>
+							<p>{{ price.existingPrice.on_the_road | number }}</p>
+						</td>
+						<td>
+							<p>{{ price.registration_fee | number }}</p>
+							<p>{{ price.existingPrice.registration_fee | number }}</p>
+						</td>
+						<td>
+							<p>{{ price.max_registration_process_fee | number }}</p>
+							<p>{{ price.existingPrice.max_registration_process_fee | number }}</p>
+						</td>
+						<td>{{ price.status }}</td>
+						<td><button class="btn btn-sm btn-block btn-danger" ng-click="ctrl.remove(price)">Hapus</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<button class="btn btn-lg btn-default btn-block" ng-click="ctrl.uploadAll()">Upload</button>
+	</div>
+</div>

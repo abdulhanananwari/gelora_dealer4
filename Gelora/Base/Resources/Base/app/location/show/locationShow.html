@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>{{ctrl.location.name ? 'Lokasi: ' + ctrl.location.name : 'Baru'}}</h4><hr>
+        
+        <label>Nama</label>
+        <input type="text" ng-model="ctrl.location.name">
+        
+        <label>Jenis</label>
+        <select ng-options="type for type in ctrl.types" ng-model="ctrl.location.type"></select>
+
+        <label>Kapasitas</label>
+        <input type="number" ng-model="ctrl.location.capacity">
+        <label>Aktif</label>
+        <input type="checkbox" class="form-not-applied" ng-model="ctrl.location.active">        
+        <button class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.location)">Simpan</button>
+    </div>
+</div>

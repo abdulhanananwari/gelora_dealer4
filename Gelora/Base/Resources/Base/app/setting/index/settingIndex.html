@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <h4>Setting Tenant</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Setting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="tenantInfo in ctrl.tenantInfo">
+                            <td>{{ tenantInfo.name}}</td>
+                            <td><textarea ng-model="ctrl.settings.tenantInfoSetting[tenantInfo.code]"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-block" ng-click="ctrl.update('TENANT_INFO', ctrl.settings.tenantInfoSetting)">Update</button>
+            </div>
+        </div>
+
+        <div class="well">
+            <h4>Setting Business Procedure</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Setting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="businessProcedure in ctrl.businessProcedure">
+                            <td>{{ businessProcedure.name}}</td>
+                            <td><input type="checkbox" class="form-not-applied" ng-model="ctrl.settings.businessProcedure[businessProcedure.code]"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-block" ng-click="ctrl.update('BUSINESS_PROCEDURES', ctrl.settings.businessProcedure)">Update</button>
+            </div>
+        </div>
+
+        <a class="btn btn-block btn-primary" ui-sref="settingDriver">Supir</a>
+
+    </div>
+</div>
