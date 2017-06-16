@@ -33,8 +33,4 @@ geloraDealerCreditSales
 
             }
         }
-
-        vm.assignToSalesOrder = function(salesOrderId) {
-        	
-        }
     })
