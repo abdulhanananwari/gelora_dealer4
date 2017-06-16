@@ -8,7 +8,7 @@ class LeasingOrder {
     
     public static function transform (SalesOrderModel $salesOrder) {
         
-        $leasingOrder = (object) $salesOrder->subDocument()->leasingOrder()->retrieve();
+        $leasingOrder = $salesOrder->subDocument()->leasingOrder();
         
         $transformed = [
             'po_number' => $leasingOrder->po_number,
@@ -32,14 +32,12 @@ class LeasingOrder {
             'memo_file_uuid' => $leasingOrder->memo_file_uuid,
             
             'due_uuid' => $leasingOrder->due_uuid,
-            'joinPromos' => (array) $leasingOrder->joinPromos,
+            'joinPromos' => $leasingOrder->joinPromos ? (array) $leasingOrder->joinPromos : [],
             
             'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->invoice_generated_at->toDateTimeString() : null,
             'invoice_generator' => $leasingOrder->invoice_generator,    
         ];
         
-        $salesOrder->leasingOrder = (object) $transformed;
-        
-        return $leasingOrder;
+        return $transformed;
     }
 }

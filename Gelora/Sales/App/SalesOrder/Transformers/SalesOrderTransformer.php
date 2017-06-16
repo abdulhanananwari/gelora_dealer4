@@ -6,9 +6,6 @@ use League\Fractal;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class SalesOrderTransformer extends Fractal\TransformerAbstract {
-//    
-//    public $availableIncludes = ['leasingOrders', 'selectedLeasingOrder','usedRegistration',
-//        'salesOrderExtras', 'cddb', 'price', 'financialBalance'];
     
     public function transform(SalesOrderModel $salesOrder) {
         
@@ -35,9 +32,6 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'sales_condition' => $salesOrder->sales_condition,
             'payment_type' => $salesOrder->payment_type,
             
-            'leasing_order_id' => $salesOrder->leasing_order_id,
-            'leasing_order_selector' => $salesOrder->leasing_order_selector,
-            
             'delivery_id' => $salesOrder->delivery_id,
             'delivery_assigner' => (object) $salesOrder->delivery_assigner,
 
@@ -56,7 +50,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'unvalidator' => $salesOrder->unvalidator,
             
             // Baru diisi setelah proses STNK selesai, pencairan leasing selesai, konsumen sudah bayar semua due.
-            // Caranya sistem ngecheck jumlah diatas apakah sudah lengkap semua            
+            // Caranya sistem ngecheck jumlah diatas apakah sudah lengkap semua
             'financial_completed_at' => $salesOrder->financial_completed_at ? $salesOrder->financial_completed_at->toDateTimeString() : null,
             'financial_completer' => $salesOrder->financial_completer,
             
@@ -74,84 +68,4 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
                 Partials\Price::transform($salesOrder)
         );
     }
-//    
-//    public function includeLeasingOrders(SalesOrderModel $salesOrder) {
-//
-//        $leasingOrders = $salesOrder->leasingOrders;
-//        
-//            
-//        return $this->collection($leasingOrders,
-//                new \Gelora\CreditSales\App\LeasingOrder\Transformers\LeasingOrderTransformer(),
-//                'leasing_orders');
-//    }
-//    
-//    public function includeSelectedLeasingOrder(SalesOrderModel $salesOrder) {
-//        
-//        if (is_null($salesOrder->leasing_order_id)) {
-//            return null;
-//        }
-//        
-//        $leasingOrder = $salesOrder->selectedLeasingOrder;
-//        
-//        return $this->item($leasingOrder,
-//                new \Gelora\CreditSales\App\LeasingOrder\Transformers\LeasingOrderTransformer(),
-//                'leasing_order');
-//    }
-//    
-//    public function includeSalesOrderExtras(SalesOrderModel $salesOrder) {
-//        
-//        $salesOrderExtras = $salesOrder->salesOrderExtras;
-//
-//        return $this->collection($salesOrderExtras,
-//                new \Gelora\Sales\App\SalesOrderExtra\Transformers\SalesOrderExtraTransformer(),
-//                'sales_order_extras');
-//    }
-//    
-//    public function includeCddb(SalesOrderModel $salesOrder) {
-//        
-//        $cddb = $salesOrder->cddb;
-//        
-//        if (empty($cddb)) {
-//            return null;
-//        }
-//        
-//        return $this->item($cddb,
-//                new \Gelora\Cdb\App\Cddb\Transformers\CddbTransformer(),
-//                'cddb');
-//    }
-//    
-//    public function includePrice(SalesOrderModel $salesOrder) {
-//        
-//        if (is_null($salesOrder->price)) {
-//            return null;
-//        }
-//        
-//        $price = $salesOrder->price;
-//        
-//        return $this->item($price,
-//                new \Gelora\Base\App\Price\Transformers\PriceTransformer(),
-//                'prices');
-//    }
-//    
-//    public function includeFinancialBalance(SalesOrderModel $salesOrder) {
-//        
-//        return $this->item($salesOrder,
-//                new Partials\FinancialBalance(),
-//                'financialBalance');
-//    }
-//    
-//    public function includeUsedRegistration(SalesOrderModel $salesOrder) {
-//        
-//        if (is_null($salesOrder->registration_id)) {
-//            return null;
-//        }
-//        
-//        $usedRegistration = $salesOrder->usedRegistration;
-//        
-//        return $this->item($usedRegistration,
-//                new \Gelora\PolReg\App\Registration\Transformers\RegistrationTransformer(),
-//                'registrations');
-//    }
-//    
-    
 }
