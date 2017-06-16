@@ -187,6 +187,9 @@ return [
         \Solumax\TransactionClient\SolumaxTransactionClientProvider::class,
         
         \Gelora\Base\GeloraBaseProvider::class,
+        \Gelora\InventoryManagement\GeloraInventoryManagementProvider::class,
+        \Gelora\PurchaseSimple\GeloraPurchaseSimpleProvider::class,
+        \Gelora\CreditSales\GeloraCreditSalesProvider::class,
     ],
 
     /*

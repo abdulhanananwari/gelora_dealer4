@@ -1,0 +1,171 @@
+<div class="row">
+	<div class="col-sm-6">
+		<h4>Program #{{ ctrl.leasingProgram._id || ' Baru'}}</h4>
+		<p>Leasing: <a ui-sref="leasingShow({id:ctrl.leasingProgram.leasing.mainLeasing.id})">{{ ctrl.leasingProgram.leasing.mainLeasing.name }}</a></p>
+		<input type="text" placeholder="Nama Program (optional)" ng-model="ctrl.leasingProgram.name">
+	</div>
+	<div class="col-sm-6 text-right">
+		<p><small>Dibuat: {{ ctrl.leasingProgram.created_at }}</small></p>
+		<p><small>Diupdate: {{ ctrl.leasingProgram.updated_at }}</small></p>
+		<p ng-if="!ctrl.leasingProgram.active" class="text-danger"><strong>Non Aktif</strong></p>
+	</div>
+</div>
+<hr>
+
+<div class="row">
+	<div class="col-sm-6">
+
+		<label>Harga OTR <small>Untuk validasi validitas program leasing</small></label>
+		<input type="number" ng-model="ctrl.leasingProgram.on_the_road">
+		
+		<div class="well">
+			<h4>Type Kendaraan</h4>
+			<hr>
+<!-- 
+			<form>
+				<input type="radio" class="form-not-applied" ng-model="ctrl.leasingProgram.vehicle_model_selection_type" value="group">
+				<label>Group Kendaraan</label>
+
+				<input type="radio" class="form-not-applied" ng-model="ctrl.leasingProgram.vehicle_model_selection_type" value="single">
+				<label>Kendaraan Spesifik</label>
+			</form>
+			<br>
+			
+			<div ng-show="ctrl.leasingProgram.vehicle_model_selection_type == 'group'">
+				<label>Group Kendaraan</label>
+				<select ng-options="modelCategory for modelCategory in ctrl.modelCategories" ng-model="ctrl.leasingProgram.vehicle_model_group"></select>
+			</div>
+
+			<div ng-show="ctrl.leasingProgram.vehicle_model_selection_type == 'single'">
+				<label>Kendaraan </label> -->
+				<vehicle-model-finder
+					color-selectable="false"
+					
+					params='{"current":"true"}'
+					selected-model="selectedModel"
+					on-model-selected="ctrl.addVehicle(selectedModel)"
+				>
+				</vehicle-model-finder>
+					<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Model Kendaraan</th>
+								<th>Hapus</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="model in ctrl.leasingProgram.vehicle">
+								<td>{{model.name}} | {{model.code}}</td>
+								<td><button class="btn btn-danger btn-xs" ng-click="ctrl.removeVehicle(model)">Hapus</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<!-- </div> -->
+
+		<div class="well">
+			<h4>Tenor</h4>
+			<hr>
+
+			<form>
+				<input type="radio" class="form-not-applied" ng-model="ctrl.leasingProgram.tenor_selection_type" value="range">
+				<label>Tenor Range</label>
+
+				<input type="radio" class="form-not-applied" ng-model="ctrl.leasingProgram.tenor_selection_type" value="single">
+				<label>Tenor Spesifik</label>
+			</form>
+			<br>
+			
+			
+			<div ng-show="ctrl.leasingProgram.tenor_selection_type == 'range'">
+				<label>Min Tenor</label>
+				<input type="number" ng-model="ctrl.leasingProgram.min_tenor">
+
+				<label>Max Tenor</label>
+				<input type="number" ng-model="ctrl.leasingProgram.max_tenor">
+			</div>
+
+			<div ng-show="ctrl.leasingProgram.tenor_selection_type == 'single'">
+				<label>Tenor</label>
+				<input type="number" ng-model="ctrl.leasingProgram.tenor">
+			</div>
+
+		</div>
+
+		<div class="well">
+			<h4>DP</h4>
+			<hr>
+
+			<form>
+				<input type="radio" class="form-not-applied" ng-model="ctrl.leasingProgram.dp_selection_type" value="range">
+				<label>DP Range</label>
+
+				<input type="radio" class="form-not-applied" ng-model="ctrl.leasingProgram.dp_selection_type" value="single">
+				<label>DP Spesifik</label>
+			</form>
+			<br>
+			
+			
+			<div ng-show="ctrl.leasingProgram.dp_selection_type == 'range'">
+				<label>Min DP</label>
+				<input type="number" ng-model="ctrl.leasingProgram.min_dp">
+
+				<label>Max DP</label>
+				<input type="number" ng-model="ctrl.leasingProgram.max_dp">
+			</div>
+
+			<div ng-show="ctrl.leasingProgram.dp_selection_type == 'single'">
+				<label>DP</label>
+				<input type="number" ng-model="ctrl.leasingProgram.dp">
+			</div>
+			
+		</div>
+	</div>	
+
+	<div class="col-sm-6">
+		
+		<button class="btn btn-block btn-info" ng-click="ctrl.leasingProgram.programs.push({})">Tambah Promo</button>
+		<br>
+
+		<div class="well" ng-repeat="program in ctrl.leasingProgram.programs">
+
+			<label>Nama</label>
+			<input type="text" ng-model="program.name">
+
+			<label>DPP</label>
+			<input type="number" ng-model="program.dpp">
+
+			<label>PPN</label>
+			<input type="number" ng-model="program.ppn">
+			
+			<input type="checkbox" class="form-not-applied" ng-model="program.ppn_unpaid">
+			<label>PPN dibiayakan</label>
+			<br>
+
+			<label>PPH23</label>
+			<input type="number" ng-model="program.pph23">
+
+			<label>Jenis Jatoh Tempo</label>
+			<input type="text" ng-model="program.due_day_type" ng-value="RECEIVABLE_PAID" readonly>
+
+			<label>Jatoh Tempo</label>
+			<input type="number" ng-model="program.due_day_count">
+
+			<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.removeProgram(program)">Hapus</button>
+		</div>
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<button class="btn btn-block btn-md btn-warning" ng-click="ctrl.store(ctrl.leasingProgram)">Simpan</button>
+		
+		<button ng-if="ctrl.leasingProgram.active" class="btn btn-block btn-md btn-danger" ng-click="ctrl.leasingProgram.active=false;ctrl.store(ctrl.leasingProgram)">Non Aktifkan</button>
+
+		<button ng-if="!ctrl.leasingProgram.active" class="btn btn-block btn-md btn-danger" ng-click="ctrl.leasingProgram.active=true;ctrl.store(ctrl.leasingProgram)">Aktifkan</button>
+		<br>
+	</div>
+</div>

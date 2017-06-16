@@ -20,15 +20,15 @@ elixir((mix) => {
     mix.scriptsIn('Gelora/Base/Resources/BaseShared', 'public/gelora/base-shared/app/all.js');
     mix.copy('Gelora/Base/Resources/BaseShared', 'public/gelora/base-shared');
     
+    mix.scriptsIn('Gelora/InventoryManagement/Resources/InventoryManagement', 'public/gelora/inventory-management/app/all.js');
+    mix.copy('Gelora/InventoryManagement/Resources/InventoryManagement', 'public/gelora/inventory-management');
+
     mix.scriptsIn('Gelora/Purchase/Resources/Purchase', 'public/gelora/purchase/app/all.js');
     mix.copy('Gelora/Purchase/Resources/Purchase', 'public/gelora/purchase');
     
     mix.scriptsIn('Gelora/PurchaseSimple/Resources/PurchaseSimple', 'public/gelora/purchase-simple/app/all.js');
     mix.copy('Gelora/PurchaseSimple/Resources/PurchaseSimple', 'public/gelora/purchase-simple');
     
-    mix.scriptsIn('Gelora/InventoryManagement/Resources/InventoryManagement', 'public/gelora/inventory-management/app/all.js');
-    mix.copy('Gelora/InventoryManagement/Resources/InventoryManagement', 'public/gelora/inventory-management');
-
     mix.scriptsIn('Gelora/Sales/Resources/SalesAdmin', 'public/gelora/sales/admin/app/all.js');
     mix.copy('Gelora/Sales/Resources/SalesAdmin', 'public/gelora/sales/admin');
 

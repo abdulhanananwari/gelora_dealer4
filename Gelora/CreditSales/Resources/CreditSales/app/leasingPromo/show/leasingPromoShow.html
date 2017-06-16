@@ -1,0 +1,114 @@
+`<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Promo {{ctrl.leasingPromo.name || 'Baru'}}</h4>
+
+		<hr>
+
+		<label>Nama</label>
+		<input type="text" ng-model="ctrl.leasingPromo.name">
+
+		<p><strong>Nominal</strong></p>
+
+		<label>DPP</label>
+		<input type="number" ng-model="ctrl.leasingPromo.dpp" ng-change="ctrl.calculate()">
+
+		<label>PPN</label>
+		<input type="number" ng-model="ctrl.leasingPromo.ppn" ng-change="ctrl.calculate()">
+
+		<label>PPH 23</label>
+		<input type="number" ng-model="ctrl.leasingPromo.pph23" ng-change="ctrl.calculate()">
+
+		<label>Others</label>
+		<input type="number" ng-model="ctrl.leasingPromo.others" ng-change="ctrl.calculate()">
+
+		<label>Nett Receivable</label>
+		<input type="number" ng-model="ctrl.leasingPromo.nett_receivable" readonly>
+
+		<br>
+
+		<label>Jatuh Tempo Setelah SJ</label>
+		<input type="number" ng-model="ctrl.leasingPromo.due_in_days">
+
+		<input type="checkbox" class="form-not-applied" ng-model="ctrl.leasingPromo.optional">
+		<label>Optional</label><br>
+
+		<br>
+
+		<p><strong>Aktif</strong></p>
+
+		<label>Sejak</label>
+		<input type="text" class="date" ng-model="ctrl.leasingPromo.from">
+
+		<label>Sampai</label>
+		<input type="text" class="date" ng-model="ctrl.leasingPromo.until">
+
+		<br>
+		<div class="well">
+		<h4>Pilih Cabang</h4>
+			<ul>
+				<li ng-repeat="subLeasing in ctrl.leasing.sub_leasings">
+				<label>
+					<input type="checkbox" class="form-not-applied" ng-change="ctrl.toggleSelection(subLeasing)" ng-model="subLeasing.check">
+					{{subLeasing.name}}
+				</label>
+					
+				</li>
+			</ul>
+			
+		</div>
+		
+		<br>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<p><strong>Allowed Models</strong></p>
+
+				<vehicle-model-finder params='{"current":"true"}' selected-model="selectedAllowedModel" on-model-selected="ctrl.leasingPromo.allowed_models.push({id:selectedAllowedModel.id,name:selectedAllowedModel.name,code:selectedAllowedModel.code,})"></vehicle-model-finder>	
+
+				<div class="table-responsive">
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Nama</th>
+							<th>Code</th>
+							<th>Hapus</th>
+						</tr>
+						<tr ng-repeat="model in ctrl.leasingPromo.allowed_models">
+							<td>{{ model.id }}</td>
+							<td>{{ model.name }}</td>
+							<td>{{ model.code }}</td>
+							<td><button class="btn btn-danger" ng-click="ctrl.removeAllowed(allowed_models)">Hapus</button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<p><strong>Disallowed Models</strong></p>
+
+				<vehicle-model-finder params='{"current":"true"}' selected-model="selectedDisallowedModel" on-model-selected="ctrl.leasingPromo.disallowed_models.push({id:selectedAllowedModel.id,name:selectedAllowedModel.name,code:selectedAllowedModel.code,})"></vehicle-model-finder>	
+
+
+				<div class="table-responsive">
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Nama</th>
+							<th>Code</th>
+							<th>Hapus</th>
+						</tr>
+						<tr ng-repeat="model in ctrl.leasingPromo.disallowed_models">
+							<td>{{ model.id }}</td>
+							<td>{{ model.name }}</td>
+							<td>{{ model.code }}</td>
+							<td><button class="btn btn-danger" ng-click="ctrl.removeDisallowed(disallowed_models)">Hapus</button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.leasingPromo)">Simpan</button><br>
+
+	</div>
+</div>

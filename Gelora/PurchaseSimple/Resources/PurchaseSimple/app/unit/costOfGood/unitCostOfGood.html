@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-sm-10">
+		
+		<h4>Input Harga Motor</h4>
+		<p><small>
+			Hanya motor yang belum ada COG nya yang akan tampil <br>
+			Jika salah input beritahu system admin <br>
+			Download file untuk menghitung ND <a href="/application-files/nd_calculation.xlsx">disini</a>
+		</small></p>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Warna</th>
+						<th>Engine Number</th>
+						<th>Chasis Number</th>
+						<th>Tanggal Nota Debet</th>
+						<th>Nomor Nota Debet</th>
+						<th>Harga Beli</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="unit in ctrl.units">
+						<td>{{ unit.type_name }}</td>
+						<td>{{ unit.color_name }}</td>
+						<td>{{ unit.engine_number }}</td>
+						<td>{{ unit.chasis_number }}</td>
+						<td>{{ unit.nd_date }}</td>
+						<td>{{ unit.nd_number }}</td>
+						<td>
+							<input type="number" ng-model="unit.cost_of_good" ng-change="ctrl.calculateTotal()">
+							<button ng-show="unit.cost_of_good > 0" class="btn btn-xs btn-danger btn-block" ng-click="ctrl.store(unit)">Update</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<pagination pagination="vm.meta.pagination" page="page" on-load-page="ctrl.load(page)"></pagination>
+	</div>
+	<div class="col-sm-2">
+		<p class="text-danger"><strong>Total: {{ ctrl.total }}</strong></p>
+	</div>
+</div>

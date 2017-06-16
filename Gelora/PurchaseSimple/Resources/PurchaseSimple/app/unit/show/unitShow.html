@@ -1,0 +1,47 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Unit {{ ctrl.unit.id || 'Baru' }}</h4>
+		<hr>
+
+		<vehicle-model-finder2
+			selected-model="selectedModel"
+			on-change="
+				ctrl.unit.brand=selectedModel.brand;
+				ctrl.unit.type_name=selectedModel.name;
+				ctrl.unit.type_code=selectedModel.code;
+				ctrl.unit.color_name=selectedModel.variant.name;
+				ctrl.unit.color_code=selectedModel.variant.code;
+			">
+		</vehicle-model-finder2>
+
+		<div ng-if="ctrl.unit.color_code" >
+			<fieldset disabled>
+				<label>Nama Tipe</label>
+				<input type="text" ng-model="ctrl.unit.type_name">
+
+				<label>Kode Tipe</label>
+				<input type="text" ng-model="ctrl.unit.type_code">
+
+				<label>Nama Warna</label>
+				<input type="text" ng-model="ctrl.unit.color_name">
+
+				<label>Kode Warna</label>
+				<input type="text" ng-model="ctrl.unit.color_code">
+			</fieldset>
+
+			<label>Nomor Mesin</label>
+			<input type="text" ng-model="ctrl.unit.engine_number">
+
+			<label>Nomor Rangka</label>
+			<input type="text" ng-model="ctrl.unit.chasis_number">
+
+			<label>Tahun Perakitan</label>
+			<input type="number" ng-model="ctrl.unit.assembly_year">
+
+			<button ng-if="!ctrl.unit.id" class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.unit)">Simpan</button>
+		</div>
+
+		
+	</div>
+</div>

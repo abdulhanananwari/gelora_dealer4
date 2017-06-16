@@ -1,0 +1,107 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h4>Daftar PO</h4>
+
+		<button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#leasing-order-filter-modal">Filter</button>
+		<br>
+
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Leasing</th>
+						<th>Cabang Leasing</th>
+						<th>Nomor PO</th>
+						<th>OTR</th>
+						<th>DP PO</th>
+						<th>Piutang Leasing</th>
+						<th>DP Bayar</th>
+						<th>Tenor</th>
+						<th>Cicilan</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="order in ctrl.leasingOrders">
+						<td>{{order.mainLeasing.name}}</td>
+						<td>{{order.subLeasing.name}}</td>
+						<td>{{order.po_number}}</td>
+						<td>{{order.on_the_road | number}}</td>
+						<td>{{order.dp_po | number}}</td>
+						<td>{{order.leasing_payable | number}}</td>
+						<td>{{order.dp_bayar}}</td>
+						<td>{{order.tenor}}</td>
+						<td>{{order.cicilan | number}}</td>
+						<td><a ui-sref="leasingOrderShow({id: order.id,mainLeasingId:order.mainLeasing.id,salesOrderId:order.sales_order_id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="leasing-order-filter-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><strong>Pencarian</strong></h4>
+			</div>
+			<div class="modal-body">
+
+				<label>Nomor PO</label>
+				<input type="text" ng-model="ctrl.filter.po_number">
+
+				<label>Nomor SPK</label>
+				<input type="text" ng-model="ctrl.filter.sales_order_id">
+
+				<div class="row">
+					<div class="col-sm-6">
+						<label>Nama Konsumen</label>
+						<input type="text" ng-model="ctrl.filter.customer_name">
+					</div>
+					<div class="col-sm-6">
+						<label>Nama STNK</label>
+						<input type="text" ng-model="ctrl.filter.registration_name">
+					</div>
+				</div>
+
+				<div class="panel panel-info">
+					<div class="panel-body">
+						<leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="false" on-leasing-selected="ctrl.filter.main_leasing_id=mainLeasing.id;ctrl.filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
+					</div>
+				</div>
+
+				<label>Validasi</label>
+				<select ng-model="ctrl.filter.validated">
+					<option value="all">Semua</option>
+					<option value="true">Sudah Validasi</option>
+					<option value="false">Belum Validasi</option>
+				</select> 
+
+				<label>Serah Terima Unit Ke Customer</label>
+				<select ng-model="ctrl.filter.unit_delivered">
+					<option value="all">Semua</option>
+					<option value="true">Sudah Serah Terima</option>
+					<option value="false">Belum Serah Terima</option>
+				</select> 
+
+
+				<label>Penagihan</label>
+				<select ng-model="ctrl.filter.invoice_generated">
+					<option value="all">Semua</option>
+					<option value="true">Sudah Tagih</option>
+					<option value="false">Belum Tagih Saja</option>
+				</select> 
+
+				<label>Hasil Per Halaman</label>
+				<input type="text" ng-model="ctrl.filter.paginate" name="paginate">
+
+				<button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter)">Cari</button>
+				<button class="btn btn-block btn-default" ng-click="ctrl.assignFilter(ctrl.pendingInvoiceGenerateFilter)">Belum Tagih Saja</button>
+
+			</div>
+		</div>
+	</div>
+</div>

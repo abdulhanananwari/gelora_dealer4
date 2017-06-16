@@ -1,0 +1,132 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Utama</h4>
+				<div ng-if="!ctrl.leasing.created_at">
+					<entity-finder-modal selected-entity="ctrl.leasing.mainLeasing"></entity-finder-modal>
+				</div>
+				<label>Name</label>
+				<input type="text" ng-model="ctrl.leasing.mainLeasing.name" readonly>
+				<label>Kode Leasing</label>
+				<input type="text" ng-model="ctrl.leasing.code">
+			</div>
+			<div class="col-sm-6 well" ng-if="ctrl.leasing.mainLeasing">
+				<h4>Cabang</h4>
+				<entity-finder-modal selected-entity="subEntity"></entity-finder-modal>
+
+				<label>Name</label>
+				<input type="text" ng-model="subEntity.name" readonly>
+
+				<button class="btn btn-block" ng-click="ctrl.leasing.subLeasings.push(subEntity)" ng-if="subEntity">Tambahkan</button>
+
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Nama</th>
+								<th>Hapus</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="sub in ctrl.leasing.subLeasings">
+								<td>{{sub.name}}</td>
+								<td><button class="btn btn-danger btn-xs" ng-click="ctrl.remove(sub)">Hapus</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<button class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.leasing)">Simpan</button>
+
+		<hr>
+		<div ng-if="ctrl.leasing.created_at">
+		<h4>Leasing Personnel</h4>
+		<a class="btn btn-block btn-warning" ui-sref="leasingPersonnelShow({mainLeasingId:ctrl.leasing.mainLeasing.id})">Tambah Data Leasing Personal</a>
+		<br>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Personal Entity</th>
+						<th>Email</th>
+						<th>Dapat Update Pooling</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="leasingPersonnel in ctrl.leasingPersonnels">
+						<td>{{leasingPersonnel.personnel.name}}</td>
+						<td>{{leasingPersonnel.personnel.email}}</td>
+						<td>{{leasingPersonnel.access.can_update_pooling}}</td>
+						<td><a ui-sref="leasingPersonnelShow({id:leasingPersonnel.id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<hr>
+		
+		<div ng-if="ctrl.leasing.created_at">
+
+			<h4>Program</h4>
+			<a class="btn btn-block btn-warning" ui-sref="leasingProgramShow({mainLeasingId:ctrl.leasing.mainLeasing.id})">Tambah Program Baru</a>
+			<br>
+
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Leasing</th>
+							<th>Kendaraan</th>
+							<th>Tenor</th>
+							<th>DP</th>
+							<th>Jumlah Program</th>
+							<th>Buka</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="leasingProgram in ctrl.leasingPrograms">
+							<td>{{ leasingProgram.leasing.mainLeasing.name }}</td>
+							<td>
+								<span ng-if="leasingProgram.vehicle_model_selection_type == 'group'">
+									{{ leasingProgram.vehicle_model_group }}
+								</span>
+								<span ng-if="leasingProgram.vehicle_model_selection_type == 'single'">
+									{{ leasingProgram.vehicle.name }} | {{ leasingProgram.vehicle.code	 }} 
+								</span>
+							</td>
+							<td>
+								<span ng-if="leasingProgram.tenor_selection_type == 'range'">
+									{{ leasingProgram.min_tenor + ' - ' + leasingProgram.max_tenor }}
+								</span>
+								<span ng-if="leasingProgram.tenor_selection_type == 'single'">
+									{{ leasingProgram.tenor }}
+								</span>
+							</td>
+							<td>
+								<span ng-if="leasingProgram.dp_selection_type == 'range'">
+									{{ leasingProgram.min_dp + ' - ' + leasingProgram.min_dp }}
+								</span>
+								<span ng-if="leasingProgram.dp_selection_type == 'single'">
+									{{ leasingProgram.dp }}
+								</span>
+							</td>
+							<td>{{ leasingProgram.programs.length || 0 }}</td>
+							<td>
+								<a ui-sref="leasingProgramShow({id:leasingProgram._id})" target="_blank">Buka</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+
+		</div>
+	</div>
+</div>

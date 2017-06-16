@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="well">
+            <label>File</label>
+            <input type="file" id="surat_jalan_file">
+
+            <button class="btn btn-block btn-default btn-xs" ng-click="ctrl.loadSuratJalan()">Load File</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tipe</th>
+                        <th>Nama Tipe</th>
+                        <th>Warna</th>
+                        <th>Nama Warna</th>
+                        <th>Model Aktif</th>
+                        <th>No Mesin</th>
+                        <th>No Rangka</th>
+                        <th>No ND</th>
+                        <th>Tgl ND</th>
+                        <th>No SJ</th>
+                        <th>Tgl SJ</th>
+                        <th>Status</th>
+                        <th>Hapus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='object in ctrl.units'>
+                        <td>{{object.type_code}}</td>
+                        <td>{{object.type_name}}</td>
+                        <td>{{object.color_code}}</td>
+                        <td>{{object.color_name}}</td>
+                        <td>{{object.current}}</td>
+                        <td>{{object.engine_number}}</td>
+                        <td>{{object.chasis_number}}</td>
+                        <td>{{object.nd_number}}</td>
+                        <td>{{object.nd_date}}</td>
+                        <td>{{object.sj_number}}</td>
+                        <td>{{object.sj_date}}</td>
+                        <td>
+                            <span>{{object.status}}</span>
+                            <span ng-if="object.status == 1">Sukses. ID: {{object.response.data.id}}</span>
+                            <span ng-if="object.status == 0">Upload Gagal</span>
+                        </td>
+                        <td><button class="btn btn-xs btn-danger" ng-click="ctrl.removeUnit(object)" ng-disabled="ctrl.suratJalan.uploaded">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>	
+        </div>
+
+        <button ng-if="ctrl.units.length > 0" class="btn btn-block btn-warning" ng-click="ctrl.upload(ctrl.units)">Upload</button><br>
+
+    </div>
+</div>

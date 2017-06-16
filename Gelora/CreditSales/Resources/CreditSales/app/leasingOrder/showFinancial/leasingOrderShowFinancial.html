@@ -1,0 +1,138 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<a ui-sref="leasingOrderShow({id:ctrl.leasingOrder.id})"><h4>Leasing Order</h4></a>
+
+		<div class="well">
+			<div class="row">
+			
+				<div class="col-sm-4">
+					<h5>Leasing</h5>
+					<br>
+
+					<label>Leasing ID</label>
+					<input type="text" ng-model="ctrl.leasingOrder.mainLeasing.id" readonly>
+
+					<label>Leasing Name</label>
+					<input type="text" ng-model="ctrl.leasingOrder.mainLeasing.name" readonly>
+
+					<label>Cabang Leasing ID</label>
+					<input type="text" ng-model="ctrl.leasingOrder.subLeasing.id" readonly>
+
+					<label>Cabang Leasing Name</label>
+					<input type="text" ng-model="ctrl.leasingOrder.subLeasing.name" readonly>
+				</div>
+				<div class="col-sm-4">
+					<h5>Detail PO</h5>
+				
+					<label>Nama Kustomer</label>
+					<input type="text" ng-model="ctrl.leasingOrder.customer.name" readonly>
+
+					<label>Alamat Kustomer</label>
+					<textarea rows="5" style="height: 5em;" ng-model="ctrl.leasingOrder.customer.address" readonly></textarea>
+					<label>Nama STNK</label>
+					<input type="text" ng-model="ctrl.leasingOrder.registration.name" readonly>
+
+					<label>Alamat STNK</label>
+					<textarea rows="5" style="height: 5em;" ng-model="ctrl.leasingOrder.registration.address" readonly></textarea>
+					
+				</div>
+				<div class="col-sm-4">
+					<h5>Keuangan PO</h5>
+
+					<label>Nomor PO</label>
+					<input type="text" ng-model="ctrl.leasingOrder.po_number" readonly>
+
+					<label>OTR</label>
+					<input type="number" ng-model="ctrl.leasingOrder.on_the_road" readonly>
+
+					<label>DP PO</label>
+					<input type="number" ng-model="ctrl.leasingOrder.dp_po" readonly>
+
+					<label>DP Bayar <small>Tidak perlu diisi jika sama dengan DP PO</small></label>
+					<input type="number" ng-model="ctrl.leasingOrder.dp_bayar" readonly>
+
+					<label>Tenor</label>
+					<input type="number" ng-model="ctrl.leasingOrder.tenor" readonly>
+
+					<label>Cicilan</label>
+					<input type="number" ng-model="ctrl.leasingOrder.cicilan" readonly>
+					
+					<label>Tanggal Tagih</label>
+					<input type="text"  id="date" ng-model="ctrl.leasingOrder.invoice_date" readonly>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="well">
+			<div class="row">
+				
+				<div class="col-sm-12">
+					<h4>Join Promo</h4>
+					<button class="btn btn-block btn-info" ng-click="ctrl.leasingOrder.financial.joinPromos.push({})">Tambah Join Promo</button>
+					<br>
+					<div class="table-reponsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Nama</th>
+									<th>Jumlah Piutang Leasing</th>
+									<th>Jenis Tanggal Jatuh Tempo</th>
+									<th>Adjustment Tanggal Jatuh Tempo</th>
+									<th>Hutang ID</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="joinPromo in ctrl.leasingOrder.financial.joinPromos">
+									<td><input type="text" ng-model="joinPromo.name"></td>
+									<td><input type="number" ng-model="joinPromo.transfer_amount"></td>
+									<td><select ng-options="key as value for (key,value) in ctrl.dueDayTypes" ng-model="joinPromo.due_day_type"></select></td>
+									<td><input type="text" ng-model="joinPromo.due_day_count"></td>
+									<td><due-show ng-if="joinPromo.due_uuid" uuid="{{joinPromo.due_uuid}}"></due-show></td>
+								</tr>
+								<tr class="warning">
+									<td></td>
+									<td colspan="4">Total Piutang Leasing: <strong>Rp {{ ctrl._.sumBy(ctrl.leasingOrder.financial.joinPromos, 'transfer_amount') | number }}</strong></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- <div class="col-sm-4">
+					<h4>Insentive</h4>
+					<hr>
+
+					<label>Salesman</label>
+					<input type="number" ng-model="ctrl.leasingOrder.financial.insentives.salesman.amount">
+
+					<select ng-options="key as value for (key, value) in ctrl.availablePositions" ng-model="ctrl.leasingOrder.financial.insentives.salesman.type"></select>
+
+					<label>Koordinator</label>
+					<input type="number" ng-model="ctrl.leasingOrder.financial.insentives.koordinator.amount">
+
+					<select ng-options="key as value for (key, value) in ctrl.availablePositions" ng-model="ctrl.leasingOrder.financial.insentives.koordinator.type"></select>
+
+					<label>PIC</label>
+					<input type="number" ng-model="ctrl.leasingOrder.financial.insentives.pic.amount">
+
+					<hr>
+					<h4>Discount</h4>
+
+					<label>Maksimal Discount</label>
+					<input type="number" ng-model="ctrl.leasingOrder.financial.discount.max_discount">
+
+					<label>Minimal Discount</label>
+					<input type="number" ng-model="ctrl.leasingOrder.financial.discount.min_discount">
+				</div>
+			</div> -->
+
+			<button  class="btn btn-block btn-success" ng-click="ctrl.update(ctrl.leasingOrder)">Simpan</button>
+		</div>
+
+	</div>
+</div>
+
+
+

@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<div class="well">
+
+			<h3>PDI Unit</h3>
+
+			<dealer-unit-search selected-unit="ctrl.unit"></dealer-unit-search><br>
+			<button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br>
+			<dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.pdi(scannedUnit, true, ctrl.comment)"></dealer-unit-barcode-finder>
+			
+		</div>
+
+		<div ng-if="ctrl.unit">
+
+			<button class="btn btn-block btn-warning" ng-click="ctrl.pdi(ctrl.unit, true, ctrl.comment)">Unit sudah di PDI. Semua sudah dicheck dan dalam kondisi baik</button><br>
+			<button class="btn btn-block btn-warning" ng-click="ctrl.pdi(ctrl.unit, false, ctrl.comment)">Unit tidak dalam kondisi baik</button>
+
+		</div>
+
+	</div>
+</div>

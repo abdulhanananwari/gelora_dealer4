@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="col-sm-4">
+		<label>Dari Tanggal</label>
+		<input type="text" ng-model="ctrl.filter.from" class="date">
+		<label>Sampai Tanggal</label>
+		<input type="text" ng-model="ctrl.filter.until" class="date">
+		</div>
+		<div class="col-sm-4">
+			<leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.filter.main_leasing_id=mainLeasing.id;ctrl.filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
+		</div>
+		<div class="col-sm-4">
+			<vehicle-model-finder2 selected-model="selectedModel" 
+			color-selectable="false"
+			on-change="ctrl.filter.type_name=selectedModel.name;">
+            </vehicle-model-finder2>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<button class="btn btn-block btn-primary" ng-click="ctrl.download(ctrl.filter)">Download Report</button>
+	</div>
+</div>
