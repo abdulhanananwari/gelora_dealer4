@@ -1,0 +1,60 @@
+<button class="btn btn-sm btn-block btn-default" style="padding:8px 8px;border:1px solid #607285;" data-toggle="modal" data-target="#spk-filter-modal">SPK Filter</button>
+
+<div class="modal fade" id="spk-filter-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><strong>Filter</strong></h4>
+			</div>
+			<div class="modal-body">
+
+				<label>Nama Customer</label>
+				<input type="text" ng-model="ctrl.filter.customer_name">
+
+				<label>Nomor Telepon Customer</label>
+				<input type="text" ng-model="ctrl.filter.customer_phone_number" name="phone_number">
+
+				<label>Sales</label>
+				<input type="text" ng-model="ctrl.filter.salesperson_entity_id" name="phone_number">
+
+				<label><strong>Tanggal</strong></label>
+
+				<label>Jenis Tanggal</label>
+				<select ng-options="dateType.code as dateType.name for dateType in ctrl.dateTypes" ng-model="ctrl.filter.timeType"></select>
+
+				<div ng-disabled="ctrl.filter.timeType.code == false">
+					<label>Dari</label>
+					<input type="text" ng-model="ctrl.filter.from">
+
+					<label>Until</label>
+					<input type="text" ng-model="ctrl.filter.until">
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6">
+						
+						<label>Hasil Per Halaman</label>
+						<input type="text" ng-model="ctrl.filter.paginate" name="paginate">
+
+					</div>
+					<div class="col-sm-6">
+
+
+						<label>Pengurutan</label>
+						<select ng-model="ctrl.filter.order" ng-init="asc" name="order">
+							<option value="asc">Terlama</option>
+							<option value="desc">Terbaru</option>
+						</select>
+
+					</div>
+				</div>
+
+				<button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter)">Cari</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+

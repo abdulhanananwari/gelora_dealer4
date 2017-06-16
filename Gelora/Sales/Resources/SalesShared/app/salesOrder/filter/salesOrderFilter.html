@@ -1,0 +1,70 @@
+<button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#spk-filter-modal-{{modalId}}">SPK Filter</button><br>
+<!--  style="padding:8px 8px;border:1px solid #607285;" -->
+
+<div class="modal fade" id="spk-filter-modal-{{modalId}}" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><strong>Filter</strong></h4>
+			</div>
+			<div class="modal-body">
+
+				<label>Nama Customer</label>
+				<input type="text" ng-model="filter.customer_name">
+
+				<label>Nomor Telepon Customer</label>
+				<input type="text" ng-model="filter.customer_phone_number" name="phone_number">
+
+				<label>Sales ID</label>
+				<input type="text" ng-model="filter.salesperson_entity_id">
+
+				<label>Jenis Penjualan</label>
+
+				<select ng-options="customerType as customerType for customerType in customerTypes" ng-model="filter.customer_type"></select>
+
+           	    <label>Jenis Pembayaran</label>
+
+            	<select ng-options="key as value for (key, value) in paymentTypes" ng-model="filter.payment_type"></select>
+				
+ 
+				<label><strong>Tanggal</strong></label><br>
+
+				<label>Jenis Tanggal</label>
+				<select ng-options="dateType.code as dateType.name for dateType in dateTypes" ng-model="filter.timeType"></select>
+
+				<div ng-disabled="filter.timeType.code == false">
+					<label>Dari Tanggal</label>
+					<input type="text" ng-model="filter.from" class="date">
+
+					<label>Sampai Tanggal</label>
+					<input type="text" ng-model="filter.until" class="date">
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6">
+						
+						<label>Hasil Per Halaman</label>
+						<input type="text" ng-model="filter.paginate" name="paginate">
+
+					</div>
+					<div class="col-sm-6">
+
+
+						<label>Pengurutan</label>
+						<select ng-model="filter.order" ng-init="asc" name="order">
+							<option value="asc">Terlama</option>
+							<option value="desc">Terbaru</option>
+						</select>
+
+					</div>
+				</div>
+
+				<button class="btn btn-block btn-info" ng-click="load(filter)">Cari</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+

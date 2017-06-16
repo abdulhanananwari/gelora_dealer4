@@ -1,0 +1,115 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>		
+
+<div class="well" ng-if="ctrl.salesOrder.payment_type == 'credit'">
+	<div class="row">
+		<div class="col-sm-12">
+
+			<h4>Kredit Detail</h4>
+
+			<a class="btn btn-block btn-info" ng-click="ctrl.openLeasingOrder(ctrl.salesOrder.id, 'sales_order_id')">Input PO Leasing Baru</a><br>
+
+			<div class="panel panel-body panel-primary" ng-if="ctrl.salesOrder.selectedLeasingOrder">
+				<div class="row">
+					<div class="col-sm-12">
+						<h4>PO yang digunakan</h4>
+					</div>
+				</div>
+				<div class="row">
+					<fieldset readonly disabled>
+						<div class="col-sm-6">
+							<label>Leasing</label>
+							<input type="text" ng-model="ctrl.salesOrder.selectedLeasingOrder.mainLeasing.name">
+							<label>Leasing Branch</label>
+							<input type="text" ng-model="ctrl.salesOrder.selectedLeasingOrder.subLeasing.name">
+							<label>Nomor PO</label>
+							<input type="text" ng-model="ctrl.salesOrder.selectedLeasingOrder.po_number">
+						</div>
+						<div class="col-sm-6">
+							<label>DP PO</label>
+							<input type="text" ng-model="ctrl.salesOrder.selectedLeasingOrder.dp_po">
+							<label>Cicilan</label>
+							<input type="text" ng-model="ctrl.salesOrder.selectedLeasingOrder.cicilan">
+							<label>Tenor</label>
+							<input type="text" ng-model="ctrl.salesOrder.selectedLeasingOrder.tenor">
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<button ng-if="ctrl.salesOrder.selectedLeasingOrder.id && !ctrl.salesOrder.validated_at" class="btn btn-block btn-danger" ng-click="ctrl.deselectLeasingOrder(leasingOrder)">Ganti PO</button>
+			<br>
+			<div class="table-responsive" ng-if="ctrl.salesOrder.payment_type == 'credit'">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nomor PO</th>
+							<th>Date</th>
+							<th>Leasing</th>
+							<th>Leasing Branch</th>
+							<th>DP PO</th>
+							<th>Tenor</th>
+							<th>Cicilan</th>
+							<th>Buka</th>
+							<th>Gunakan PO Ini</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="leasingOrder in ctrl.salesOrder.leasingOrders">
+							<td>{{leasingOrder.po_number}}</td>
+							<td>{{leasingOrder.date}}</td>
+							<td>{{leasingOrder.mainLeasing.name}}</td>
+							<td>{{leasingOrder.subLeasing.name}}</td>
+							<td>{{leasingOrder.dp_po | number}}</td>
+							<td>{{leasingOrder.tenor}}</td>
+							<td>{{leasingOrder.cicilan | number}}</td>
+							<td><a class="btn btn-xs btn-block btn-primary" ng-href="{{'/credit-sales/redirect-app/leasing-order/?id=' + leasingOrder.id}}" target="_blank">Buka</a></td>
+							<td>
+								<button ng-disabled="leasingOrder.id == ctrl.salesOrder.selectedLeasingOrder.id" class="btn btn-xs btn-block btn-primary" ng-click="ctrl.selectLeasingOrder(leasingOrder)">Set</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+<div class="well">
+	<div class="row">
+		<div class="col-sm-12">
+		<h4>Daftar PO Leasing</h4>
+			<div class="table-responsive" ng-if="ctrl.salesOrder.payment_type == 'credit'">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nomor PO</th>
+							<th>Date</th>
+							<th>Leasing</th>
+							<th>Leasing Branch</th>
+							<th>DP PO</th>
+							<th>Tenor</th>
+							<th>Cicilan</th>
+							<th>Buka</th>
+							<th>Sambungkan PO Ini</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="leasingOrder in ctrl.leasingOrders">
+							<td>{{leasingOrder.po_number}}</td>
+							<td>{{leasingOrder.date}}</td>
+							<td>{{leasingOrder.mainLeasing.name}}</td>
+							<td>{{leasingOrder.subLeasing.name}}</td>
+							<td>{{leasingOrder.dp_po | number}}</td>
+							<td>{{leasingOrder.tenor}}</td>
+							<td>{{leasingOrder.cicilan | number}}</td>
+							<td><a class="btn btn-xs btn-block btn-primary" ng-href="{{'/credit-sales/redirect-app/leasing-order/?id=' + leasingOrder.id}}" target="_blank">Buka</a></td>
+							<td>
+								<button class="btn btn-xs btn-block btn-primary" ng-click="ctrl.attachLeasingOrder(leasingOrder)">Sambungkan</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

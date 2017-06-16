@@ -1,0 +1,170 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Kustomer ({{ctrl.salesOrder.customer.entity_id || 'Belum Terdaftar'}})</h5>
+            <entity-finder-modal search-only="true" selected-entity="selectedCustomerEntity" on-entity-selected="
+					ctrl.salesOrder.customer=_.pick(selectedCustomerEntity,['id','name','phone_number','email','address']);
+					ctrl.salesOrder.customer.entity_id=selectedCustomerEntity.id">
+            </entity-finder-modal>
+            <br>
+            <fieldset ng-readonly="true">
+                <label>Jenis</label>
+                <select ng-options="customerType as customerType for customerType in ctrl.customerTypes" ng-model="ctrl.salesOrder.customer.type"></select>
+                <label>Nama</label>
+                <input type="text" ng-model="ctrl.salesOrder.customer.name">
+                <label>Nomor Telepon <small>(hanya isi nomor, jangan gunakan spasi atau tanda baca)</small></label>
+                <input type="text" ng-model="ctrl.salesOrder.customer.phone_number">
+                <label>Email</label>
+                <input type="email" ng-model="ctrl.salesOrder.customer.email">
+                <label>Alamat</label>
+                <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.customer.address"></textarea>
+                <label>No KTP</label>
+                <input type="text" ng-model="ctrl.salesOrder.customer.ktp">
+                <label>NPWP</label>
+                <input type="text" ng-model="ctrl.salesOrder.customer.npwp">
+            </fieldset>
+            <entity-updater-modal ng-if="ctrl.salesOrder.customer.entity_id" entity-id="{{ctrl.salesOrder.customer.entity_id}}" new-entity-data="ctrl.salesOrder.customer">
+            </entity-updater-modal>
+            <br>
+            <file-manager-upload ng-if="ctrl.salesOrder.id" displayed-input='{{ ctrl.fileManager.customerIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.customerIdentification.additionalData }}' validations='{{ ctrl.fileManager.customerIdentification.validations }}' uploaded-file="uploadedCustomerIdentification" on-file-uploaded="ctrl.salesOrder.customer.id_file_uuid=uploadedCustomerIdentification.uuid;ctrl.store(ctrl.salesOrder);">
+            </file-manager-upload>
+            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.customer.id_file_uuid}}">
+            </file-manager-show>
+        </div>
+        <div class="col-sm-6">
+            <h5>Data Untuk STNK ({{ctrl.salesOrder.registration.entity_id || 'Belum Terdaftar'}})</h5>
+            <entity-finder-modal search-only="true" selected-entity="selectedRegistrationEntity" on-entity-selected="
+					ctrl.salesOrder.registration=_.pick(selectedRegistrationEntity,['id','name','phone_number','email','address']);
+					ctrl.salesOrder.registration.entity_id=selectedRegistrationEntity.id">
+            </entity-finder-modal>
+            <br>
+            <a class="btn btn-sm btn-block btn-success" ng-click="ctrl.copyRegistrationFromCustomer()">Sama Dengan Data Kustomer</a>
+            <br>
+            <fieldset ng-readonly="true">
+                <label>Jenis</label>
+                <select ng-options="customerType as customerType for customerType in ctrl.customerTypes" ng-model="ctrl.salesOrder.registration.type"></select>
+                <label>Nama</label>
+                <input type="text" ng-model="ctrl.salesOrder.registration.name">
+                <label>Nomor Telepon <small>(hanya isi nomor, jangan gunakan spasi atau tanda baca)</small></label>
+                <input type="text" ng-model="ctrl.salesOrder.registration.phone_number">
+                <label>Alamat</label>
+                <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.registration.address"></textarea>
+                <label>No KTP</label>
+                <input type="text" ng-model="ctrl.salesOrder.registration.ktp">
+                <label>NPWP</label>
+                <input type="text" ng-model="ctrl.salesOrder.registration.npwp">
+            </fieldset>
+            <entity-updater-modal ng-if="ctrl.salesOrder.registration.entity_id" entity-id="{{ctrl.salesOrder.registration.entity_id}}" new-entity-data="ctrl.salesOrder.registration">
+            </entity-updater-modal>
+            <br>
+            <file-manager-upload ng-if="ctrl.salesOrder.id" displayed-input='{{ ctrl.fileManager.registrationIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.registrationIdentification.additionalData }}' validations='{{ ctrl.fileManager.registrationIdentification.validations }}' uploaded-file="uploadedRegistrationIdentification" on-file-uploaded="ctrl.salesOrder.registration.id_file_uuid=uploadedRegistrationIdentification.uuid;ctrl.store(ctrl.salesOrder);">
+            </file-manager-upload>
+            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.registration.id_file_uuid}}">
+            </file-manager-show>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.salesOrder.id">
+        <div class="col-sm-12">
+            <br>
+            <a class="btn btn-block btn-success" ng-href="{{'/cdb/redirect-app/cddb/?sales_order_id=' + ctrl.salesOrder.id}}">CDB Survey</a>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Kendaraan</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <vehicle-model-finder2 selected-model="selectedModel" on-change="ctrl.salesOrder.vehicle=selectedModel;
+					ctrl.salesOrder.vehicle.model_id=selectedModel.id;
+					ctrl.salesOrder.vehicle.variant=selectedModel.variant;" params='{"current":"true"}'>
+            </vehicle-model-finder2>
+        </div>
+        <div class="col-sm-3">
+            <fieldset disabled>
+                <label>Merek</label>
+                <input type="text" ng-model="ctrl.salesOrder.vehicle.brand">
+                <label>Model</label>
+                <input type="text" ng-model="ctrl.salesOrder.vehicle.name">
+                <label>Kode</label>
+                <input type="text" ng-model="ctrl.salesOrder.vehicle.code">
+            </fieldset>
+        </div>
+        <div class="col-sm-3">
+            <fieldset disabled>
+                <label>Variant</label>
+                <input type="text" ng-model="ctrl.salesOrder.vehicle.variant.name">
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Detail Pesanan</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>Kondisi Jual</label>
+            <select ng-options="key as value for (key, value) in ctrl.salesConditions" ng-model="ctrl.salesOrder.sales_condition"></select>
+            <label>Jenis Pembayaran</label>
+            <select ng-options="key as value for (key, value) in ctrl.paymentTypes" ng-model="ctrl.salesOrder.payment_type"></select>
+        </div>
+        <div class="col-sm-4">
+            <!-- ng-disabled="ctrl.salesOrder.payment_type != 'credit'" -->
+            <label>On The Road</label>
+            <input type="text" ng-model="ctrl.salesOrder.on_the_road" disabled fcsa-number>
+            <label>Off The Road</label>
+            <input type="text" ng-model="ctrl.salesOrder.off_the_road" disabled fcsa-number>
+            <label>Discount</label>
+            <input type="text" ng-model="ctrl.salesOrder.discount" fcsa-number="{ preventInvalidInput: true }">
+        </div>
+        <div class="col-sm-4">
+            <label>Mediator Fee</label>
+            <input type="text" ng-model="ctrl.salesOrder.mediator_fee" fcsa-number="{ preventInvalidInput: true }">
+            <div ng-show="ctrl.salesOrder.mediator_fee > 0">
+                <entity-finder-modal search-only="true" selected-entity="selectedMediatorEntity" on-entity-selected="
+						ctrl.salesOrder.mediator=_.pick(selectedMediatorEntity,['name','phone_number','email','address']);
+						ctrl.salesOrder.mediator.entity_id=selectedMediatorEntity.id">
+                </entity-finder-modal>
+                <br>
+                <label>Nama Mediator (Lengkap Sesuai KTP)</label>
+                <input type="text" ng-model="ctrl.salesOrder.mediator.name">
+                <label>Nomor KTP Mediator</label>
+                <input type="text" ng-model="ctrl.salesOrder.mediator.ktp">
+                <file-manager-upload displayed-input='{{ ctrl.fileManager.mediatorIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.mediatorIdentification.additionalData }}' validations='{{ ctrl.fileManager.mediatorIdentification.validations }}' uploaded-file="uploadedMediatorIdentification" on-file-uploaded="ctrl.salesOrder.mediator.id_file_uuid=uploadedMediatorIdentification.uuid;ctrl.store(ctrl.salesOrder);">
+                </file-manager-upload>
+                <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.mediator.id_file_uuid}}">
+                </file-manager-show>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <label>Catatan</label>
+            <textarea rows='5' style='height:5em;' ng-model='ctrl.salesOrder.sales_note'></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <personnel-finder selected-personnel="ctrl.salesOrder.salesPersonnel">
+            </personnel-finder>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" ng-model="ctrl.salesOrder.salesPersonnel.entity.name" readonly>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" ng-model="ctrl.salesOrder.salesPersonnel.registration_code" readonly>
+        </div>
+    </div>
+</div>
+<button class="btn btn-lg btn-block btn-primary" ng-click="ctrl.store(ctrl.salesOrder)">Simpan SPK</button>
+<br>

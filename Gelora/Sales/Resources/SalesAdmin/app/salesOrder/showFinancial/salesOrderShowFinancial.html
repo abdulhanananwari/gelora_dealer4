@@ -1,0 +1,85 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Pembelian</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered" style="table-layout:fixed;">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Value @ Master</th>
+                            <th>Value @ SPK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Baris 1. Menampilkan harga dari master dan inputan -->
+                        <tr>
+                            <td>{{ ctrl.salesOrder.sales_condition == 'isi' ? 'Harga Isi' : 'Harga Kosong' }}</td>
+                            <td>{{ ctrl.salesOrder.sales_condition == 'isi' ? ctrl.salesOrder.price.on_the_road : ctrl.salesOrder.price.off_the_road | number }}</td>
+                            <td>
+                                <form name="price_form">
+                                    <input ng-show="ctrl.salesOrder.sales_condition == 'isi'" type="number" ng-model="ctrl.salesOrder.on_the_road">
+                                    <input ng-show="ctrl.salesOrder.sales_condition == 'kosong'" type="number" ng-model="ctrl.salesOrder.off_the_road">
+                                </form>
+                                <button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.updatePrice(ctrl.salesOrder)">Update</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ng-if="ctrl.salesOrder.financialBalance.price_difference_with_master" colspan="3" class="text-center">
+                                <span class="text-danger">Selisih dengan OTR master Rp {{ ctrl.salesOrder.financialBalance.price_difference_with_master | number }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ng-if="ctrl.salesOrder.financialBalance.price_difference_with_leasing_order" colspan="3" class="text-center">
+                                <span class="text-danger">Selisih dengan OTR PO Rp {{ ctrl.salesOrder.financialBalance.price_difference_with_leasing_order | number }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ng-if="ctrl.salesOrder.otr_difference_with_selected_leasing_order" colspan="3" class="text-center">
+                                <span class="text-danger">Selisih OTR dengan PO Rp {{ ctrl.salesOrder.otr_difference_with_selected_leasing_order | number  }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>(-) Total Discount</td>
+                            <td></td>
+                            <td>{{ ctrl.salesOrder.discount | number }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Total Unit</strong></td>
+                            <td>{{ ctrl.salesOrder.financialBalance.total_sales_order | number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Quantity x Price Per Unit</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr ng-repeat="extra in ctrl.salesOrder.salesOrderExtras">
+                            <td>{{extra.item_name}}</td>
+                            <td>{{extra.quantity}} x {{extra.price_per_unit | number}}</td>
+                            <td>{{extra.total | number}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Total Extra</strong></td>
+                            <td>{{ ctrl.salesOrder.financialBalance.total_sales_order_extras | number }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Grand Total</strong></td>
+                            <td>{{ ctrl.salesOrder.financialBalance.grand_total | number }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h4>Pembayaran</h4>
+            <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue" on-updated="ctrl.calculatePaymentUnreceived(false)"></transaction-due-list>
+            <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+            <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+            <due-create type="R" entity-id="{{ ctrl.salesOrder.customer.id }}" entity-name="{{ ctrl.salesOrder.customer.name }}" entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ ctrl.salesOrder.id }}"></due-create>
+        </div>
+    </div>
+    <p class="text-center"><strong>Kekurangan: Rp {{ ctrl.paymentUnreceived | number }}</strong></p>
+    <p ng-if="ctrl.paymentUnreceived < 0" class="text-danger text-center"><small>Pembayaran Sudah Berlebih</small></p>
+    <button class="btn btn-success btn-block" ng-click="ctrl.calculatePaymentUnreceived(true)">Hitung Ulang</button>
+</div>

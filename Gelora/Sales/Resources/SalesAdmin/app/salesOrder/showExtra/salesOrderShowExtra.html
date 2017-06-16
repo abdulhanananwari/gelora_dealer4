@@ -1,0 +1,94 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
+<div class="dropdown dropdown-scroll">
+    <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">{{ctrl.focused.sales_program_id ? 'Program: ' + ctrl.focused.name : 'Pilih Sales Program' }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation">
+            <div class="input-group input-group-sm search-control">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control" placeholder="Search Program" ng-model="x"></input>
+            </div>
+        </li>
+        <li role="presentation" ng-click="ctrl.focused={};ctrl.focused.sales_program_id=salesProgram.id;ctrl.focused.item_name=salesProgram.name;ctrl.focused.item_code=salesProgram.code;ctrl.focused.price_per_unit=salesProgram.value;ctrl.focused.quantity=1" ng-repeat='salesProgram in ctrl.salesPrograms | filter:x'><a> {{ salesProgram.code }} | {{ salesProgram.name }} | {{ salesProgram.value | number }}</a>
+        </li>
+    </ul>
+</div>
+<br>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Barang / Jasa</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>Nama</label>
+            <input type="text" ng-model="ctrl.focused.item_name">
+            <label>Kode</label>
+            <input type="text" ng-model="ctrl.focused.item_code">
+        </div>
+        <div class="col-sm-4">
+            <label>Quantity</label>
+            <input type="number" ng-model="ctrl.focused.quantity" ng-change="ctrl.calculate()">
+            <label>Per Unit</label>
+            <input type="number" ng-model="ctrl.focused.price_per_unit" ng-change="ctrl.calculate()">
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>Persentase Pajak</label>
+                    <input type="number" ng-model="ctrl.focused.vat_percentage">
+                </div>
+                <div class="col-xs-6">
+                    <label>Pajak</label>
+                    <input type="number" ng-model="ctrl.focused.vat" readonly auto-calculator="(ctrl.focused.quantity*ctrl.focused.price_per_unit)*((ctrl.focused.vat_percentage|0)/100)">
+                </div>
+            </div>
+            <label>Total</label>
+            <input type="number" ng-model="ctrl.focused.total" readonly auto-calculator="(ctrl.focused.quantity*ctrl.focused.price_per_unit)+ctrl.focused.vat">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button ng-disabled="!ctrl.focused.total" class="btn btn-block btn-danger" ng-click="ctrl.storeFocused(ctrl.focused)">Simpan</button>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Code</th>
+                            <th>Per Unit</th>
+                            <th>Quantity</th>
+                            <th>PPN</th>
+                            <th>Total</th>
+                            <th>Sales program ID</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="extra in ctrl.salesOrder.salesOrderExtras" ng-click="ctrl.focused=extra">
+                            <td>{{extra.item_name}}</td>
+                            <td>{{extra.item_code}}</td>
+                            <td>{{extra.price_per_unit | number}}</td>
+                            <td>{{extra.quantity}}</td>
+                            <td>{{extra.vat | number}}</td>
+                            <td>{{extra.total | number}}</td>
+                            <td><a ng-href="{{'/base/redirect-app/sales-program/' + extra.sales_program_id}}" target="_blank">{{extra.sales_program_id}}</a></td>
+                            <td>
+                                <button class="btn btn-xs btn-success" ng-click="ctrl.focused=extra">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

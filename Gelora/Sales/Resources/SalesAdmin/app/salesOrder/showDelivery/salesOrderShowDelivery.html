@@ -1,0 +1,53 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>		
+
+<div class="row">
+	<div class="col-sm-12">
+
+		<div class="col-sm-6">
+			<label>Jenis Delivery</label>
+			<select ng-options="deliveryType.code as deliveryType.name for deliveryType in ctrl.deliveryTypes" ng-model="ctrl.salesOrder.delivery_request.type"></select>
+
+			<label>Special Request</label>
+			<textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.delivery_request.request"></textarea>
+
+			<hr>
+
+			<h5>Penerima</h5>
+
+			<label>Nama</label>
+			<input type="text" ng-model="ctrl.salesOrder.delivery_request.name">
+
+			<label>Nomor Telepon</label>
+			<input type="text" ng-model="ctrl.salesOrder.delivery_request.phone_number">
+
+			<label>Alamat Delivery</label>
+			<textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.delivery_request.address"></textarea>
+
+			<button class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
+
+		</div>
+		<div class="col-sm-6">
+		<h4>Monitoring Pengiriman</h4>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Tanggal SJ</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="delivery in ctrl.deliveries">
+							<td>{{delivery.id}}</td>
+							<td>{{delivery.created_at}}</td>
+							<td>{{delivery.status_for_human}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<a ng-if="!ctrl.salesOrder.delivery_id && ctrl.salesOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.openDelivery(ctrl.salesOrder.id, 'sales_order_id')">Input Pengiriman</a>
+				<a ng-if="ctrl.salesOrder.delivery_id" class="btn btn-block btn-success" ng-href="{{'/delivery/redirect-app/delivery/?id=' + ctrl.salesOrder.delivery_id}}" target="_blank">Lihat Pengiriman</a>
+			</div>	
+		</div>
+	</div>
+</div>

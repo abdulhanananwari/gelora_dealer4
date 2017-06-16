@@ -1,0 +1,44 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>		
+
+<div class="row">
+	<div class="col-sm-12">
+		
+		<h4>Faktur</h4>
+
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Delivery</th>
+						<th>Tanggal</th>
+						<th>Laporan ke MD</th>
+						<th>Serah ke Biro Jasa</th>
+						<th>Terima dari Biro Jasa</th>
+						<th>Penyerahan BPKB ke Leasing</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="registration in ctrl.registrations">
+						<td>{{ registration.id | limitTo: 5 }}...</td>
+						<td><a href="{{'/delivery/redirect-app/delivery/?id=' + registration.delivery_id}}" >Delivery</a></td>
+						<td>{{ registration.created_at }}</td>
+						<td><a ng-if="registration.registration_md_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-md-submission-batch/' + registration.registration_md_submission_batch_id}}">Buka</a></td>
+						<td><a ng-if="registration.registration_agency_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-agency-submission-batch/' + registration.registration_agency_submission_batch_id}}">Buka</a></td>
+						<td><a ng-if="registration.registration_agency_invoice_id" href="{{'/pol-reg/redirect-app/registration-agency-invoice/' + registration.registration_agency_invoice_id}}" >Buka</a></td>
+						<td><a ng-if="registration.registration_leasing_bpkb_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-leasing-bpkb-submission-batch/' + registration.registration_leasing_bpkb_submission_batch_id}}" >Buka</a></td>
+						<td><a class="btn btn-xs btn-primary" href="{{'/pol-reg/redirect-app/registration/?id=' + registration.id}}">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<registration-batches registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-batches>
+
+		<registration-handover registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-handover>
+
+		<registration-cost registration-id="{{ctrl.salesOrder.usedRegistration.id}}"></registration-cost>
+		
+	</div>
+</div>

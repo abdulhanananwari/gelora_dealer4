@@ -190,6 +190,7 @@ return [
         \Gelora\InventoryManagement\GeloraInventoryManagementProvider::class,
         \Gelora\PurchaseSimple\GeloraPurchaseSimpleProvider::class,
         \Gelora\CreditSales\GeloraCreditSalesProvider::class,
+        \Gelora\Sales\GeloraSalesProvider::class,
     ],
 
     /*

@@ -1,0 +1,227 @@
+<h4>Prospek {{ ctrl.prospect.id || 'Baru' }}</h4>
+<p><small>
+    Dibuat: {{ ctrl.prospect.created_at | date }} ({{ ctrl.prospect.creator.name }})<br>
+    Terakhir Update: {{ ctrl.prospect.updated_at | date }} ({{ ctrl.prospect.updater.name }})<br>
+    Ditutup: {{ ctrl.prospect.closed_at | date }} ({{ ctrl.prospect.closer.name }})<br>
+    SPK: {{ ctrl.prospect.sales_order_id }}<br>
+</small></p>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Kustomer ({{ctrl.prospect.customer.entity_id || 'Belum Terdaftar'}})</h5>
+            <entity-finder-modal search-only="true" selected-entity="selectedCustomerEntity" on-entity-selected="
+                    ctrl.prospect.customer=_.pick(selectedCustomerEntity,['id','name','phone_number','email','address']);
+                    ctrl.prospect.customer.entity_id=selectedCustomerEntity.id">
+            </entity-finder-modal>
+            <br>
+            <fieldset ng-readonly="true">
+                <label>Jenis</label>
+                <select ng-options="customerType as customerType for customerType in ctrl.customerTypes" ng-model="ctrl.prospect.customer.type"></select>
+                <label>Nama</label>
+                <input type="text" ng-model="ctrl.prospect.customer.name">
+                <label>Nomor Telepon <small>(hanya isi nomor, jangan gunakan spasi atau tanda baca)</small></label>
+                <input type="text" ng-model="ctrl.prospect.customer.phone_number">
+                <label>Email</label>
+                <input type="email" ng-model="ctrl.prospect.customer.email">
+                <label>Alamat</label>
+                <textarea style="height:5em;" rows="5" ng-model="ctrl.prospect.customer.address"></textarea>
+                <label>No KTP</label>
+                <input type="text" ng-model="ctrl.prospect.customer.ktp">
+                <label>NPWP</label>
+                <input type="text" ng-model="ctrl.prospect.customer.npwp">
+            </fieldset>
+            <entity-updater-modal ng-if="ctrl.prospect.customer.entity_id" entity-id="{{ctrl.prospect.customer.entity_id}}" new-entity-data="ctrl.prospect.customer">
+            </entity-updater-modal>
+            <br>
+            <file-manager-upload ng-if="ctrl.prospect.id" displayed-input='{{ ctrl.fileManager.customerIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.customerIdentification.additionalData }}' validations='{{ ctrl.fileManager.customerIdentification.validations }}' uploaded-file="uploadedCustomerIdentification" on-file-uploaded="ctrl.prospect.customer.id_file_uuid=uploadedCustomerIdentification.uuid;ctrl.store(ctrl.prospect);">
+            </file-manager-upload>
+            <file-manager-show display-type="img" file-uuid="{{ctrl.prospect.customer.id_file_uuid}}">
+            </file-manager-show>
+        </div>
+        <div class="col-sm-6">
+            <h5>Data Untuk STNK ({{ctrl.prospect.registration.entity_id || 'Belum Terdaftar'}})</h5>
+            <entity-finder-modal search-only="true" selected-entity="selectedRegistrationEntity" on-entity-selected="
+                    ctrl.prospect.registration=_.pick(selectedRegistrationEntity,['id','name','phone_number','email','address']);
+                    ctrl.prospect.registration.entity_id=selectedRegistrationEntity.id">
+            </entity-finder-modal>
+            <br>
+            <a class="btn btn-sm btn-block btn-success" ng-click="ctrl.copyRegistrationFromCustomer()">Sama Dengan Data Kustomer</a>
+            <br>
+            <fieldset ng-readonly="true">
+                <label>Jenis</label>
+                <select ng-options="customerType as customerType for customerType in ctrl.customerTypes" ng-model="ctrl.prospect.registration.type"></select>
+                <label>Nama</label>
+                <input type="text" ng-model="ctrl.prospect.registration.name">
+                <label>Nomor Telepon <small>(hanya isi nomor, jangan gunakan spasi atau tanda baca)</small></label>
+                <input type="text" ng-model="ctrl.prospect.registration.phone_number">
+                <label>Alamat</label>
+                <textarea style="height:5em;" rows="5" ng-model="ctrl.prospect.registration.address"></textarea>
+                <label>No KTP</label>
+                <input type="text" ng-model="ctrl.prospect.registration.ktp">
+                <label>NPWP</label>
+                <input type="text" ng-model="ctrl.prospect.registration.npwp">
+            </fieldset>
+            <entity-updater-modal ng-if="ctrl.prospect.registration.entity_id" entity-id="{{ctrl.prospect.registration.entity_id}}" new-entity-data="ctrl.prospect.registration">
+            </entity-updater-modal>
+            <br>
+            <file-manager-upload ng-if="ctrl.prospect.id" displayed-input='{{ ctrl.fileManager.registrationIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.registrationIdentification.additionalData }}' validations='{{ ctrl.fileManager.registrationIdentification.validations }}' uploaded-file="uploadedRegistrationIdentification" on-file-uploaded="ctrl.prospect.registration.id_file_uuid=uploadedRegistrationIdentification.uuid;ctrl.store(ctrl.prospect);">
+            </file-manager-upload>
+            <file-manager-show display-type="img" file-uuid="{{ctrl.prospect.registration.id_file_uuid}}">
+            </file-manager-show>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Kendaraan</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <vehicle-model-finder2 selected-model="selectedModel" on-change="ctrl.prospect.vehicle=selectedModel;
+                    ctrl.prospect.vehicle.model_id=selectedModel.id;
+                    ctrl.prospect.vehicle.variant=selectedModel.variant;" params='{"current":"true"}'>
+            </vehicle-model-finder2>
+        </div>
+        <div class="col-sm-3">
+            <fieldset disabled>
+                <label>Merek</label>
+                <input type="text" ng-model="ctrl.prospect.vehicle.brand">
+                <label>Model</label>
+                <input type="text" ng-model="ctrl.prospect.vehicle.name">
+                <label>Kode</label>
+                <input type="text" ng-model="ctrl.prospect.vehicle.code">
+            </fieldset>
+        </div>
+        <div class="col-sm-3">
+            <fieldset disabled>
+                <label>Variant</label>
+                <input type="text" ng-model="ctrl.prospect.vehicle.variant.name">
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Detail Pesanan</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>Kondisi Jual</label>
+            <select ng-options="key as value for (key, value) in ctrl.salesConditions" ng-model="ctrl.prospect.sales_condition"></select>
+            <label>Jenis Pembayaran</label>
+            <select ng-options="key as value for (key, value) in ctrl.paymentTypes" ng-model="ctrl.prospect.payment_type"></select>
+        </div>
+        <div class="col-sm-4">
+            <label>Discount</label>
+            <input type="text" ng-model="ctrl.prospect.discount" fcsa-number="{ preventInvalidInput: true }">
+        </div>
+        <div class="col-sm-4">
+            <label>Mediator Fee</label>
+            <input type="text" ng-model="ctrl.prospect.mediator_fee" fcsa-number="{ preventInvalidInput: true }">
+            <div ng-show="ctrl.prospect.id && ctrl.prospect.mediator_fee > 0">
+                <entity-finder-modal search-only="true" selected-entity="selectedMediatorEntity" on-entity-selected="
+                        ctrl.prospect.mediator=_.pick(selectedMediatorEntity,['name','phone_number','email','address']);
+                        ctrl.prospect.mediator.entity_id=selectedMediatorEntity.id">
+                </entity-finder-modal>
+                <br>
+                <label>Nama Mediator (Lengkap Sesuai KTP)</label>
+                <input type="text" ng-model="ctrl.prospect.mediator.name">
+                <label>Nomor KTP Mediator</label>
+                <input type="text" ng-model="ctrl.prospect.mediator.ktp">
+                <file-manager-upload displayed-input='{{ ctrl.fileManager.mediatorIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.mediatorIdentification.additionalData }}' validations='{{ ctrl.fileManager.mediatorIdentification.validations }}' uploaded-file="uploadedMediatorIdentification" on-file-uploaded="ctrl.prospect.mediator.id_file_uuid=uploadedMediatorIdentification.uuid;ctrl.store(ctrl.prospect);">
+                </file-manager-upload>
+                <file-manager-show display-type="img" file-uuid="{{ctrl.prospect.mediator.id_file_uuid}}">
+                </file-manager-show>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <label>Catatan</label>
+            <textarea rows='5' style='height:5em;' ng-model='ctrl.prospect.sales_note'></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <personnel-finder selected-personnel="ctrl.prospect.salesPersonnel">
+            </personnel-finder>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" ng-model="ctrl.prospect.salesPersonnel.entity.name" readonly>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" ng-model="ctrl.prospect.salesPersonnel.registration_code" readonly>
+        </div>
+    </div>
+</div>
+<button ng-if="!ctrl.prospect.closed_at" class="btn btn-lg btn-block btn-primary" ng-click="ctrl.store(ctrl.prospect)">Simpan Prospek</button>
+<br>
+<div class="well" ng-if="ctrl.prospect.id & !ctrl.prospect.closed_at">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Follow Up</h4>
+            <label>Reminder Follow Up Tanggal</label>
+            <input type="text" class="jqdate" ng-model="ctrl.newFollowUp.date">
+            <label>Catatan</label>
+            <input type="text" ng-model="ctrl.newFollowUp.note">
+            <button ng-disabled="!ctrl.newFollowUp.date || !ctrl.newFollowUp.note" class="btn btn-block btn-primary btn-block btn-xs" ng-click="ctrl.followUp.store(ctrl.newFollowUp)">Simpan Catatan Follow Up</button>
+        </div>
+        <div class="col-sm-6">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Catatan</th>
+                            <th>Hasil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="followUp in ctrl.prospect.follow_ups">
+                            <td>{{ followUp.date | date }}</td>
+                            <td>{{ followUp.note }}</td>
+                            <td>
+                                <span ng-if="!followUp.completed_at">
+                                    <input type="text" ng-model="followUp.result" placeholder="Hasil Follow Up">
+                                    <button ng-disabled="!followUp.result" class="btn btn-xs btn-primary btn-block" ng-click="ctrl.followUp.storeResult(followUp)">Simpan</button>
+                                </span>
+                                <span ng-if="followUp.completed_at">{{ followUp.result }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="well" ng-if="ctrl.prospect.id">
+    <h4>Tutup dan Konfirmasi Prospek</h4>
+    <input class="form-not-applied" type="checkbox" ng-model="ctrl.prospect.create_sales_order_request">
+    <label>Request untuk dibuat SPK</label>
+    <br>
+    <label>Catatan Penutupan</label>
+    <input type="text" ng-model="ctrl.closing_note">
+    <button ng-if="!ctrl.prospect.closed_at" class="btn btn-lg btn-block btn-warning" ng-click="ctrl.close(ctrl.prospect)">Tutup & Konfirmasi Prospek</button>
+</div>
+<div class="well" ng-if="ctrl.prospect.closed_at && ctrl.prospect.create_sales_order_request">
+    <input class="form-not-applied" type="checkbox" ng-model="ctrl.prospect.create_sales_order_response">
+    <label>Request untuk dibuat SPK di approve Admin</label>
+    <br>
+    <label>Catatan Penutupan</label>
+    <input type="text" ng-model="ctrl.create_sales_order_response_note">
+    <p><small>Dibuat: {{ ctrl.prospect.create_sales_order_responded_at | date }} ({{ ctrl.prospect.create_sales_order_responder.name }})</small></p>
+    <button ng-if="!ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" ng-click="ctrl.respond(ctrl.prospect)">Respon dan Generate Sales Order</button>
+    <a ng-if="ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" href="/sales-admin/redirect-app/sales-order/?id={{ ctrl.prospect.sales_order_id }}">Buka Sales Order</a>
+</div>
+<br>
+
+<script type="text/javascript">
+    $( ".jqdate" ).datepicker({ dateFormat: "yy-mm-dd" })
+</script>

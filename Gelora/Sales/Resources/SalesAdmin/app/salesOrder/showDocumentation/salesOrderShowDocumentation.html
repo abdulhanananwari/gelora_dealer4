@@ -1,0 +1,31 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>		
+
+<div class="row">
+	<div class="col-sm-12">
+
+		<btn class="btn btn-block btn-warning" ng-click="ctrl.generateAndDownload(ctrl.salesOrder)">Generate dan Download SPK</btn>
+
+		<hr>
+		<button ng-if="ctrl.salesOrder.customer.email" class="btn btn-block btn-primary" ng-click="ctrl.sendEmail(ctrl.salesOrder)">Kirim Via Email</button>
+		<hr>
+		
+		<h4>History</h4>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Tanggal Cetak</th>
+						<th>Download</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="documentation in ctrl.documentations">
+						<td>{{ documentation.created_at }}</td>
+						<td><a href="{{documentation.full_url}}" target="_blank">Download</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
