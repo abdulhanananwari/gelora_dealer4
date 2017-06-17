@@ -3,17 +3,13 @@
 		<h4>Leasing Personnel</h4>
 		<p>Leasing: <a ui-sref="leasingShow({id:ctrl.leasingPersonnel.leasing.mainLeasing.id})">{{ ctrl.leasingPersonnel.leasing.mainLeasing.name }}</a></p>
 		<hr>
-		
-		<entity-finder-modal
-			ng-if="!ctrl.leasingPersonnel.id"
-			selected-entity="personnelEntity"
-			on-entity-selected="ctrl.leasingPersonnel.personnel=personnelEntity">
-		</entity-finder-modal>
+
+		<account-finder-modal ng-if="!ctrl.leasingPersonnel.id" selected-user="ctrl.leasingPersonnel.user"></account-finder-modal>
 		
 		<label>Nama</label>
-		<input type="text" ng-model="ctrl.leasingPersonnel.personnel.name" readonly>
+		<input type="text" ng-model="ctrl.leasingPersonnel.user.name" readonly>
 		<label>Email</label>
-		<input type="text" ng-model="ctrl.leasingPersonnel.personnel.email">
+		<input type="text" ng-model="ctrl.leasingPersonnel.user.email" readonly>
 
 		<br>
 

@@ -50,6 +50,9 @@ elixir((mix) => {
     mix.scriptsIn('Gelora/CreditSales/Resources/CreditSales', 'public/gelora/credit-sales/app/all.js');
     mix.copy('Gelora/CreditSales/Resources/CreditSales', 'public/gelora/credit-sales');
 
+    mix.scriptsIn('Gelora/CreditSales/Resources/LeasingApp', 'public/gelora/credit-sales-leasing-app/app/all.js');
+    mix.copy('Gelora/CreditSales/Resources/LeasingApp', 'public/gelora/credit-sales-leasing-app');
+
     mix.scriptsIn('Gelora/CreditSales/Resources/CreditSalesShared', 'public/gelora/credit-sales-shared/app/all.js');
     mix.copy('Gelora/CreditSales/Resources/CreditSalesShared', 'public/gelora/credit-sales-shared');
     

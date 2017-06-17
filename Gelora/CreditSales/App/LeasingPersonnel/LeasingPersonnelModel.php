@@ -5,10 +5,9 @@ namespace Gelora\CreditSales\App\LeasingPersonnel;
 use Solumax\PhpHelper\App\BaseModelMongo as Model;
 
 class LeasingPersonnelModel extends Model {
-    
+
     protected $connection = 'mongodb';
     protected $collection = 'leasing_personnels';
-
     protected $guarded = ['created_at', 'updated_at'];
 
     public function assign() {
@@ -27,7 +26,8 @@ class LeasingPersonnelModel extends Model {
 
     public function leasing() {
 
-    	return $this->belongsTo('Gelora\CreditSales\App\Leasing\LeasingModel',
-            'mainLeasing.id', 'leasing.mainLeasing.id');
+        return $this->belongsTo('Gelora\CreditSales\App\Leasing\LeasingModel',
+                'mainLeasing.id', 'leasing.mainLeasing.id');
     }
+
 }

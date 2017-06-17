@@ -44,6 +44,10 @@ class SalesOrderModel extends Model {
     public function email() {
         return new Managers\Emailer($this);
     }
+    
+    public function subDocument() {
+        return new Managers\SubDocument($this);
+    }
 
     //Relationship
 

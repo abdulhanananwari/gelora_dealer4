@@ -33,13 +33,14 @@
         <script type="text/javascript" src="/gelora/base-shared/app/all.js"></script>
         <script type="text/javascript" src="/gelora/credit-sales-shared/app/all.js"></script>
         <script type="text/javascript" src="/solumax/dependencies/all.js"></script>
-        <script type="text/javascript" src="/solumax/file-manager/v2/file-manager.js"></script>
+        <script type="text/javascript" src="/solumax/file-manager/v3.0/file-manager.js"></script>
         <script type="text/javascript" src="/solumax/setting/app.js"></script>
 
         <!-- Replace For Production -->
         <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:'.explode(':', Request::root())[1].':11019/') : 'https://transaction.hondagelora.com/'}}plugins2/all.js"></script>
         <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:'.explode(':', Request::root())[1].':11088/') : 'https://kendaraan.hondagelora.com/'}}shared/all.js"></script>
-        <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:'.explode(':', Request::root())[1].':10777/') : 'https://entity.hondagelora.com/'}}plugins/v2/all.js"></script>
+        <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':10000/') : 'https://accounts.xolura.com/'}}plugins/1.0/all.js"></script>
+    
 
         <script type="text/javascript" src="app/all.js"></script>
 

@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnDeselect {
+class OnUpdate {
 
     protected $salesOrder;
 
@@ -13,7 +13,7 @@ class OnDeselect {
     }
 
     public function validate() {
-        
+
         $onUpdateValidation = $this->salesOrder->validate()->onUpdate();
         if ($onUpdateValidation !== true) {
             return $onUpdateValidation;
@@ -21,4 +21,5 @@ class OnDeselect {
 
         return true;
     }
+
 }

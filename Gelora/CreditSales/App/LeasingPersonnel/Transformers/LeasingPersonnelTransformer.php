@@ -14,7 +14,7 @@ class LeasingPersonnelTransformer extends Fractal\TransformerAbstract {
             '_id' => $leasingPersonnel->_id,
 
             'leasing' => $leasingPersonnel->leasing,
-            'personnel' => $leasingPersonnel->personnel,
+            'user' => $leasingPersonnel->user,
             'access' => $leasingPersonnel->access,
         ];
         

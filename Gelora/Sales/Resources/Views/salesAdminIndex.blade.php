@@ -31,7 +31,7 @@
 
     <script type="text/javascript" src="/solumax/setting/app.js"></script>
     <script type="text/javascript" src="/solumax/dependencies/all.js"></script>
-    <script type="text/javascript" src="/solumax/file-manager/v2/file-manager.js"></script>
+    <script type="text/javascript" src="/solumax/file-manager/v3.0/file-manager.js"></script>
     
     <script type="text/javascript" src="/gelora/base-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/sales-shared/app/all.js"></script>

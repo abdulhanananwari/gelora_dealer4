@@ -6,9 +6,7 @@ use League\Fractal;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class SalesOrderTransformer extends Fractal\TransformerAbstract {
-//    
-//    public $availableIncludes = ['leasingOrders', 'selectedLeasingOrder','usedRegistration',
-//        'salesOrderExtras', 'cddb', 'price', 'financialBalance'];
+
     public $defaultIncludes = ['unit'];
 
     public function transform(SalesOrderModel $salesOrder) {
@@ -23,21 +21,18 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'registration' => (object) $salesOrder->registration,
             
             'vehicle'  => (object) $salesOrder->vehicle,
-            'delivery_request' => (object) $salesOrder->delivery_request,
+            'deliveryRequest' => (object) $salesOrder->deliveryRequest,
             'mediator' =>  (object) $salesOrder->mediator,
             'salesPersonnel' => (object) $salesOrder->salesPersonnel,
+            
+            'leasingOrder' => (object) $salesOrder->leasingOrder,
 
             
             'indent' => $salesOrder->indent,
             'plafond' => $salesOrder->plafond,
             
-            'kondisi_jual' => $salesOrder->sales_condition,
-
             'sales_condition' => $salesOrder->sales_condition,
             'payment_type' => $salesOrder->payment_type,
-            
-            'leasing_order_id' => $salesOrder->leasing_order_id,
-            'leasing_order_selector' => $salesOrder->leasing_order_selector,
             
             'delivery_id' => $salesOrder->delivery_id,
             'delivery_assigner' => (object) $salesOrder->delivery_assigner,
@@ -57,7 +52,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'unvalidator' => $salesOrder->unvalidator,
             
             // Baru diisi setelah proses STNK selesai, pencairan leasing selesai, konsumen sudah bayar semua due.
-            // Caranya sistem ngecheck jumlah diatas apakah sudah lengkap semua            
+            // Caranya sistem ngecheck jumlah diatas apakah sudah lengkap semua
             'financial_completed_at' => $salesOrder->financial_completed_at ? $salesOrder->financial_completed_at->toDateTimeString() : null,
             'financial_completer' => $salesOrder->financial_completer,
             
@@ -68,6 +63,8 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'delivery' => (object) $salesOrder->delivery,
             'unit_id' => $salesOrder->unit_id,
         ];
+        
+        $transformed['leasingOrder'] = Partials\LeasingOrder::transform($salesOrder);
         
         return array_merge(
                 $transformed,
