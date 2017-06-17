@@ -74,7 +74,7 @@ geloraDelivery
                 return
             }
 
-            SalesOrderModel.delivery.handover(salesOrder.id,salesOrder, { status: status })
+            SalesOrderModel.delivery.handover(salesOrder.id, salesOrder.delivery, {status:status})
                 .then(function(res) {
                     assignData(res.data)
                     alert('Serah terima berhasil dibuat');

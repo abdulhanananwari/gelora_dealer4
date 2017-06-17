@@ -34,7 +34,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'sales_condition' => $salesOrder->sales_condition,
             'payment_type' => $salesOrder->payment_type,
             
-            'delivery_id' => $salesOrder->delivery_id,
+            'delivery_status' => $salesOrder->delivery_status,
             'delivery_assigner' => (object) $salesOrder->delivery_assigner,
 
             'registration_id' => $salesOrder->registration_id,

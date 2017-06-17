@@ -13,11 +13,12 @@ class OnHandover {
     }
     
     public function action() {
-         $this->salesOrder->action()->delivery()->onHandoverSuccessful();      
-       /* if ($this->salesOrder['delivery']['status']) {
-            
+        
+        if ($this->salesOrder->delivery->status) {
+
+            $this->salesOrder->action()->delivery()->onHandoverSuccessful();      
         } else {
             $this->salesOrder->action()->delivery()->onHandoverUnsuccessful();
-        }*/
+        }
     }
 }

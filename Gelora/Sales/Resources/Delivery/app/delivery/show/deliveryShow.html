@@ -61,7 +61,7 @@
         <button ng-if="!ctrl.salesOrder.delivery.created_at && ctrl.salesOrder.unit.id && !ctrl.salesOrder.delivery.handover_at" class="btn btn-block btn-warning" ng-click="ctrl.generateDelivery(ctrl.salesOrder, ctrl.salesOrder.unit)">Generate Surat Jalan</button>
 
 
-        <div ng-if="ctrl.salesOrder.delivery.created_at">
+        <div ng-if="ctrl.salesOrder.delivery">
             <div ng-if="ctrl.salesOrder.unit_id">
                 <div ng-if="!ctrl.salesOrder.delivery.handover_at">
                     <button class="btn btn-block btn-primary" ng-click="ctrl.scan()">Scan Barcode</button>
@@ -89,7 +89,7 @@
                             <label>Catatan Serah Terima</label>
                             <input type="text" ng-model="ctrl.salesOrder.delivery.handover_note">
                             <label>Waktu</label>
-                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover_at" readonly>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover_at | date" readonly>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Lat</label>

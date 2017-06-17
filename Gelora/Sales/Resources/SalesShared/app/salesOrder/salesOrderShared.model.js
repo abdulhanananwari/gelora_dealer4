@@ -61,8 +61,8 @@ geloraSalesShared
             generate: function(id, unit) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', {unit_id: unit.id})
             },
-            handover: function(id,params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/', {params:params})
+            handover: function(id,delivery, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/',delivery, {params:params})
             }
         }
         salesOrder.unit = {

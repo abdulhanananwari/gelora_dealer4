@@ -22,7 +22,7 @@
 					<tr ng-repeat="salesOrder in ctrl.salesOrders">
 						<td>{{ salesOrder.id }}</td>
 						<td>{{ salesOrder.customer.name }}</td>
-						<td>{{ salesOrder.delivery.created_at | date:"MM/dd/yyyy h:mma"}}</td>
+						<td>{{ salesOrder.delivery.created_at | date }}</td>
 						<td>{{ salesOrder.delivery.deliveryBatch.driver.name }}</td>
 						<td>{{ salesOrder.delivery.status_for_human}}</td>
 						<td><a ui-sref="deliveryShow({ id:salesOrder.id})">Buka</a></td>

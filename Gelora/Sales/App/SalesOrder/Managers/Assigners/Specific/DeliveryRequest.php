@@ -14,7 +14,7 @@ class DeliveryRequest {
     
     public function assign(\Illuminate\Http\Request $request) {
 
-        $this->salesOrder->delivery_request = $request->get('delivery_request');
+        $this->salesOrder->deliveryRequest = $request->get('deliveryRequest');
 
         return $this->salesOrder;
     }

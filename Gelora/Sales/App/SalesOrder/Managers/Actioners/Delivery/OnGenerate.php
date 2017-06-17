@@ -20,6 +20,7 @@ class OnGenerate {
         
         $delivery->created_at = new UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000);
         $delivery->creator = $this->salesOrder->assignEntityData();
+        
         $this->salesOrder->delivery = $delivery;
         
         $this->salesOrder->unit_id = $unit->id;
