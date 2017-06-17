@@ -191,6 +191,7 @@ return [
         \Gelora\PurchaseSimple\GeloraPurchaseSimpleProvider::class,
         \Gelora\CreditSales\GeloraCreditSalesProvider::class,
         \Gelora\Sales\GeloraSalesProvider::class,
+        \Gelora\Cdb\GeloraCdbProvider::class,
     ],
 
     /*

@@ -33,17 +33,23 @@ geloraSalesShared
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/price/', salesOrder, { params: params })
             },
             plafond: function(id, salesOrder, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/plafond/', salesOrder, { params:params })
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/plafond/', salesOrder, { params: params })
             }
         }
 
         salesOrder.leasingOrder = {
             update: function(id, leasingOrder, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/', { leasingOrder : leasingOrder }, { params: params })
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/', { leasingOrder: leasingOrder }, { params: params })
             },
             assignFromLeasingOrder: function(id, leasingOrderId, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id : leasingOrderId }, { params: params })  
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id: leasingOrderId }, { params: params })
             }
+        }
+
+        salesOrder.cddb = {
+            update: function(id, cddb, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/', { cddb: cddb }, { params: params })
+            },
         }
 
         salesOrder.document = {
@@ -67,7 +73,7 @@ geloraSalesShared
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/indent/')
             }
         }
-        
+
         salesOrder.action = {
             lock: {
                 request: function(id) {

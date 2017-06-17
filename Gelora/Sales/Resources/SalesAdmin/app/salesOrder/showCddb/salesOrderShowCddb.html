@@ -1,0 +1,142 @@
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Survey Customer Database</h4>
+        <button class="btn btn-block" ng-click="ctrl.copyFromSalesOrder()">Load Data Penjualan</button>
+        <label>No KTP</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.no_ktp">
+        <label>Jenis Kustomer</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.customer_code.options" ng-model="ctrl.salesOrder.cddb.customer_code"></select>
+        <label>Jenis Kelamin</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.jenis_kelamin.options" ng-model="ctrl.salesOrder.cddb.jenis_kelamin"></select>
+        <label>Tanggal Lahir</label>
+        <input type="text" class="birth-date" ng-model="ctrl.salesOrder.cddb.tanggal_lahir" onfocus="this.blur()">
+        <label>Alamat Surat</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.alamat_surat">
+        <label>Propinsi</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.propinsi_surat" readonly>
+        <label>Kota</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kota_surat_name || 'Pilih Kota' }}
+            </button>
+            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
+                <li role="presentation">
+                    <div class="input-group input-group-sm search-control">
+                        <span class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kota">
+                    </div>
+                </li>
+                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kota.options | valueHas:filter.kota" ng-click="ctrl.salesOrder.cddb.kota_surat=key;ctrl.salesOrder.cddb.kota_surat_name=value;ctrl.filterKecamatanSurat(ctrl.salesOrder.cddb.kota_surat)"><a>{{ value
+				 }}</a></li>
+            </ul>
+        </div>
+        <label>Kecamatan Surat</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kecamatan_surat_name || 'Pilih Kecamatan' }}
+            </button>
+            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
+                <li role="presentation">
+                    <div class="input-group input-group-sm search-control">
+                        <span class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kecamatan">
+                    </div>
+                </li>
+                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kecamatan_surat.options_filtered | valueHas:filter.kecamatan" ng-click="ctrl.salesOrder.cddb.kecamatan_surat=key;ctrl.salesOrder.cddb.kecamatan_surat_name=value;ctrl.filterKelurahanSurat(ctrl.salesOrder.cddb.kecamatan_surat)"><a>{{ value
+				 }}</a></li>
+            </ul>
+        </div>
+        <label>Kelurahan Surat</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kelurahan_surat_name || 'Pilih Kelurahan' }}
+            </button>
+            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
+                <li role="presentation">
+                    <div class="input-group input-group-sm search-control">
+                        <span class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kelurahan">
+                    </div>
+                </li>
+                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kelurahan_surat.options_filtered | valueHas:filter.kelurahan" ng-click="ctrl.salesOrder.cddb.kelurahan_surat=key;ctrl.salesOrder.cddb.kelurahan_surat_name=value;ctrl.filterKodePos(value)"><a>{{ value
+				 }}</a></li>
+            </ul>
+        </div>
+        <label>Kode Pos Surat</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.kode_pos_surat">
+        <label>Agama</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.agama.options" ng-model="ctrl.salesOrder.cddb.agama" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Pekerjaan</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.pekerjaan.options" ng-model="ctrl.salesOrder.cddb.pekerjaan" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Pengeluaran</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.pengeluaran.options" ng-model="ctrl.salesOrder.cddb.pengeluaran" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Pendidikan</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.pendidikan.options" ng-model="ctrl.salesOrder.cddb.pendidikan" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Nama Penanggung Jawab</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.nama_penanggung_jawab" ng-readonly="ctrl.salesOrder.cddb.customer_code=='I'||ctrl.salesOrder.cddb.customer_code=='C'||ctrl.salesOrder.cddb.customer_code=='J'">
+        <label>Nomor HP</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.no_hp">
+        <label>Nomor Telp</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.no_telp">
+        <label>Kebersedian Untuk Dihubungi</label>
+        <input type="checkbox" ng-model="ctrl.salesOrder.cddb.kebersediaan_untuk_dihubungi" ng-true-value="'Y'" ng-false-value="'T'">
+        <label>Merek Motor Yang Dimiliki Sekarang</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.merk_motor_yang_dimiliki_sekarang.options" ng-model="ctrl.salesOrder.cddb.merk_motor_yang_dimiliki_sekarang" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Jenis Motor Yang Dimiliki Sekarang</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.jenis_motor_yang_dimiliki_sekarang.options" ng-model="ctrl.salesOrder.cddb.jenis_motor_yang_dimiliki_sekarang" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Peruntukan penggunaan Sepeda Motor</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.sepeda_motor_digunakan_untuk.options" ng-model="ctrl.salesOrder.cddb.sepeda_motor_digunakan_untuk" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Yang Menggunakan Sepeda Motor</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.yang_menggunakan_sepeda_motor.options" ng-model="ctrl.salesOrder.cddb.yang_menggunakan_sepeda_motor" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <p>Aplikasi Always Honda Card</p>
+        <label>Jenis Kartu</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.jenis_kartu.options" ng-model="ctrl.salesOrder.cddb.jenis_kartu"></select>
+        <label>Sms Broadcast</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.sms_broadcast.options" ng-model="ctrl.salesOrder.cddb.sms_broadcast"></select>
+        <p>Jika customer tidak punya akun sosmed, isi dengan N</p>
+        <label>Akun Facebook</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.akun_facebook">
+        <label>Akun Twitter</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.akun_twitter">
+        <label>Akun Instagram</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.akun_instagram">
+        <label>Akun Youtube</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.akun_youtube">
+        <label>Hobi</label>
+        <select ng-options="option.code as option.name group by option.group for option in ctrl.cddbOptions.hobi.options_formatted" ng-model="ctrl.salesOrder.cddb.hobi" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'"></select>
+        <label>Deskripsi Konsumen (contoh: orangnya suka tersenyum)</label>
+        <input type="text" ng-model="ctrl.salesOrder.cddb.karakteristik_konsumen" ng-readonly="ctrl.salesOrder.cddb.customer_code=='G'||ctrl.salesOrder.cddb.customer_code=='J'">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Data Untuk Faktur</p>
+                <personnel-finder selected-personnel="ctrl.salesOrder.cddb.salesPersonnel">
+                </personnel-finder>
+                <br>
+                <button class="btn btn-xs btn-block btn-info" ng-click="ctrl.salesOrder.cddb.salesPersonnel=null">Hapus</button>
+            </div>
+            <div class="col-sm-6">
+                <label>Salesman Untuk Faktur</label>
+                <input type="text" ng-model="ctrl.salesOrder.cddb.salesPersonnel.entity.name" readonly>
+                <label>Kode Sales Person</label>
+                <input type="text" ng-model="ctrl.salesOrder.cddb.salesPersonnel.registration_code" readonly>
+            </div>
+        </div>
+        <label>Tanggal Penjualan (override)</label>
+        <input type="text" class="sales-date" ng-model="ctrl.salesOrder.cddb.tanggal_penjualan" onfocus="this.blur()">
+        <button class="btn btn-block btn-success" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
+        <hr>
+        <div ng-show="ctrl.salesOrder.cddb.string">
+            <label>CDDB</label>
+            <input type="text" ng-model="ctrl.salesOrder.cddb.string.cddb">
+            <label>UDSTK</label>
+            <input type="text" ng-model="ctrl.salesOrder.cddb.string.udstk">
+            <label>UDSLS</label>
+            <input type="text" ng-model="ctrl.salesOrder.cddb.string.udsls">
+        </div>
+        <button class="btn btn-block btn-success" ng-click="ctrl.generateString(ctrl.cddb)">Generate Text Untuk Email CDDB</button>
+    </div>
+</div>

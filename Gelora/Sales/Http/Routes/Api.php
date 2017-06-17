@@ -46,6 +46,10 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 });
             });
 
+            Route::group(['prefix' => '{id}/cddb'], function() {
+                Route::post('/', ['uses' => 'CddbController@update']);
+            });
+
             Route::group(['prefix' => '{id}/leasing-order'], function() {
                 Route::post('/', ['uses' => 'LeasingOrderController@update']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder']);
