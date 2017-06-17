@@ -49,4 +49,13 @@ class SalesOrderModel extends Model {
         return new Managers\SubDocument($this);
     }
 
+    //Relationship
+
+    public function unit() {
+        return $this->belongsTo('\Gelora\Base\App\Unit\UnitModel', 'unit_id');
+    }
+    
+    public function salesOrderExtras() {
+        return $this->hasMany('\Gelora\Sales\App\SalesOrderExtra\SalesOrderExtraModel', 'sales_order_id');
+    }
 }

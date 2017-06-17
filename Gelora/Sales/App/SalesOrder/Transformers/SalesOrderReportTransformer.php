@@ -17,7 +17,7 @@ class SalesOrderReportTransformer {
 
     public function transform(SalesOrderModel $salesOrder) {
 
-            // exit($salesOrder['leasing_order']['po_number']);
+           
        
         $data = [
             'id' => $salesOrder->_id,

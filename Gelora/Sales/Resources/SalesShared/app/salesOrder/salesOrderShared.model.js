@@ -64,13 +64,19 @@ geloraSalesShared
         }
 
         salesOrder.delivery = {
-            generate: function(id) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery-detail/generate/')
+            generate: function(id, unit) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', {unit_id: unit.id})
+            },
+            handover: function(id,delivery, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/',delivery, {params:params})
             }
         }
         salesOrder.unit = {
             indent: function(id) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/indent/')
+            },
+            deselect: function(id, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, {params:params})
             }
         }
 

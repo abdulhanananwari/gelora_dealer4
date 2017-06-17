@@ -35,6 +35,9 @@ elixir((mix) => {
     mix.scriptsIn('Gelora/Sales/Resources/SalesPersonnel', 'public/gelora/sales/personnel/app/all.js');
     mix.copy('Gelora/Sales/Resources/SalesPersonnel', 'public/gelora/sales/personnel');
 
+    mix.scriptsIn('Gelora/Sales/Resources/Delivery', 'public/gelora/sales/delivery/app/all.js');
+    mix.copy('Gelora/Sales/Resources/Delivery', 'public/gelora/sales/delivery');
+    
     mix.scriptsIn('Gelora/Sales/Resources/SalesShared', 'public/gelora/sales-shared/app/all.js');
     mix.copy('Gelora/Sales/Resources/SalesShared', 'public/gelora/sales-shared');
 

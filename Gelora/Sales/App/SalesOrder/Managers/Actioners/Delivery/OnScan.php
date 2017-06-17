@@ -4,19 +4,18 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Delivery;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnSuccessful {
-    
+class OnScan {
+
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
-    public function action($deliveryId) {
-        
-        $this->salesOrder->delivery_id = $deliveryId;
-        $this->salesOrder->assignEntityData('delivery_assigner');
-        
+
+    public function action() {
+
+        $this->salesOrder->scanned = true;
         $this->salesOrder->save();
     }
+
 }

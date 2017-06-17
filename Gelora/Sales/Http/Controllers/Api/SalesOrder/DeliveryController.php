@@ -17,13 +17,38 @@ class DeliveryController  extends SalesOrderController {
         
         $salesOrder = $this->salesOrder->find($id);
 
-//        $validation = $salesOrder->validate()->leasingOrder()->onSelect($leasingOrder);
-//        if ($validation !== true) {
-//            return $this->formatErrors($validation);
-//        }
+        $unit = \Gelora\Base\App\Unit\UnitModel::
+                find($request->get('unit_id'));
 
-        $salesOrder->action()->delivery()->onGenerate();
+        $validation = $salesOrder->validate()->delivery()->onGenerate();
+        if ($validation !== true) {
+           return $this->formatErrors($validation);
+        }
+        
+        $validation = $salesOrder->validate()->unit()->onSelect($unit);
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
 
+        $salesOrder->action()->delivery()->onGenerate($unit);
+        $salesOrder->action()->unit()->onSelect($unit);
+
+        return $this->formatItem($salesOrder);
+        
+    }
+    public function handover($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+        
+        $salesOrder->assign()->delivery()->onHandover($request);
+        
+        $validation = $salesOrder->validate()->delivery()->onHandover();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+        
+        $salesOrder->action()->delivery()->onHandover();
+        
         return $this->formatItem($salesOrder);
         
     }

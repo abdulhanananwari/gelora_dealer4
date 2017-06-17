@@ -99,7 +99,9 @@ geloraBaseShared
 				sales: {
 					salesOrder: {
 						base: apps.dealer.sales + 'api/sales-order/',
-						report: apps.dealer.sales + 'report/sales-order'
+						report: apps.dealer.sales + 'report/sales-order',
+						print:apps.dealer.sales + 'views/sales-order/delivery/print/',
+						scan:apps.dealer.sales + 'trigger/sales-order/delivery/',
 					},
 					prospect: {
 						base: apps.dealer.sales + 'api/prospect/',

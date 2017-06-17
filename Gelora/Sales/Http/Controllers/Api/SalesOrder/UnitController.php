@@ -27,4 +27,18 @@ class UnitController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
 
+    public function deselect($id) {
+
+        $salesOrder = $this->salesOrder->find($id);
+        
+        /*$validation = $salesOrder->validate()->unit()->onDeselect();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }*/
+
+        $salesOrder->action()->unit()->onDeselect();
+
+        return $this->formatItem($salesOrder);
+    }
+
 }

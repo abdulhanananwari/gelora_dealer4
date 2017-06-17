@@ -14,7 +14,7 @@ class OnGenerate {
         $this->salesOrder = $salesOrder;
     }
     
-    public function action() {
+    public function action($unit) {
         
         $delivery = new \stdClass();
         
@@ -23,6 +23,8 @@ class OnGenerate {
         
         $this->salesOrder->delivery = $delivery;
         
+        $this->salesOrder->unit_id = $unit->id;
+
         $this->salesOrder->action()->onUpdate();
     }
 }

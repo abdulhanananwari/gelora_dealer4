@@ -56,11 +56,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             });
             
             Route::group(['prefix' => '{id}/delivery'], function() {
+                
                 Route::post('generate', ['uses' => 'DeliveryController@generate']);
+                Route::post('handover', ['uses' => 'DeliveryController@handover']);
+                Route::post('cancel', ['uses' => 'DeliveryController@cancel']);
             });
             
             Route::group(['prefix' => '{id}/unit'], function() {
                 Route::post('indent', ['uses' => 'UnitController@indent']);
+                Route::post('deselect', ['uses' => 'UnitController@deselect']);
 
             });
 
