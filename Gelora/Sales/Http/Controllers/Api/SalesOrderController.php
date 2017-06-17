@@ -52,12 +52,19 @@ class SalesOrderController extends Controller {
             $query->whereNotNull('validated_at');
         }
 
-        if ($request->has('delivery_id')) {
-            if ($request->get('delivery_id') == 'null') {
-                $query->whereNull('delivery_id');
+        if ($request->has('delivery')) {
+            if ($request->get('delivery') == 'null') {
+                $query->whereNull('delivery');
             } else {
-                $query->where('delivery_id', $request->get('delivery_id'));
+                $query->where('delivery', $request->get('delivery'));
             }
+        }
+        if ($request->get('status') == 'on_progress') {
+            $query->whereNull('delivery.status');
+        }elseif ($request->get('status') == 'completed_successfully') {
+            $query->whereNotNull('delivery.handover_at')->where('delivery.status', true);
+        }elseif ($request->get('status') == 'cancelled') {
+            $query->whereNull('delivery.handover_at')->where('status', false);
         }
 
         $salesOrders = $query

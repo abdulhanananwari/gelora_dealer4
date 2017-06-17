@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Surat Jalan</h4>
+		<hr>
+
+		<!-- <select ng-options="key as value for (key, value) in ctrl.statuses" ng-model="ctrl.filter.status" ng-change="ctrl.load()"></select>
+ -->
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nama Kustomer</th>
+						<th>Tanggal SJ</th>
+						<th>Supir</th>
+						<th>Status</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="delivery in ctrl.salesOrders">
+						<td>{{ delivery.id }}</td>
+						<td>{{ delivery.customer.name }}</td>
+						<td>{{ delivery.delivery.created_at }}</td>
+						<td>{{ delivery.deliveryBatch.driver.name }}</td>
+						<td>{{ delivery.status_for_human}}</td>
+						<!-- <td><a ui-sref="deliveryShow({ id:delivery.id, salesOrderId: delivery.salesOrder.id,deliveryBatchId:delivery.delivery_batch_id})">Buka</a></td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<pagination pagination="ctrl.meta.pagination" page="page" on-load-page="ctrl.filter.page=page;ctrl.load()"></pagination>
+	</div>
+</div>

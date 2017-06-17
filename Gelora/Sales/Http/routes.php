@@ -5,6 +5,8 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Gelora\Sales\Http\Controllers
     include('Routes/Api.php');
     include('Routes/ApiSalesPersonnel.php');
     include('Routes/Report.php');
+    include('Routes/Views.php');
+
 });
 
 Route::group(['prefix' => 'sales-admin'], function() {
@@ -20,4 +22,4 @@ Route::group(['prefix' => 'sales'], function() {
     include('Routes/RedirectApp.php'); 
 });
 
-include('Routes/View.php');
+include('Routes/Views.php');

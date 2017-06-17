@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <h4><a ng-href="/sales-admin/redirect-app/sales-order/?id={{ctrl.salesOrder.id}}" target="_blank">Penjualan</a></h4>
+            <hr>
+            <fieldset disabled>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Nama Customer</label>
+                        <input type="text" ng-model="ctrl.salesOrder.customer.name">
+                        <label>Nomor Telepon</label>
+                        <input type="text" ng-model="ctrl.salesOrder.customer.phone_number">
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Delivery Request</h4>
+                        <label>Nama</label>
+                        <input type="text" ng-model="ctrl.salesOrder.deliveryRequest.name">
+                        <label>No Telepon</label>
+                        <input type="text" ng-model="ctrl.salesOrder.deliveryRequest.phone_number">
+                        <label>Alamat Delivery</label>
+                        <input type="text" ng-model="ctrl.salesOrder.deliveryRequest.address">
+                        <label>Jenis Delivery</label>
+                        <select ng-options="deliveryType.code as deliveryType.name for deliveryType in ctrl.deliveryTypes" ng-model="ctrl.delivery.salesOrder.deliveryRequest.type"></select>
+                        <label>Delivery Request</label>
+                        <textarea style="height:7em;" rows="7" ng-model="ctrl.salesOrder.deliveryRequest.request"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="well">
+            <h4>Unit</h4>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4><a ng-href="/base/redirect-app/unit/{{ctrl.salesOrder.unit.id}}" target="_blank">Unit</a></h4>
+                </div>
+                <div class="col-sm-3">
+                    <label>Nomor Mesin</label>
+                    <input type="text" ng-model="ctrl.salesOrder.unit.engine_number">
+                    <label>Nomor Rangka</label>
+                    <input type="text" ng-model="ctrl.salesOrder.unit.chasis_number">
+                </div>
+                <div class="col-sm-3">
+                    <label>PDI</label>
+                    <input type="text" ng-model="ctrl.salesOrder.unit.pdi_at">
+                    <label>PDI Man</label>
+                    <input type="text" ng-model="ctrl.salesOrder.unit.pdi_man_id">
+                </div>
+                <div class="col-sm-3">
+                    <label>Lokasi</label>
+                    <input type="text" ng-model="ctrl.salesOrder.unit.currentLocation.name">
+                </div>
+            </div>                
+            <div ng-if="!ctrl.salesOrder.delivery.deliveryBatch.fixed_at && !ctrl.salesOrder.delivery.handover_at && (!ctrl.salesOrder.delivery.status || ctrl.salesOrder.delivery.status === null)">
+                <dealer-unit-search ng-if="ctrl.unitSearchAdditionalParams" selected-unit="unit" on-unit-selected="ctrl.salesOrder.unit=unit" additional-params="ctrl.unitSearchAdditionalParams"></dealer-unit-search>
+                <br>
+                <button ng-if="ctrl.salesOrder.unit_id" ng-click="ctrl.deselectUnit()" class="btn btn-block btn-danger">Hapus Pilihan Unit</button>
+            </div>
+        </div>
+        
+        <button ng-if="!ctrl.salesOrder.delivery.created_at && ctrl.salesOrder.unit.id && !ctrl.salesOrder.delivery.handover_at" class="btn btn-block btn-warning" ng-click="ctrl.generateDelivery(ctrl.salesOrder, ctrl.salesOrder.unit)">Generate Surat Jalan</button>
+
+
+        <div ng-if="ctrl.salesOrder.delivery.created_at">
+            <div ng-if="ctrl.salesOrder.unit_id">
+                <div ng-if="!ctrl.salesOrder.delivery.handover_at">
+                    <button class="btn btn-block btn-primary" ng-click="ctrl.scan()">Scan Barcode</button>
+                    <button class="btn btn-block btn-primary" ng-click="ctrl.generateDeliveryNote(ctrl.salesOrder.delivery)">Cetak Surat Jalan</button>
+                    <br>
+                </div>
+                <!-- <div class="well" ng-if="(!ctrl.delivery.delivery_batch_id && !ctrl.delivery.handover_at) || ctrl.delivery.delivery_batch_id">
+                    <h4>Batch <a ng-if="ctrl.delivery.delivery_batch_id" ui-sref="deliveryBatchShow({id:ctrl.delivery.delivery_batch_id})" target="_blank"># {{ ctrl.delivery.delivery_batch_id }}</a></h4>
+                    <div ng-if="!ctrl.delivery.deliveryBatch.fixed_at">
+                        <label>Pilih Batch Pengiriman</label>
+                        <select ng-options="deliveryBatch.id as ( deliveryBatch.id + ' | ' +  deliveryBatch.driver.name ) for deliveryBatch in ctrl.deliveryBatches" ng-model="ctrl.selectedDeliveryBatchId"></select>
+                        <button class="btn btn-block btn-warning" ng-click="ctrl.selectDeliveryBatch(ctrl.selectedDeliveryBatchId)">Pilih</button>
+                        <button ng-if="ctrl.delivery.delivery_batch_id" class="btn btn-block btn-warning" ng-click="ctrl.deselectDeliveryBatch()">Batalkan Pilihan Batch Pengiriman</button>
+                    </div>
+                </div>
+ -->                <div>
+<!-- *ng-if="(ctrl.delivery.delivery_batch_id && ctrl.delivery.deliveryBatch.travel_started_at) || !ctrl.delivery.delivery_batch_id" class="well" -->
+                    <h4>Serah Terima</h4>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Nama Penerima</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover_name">
+                            <label>Nomor Telepon Penerima</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover_phone_number">
+                            <label>Catatan Serah Terima</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover_note">
+                            <label>Waktu</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover_at" readonly>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Lat</label>
+                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover_lat" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Lat</label>
+                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover_lon" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <img ng-if="ctrl.salesOrder.delivery.handover_lat && ctrl.salesOrder.delivery.handover_lon" class="img-responsive" ng-src="{{ 'https://maps.googleapis.com/maps/api/staticmap?center=' + ctrl.salesOrder.delivery.handover_lat + ',' + ctrl.salesOrder.delivery.handover_lon + '&markers='  + ctrl.salesOrder.delivery.handover_lat + ',' + ctrl.salesOrder.delivery.handover_lon + '&zoom=16&size=600x300' }}">
+                            <br>
+                            <button ng-if="!ctrl.salesOrder.delivery.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.setHandoverLocation()">Set Sebagai Lokasi Penerimaan</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div ng-if="!ctrl.salesOrder.delivery.handover_at" class="row">
+                        <div class="col-sm-6">
+                            <h4>KTP Penerima</h4>
+                            <file-manager-upload displayed-input='{{ ctrl.fileManager.handoverIndentification.displayedInput }}' additional-data='{{ ctrl.fileManager.handoverIndentification.additionalData }}' uploaded-file="uploadedHandoverIndentification" on-file-uploaded="ctrl.salesOrder.delivery.handover_id_file_uuid=uploadedHandoverIndentification.uuid;">
+                            </file-manager-upload>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Foto Serah Terima</h4>
+                            <file-manager-upload displayed-input='{{ ctrl.fileManager.handover.displayedInput }}' additional-data='{{ ctrl.fileManager.handover.additionalData }}' uploaded-file="uploadedHandover" on-file-uploaded="ctrl.salesOrder.delivery.handover_file_uuid=uploadedHandover.uuid">
+                            </file-manager-upload>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover_id_file_uuid}}"></file-manager-show>
+                        </div>
+                        <div class="col-sm-6">
+                            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover_file_uuid}}"></file-manager-show>
+                        </div>
+                    </div>
+                    <br>
+                    <button ng-if="!ctrl.salesOrder.delivery.handover_at" class="btn btn-block btn-success" ng-click="ctrl.handover(ctrl.salesOrder, true)">Serah Terima Berhasil</button>
+                    <button ng-if="!ctrl.salesOrder.delivery.handover_at" class="btn btn-block btn-danger" ng-click="ctrl.handover(ctrl.salesOrder, false)">Serah Terima Gagal</button>
+                </div>
+            </div>
+            <button ng-if="ctrl.salesOrder.delivery.status === null && !ctrl.salesOrer.delivery.deliveryBatch.travel_started_at" class="btn btn-danger btn-block btn-md" ng-click="ctrl.cancelDelivery(ctrl.salesOrder.delivery)">Batalkan Surat Jalan</button>
+            <br>
+        </div>
+        <div class="text-center text-warning">
+            <p ng-if="ctrl.salesOrder.delivery.status == true">Delivery Berhasil</p>
+            <p ng-if="ctrl.salesOrder.delivery.status == false && ctrl.delivery.handover_at">Delivery Gagal Saat Pengiriman</p>
+            <p ng-if="ctrl.salesOrder.delivery.status == false && ctrl.delivery.handover_at == null">Delivery Dibatalkan</p>
+        </div>
+    </div>
+</div>
+<br>

@@ -20,6 +20,7 @@ class GeloraSalesProvider extends ServiceProvider {
     public function register() {
 
         $this->mergeConfigFrom(__DIR__ . '/Config/sales.php', 'gelora.sales');
+        $this->mergeConfigFrom(__DIR__ . '/Config/delivery.php', 'gelora.delivery');
     }
 
 }

@@ -9,7 +9,8 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
 //    
 //    public $availableIncludes = ['leasingOrders', 'selectedLeasingOrder','usedRegistration',
 //        'salesOrderExtras', 'cddb', 'price', 'financialBalance'];
-    
+    public $defaultIncludes = ['unit'];
+
     public function transform(SalesOrderModel $salesOrder) {
         
         $transformed = [
@@ -64,13 +65,28 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'closed_at' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : null,
             'closer' => $salesOrder->closer,
             
-            'delivery' => (object) $salesOrder->delivery
+            'delivery' => (object) $salesOrder->delivery,
+            'unit_id' => $salesOrder->unit_id,
         ];
         
         return array_merge(
                 $transformed,
                 Partials\Price::transform($salesOrder)
         );
+    }
+
+
+    public function includeUnit(SalesOrderModel $salesOrder) {
+
+        if (is_null($salesOrder->unit_id)) {
+            return null;
+        }
+
+        $unit = $salesOrder->unit;
+
+        return $this->item($unit,
+                new \Gelora\Base\App\Unit\Transformers\UnitTransformer(),
+                'units');
     }
 //    
 //    public function includeLeasingOrders(SalesOrderModel $salesOrder) {
