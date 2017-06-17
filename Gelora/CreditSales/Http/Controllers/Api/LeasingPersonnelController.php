@@ -20,9 +20,11 @@ class LeasingPersonnelController extends Controller {
     public function index(Request $request) {
 
         $query = $this->leasingPersonnel->newQuery();
-
-        if ($request->has('leasing.mainLeasing.id')) {
-            $query->where('leasing.mainLeasing.id', $request->get('leasing.mainLeasing.id'));
+        
+//        exit($request->get('leasing.mainLeasing.id'));
+        
+        if ($request->has('main_leasing_id')) {
+            $query->where('leasing.mainLeasing.id', (int) $request->get('main_leasing_id'));
         }
 
         $leasingPersonnels = $query->get();
