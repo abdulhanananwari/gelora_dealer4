@@ -39,6 +39,13 @@ geloraSalesAdmin
   			pageTitle: 'Dealer | Sales Admin | Sales Order Credit'
 
 		})
+		.state('salesOrderShowCddb', {
+			url: '/salesOrder/showCddb/:id',
+  			templateUrl: 'app/salesOrder/showCddb/salesOrderShowCddb.html',
+  			controller: 'SalesOrderShowCddbController as ctrl',
+  			pageTitle: 'Dealer | Sales Admin | Sales Order CDDB'
+
+		})
 		.state('salesOrderShowDelivery', {
 			url: '/salesOrder/showDelivery/:id',
   			templateUrl: 'app/salesOrder/showDelivery/salesOrderShowDelivery.html',

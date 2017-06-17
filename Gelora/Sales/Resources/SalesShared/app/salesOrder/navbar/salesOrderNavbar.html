@@ -16,6 +16,7 @@
                 <li ng-if="salesOrder.payment_type == 'credit'" ng-class="{active: currentStateName == 'salesOrderShowCredit'}"><a ui-sref="salesOrderShowCredit({id:salesOrder.id})">Kredit</a></li>
                 <li ng-class="{active: currentStateName == 'salesOrderShowExtra'}"><a ui-sref="salesOrderShowExtra({id:salesOrder.id})">Tambahan</a></li>
                 <li ng-class="{active: currentStateName == 'salesOrderShowDelivery'}"><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>
+                <li ng-class="{active: currentStateName == 'salesOrderShowCddb'}"><a ui-sref="salesOrderShowCddb({id:salesOrder.id})">CDDB</a></li>
                 <li ng-class="{active: currentStateName == 'salesOrderShowApproval'}"><a ui-sref="salesOrderShowApproval({id:salesOrder.id})">Kunci & Validasi</a></li>
                 <li ng-class="{active: currentStateName == 'salesOrderShowRegistration'}"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
                 <li ng-class="{active: currentStateName == 'salesOrderShowDocumentation'}"><a ui-sref="salesOrderShowDocumentation({id:salesOrder.id})">Dokumen</a></li>
