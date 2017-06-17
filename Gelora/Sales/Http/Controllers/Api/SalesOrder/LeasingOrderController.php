@@ -13,33 +13,32 @@ class LeasingOrderController extends SalesOrderController {
         parent::__construct();
     }
 
-    public function select($id, Request $request) {
+    public function update($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->leasingOrder($request->get('leasingOrder'));
 
-        $leasingOrder = \Gelora\CreditSales\App\LeasingOrder\LeasingOrderModel::
-                find($request->get('leasing_order_id'));
-
-        $validation = $salesOrder->validate()->leasingOrder()->onSelect($leasingOrder);
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdate();
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
 
-        $salesOrder->action()->leasingOrder()->onSelect($leasingOrder);
+        $salesOrder->action()->leasingOrder()->onUpdate();
 
         return $this->formatItem($salesOrder);
     }
 
-    public function deselect($id, Request $request) {
-
+    public function assignFromLeasingOrder($id, Request $request) {
+        
         $salesOrder = $this->salesOrder->find($id);
+        $leasingOrder = \Gelora\CreditSales\App\LeasingOrder\LeasingOrderModel::find($request->get('leasing_order_id'));
 
-        $validation = $salesOrder->validate()->leasingOrder()->onDeselect();
+        $validation = $salesOrder->validate()->leasingOrder()->onAssignFromLeasingOrder($leasingOrder);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
 
-        $salesOrder->action()->leasingOrder()->onDeselect();
+        $salesOrder->action()->leasingOrder()->onAssignFromLeasingOrder($leasingOrder);
 
         return $this->formatItem($salesOrder);
     }

@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnDeselect {
+class OnUpdate {
     
     protected $salesOrder;
     
@@ -13,8 +13,6 @@ class OnDeselect {
     }
     
     public function action() {
-        
-        $this->salesOrder->leasing_order_id = null;
         
         $this->salesOrder->save();
     }

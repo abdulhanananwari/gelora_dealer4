@@ -1,4 +1,4 @@
-geloraDealerCreditSales
+GeloraCreditSalesShared
 	.factory('LeasingModel', function(
 		$http,
 		LinkFactory) {
