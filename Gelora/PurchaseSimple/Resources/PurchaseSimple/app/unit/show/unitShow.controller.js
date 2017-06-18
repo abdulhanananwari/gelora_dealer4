@@ -31,7 +31,7 @@ geloraPurchaseSimple
 
 		if ($state.params.id) {
 
-			UnitModel.show($state.params.id)
+			UnitModel.get($state.params.id)
 			.then(function(res) {
 				vm.unit = res.data.data
 			})

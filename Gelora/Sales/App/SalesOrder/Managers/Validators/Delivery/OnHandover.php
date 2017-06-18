@@ -5,58 +5,55 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Delivery;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class OnHandover {
-    
+
     protected $salesOrder;
 
-    public function __construct(SalesOrderModel  $salesOrder) {
+    public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     public function validate() {
         
         $default = $this->validateDefaultAttributes();
-        if ($default->fails()) {
-            return $default->errors()->all();
+        if ($default !== true) {
+            return $default;
         }
-        
-        $successful = $this->validateAttributesIfSuccessful();
-        if ($this->delivery->status == true && $successful->fails()) {
-            return $successful->errors()->all();
+
+        $scannedValidation = $this->validateUnitScanned();
+        if ($scannedValidation !== true) {
+            return $scannedValidation;
         }
-        
-        $unsuccessful = $this->validateAttributesIfUnsuccessful();
-        if ($this->delivery->status == false && $unsuccessful->fails()) {
-            return $unsuccessful->errors()->all();
-        }
-        
+
         return true;
-        
     }
-    
+
     protected function validateDefaultAttributes() {
-        
-        return \Validator::make($this->salesOrder->toArray(),
-                [
-                    'delivery.handover_at' => 'required',
-                    'delivery.status' => 'required',
-                ]);
+
+        if (!isset($this->salesOrder->subDocument()->delivery()->handover->receiver['name'])) {
+            return ['Nama penerima harus diisi'];
+        }
+
+        if (!isset($this->salesOrder->subDocument()->delivery()->handover->receiver['phone_number'])) {
+            return ['Nomor telepon penerima harus diisi'];
+        }
+
+        return true;
     }
-    
-    protected function validateAttributesIfSuccessful() {
-        
-        return \Validator::make($this->salesOrder->toArray(),
-                [
-                    'delivery.handover_name' => 'required',
-                    'delivery.handover_phone_number' => 'required',
-                ]);
+
+    protected function validateUnitScanned() {
+
+        if (!request()->get('bypass_scanned_validation') && empty($this->salesOrder->subDocument()->delivery()->scanner)) {
+
+            return [
+                    [
+                    'text' => 'Unit belum di scan. Jika yakin unit sudah betul, klik konfirm',
+                    'type' => 'confirm',
+                    'if_confirmed' => 'bypass_scanned_validation'
+                ]
+            ];
+        }
+
+        return true;
     }
-    
-    protected function validateAttributesIfUnsuccessful() {
-        
-        return \Validator::make($this->salesOrder->toArray(),
-                [
-                    'delivery.handover_note' => 'required',
-                ]);
-    }
-    
+
 }

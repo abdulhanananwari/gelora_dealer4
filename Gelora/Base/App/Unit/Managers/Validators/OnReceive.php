@@ -18,10 +18,6 @@ class OnReceive {
             return ['Lokasi penyimpanan unit harus dipilih'];
         }
         
-        if ($this->unit->received_at) {
-            return ['Penerimaan unit sudah dibuat'];
-        }
-        
         if ($this->unit->current_status != 'UNRECEIVED') {
             return ['Unit tidak sedang pending penerimaan'];
         }

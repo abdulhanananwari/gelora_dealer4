@@ -1,4 +1,4 @@
-<button class="btn btn-sm btn-block btn-default" style="padding:8px 8px;border:1px solid #607285;" data-toggle="modal" data-target="#dealer-unit-search-{{modalId}}">{{ title || 'Pencarian Unit'}}</button>
+<button class="btn btn-sm btn-block btn-default" style="padding:8px 8px;border:1px solid #607285;" data-toggle="modal" data-target="#dealer-unit-search-{{modalId}}">{{ selectedUnit ? (selectedUnit.type_name + ' | ' + selectedUnit.chasis_number) : 'Pencarian Unit'}}</button>
 
 <div class="modal fade" id="dealer-unit-search-{{modalId}}" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">

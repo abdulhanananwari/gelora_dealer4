@@ -13,8 +13,10 @@ class OnScan {
     }
 
     public function action() {
-
-        $this->salesOrder->scanned = true;
+        
+        $delivery = $this->salesOrder->subDocument()->delivery();
+        $delivery->scanner = $this->salesOrder->assignEntityData();
+        $this->salesOrder->delivery = $delivery;
         $this->salesOrder->save();
     }
 

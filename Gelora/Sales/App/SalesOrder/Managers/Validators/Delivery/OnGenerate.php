@@ -1,19 +1,20 @@
 <?php
-namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Delivery;
 
+namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Delivery;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class OnGenerate {
-    
+
     protected $salesOrder;
 
-    public function __construct(SalesOrderModel  $salesOrder) {
+    public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     public function validate() {
-                  
-          return true;
-    }   
+
+        return true;
+    }
+
 }

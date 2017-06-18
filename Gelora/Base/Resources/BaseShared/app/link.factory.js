@@ -128,17 +128,6 @@ geloraBaseShared
 						base: apps.dealer.humanResource + 'personnel/'
 					},
 				},
-				consignment: {
-					consignmentDetail: {
-						base: apps.dealer.consignment + 'api/consignment-detail/',
-						generate: {
-							fromSalesOrder: apps.dealer.consignment + 'generate/consignment-detail/from-sales-order/'
-						}
-					},
-					consignmentHeader: {
-						base: apps.dealer.consignment + 'api/consignment-header/'
-					}
-				},
 				polReg: {
 					registration: {
 						base: apps.dealer.polReg + 'api/registration/',
@@ -160,17 +149,13 @@ geloraBaseShared
 						views: apps.dealer.polReg + 'views/registration-leasing-bpkb-submission-batch/',
 					}
 				},
-				cdb: {
-					cddb: {
-						base: apps.dealer.cdb + 'api/cddb/'
-					}
-				},
 				views: {
 					base: {
 						unitSearch: apps.dealer.base + 'view/dealer-unit-search.html',
 						unitFilter: apps.dealer.base + 'view/dealer-unit-filter.html',
 						locationFinder:  apps.dealer.base + 'view/dealer-location-finder.html',
-						unitBarcodeFinder: apps.dealer.base + 'view/dealer-unit-barcode-finder.html'
+						unitBarcodeFinder: apps.dealer.base + 'view/dealer-unit-barcode-finder.html',
+						unitShow: apps.dealer.base + 'view/dealer-unit-show.html'
 					}
 				},
 				plugins: {

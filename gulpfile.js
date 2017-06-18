@@ -35,9 +35,6 @@ elixir((mix) => {
     mix.scriptsIn('Gelora/Sales/Resources/SalesPersonnel', 'public/gelora/sales/personnel/app/all.js');
     mix.copy('Gelora/Sales/Resources/SalesPersonnel', 'public/gelora/sales/personnel');
 
-    mix.scriptsIn('Gelora/Sales/Resources/Delivery', 'public/gelora/sales/delivery/app/all.js');
-    mix.copy('Gelora/Sales/Resources/Delivery', 'public/gelora/sales/delivery');
-    
     mix.scriptsIn('Gelora/Sales/Resources/SalesShared', 'public/gelora/sales-shared/app/all.js');
     mix.copy('Gelora/Sales/Resources/SalesShared', 'public/gelora/sales-shared');
 
@@ -58,9 +55,6 @@ elixir((mix) => {
     
     mix.scriptsIn('Gelora/Delivery/Resources/Delivery', 'public/gelora/delivery/app/all.js');
     mix.copy('Gelora/Delivery/Resources/Delivery', 'public/gelora/delivery');
-
-    mix.scriptsIn('Gelora/Delivery/Resources/DeliveryShared', 'public/gelora/delivery-shared/app/all.js');
-    mix.copy('Gelora/Delivery/Resources/DeliveryShared', 'public/gelora/delivery-shared'););    
 
     mix.scriptsIn('Gelora/PolReg/Resources/PolReg', 'public/gelora/pol-reg/app/all.js');
     mix.copy('Gelora/PolReg/Resources/PolReg', 'public/gelora/pol-reg');

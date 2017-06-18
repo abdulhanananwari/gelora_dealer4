@@ -8,6 +8,7 @@ geloraBaseShared
 			templateUrl: $sce.trustAsResourceUrl(LinkFactory.dealer.views.base.unitBarcodeFinder),
 			restrict: 'E',
 			scope: {
+				androidScanUrl: '@',
 				unit: "=",
 				onFound: "&"
 			},
@@ -16,7 +17,8 @@ geloraBaseShared
 				scope.modalId = Math.random().toString(36).substring(2, 7)
 
 				scope.scan = function() {
-					window.open('zxing://scan/?ret=' + encodeURIComponent(androidScanUrl))
+					console.log(scope.androidScanUrl)
+					window.open('zxing://scan/?ret=' + encodeURIComponent(scope.androidScanUrl))
 				}
 
 				scope.findUnit = function(chasisNumber) {

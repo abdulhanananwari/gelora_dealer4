@@ -1,0 +1,67 @@
+<div class="well">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well">
+                <label>Brand</label>
+                <input type="text" ng-model="unit.brand">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Nama Type</label>
+                        <input type="text" ng-model="unit.type_name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Kode Type</label>
+                        <input type="text" ng-model="unit.type_code">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Nama Warna</label>
+                        <input type="text" ng-model="unit.color_name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Kode Warna</label>
+                        <input type="text" ng-model="unit.color_code">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>No Mesin</label>
+                        <input type="text" ng-model="unit.engine_number">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>No Rangka</label>
+                        <input type="text" ng-model="unit.chasis_number">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Status</label>
+                        <input type="text" ng-model="unit.current_status_text">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Lokasi</label>
+                        <input type="text" ng-model="unit.currentLocation.data.name">
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Diterima</label>
+                        <input type="text" ng-model="unit.received_at">
+                        <label>Diterima Oleh</label>
+                        <input type="text" ng-model="unit.receiver.name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>PDI</label>
+                        <input type="text" ng-model="unit.pdi_at">
+                        <label>Di PDI Oleh</label>
+                        <input type="text" ng-model="unit.pdi_man.name">
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-block btn-warning" ng-href="{{'/inventory-management/redirect-app/unit/manual-movement/' + unit.chasis_number}}">Perpindahan</a>
+        </div>
+    </div>
+</div>

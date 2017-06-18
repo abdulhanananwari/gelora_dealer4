@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Delivery;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnScan {
+class OnHandoverPreAssign {
 
     protected $salesOrder;
 
@@ -12,12 +12,12 @@ class OnScan {
         $this->salesOrder = $salesOrder;
     }
 
-    public function validate($unit) {
+    public function validate() {
         
-        if ($this->salesOrder->unit_id != $unit->id) {
-            return ['Unit yang di scan tidak sama'];
+        if (!is_null($this->salesOrder->subDocument()->delivery()->handover['created_at'])) {
+            return ['Penerimaan sudah dibuat sebelumnya'];
         }
-        
+
         return true;
     }
 

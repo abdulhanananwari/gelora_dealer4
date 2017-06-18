@@ -52,6 +52,24 @@ geloraSalesShared
             },
         }
 
+        salesOrder.delivery = {
+            generate: function(id, unit) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', { unit_id: unit.id })
+            },
+            scan: function(id, unit) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/scan/', { unit_id: unit.id })
+            },
+            travelStart: function(id) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/travel-start/')
+            },
+            handover: function(id, handover, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/', { handover: handover }, { params: params })
+            },
+            cancel: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/cancel/', salesOrder, { params: params })
+            }
+        }
+
         salesOrder.document = {
             spk: {
                 generate: function(id) {
@@ -63,20 +81,12 @@ geloraSalesShared
             }
         }
 
-        salesOrder.delivery = {
-            generate: function(id, unit) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', {unit_id: unit.id})
-            },
-            handover: function(id,delivery, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/',delivery, {params:params})
-            }
-        }
         salesOrder.unit = {
             indent: function(id) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/indent/')
             },
             deselect: function(id, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, {params:params})
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, { params: params })
             }
         }
 

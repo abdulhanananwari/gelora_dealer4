@@ -6,8 +6,8 @@
 			<h3>PDI Unit</h3>
 
 			<dealer-unit-search selected-unit="ctrl.unit"></dealer-unit-search><br>
-			<button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br>
-			<dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.pdi(scannedUnit, true, ctrl.comment)"></dealer-unit-barcode-finder>
+			<!-- <button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br> -->
+			<dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.pdi(scannedUnit, true, ctrl.comment)" android-scan-url="{{ ctrl.androidScanUrl }}"></dealer-unit-barcode-finder>
 			
 		</div>
 
