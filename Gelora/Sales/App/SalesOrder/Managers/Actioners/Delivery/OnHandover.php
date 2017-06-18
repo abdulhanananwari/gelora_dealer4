@@ -14,8 +14,10 @@ class OnHandover {
 
     public function action() {
 
+        $this->salesOrder->unit->action()->delivery()->onHandover();
+        
         $this->salesOrder->delivery->handover->created_at = \Carbon\Carbon::now();
-
+        
         $this->salesOrder->save();
     }
 
