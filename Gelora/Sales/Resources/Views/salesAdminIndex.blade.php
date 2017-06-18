@@ -8,11 +8,8 @@
 
     <title ng-bind="pageTitle"></title>
 
-    <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/custom/bootstrap/bootstrap-yeti.min.css">
     <link rel="stylesheet" type="text/css" href="/standard/jquery-ui-1.11.4/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="/standard/jquery-ui-1.11.4/jquery-ui.structure.min.css">
-    <link rel="stylesheet" type="text/css" href="/standard/jquery-ui-1.11.4/jquery-ui.theme.min.css">
     <link rel="stylesheet" type="text/css" href="/standard/font-awesome-4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/standard/web-fonts/fonts.css">
 
@@ -36,9 +33,7 @@
     <script type="text/javascript" src="/gelora/base-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/credit-sales-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/sales-shared/app/all.js"></script>
-    <!-- <script type="text/javascript" src="/gelora/human-resource-shared/app/all.js"></script> -->
-    <!-- <script type="text/javascript" src="/gelora/delivery-shared/app/all.js"></script>
-    <script type="text/javascript" src="/gelora/pol-reg-shared/app/all.js"></script> -->
+    <script type="text/javascript" src="/gelora/pol-reg-shared/app/all.js"></script>
 
     <!-- Replace For Production -->
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11019/') : 'https://transaction.hondagelora.com/'}}plugins2/all.js"></script>

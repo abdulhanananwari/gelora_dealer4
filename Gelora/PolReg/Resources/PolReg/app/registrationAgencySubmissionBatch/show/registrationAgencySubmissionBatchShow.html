@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Batch Faktur Penyerahan ke Biro Jasa {{ ctrl.registrationBatch.id || 'Baru' }}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <entity-finder-modal ng-if="!ctrl.registrationBatch.closed_at" selected-entity="agent" on-entity-selected="ctrl.registrationBatch.agent=agent"></entity-finder-modal>
+                <br>
+                <div style="width: 100%;" class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Biro Jasa</td>
+                                <td>{{ctrl.registrationBatch.agent.name}} ({{ctrl.registrationBatch.agent.id}})</td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-6">Ditutup</td>
+                                <td>{{ ctrl.registrationBatch.closed_at }}</td>
+                            </tr>
+                            <tr>
+                                <td>Dikirimkan Tanggal</td>
+                                <td>{{ ctrl.registrationBatch.handover_at }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
+                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.registrations.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Konfirmasi</button>
+                <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.generateReceipt(ctrl.registrationBatch)">Cetak Bukti Penyerahan</button>
+                <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.handover(ctrl.registrationBatch)">Konfirmasi Serah Terima</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Salesman</th>
+                        <th>Type Motor</th>
+                        <th>Warna</th>
+                        <th>No Rangka</th>
+                        <th>No Mesin</th>
+                        <th>Serah Terima</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="registration in ctrl.registrationBatch.registrations">
+                        <td>{{registration.delivery.salesOrder.customer.name}}</td>
+                        <td>{{registration.delivery.salesOrder.customer.address}}</td>
+                        <td>{{registration.delivery.salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{registration.delivery.unit.type_name}}</td>
+                        <td>{{registration.delivery.unit.color_name}}</td>
+                        <td>{{registration.delivery.unit.chasis_number}}</td>
+                        <td>{{registration.delivery.unit.engine_number}}</td>
+                        <td>{{registration.delivery.handover_at}}</td>
+                        <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

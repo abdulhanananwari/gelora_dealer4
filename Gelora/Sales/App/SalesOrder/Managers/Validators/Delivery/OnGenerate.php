@@ -13,6 +13,10 @@ class OnGenerate {
     }
 
     public function validate() {
+        
+        if (is_null($this->salesOrder->validated_at)) {
+            return ['Penjualan belum di validasi'];
+        }
 
         return true;
     }

@@ -8,10 +8,10 @@
 <div class="well">
     <div class="row">
         <div class="col-sm-6">
-            <h5>Kustomer ({{ctrl.prospect.customer.entity_id || 'Belum Terdaftar'}})</h5>
+            <h5>Kustomer ({{ctrl.prospect.customer.id || 'Belum Terdaftar'}})</h5>
             <entity-finder-modal search-only="true" selected-entity="selectedCustomerEntity" on-entity-selected="
                     ctrl.prospect.customer=_.pick(selectedCustomerEntity,['id','name','phone_number','email','address']);
-                    ctrl.prospect.customer.entity_id=selectedCustomerEntity.id">
+                    ctrl.prospect.customer.id=selectedCustomerEntity.id">
             </entity-finder-modal>
             <br>
             <fieldset ng-readonly="true">
@@ -30,7 +30,7 @@
                 <label>NPWP</label>
                 <input type="text" ng-model="ctrl.prospect.customer.npwp">
             </fieldset>
-            <entity-updater-modal ng-if="ctrl.prospect.customer.entity_id" entity-id="{{ctrl.prospect.customer.entity_id}}" new-entity-data="ctrl.prospect.customer">
+            <entity-updater-modal ng-if="ctrl.prospect.customer.id" entity-id="{{ctrl.prospect.customer.id}}" new-entity-data="ctrl.prospect.customer">
             </entity-updater-modal>
             <br>
             <file-manager-upload ng-if="ctrl.prospect.id" displayed-input='{{ ctrl.fileManager.customerIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.customerIdentification.additionalData }}' validations='{{ ctrl.fileManager.customerIdentification.validations }}' uploaded-file="uploadedCustomerIdentification" on-file-uploaded="ctrl.prospect.customer.id_file_uuid=uploadedCustomerIdentification.uuid;ctrl.store(ctrl.prospect);">
@@ -39,10 +39,10 @@
             </file-manager-show>
         </div>
         <div class="col-sm-6">
-            <h5>Data Untuk STNK ({{ctrl.prospect.registration.entity_id || 'Belum Terdaftar'}})</h5>
+            <h5>Data Untuk STNK ({{ctrl.prospect.registration.id || 'Belum Terdaftar'}})</h5>
             <entity-finder-modal search-only="true" selected-entity="selectedRegistrationEntity" on-entity-selected="
                     ctrl.prospect.registration=_.pick(selectedRegistrationEntity,['id','name','phone_number','email','address']);
-                    ctrl.prospect.registration.entity_id=selectedRegistrationEntity.id">
+                    ctrl.prospect.registration.id=selectedRegistrationEntity.id">
             </entity-finder-modal>
             <br>
             <a class="btn btn-sm btn-block btn-success" ng-click="ctrl.copyRegistrationFromCustomer()">Sama Dengan Data Kustomer</a>
@@ -61,7 +61,7 @@
                 <label>NPWP</label>
                 <input type="text" ng-model="ctrl.prospect.registration.npwp">
             </fieldset>
-            <entity-updater-modal ng-if="ctrl.prospect.registration.entity_id" entity-id="{{ctrl.prospect.registration.entity_id}}" new-entity-data="ctrl.prospect.registration">
+            <entity-updater-modal ng-if="ctrl.prospect.registration.id" entity-id="{{ctrl.prospect.registration.id}}" new-entity-data="ctrl.prospect.registration">
             </entity-updater-modal>
             <br>
             <file-manager-upload ng-if="ctrl.prospect.id" displayed-input='{{ ctrl.fileManager.registrationIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.registrationIdentification.additionalData }}' validations='{{ ctrl.fileManager.registrationIdentification.validations }}' uploaded-file="uploadedRegistrationIdentification" on-file-uploaded="ctrl.prospect.registration.id_file_uuid=uploadedRegistrationIdentification.uuid;ctrl.store(ctrl.prospect);">

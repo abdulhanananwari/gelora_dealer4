@@ -50,6 +50,9 @@ geloraSalesShared
             update: function(id, cddb, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/', { cddb: cddb }, { params: params })
             },
+            generateStrings: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/generate-strings/', salesOrder, { params: params })
+            },
         }
 
         salesOrder.delivery = {
