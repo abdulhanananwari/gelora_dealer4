@@ -52,7 +52,6 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
             Route::group(['prefix' => '{id}/cddb'], function() {
                 Route::post('/', ['uses' => 'CddbController@update']);
-                Route::post('generate-strings', ['uses' => 'CddbController@generateStrings']);
             });
 
             Route::group(['prefix' => '{id}/leasing-order'], function() {
@@ -61,15 +60,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             });
 
             Route::group(['prefix' => '{id}/pol-reg'], function() {
-
+                
+                Route::post('generate-strings', ['uses' => 'PolRegController@generateStrings']);
+                
                 Route::group(['namespace' => 'PolReg'], function() {
                     Route::group(['prefix' => 'item'], function() {
                         Route::post('incoming', ['uses' => 'ItemController@incoming']);
                         Route::post('outgoing', ['uses' => 'ItemController@outgoing']);
                     });
-                    Route::group(['prefix' => 'cost'], function() {
-                        Route::post('/', ['uses' => 'CostController@update']);
-                    });
+                    Route::post('cost', ['uses' => 'CostController@update']);
                 });
             });
 

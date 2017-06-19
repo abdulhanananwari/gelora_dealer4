@@ -1,6 +1,6 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Registration\Generators;
+namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\PolReg\Generators;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 

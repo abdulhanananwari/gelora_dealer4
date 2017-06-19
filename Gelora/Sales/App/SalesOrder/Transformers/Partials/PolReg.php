@@ -14,6 +14,9 @@ class PolReg {
             'items' => (array) $polReg->items,
             'costs' => (array) $polReg->costs,
             
+            'strings' => (object) $polReg->strings,
+            'generator' => (object) $polReg->generator,
+            
             'md_submission_batch_id' => $polReg->md_submission_batch_id,
             'agency_submission_batch_id' => $polReg->agency_submission_batch_id,
             'agency_invoice_id' => $polReg->agency_invoice_id,

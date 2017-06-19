@@ -27,19 +27,4 @@ class CddbController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
-
-    public function generateStrings($id, Request $request) {
-        
-        $salesOrder = $this->salesOrder->find($id);
-
-        $validation = $salesOrder->validate()->cddb()->onUpdate();
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }
-
-        $salesOrder->action()->cddb()->onGenerateStrings();
-
-        return $this->formatItem($salesOrder);
-    }
-
 }
