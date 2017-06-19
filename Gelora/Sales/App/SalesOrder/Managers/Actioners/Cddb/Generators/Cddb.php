@@ -23,7 +23,7 @@ class Cddb {
         $data['No Ktp'] = $salesOrder['registration']['name'];
         $data['Kode Kustomer'] = $cddb['customer_code'];
         $data['Jenis Kelamin'] = $cddb['jenis_kelamin'];
-        $data['Alamat '] = $cddb['alamat_surat'];
+        $data['Alamat'] = $cddb['alamat_surat'];
         $data['Kelurahan'] = $cddb['kelurahan_surat'];
         $data['Kecamatan'] = $cddb['kecamatan_surat'];
         $data['kota'] = $cddb['kota_surat'];
