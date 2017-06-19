@@ -14,13 +14,20 @@ geloraSalesShared
 			},
 			link: function(scope, element, attrs) {
 				
-				scope.filter = {}
+				scope.filter = {
+					time_type: 'created_at',
+					order_by: 'created_at',
+					order: 'desc'
+				}
 
 				$('.date').datepicker({dateFormat: "yy-mm-dd"});
 
 				scope.modalId = Math.random().toString(36).substring(2, 7)
 				scope.customerTypes = ['Perorangan', 'Badan Usaha']
 				scope.paymentTypes = {'credit': 'Kredit', 'cash': 'Kas'}
+				scope.statuses = {'validated' : 'Validasi', 'delivery_generated' : 'Sudah Buat Surat Jalan', 'delivery_handover_created': 'Sudah serah terima', 'financial_completed' : 'Konsumen yang sudah lunas'}
+			    scope.dateTypes = {'created_at' : 'Tanggal SPK', 'validated_at' : 'Tanggal Validasi','delivery_generated_at':'Tanggal Buat Surat Jalan', 'delivery_handover_created_at': 'Tanggal Serah terima kendaraan'}
+			    
 			    scope.$watch('page', function() {
 			    	
 			    	scope.filter.page = scope.page
