@@ -19,8 +19,8 @@ class Udstk {
 
         $file = tmpfile();
 
-        foreach ($registrations as $registration) {
-            fwrite($file, $registration->delivery->salesOrder->cddb->string['udstk']);
+        foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
+            fwrite($file, $salesOrder->subDocument()->polReg()->strings['udstk']['string']);
             fwrite($file, "\n");
         }
 

@@ -7,6 +7,8 @@ use Gelora\PolReg\App\MdSubmissionBatch\MdSubmissionBatchModel;
 
 class MdSubmissionBatchTransformer extends Fractal\TransformerAbstract {
     
+    public $defaultIncludes = ['salesOrders'];
+    
     public function transform(MdSubmissionBatchModel $registrationMdSubmissionBatch) {
         
         return [
@@ -23,5 +25,13 @@ class MdSubmissionBatchTransformer extends Fractal\TransformerAbstract {
             'created_at' => $registrationMdSubmissionBatch->created_at->toDateTimeString(),
             'creator' => (array) $registrationMdSubmissionBatch->creator,
         ];
+    }
+    
+    public function includeSalesOrders(MdSubmissionBatchModel $registrationMdSubmissionBatch) {
+        
+        $salesOrders = $registrationMdSubmissionBatch->getSalesOrders();
+        
+        return $this->collection($salesOrders,
+                new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderTransformer());
     }
 }

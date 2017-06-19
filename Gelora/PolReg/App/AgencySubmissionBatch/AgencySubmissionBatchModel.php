@@ -28,4 +28,12 @@ class AgencySubmissionBatchModel extends Model {
         return new Managers\Retriever($this);
     }
 
+    // Relateds
+
+    public function getSalesOrders() {
+
+        return \Gelora\Sales\App\SalesOrder\SalesOrderModel::
+                        where('polReg.agency_submission_batch_id', new \MongoDB\BSON\ObjectID($this->id))
+                        ->get();
+    }
 }

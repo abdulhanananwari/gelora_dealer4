@@ -7,14 +7,14 @@ geloraPolReg
 
         vm.registrationBatch = {}
 
-        var defaultIncludes = { with: 'registrations.delivery.salesOrder.cddb' }
-
         vm.store = function(registrationBatch) {
 
             if (registrationBatch.id) {
 
                 MdSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
+                        vm.registrationBatch = res.data.data
+                        vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
                         alert('Berhasil diupdate')
                     })
 
@@ -31,35 +31,30 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            MdSubmissionBatchModel.close(registrationBatch.id, {}, defaultIncludes)
+            MdSubmissionBatchModel.close(registrationBatch.id)
                 .then(function(res) {
                     alert('Berhasil ditutup')
-                    assignData(res.data.data)
+                    vm.registrationBatch = res.data.data
+                    vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
                 })
-        }
-
-        vm.confirm = function(registration, confirmed_success) {
-
-            RegistrationModel.update.confirmMdSubmissionBatch(registration.id, { confirmed_success: confirmed_success })
-                .then(function(res) {
-                    alert('Berhasil dikonfirmasi')
-                })
-
         }
 
         vm.sendEmail = function(registrationBatch, email) {
 
-            MdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email }, defaultIncludes)
+            MdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email })
                 .then(function(res) {
-                    assignData(res.data.data)
+                    vm.registrationBatch = res.data.data
+                    vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
+
                 })
         }
 
         if ($state.params.id) {
 
-            MdSubmissionBatchModel.get($state.params.id, defaultIncludes)
+            MdSubmissionBatchModel.get($state.params.id)
                 .then(function(res) {
-                    vm.registrationBatch = assignData(res.data.data)
+                    vm.registrationBatch = res.data.data
+                    vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
                 })
         }
     })

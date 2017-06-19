@@ -7,6 +7,8 @@ use Gelora\PolReg\App\AgencyInvoice\AgencyInvoiceModel;
 
 class AgencyInvoiceTransformer extends Fractal\TransformerAbstract {
 
+    public $defaultIncludes = ['salesOrders'];
+    
     public function transform(AgencyInvoiceModel $registrationAgencyInvoice) {
 
         return [
@@ -22,5 +24,13 @@ class AgencyInvoiceTransformer extends Fractal\TransformerAbstract {
             'closed_at' => $registrationAgencyInvoice->closed_at ? $registrationAgencyInvoice->closed_at->toDateTimeString() : null,
             'closer' => $registrationAgencyInvoice->closer,
         ];
+    }
+    
+    public function includeSalesOrders(AgencyInvoiceModel $registrationAgencyInvoice) {
+        
+        $salesOrders = $registrationAgencyInvoice->getSalesOrders();
+        
+        return $this->collection($salesOrders,
+                new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderTransformer());
     }
 }

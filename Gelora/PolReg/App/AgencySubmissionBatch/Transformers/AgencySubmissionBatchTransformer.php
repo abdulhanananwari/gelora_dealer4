@@ -7,6 +7,8 @@ use Gelora\PolReg\App\AgencySubmissionBatch\AgencySubmissionBatchModel;
 
 class AgencySubmissionBatchTransformer extends Fractal\TransformerAbstract {
     
+    public $defaultIncludes = ['salesOrders'];
+    
     public function transform(AgencySubmissionBatchModel $registrationAgencySubmissionBatch) {
         
         return [
@@ -26,5 +28,13 @@ class AgencySubmissionBatchTransformer extends Fractal\TransformerAbstract {
         
             
         ];
+    }
+    
+    public function includeSalesOrders(AgencySubmissionBatchModel $registrationAgencySubmissionBatch) {
+        
+        $salesOrders = $registrationAgencySubmissionBatch->getSalesOrders();
+        
+        return $this->collection($salesOrders,
+                new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderTransformer());
     }
 }

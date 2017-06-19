@@ -18,8 +18,8 @@ class Udsls {
 
         $file = tmpfile();
 
-        foreach ($registrations as $registration) {
-            fwrite($file, $registration->delivery->salesOrder->cddb->string['udsls']);
+        foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
+            fwrite($file, $salesOrder->subDocument()->polReg()->strings['udsls']['string']);
             fwrite($file, "\n");
         }
 

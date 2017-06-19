@@ -7,6 +7,8 @@ use Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel
 
 class LeasingBpkbSubmissionBatchTransformer extends Fractal\TransformerAbstract {
     
+    public $defaultIncludes = ['salesOrders'];
+    
     public function transform(LeasingBpkbSubmissionBatchModel $registrationLeasingBpkbSubmissionBatch) {
         
         return [
@@ -26,5 +28,13 @@ class LeasingBpkbSubmissionBatchTransformer extends Fractal\TransformerAbstract 
             'handover_at' => $registrationLeasingBpkbSubmissionBatch->handover_at ? $registrationLeasingBpkbSubmissionBatch->handover_at->toDateTimeString() : null,
             'handover' => $registrationLeasingBpkbSubmissionBatch->handover
         ];
+    }
+    
+    public function includeSalesOrders(LeasingBpkbSubmissionBatchModel $registrationLeasingBpkbSubmissionBatch) {
+        
+        $salesOrders = $registrationLeasingBpkbSubmissionBatch->getSalesOrders();
+        
+        return $this->collection($salesOrders,
+                new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderTransformer());
     }
 }

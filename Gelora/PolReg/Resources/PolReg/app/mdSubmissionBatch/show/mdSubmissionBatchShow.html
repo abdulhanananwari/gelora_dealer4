@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-6">
                 <button ng-if="!ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
-                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.registrations.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
+                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
                 <div ng-if="ctrl.registrationBatch.closed_at">
                     <label>Email</label>
                     <input type="text" ng-model="ctrl.email">
@@ -46,33 +46,26 @@
                         <th>No Rangka</th>
                         <th>No Mesin</th>
                         <th>Serah Terima</th>
-                        <th>Success</th>
                         <th>Buka</th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="registration in ctrl.registrationBatch.registrations">
+                <tbody ng-repeat="salesOrder in ctrl.registrationBatch.salesOrders">
                     <tr class="info">
-                        <td>{{registration.delivery.salesOrder.customer.name}}</td>
-                        <td>{{registration.delivery.salesOrder.customer.address}}</td>
-                        <td>{{registration.delivery.salesOrder.salesPersonnel.entity.name}}</td>
-                        <td>{{registration.delivery.unit.type_name}}</td>
-                        <td>{{registration.delivery.unit.color_name}}</td>
-                        <td>{{registration.delivery.unit.chasis_number}}</td>
-                        <td>{{registration.delivery.unit.engine_number}}</td>
-                        <td>{{registration.delivery.handover_at}}</td>
-                        <td>
-                            <span ng-if="ctrl.registrationBatch.sent_at && !registration.registration_md_submission_batch_confirmed_at">
-                            <button class="glyphicon glyphicon-ok btn-xs btn-success" ng-click="ctrl.confirm(registration, true)"></button>
-                            <button class="glyphicon glyphicon-remove btn-xs btn-danger" ng-click="ctrl.confirm(registration, false)"></button>
-                            </span>
-                        </td>
+                        <td>{{salesOrder.customer.name}}</td>
+                        <td>{{salesOrder.customer.address}}</td>
+                        <td>{{salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{salesOrder.unit.type_name}}</td>
+                        <td>{{salesOrder.unit.color_name}}</td>
+                        <td>{{salesOrder.unit.chasis_number}}</td>
+                        <td>{{salesOrder.unit.engine_number}}</td>
+                        <td>{{salesOrder.delivery.handover.created_at}}</td>
                         <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
                     </tr>
                     <tr>
                         <td colspan="20">
-                            <p>{{ registration.delivery.salesOrder.cddb.string.cddb }}</p>
-                            <p>{{ registration.delivery.salesOrder.cddb.string.udstk }}</p>
-                            <p>{{ registration.delivery.salesOrder.cddb.string.udsls }}</p>
+                            <p>{{ salesOrder.polReg.strings.cddb.string }}</p>
+                            <p>{{ salesOrder.polReg.strings.udstk.string }}</p>
+                            <p>{{ salesOrder.polReg.strings.udsls.string }}</p>
                         </td>
                     </tr>
                 </tbody>

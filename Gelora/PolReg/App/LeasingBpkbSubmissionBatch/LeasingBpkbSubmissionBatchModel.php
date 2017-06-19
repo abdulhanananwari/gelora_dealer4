@@ -36,4 +36,12 @@ class LeasingBpkbSubmissionBatchModel extends Model {
         return new Managers\Retriever($this);
     }
     
+    // Relateds
+
+    public function getSalesOrders() {
+
+        return \Gelora\Sales\App\SalesOrder\SalesOrderModel::
+                        where('polReg.leasing_bpkb_submission_batch_id', new \MongoDB\BSON\ObjectID($this->id))
+                        ->get();
+    }
 }

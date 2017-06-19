@@ -17,7 +17,7 @@ class OnSendEmail {
         $mailable = new \Gelora\PolReg\App\MdSubmissionBatch\Managers\Mails\MdSubmissionBatchSend($this->registrationBatch);
 
         \Mail::to($emailAddress)->send($mailable);
-        
+
         if (is_null($this->registrationBatch->sent_at)) {
             $this->registrationBatch->sent_at = \Carbon\Carbon::now();
             $this->registrationBatch->save();

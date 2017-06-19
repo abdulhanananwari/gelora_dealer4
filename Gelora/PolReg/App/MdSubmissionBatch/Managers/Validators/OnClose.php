@@ -24,9 +24,9 @@ class OnClose {
 
     protected function validates() {
 
-        foreach ($this->registrationBatch->registrations as $registration) {
+        foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
 
-            if (is_null($registration->cddb_id)) {
+            if (empty($salesOrder->subDocument()->polReg()->strings)) {
                 return ['CDDB ada yg belum diassign'];
             }
         }
