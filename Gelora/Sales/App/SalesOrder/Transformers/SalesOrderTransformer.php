@@ -46,8 +46,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'validator' => $salesOrder->validator,
             'unvalidator' => $salesOrder->unvalidator,
             
-            // Baru diisi setelah proses STNK selesai, pencairan leasing selesai, konsumen sudah bayar semua due.
-            // Caranya sistem ngecheck jumlah diatas apakah sudah lengkap semua
+            // Konsumen sudah tidak punya hutang lagi ke dealer
             'financial_completed_at' => $salesOrder->financial_completed_at ? $salesOrder->financial_completed_at->toDateTimeString() : null,
             'financial_completer' => $salesOrder->financial_completer,
             
