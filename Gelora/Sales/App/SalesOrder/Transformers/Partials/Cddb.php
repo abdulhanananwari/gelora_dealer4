@@ -40,7 +40,7 @@ class Cddb {
             'sepeda_motor_digunakan_untuk' => $cddb->sepeda_motor_digunakan_untuk,
             'yang_menggunakan_sepeda_motor' => $cddb->yang_menggunakan_sepeda_motor,
             'kode_sales_person' => $cddb->kode_sales_person,
-            'status_kepimilikan_rumah' => $cddb->status_kepimilikan_rumah,
+            'status_kepemilikan_rumah' => $cddb->status_kepemilikan_rumah,
             'status_no_hp' => $cddb->status_no_hp,
             'akun_facebook' => $cddb->akun_facebook,
             'akun_twitter' => $cddb->akun_twitter,
