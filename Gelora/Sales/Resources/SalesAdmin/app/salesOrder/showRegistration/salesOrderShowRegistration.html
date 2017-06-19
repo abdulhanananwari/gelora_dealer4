@@ -1,7 +1,7 @@
 <sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
 <div class="row">
     <div class="col-sm-12">
-        <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#faktur-data">Data Faktur</button>
+        <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#faktur-data">Data Faktur</button><br>
         <!-- <registration-batches registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-batches> -->
         <registration-handover sales-order="ctrl.salesOrder"></registration-handover>
         <registration-cost sales-order="ctrl.salesOrder"></registration-cost>
@@ -15,7 +15,9 @@
                 <h4 class="modal-title"><strong>Data Faktur</strong></h4>
             </div>
             <div class="modal-body">
-                <dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.delivery.scan(ctrl.salesOrder,scannedUnit)"></dealer-unit-barcode-finder>
+                <div class="table-responsive">
+                    
+                </div>
             </div>
         </div>
     </div>

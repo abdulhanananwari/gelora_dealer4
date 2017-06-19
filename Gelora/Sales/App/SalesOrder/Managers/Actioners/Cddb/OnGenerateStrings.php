@@ -16,7 +16,7 @@ class OnGenerateStrings {
 
         $cddb = $this->salesOrder->subDocument()->cddb();
 
-        $cddb->string = [
+        $cddb->strings = [
             'cddb' => $this->salesOrder->action()->cddb()->generate()->cddb(),
             'udsls' => $this->salesOrder->action()->cddb()->generate()->udsls(),
             'udstk' => $this->salesOrder->action()->cddb()->generate()->udstk(),
