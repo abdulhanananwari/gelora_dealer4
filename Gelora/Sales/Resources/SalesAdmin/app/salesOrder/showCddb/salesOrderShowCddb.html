@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h4>Survey Customer Database</h4>
-        <button class="btn btn-block" ng-click="ctrl.copyFromSalesOrder()">Load Data Penjualan</button>
+        <button class="btn btn-block" ng-click="ctrl.copyFromSalesOrder()">Copy Data Penjualan</button>
         <label>No KTP</label>
         <input type="text" ng-model="ctrl.salesOrder.cddb.no_ktp">
         <label>Jenis Kustomer</label>
@@ -137,6 +137,6 @@
             <label>UDSLS</label>
             <input type="text" ng-model="ctrl.salesOrder.cddb.string.udsls">
         </div>
-        <button class="btn btn-block btn-success" ng-click="ctrl.generateString(ctrl.cddb)">Generate Text Untuk Email CDDB</button>
+        <button class="btn btn-block btn-success" ng-click="ctrl.generateStrings(ctrl.salesOrder)">Generate Text Untuk Email CDDB</button>
     </div>
 </div>

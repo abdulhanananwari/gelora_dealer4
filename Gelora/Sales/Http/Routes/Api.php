@@ -48,6 +48,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
             Route::group(['prefix' => '{id}/cddb'], function() {
                 Route::post('/', ['uses' => 'CddbController@update']);
+                Route::post('generate-strings', ['uses' => 'CddbController@generateStrings']);
             });
 
             Route::group(['prefix' => '{id}/leasing-order'], function() {

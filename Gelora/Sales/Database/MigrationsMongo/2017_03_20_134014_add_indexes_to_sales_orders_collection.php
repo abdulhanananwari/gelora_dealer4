@@ -18,13 +18,13 @@ class AddIndexesToSalesOrdersCollection extends Migration {
             $collection->index('salesperson_entity_id');
             $collection->index('sales_order_hard_copy');
 
-            $collection->index('customer.entity_id');
+            $collection->index('customer.id');
             $collection->index('customer.type');
             $collection->index('customer.name');
             $collection->index('customer.ktp');
             $collection->index('customer.npwp');
 
-            $collection->index('registration.entity_id');
+            $collection->index('registration.id');
             $collection->index('registration.type');
             $collection->index('registration.name');
             $collection->index('registration.ktp');

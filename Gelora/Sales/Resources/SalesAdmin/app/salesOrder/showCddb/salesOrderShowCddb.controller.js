@@ -20,6 +20,16 @@ geloraSalesAdmin
             dateFormat: "ddmmyy",
         })
 
+        SalesOrderModel.get($state.params.id)
+            .then(function(res) {
+                
+                vm.salesOrder = res.data.data
+
+                if (!vm.salesOrder.cddb.propinsi_surat) {
+                    vm.salesOrder.cddb.propinsi_surat = 3200
+                }
+            })
+
         vm.store = function(salesOrder) {
 
             SalesOrderModel.cddb.update(salesOrder.id, salesOrder.cddb)
@@ -27,14 +37,14 @@ geloraSalesAdmin
                     vm.salesOrder = res.data.data
                     alert('CDDB berhasil di update')
                 })
-
         }
 
-        vm.generateString = function(cddb) {
+        vm.generateStrings = function(salesOrder) {
 
-            CddbModel.action.generateString(cddb.id)
-                .success(function(data) {
-                    assignCddb(data)
+            SalesOrderModel.cddb.generateStrings(salesOrder.id)
+                .then(function(res) {
+                    vm.salesOrder = res.data.data
+                    alert('String CDDB berhasil di generate')
                 })
         }
 
@@ -44,6 +54,14 @@ geloraSalesAdmin
             vm.salesOrder.cddb.entity_id = vm.salesOrder.customer.id;
             vm.salesOrder.cddb.alamat_surat = vm.salesOrder.customer.address;
             vm.salesOrder.cddb.no_hp = vm.salesOrder.customer.phone_number;
+
+            var kelurahan = _.invert(vm.areaOptions.kelurahan_surat.options)[vm.salesOrder.registration.kelurahan]
+            if (kelurahan) {
+                vm.salesOrder.cddb.kelurahan_surat = kelurahan; vm.salesOrder.cddb.kelurahan_surat_name = vm.areaOptions.kelurahan_surat.options[vm.salesOrder.cddb.kelurahan_surat]
+                vm.salesOrder.cddb.kecamatan_surat = vm.salesOrder.cddb.kelurahan_surat.substring(0,6); vm.salesOrder.cddb.kecamatan_surat_name = vm.areaOptions.kecamatan_surat.options[vm.salesOrder.cddb.kecamatan_surat]
+                vm.salesOrder.cddb.kota_surat = vm.salesOrder.cddb.kecamatan_surat.substring(0,4); vm.salesOrder.cddb.kota_surat_name = vm.areaOptions.kota.options[vm.salesOrder.cddb.kota_surat]
+                vm.filterKodePos(vm.salesOrder.cddb.kelurahan_surat_name)
+            }
         }
 
         vm.filterKecamatanSurat = function(kota) {
@@ -72,7 +90,6 @@ geloraSalesAdmin
             vm.salesOrder.cddb.kode_pos_surat = vm.areaOptions.kode_pos.options[kelurahan]
         }
 
-
         function loadConfig() {
 
             ConfigModel.get('gelora.cdb.area')
@@ -85,34 +102,15 @@ geloraSalesAdmin
 
                     vm.cddbOptions = res.data.data.cddbOptions
 
-                    if (!vm.salesOrder.cddb.created_at) {
-                        _.each(vm.cddbOptions, function(value, key) {
-                            vm.salesOrder.cddb[key] = _.get(value, 'default')
-                        })
-                    }
-
                     vm.cddbOptions.hobi.options_formatted = []
-
                     _.each(vm.cddbOptions.hobi.options, function(val1, key1) {
-
                         _.each(val1, function(val2, key2) {
                             vm.cddbOptions.hobi.options_formatted.push({ name: val2, code: key2, group: key1 })
                         })
                     })
-
-                    loadCdb()
                 })
-
-
         }
         loadConfig()
-
-        if ($state.params.id) {
-            SalesOrderModel.get($state.params.id)
-                .then(function(res) {
-                    vm.salesOrder = res.data.data
-                })
-        }
 
     })
     .filter('valueHas', function() {

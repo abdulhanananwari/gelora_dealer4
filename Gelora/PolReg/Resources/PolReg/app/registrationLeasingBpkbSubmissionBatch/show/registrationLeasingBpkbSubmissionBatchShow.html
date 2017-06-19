@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Batch Faktur Penyerahan ke Leasing {{ ctrl.registrationBatch.id || 'Baru' }}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+                <leasing-selector ng-if="!ctrl.registrationBatch.closed_at" selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.registrationBatch.mainLeasing=mainLeasing;ctrl.registrationBatch.subLeasing=subLeasing;"></leasing-selector>
+                <br>
+            </div>
+            <div class="col-sm-3">
+                <div style="width: 100%;" class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Leasing Utama</td>
+                                <td>{{ctrl.registrationBatch.mainLeasing.name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Cabang Leasing</td>
+                                <td>{{ctrl.registrationBatch.subLeasing.name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ditutup</td>
+                                <td>{{ ctrl.registrationBatch.closed_at }}</td>
+                            </tr>
+                            <tr>
+                                <td>Dikirimkan Tanggal</td>
+                                <td>{{ ctrl.registrationBatch.handover_at }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <file-manager-upload ng-if="ctrl.registrationBatch.closed_at" displayed-input='{{ ctrl.fileManager.leasingBpkb.displayedInput }}' additional-data='{{ ctrl.fileManager.leasingBpkb.additionalData }}' uploaded-file="uploadedleasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedleasingBpkb.uuid;ctrl.store(ctrl.registrationBatch);">
+                </file-manager-upload>
+                <file-manager-show file-uuid="{{ ctrl.registrationBatch.file_uuid }}" display-type="img"></file-manager-show>
+            </div>
+            <div class="col-sm-3">
+                <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
+                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.registrations.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
+                <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.generateReceipt(ctrl.registrationBatch)">Cetak Bukti Penyerahan</button>
+                <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.handover(ctrl.registrationBatch)">Konfirmasi Serah Terima</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Salesman</th>
+                        <th>Type Motor</th>
+                        <th>Warna</th>
+                        <th>No Rangka</th>
+                        <th>No Mesin</th>
+                        <th>Serah Terima</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="registration in ctrl.registrationBatch.registrations">
+                        <td>{{registration.delivery.salesOrder.customer.name}}</td>
+                        <td>{{registration.delivery.salesOrder.customer.address}}</td>
+                        <td>{{registration.delivery.salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{registration.delivery.unit.type_name}}</td>
+                        <td>{{registration.delivery.unit.color_name}}</td>
+                        <td>{{registration.delivery.unit.chasis_number}}</td>
+                        <td>{{registration.delivery.unit.engine_number}}</td>
+                        <td>{{registration.delivery.handover_at}}</td>
+                        <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

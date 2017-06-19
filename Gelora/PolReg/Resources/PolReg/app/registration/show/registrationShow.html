@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Faktur {{ ctrl.registration.id || 'Baru' }}</h4>
+        <hr>
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4><a ng-href="/sales-admin/redirect-app/sales-order/?id={{ctrl.registration.delivery.salesOrder.id}}" target="_blank">Penjualan</a></h4>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4>Data Pemesan</h4>
+                            <hr>
+                            <label>Nama</label>
+                            <input disabled type="text" ng-model="ctrl.registration.delivery.salesOrder.customer.name">
+                            <label>Alamat</label>
+                            <input disabled type="text" ng-model="ctrl.registration.delivery.salesOrder.customer.address">
+                            <label>Telepon</label>
+                            <input disabled type="text" ng-model="ctrl.registration.delivery.salesOrder.customer.phone_number">
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Data STNK</h4>
+                            <hr>
+                            <label>Nama</label>
+                            <input disabled type="text" ng-model="ctrl.registration.delivery.salesOrder.registration.name">
+                            <label>Alamat</label>
+                            <input disabled type="text" ng-model="ctrl.registration.delivery.salesOrder.registration.address">
+                            <label>Telepon</label>
+                            <input disabled type="text" ng-model="ctrl.registration.delivery.salesOrder.registration.phone_number">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h4>{{ ctrl.registration.cddb_id ? 'CDB sudah ada' : 'CDDB belum ada' }}</h4>
+                    <a ng-show="ctrl.registration.delivery.sales_order_id" class="btn btn-block btn-warning" href="{{ '/cdb/redirect-app/cddb/?sales_order_id=' + ctrl.registration.delivery.sales_order_id }}" target="_blank">Buat CDDB Baru</a>
+                </div>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Unit</h4>
+                    <hr>
+                    <label>Nama</label>
+                    <input disabled type="text" ng-model="ctrl.registration.delivery.unit.type_name">
+                    <label>Nomor Mesin</label>
+                    <input disabled type="text" ng-model="ctrl.registration.delivery.unit.engine_number">
+                    <label>Nomor Rangka</label>
+                    <input disabled type="text" ng-model="ctrl.registration.delivery.unit.chasis_number">
+                </div>
+            </div>
+        </div>
+        <button ng-if="!ctrl.registration.id && ctrl.registration.delivery.id" class="btn btn-block btn-warning" ng-click="ctrl.generateFromDelivery(ctrl.registration)">Generate Faktur Dari Delivery</button>
+        <br>
+        <registration-batches registration-id="{{ ctrl.registration.id }}"></registration-batches>
+        <div ng-if="ctrl.registration.registration_agency_invoice_id">
+            <registration-handover registration-id="{{ ctrl.registration.id }}" items="ctrl.items"></registration-handover>
+            <sms-send number="{{ ctrl.registration.delivery.salesOrder.customer.phone_number }}" message="{{ ctrl.smsString }}"></sms-send><br>
+            <registration-cost registration-id="{{ctrl.registration.id}}"></registration-cost>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+.dropdown-fullsize {
+    margin-right: : 0;
+}
+
+.dropdown-fullsize li a {
+    display: inline-block;
+}
+</style>

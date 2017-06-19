@@ -192,6 +192,7 @@ return [
         \Gelora\CreditSales\GeloraCreditSalesProvider::class,
         \Gelora\Sales\GeloraSalesProvider::class,
         \Gelora\Cdb\GeloraCdbProvider::class,
+        \Gelora\PolReg\GeloraPolRegProvider::class,
     ],
 
     /*

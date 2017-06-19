@@ -2,11 +2,8 @@
 <div class="well">
     <div class="row">
         <div class="col-sm-6">
-            <h5>Kustomer ({{ctrl.salesOrder.customer.entity_id || 'Belum Terdaftar'}})</h5>
-            <entity-finder-modal search-only="true" selected-entity="selectedCustomerEntity" on-entity-selected="
-					ctrl.salesOrder.customer=_.pick(selectedCustomerEntity,['id','name','phone_number','email','address']);
-					ctrl.salesOrder.customer.entity_id=selectedCustomerEntity.id">
-            </entity-finder-modal>
+            <h5>Kustomer ({{ctrl.salesOrder.customer.id || 'Belum Terdaftar'}})</h5>
+            <entity-finder-modal search-only="true" selected-entity="ctrl.salesOrder.customer"></entity-finder-modal>
             <br>
             <fieldset ng-readonly="true">
                 <label>Jenis</label>
@@ -24,7 +21,7 @@
                 <label>NPWP</label>
                 <input type="text" ng-model="ctrl.salesOrder.customer.npwp">
             </fieldset>
-            <entity-updater-modal ng-if="ctrl.salesOrder.customer.entity_id" entity-id="{{ctrl.salesOrder.customer.entity_id}}" new-entity-data="ctrl.salesOrder.customer">
+            <entity-updater-modal ng-if="ctrl.salesOrder.customer.id" entity-id="{{ctrl.salesOrder.customer.id}}" new-entity-data="ctrl.salesOrder.customer">
             </entity-updater-modal>
             <br>
             <file-manager-upload ng-if="ctrl.salesOrder.id" displayed-input='{{ ctrl.fileManager.customerIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.customerIdentification.additionalData }}' validations='{{ ctrl.fileManager.customerIdentification.validations }}' uploaded-file="uploadedCustomerIdentification" on-file-uploaded="ctrl.salesOrder.customer.id_file_uuid=uploadedCustomerIdentification.uuid;ctrl.store(ctrl.salesOrder);">
@@ -33,11 +30,8 @@
             </file-manager-show>
         </div>
         <div class="col-sm-6">
-            <h5>Data Untuk STNK ({{ctrl.salesOrder.registration.entity_id || 'Belum Terdaftar'}})</h5>
-            <entity-finder-modal search-only="true" selected-entity="selectedRegistrationEntity" on-entity-selected="
-					ctrl.salesOrder.registration=_.pick(selectedRegistrationEntity,['id','name','phone_number','email','address']);
-					ctrl.salesOrder.registration.entity_id=selectedRegistrationEntity.id">
-            </entity-finder-modal>
+            <h5>Data Untuk STNK ({{ctrl.salesOrder.registration.id || 'Belum Terdaftar'}})</h5>
+            <entity-finder-modal search-only="true" selected-entity="ctrl.salesOrder.registration"></entity-finder-modal>
             <br>
             <a class="btn btn-sm btn-block btn-success" ng-click="ctrl.copyRegistrationFromCustomer()">Sama Dengan Data Kustomer</a>
             <br>
@@ -55,19 +49,13 @@
                 <label>NPWP</label>
                 <input type="text" ng-model="ctrl.salesOrder.registration.npwp">
             </fieldset>
-            <entity-updater-modal ng-if="ctrl.salesOrder.registration.entity_id" entity-id="{{ctrl.salesOrder.registration.entity_id}}" new-entity-data="ctrl.salesOrder.registration">
+            <entity-updater-modal ng-if="ctrl.salesOrder.registration.id" entity-id="{{ctrl.salesOrder.registration.id}}" new-entity-data="ctrl.salesOrder.registration">
             </entity-updater-modal>
             <br>
             <file-manager-upload ng-if="ctrl.salesOrder.id" displayed-input='{{ ctrl.fileManager.registrationIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.registrationIdentification.additionalData }}' validations='{{ ctrl.fileManager.registrationIdentification.validations }}' uploaded-file="uploadedRegistrationIdentification" on-file-uploaded="ctrl.salesOrder.registration.id_file_uuid=uploadedRegistrationIdentification.uuid;ctrl.store(ctrl.salesOrder);">
             </file-manager-upload>
             <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.registration.id_file_uuid}}">
             </file-manager-show>
-        </div>
-    </div>
-    <div class="row" ng-if="ctrl.salesOrder.id">
-        <div class="col-sm-12">
-            <br>
-            <a class="btn btn-block btn-success" ng-href="{{'/cdb/redirect-app/cddb/?sales_order_id=' + ctrl.salesOrder.id}}">CDB Survey</a>
         </div>
     </div>
 </div>

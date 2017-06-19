@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Batch Tagihan / Faktur yang Masuk dari Biro Jasa {{ ctrl.registrationBatch.id || 'Baru' }}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <entity-finder-modal selected-entity="agent" on-entity-selected="ctrl.registrationBatch.agent=agent"></entity-finder-modal>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td class="col-sm-6">Biro Jasa</td>
+                                <td>{{ctrl.registrationBatch.agent.name}} ({{ctrl.registrationBatch.agent.id}})</td>
+                            </tr>
+                            <tr>
+                                <td>Ditutup</td>
+                                <td>{{ ctrl.registrationBatch.closed_at }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <file-manager-upload ng-if="ctrl.registrationBatch.id" displayed-input='{{ ctrl.fileManager.agencyInvoice.displayedInput }}' additional-data='{{ ctrl.fileManager.agencyInvoice.additionalData }}' validations='{{ ctrl.fileManager.agencyInvoice.validations }}' uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch);">
+                </file-manager-upload>
+                <file-manager-show file-uuid="{{ ctrl.registrationBatch.file_uuid }}" display-type="img"></file-manager-show>
+            </div>
+            <div class="col-sm-4">
+                <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
+                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.registrations.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Konfirmasi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Type Motor</th>
+                        <th>Warna</th>
+                        <th>No Rangka</th>
+                        <th>Serah Terima</th>
+                        <th>Buka</th>
+                        <!-- <th>Pilih</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="registration in ctrl.registrationBatch.registrations">
+                        <td>{{registration.delivery.salesOrder.customer.name}}</td>
+                        <td>{{registration.delivery.unit.type_name}}</td>
+                        <td>{{registration.delivery.unit.type_code}}</td>
+                        <td>{{registration.delivery.unit.chasis_number}}</td>
+                        <td>{{registration.delivery.handover_at}}</td>
+                        <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+                        <!-- 
+						<td><a ng-click="ctrl.selectedRegistration=registration">Pilih</a></td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<style type="text/css">
+.small-text {
+    font-size: 0.8em;
+    margin-bottom: 0.1em;
+}
+</style>

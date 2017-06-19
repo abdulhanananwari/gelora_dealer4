@@ -1,0 +1,27 @@
+<tr style="background-color: #e67e22;">
+	<td>Penagihan dari Biro Jasa</td>
+	<td>
+		<!-- Jika batch belum dipilih -->
+		<div ng-if="!registration.registrationAgencyInvoice" class="row">
+			<div class="col-sm-9">
+				<select
+					ng-model="registrationAgencyInvoice"
+					ng-change="registration.registration_agency_invoice_id=registrationAgencyInvoice.id"
+					ng-options="registrationBatch as registrationBatch.created_at for registrationBatch in registrationAgencyInvoices"
+				></select>
+			</div>
+			<div class="col-sm-3">
+				<button ng-if="registrationAgencyInvoice" class="btn btn-block btn-info" ng-click="action.agencyInvoice.select(registration)">Pilih</button>
+			</div>
+		</div>
+		<!-- Batch sudah dipilih -->
+		<div ng-if="registration.registrationAgencyInvoice" class="row">
+			<div class="col-sm-6">
+				<a href="{{'/pol-reg/redirect-app/registration-agency-invoice/' + registration.registrationAgencyInvoice.id}}" class="btn btn-block btn-success">Buka</a>
+			</div>
+			<div class="col-sm-6">
+				<button class="btn btn-block btn-primary" ng-click="action.agencyInvoice.cancel(registration)">Batalkan</a>
+			</div>
+		</div>
+	</td>
+</tr>

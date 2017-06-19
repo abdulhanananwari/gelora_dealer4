@@ -1,0 +1,42 @@
+<div class="row">
+	<div class="col-sm-12">
+		
+		<h4>Daftar Pol Reg</h4>
+
+		<hr>
+
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Penjualan</th>
+						<th>Delivery</th>
+						<th>Tanggal</th>
+						<th>Laporan ke MD</th>
+						<th>Serah ke Biro Jasa</th>
+						<th>Terima dari Biro Jasa</th>
+						<th>Penyerahan BPKB ke Leasing</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="registration in ctrl.registrations">
+						<td>{{ registration.id | limitTo: 5 }}...</td>
+						<td><a href="{{ '/sales/redirect-app/sales-order/?id=' + registration.sales_order_id }}">Penjualan</a></td>
+						<td><a href="{{ '/delivery/redirect-app/delivery/?id=' + registration.delivery_id }}">Delivery</a></td>
+						<td>{{ registration.created_at }}</td>
+						<td><a ng-if="registration.registration_md_submission_batch_id" ui-sref="registrationMdSubmissionBatchShow({id:registration.registration_md_submission_batch_id})">Buka</a></td>
+						<td><a ng-if="registration.registration_agency_submission_batch_id" ui-sref="registrationAgencySubmissionBatchShow({id:registration.registration_agency_submission_batch_id})">Buka</a></td>
+						<td><a ng-if="registration.registration_agency_invoice_id" ui-sref="registrationAgencyInvoiceShow({id:registration.registration_agency_invoice_id})">Buka</a></td>
+						<td><a ng-if="registration.registration_leasing_bpkb_submission_batch_id" ui-sref="registrationLeasingBpkbSubmissionBatchShow({id:registration.registration_leasing_bpkb_submission_batch_id})">Buka</a></td>
+						<td><a class="btn btn-xs btn-primary" ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<pagination pagination="ctrl.meta.pagination" page="page" on-load-page="ctrl.load(page)"></pagination>
+
+	</div>
+</div>
