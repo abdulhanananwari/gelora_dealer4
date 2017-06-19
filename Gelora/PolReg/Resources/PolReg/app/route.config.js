@@ -12,104 +12,64 @@ geloraPolReg
   			pageTitle: 'Dealer | Faktur'
 		})
 
-		.state('deliveryIndex', {
-			url: '/delivery/index',
-  			templateUrl: 'app/delivery/index/deliveryIndex.html',
-  			controller: 'DeliveryIndexController as ctrl',
+		.state('mdSubmissionBatchIndex', {
+			url: '/mdSubmissionBatch/index',
+  			templateUrl: 'app/mdSubmissionBatch/index/mdSubmissionBatchIndex.html',
+  			controller: 'MdSubmissionBatchIndexController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
-
-
-		.state('registrationShow', {
-			url: '/registration/show/:id/:deliveryId',
-  			templateUrl: 'app/registration/show/registrationShow.html',
-  			controller: 'RegistrationShowController as ctrl',
-  			pageTitle: 'Dealer | Faktur'
-		})
-		.state('registrationIndex', {
-			url: '/registration/index/',
-  			templateUrl: 'app/registration/index/registrationIndex.html',
-  			controller: 'RegistrationIndexController as ctrl',
-  			pageTitle: 'Dealer | Faktur'
-		})
-
-		.state('registrationMdSubmissionBatchIndex', {
-			url: '/registrationMdSubmissionBatch/index',
-  			templateUrl: 'app/registrationMdSubmissionBatch/index/registrationMdSubmissionBatchIndex.html',
-  			controller: 'RegistrationMdSubmissionBatchIndexController as ctrl',
-  			pageTitle: 'Dealer | Faktur'
-		})
-		.state('registrationMdSubmissionBatchShow', {
-			url: '/registrationMdSubmissionBatch/show/:id',
-  			templateUrl: 'app/registrationMdSubmissionBatch/show/registrationMdSubmissionBatchShow.html',
-  			controller: 'RegistrationMdSubmissionBatchShowController as ctrl',
+		.state('mdSubmissionBatchShow', {
+			url: '/mdSubmissionBatch/show/:id',
+  			templateUrl: 'app/mdSubmissionBatch/show/mdSubmissionBatchShow.html',
+  			controller: 'MdSubmissionBatchShowController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
 		
-		.state('registrationAgencySubmissionBatchIndex', {
-			url: '/registrationAgencySubmissionBatch/index',
-  			templateUrl: 'app/registrationAgencySubmissionBatch/index/registrationAgencySubmissionBatchIndex.html',
-  			controller: 'RegistrationAgencySubmissionBatchIndexController as ctrl',
+		.state('agencySubmissionBatchIndex', {
+			url: '/agencySubmissionBatch/index',
+  			templateUrl: 'app/agencySubmissionBatch/index/agencySubmissionBatchIndex.html',
+  			controller: 'AgencySubmissionBatchIndexController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
-		.state('registrationAgencySubmissionBatchShow', {
-			url: '/registrationAgencySubmissionBatch/show/:id',
-  			templateUrl: 'app/registrationAgencySubmissionBatch/show/registrationAgencySubmissionBatchShow.html',
-  			controller: 'RegistrationAgencySubmissionBatchShowController as ctrl',
+		.state('agencySubmissionBatchShow', {
+			url: '/agencySubmissionBatch/show/:id',
+  			templateUrl: 'app/agencySubmissionBatch/show/agencySubmissionBatchShow.html',
+  			controller: 'AgencySubmissionBatchShowController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
 
 		
-		.state('registrationAgencyInvoiceIndex', {
-			url: '/registrationAgencyInvoice/index',
-  			templateUrl: 'app/registrationAgencyInvoice/index/registrationAgencyInvoiceIndex.html',
-  			controller: 'RegistrationAgencyInvoiceIndexController as ctrl',
+		.state('agencyInvoiceIndex', {
+			url: '/agencyInvoice/index',
+  			templateUrl: 'app/agencyInvoice/index/agencyInvoiceIndex.html',
+  			controller: 'AgencyInvoiceIndexController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
-		.state('registrationAgencyInvoiceShow', {
-			url: '/registrationAgencyInvoice/show/:id',
-  			templateUrl: 'app/registrationAgencyInvoice/show/registrationAgencyInvoiceShow.html',
-  			controller: 'RegistrationAgencyInvoiceShowController as ctrl',
+		.state('agencyInvoiceShow', {
+			url: '/agencyInvoice/show/:id',
+  			templateUrl: 'app/agencyInvoice/show/agencyInvoiceShow.html',
+  			controller: 'AgencyInvoiceShowController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
 
-		.state('registrationLeasingBpkbSubmissionBatchIndex', {
-			url: '/registrationLeasingBpkbSubmissionBatch/index',
-  			templateUrl: 'app/registrationLeasingBpkbSubmissionBatch/index/registrationLeasingBpkbSubmissionBatchIndex.html',
-  			controller: 'RegistrationLeasingBpkbSubmissionBatchIndexController as ctrl',
+		.state('leasingBpkbSubmissionBatchIndex', {
+			url: '/leasingBpkbSubmissionBatch/index',
+  			templateUrl: 'app/leasingBpkbSubmissionBatch/index/leasingBpkbSubmissionBatchIndex.html',
+  			controller: 'LeasingBpkbSubmissionBatchIndexController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
-		.state('registrationLeasingBpkbSubmissionBatchShow', {
-			url: '/registrationLeasingBpkbSubmissionBatch/show/:id',
-  			templateUrl: 'app/registrationLeasingBpkbSubmissionBatch/show/registrationLeasingBpkbSubmissionBatchShow.html',
-  			controller: 'RegistrationLeasingBpkbSubmissionBatchShowController as ctrl',
+		.state('leasingBpkbSubmissionBatchShow', {
+			url: '/leasingBpkbSubmissionBatch/show/:id',
+  			templateUrl: 'app/leasingBpkbSubmissionBatch/show/leasingBpkbSubmissionBatchShow.html',
+  			controller: 'LeasingBpkbSubmissionBatchShowController as ctrl',
   			pageTitle: 'Dealer | Faktur'
 		})
-		.state('registrationReport', {
-			url: '/registrationReport/',
-  			templateUrl: 'app/registration/report/registrationReport.html',
+		
+		.state('Report', {
+			url: '/Report/',
+  			templateUrl: 'app//report/Report.html',
   			controller: 'RegistrationReportController as ctrl',
   			pageTitle: 'Dealer | Report Faktur'
 		})
-
-		// .state('fakturDetailShow', {
-		// 	url: '/fakturDetail/show/:id/:consignmentDetailId',
-  // 			templateUrl: 'app/fakturDetail/show/fakturDetailShow.html',
-  // 			controller: 'FakturDetailShowController as ctrl',
-  // 			pageTitle: 'Dealer | Faktur'
-		// })
-
-		// .state('fakturHeaderIndex', {
-		// 	url: '/fakturHeader/index',
-  // 			templateUrl: 'app/fakturHeader/index/fakturHeaderIndex.html',
-  // 			controller: 'FakturHeaderIndexController as ctrl',
-  // 			pageTitle: 'Dealer | Faktur Batch'
-		// })
-		// .state('fakturHeaderShow', {
-		// 	url: '/fakturHeader/show/:id',
-  // 			templateUrl: 'app/fakturHeader/show/fakturHeaderShow.html',
-  // 			controller: 'FakturHeaderShowController as ctrl',
-  // 			pageTitle: 'Dealer | Faktur Batch Single'
-		// })
 
 	})

@@ -129,24 +129,19 @@ geloraBaseShared
 					},
 				},
 				polReg: {
-					registration: {
-						base: apps.dealer.polReg + 'api/registration/',
-						views: apps.dealer.polReg + 'views/registration/',
-						report: apps.dealer.polReg + 'report/registration/',
-					}, 
-					registrationMdSubmissionBatch: {
-						base: apps.dealer.polReg + 'api/registration-md-submission-batch/',
+					mdSubmissionBatch: {
+						base: apps.dealer.polReg + 'api/md-submission-batch/',
 					},
-					registrationAgencySubmissionBatch: {
-						base: apps.dealer.polReg + 'api/registration-agency-submission-batch/',
-						views: apps.dealer.polReg + 'views/registration-agency-submission-batch/',
+					agencySubmissionBatch: {
+						base: apps.dealer.polReg + 'api/agency-submission-batch/',
+						views: apps.dealer.polReg + 'views/agency-submission-batch/',
 					},
-					registrationAgencyInvoice: {
-						base: apps.dealer.polReg + 'api/registration-agency-invoice/',
+					agencyInvoice: {
+						base: apps.dealer.polReg + 'api/agency-invoice/',
 					},
-					registrationLeasingBpkbSubmissionBatch: {
-						base: apps.dealer.polReg + 'api/registration-leasing-bpkb-submission-batch/',
-						views: apps.dealer.polReg + 'views/registration-leasing-bpkb-submission-batch/',
+					leasingBpkbSubmissionBatch: {
+						base: apps.dealer.polReg + 'api/leasing-bpkb-submission-batch/',
+						views: apps.dealer.polReg + 'views/leasing-bpkb-submission-batch/',
 					}
 				},
 				views: {
