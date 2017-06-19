@@ -1,7 +1,8 @@
 <sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
 <div class="row">
     <div class="col-sm-12">
-        <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#faktur-data">Data Faktur</button><br>
+        <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#faktur-data">Data Faktur</button>
+        <br>
         <!-- <registration-batches registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-batches> -->
         <registration-handover sales-order="ctrl.salesOrder"></registration-handover>
         <registration-cost sales-order="ctrl.salesOrder"></registration-cost>
@@ -16,7 +17,15 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    
+                    <div ng-show="ctrl.salesOrder.registration.strings">
+                        <label>CDDB</label>
+                        <input type="text" ng-model="ctrl.salesOrder.registration.strings.cddb.string">
+                        <label>UDSTK</label>
+                        <input type="text" ng-model="ctrl.salesOrder.registration.strings.udstk.string">
+                        <label>UDSLS</label>
+                        <input type="text" ng-model="ctrl.salesOrder.registration.strings.udsls.string">
+                    </div>
+                    <button class="btn btn-block btn-success" ng-click="ctrl.generateStrings(ctrl.salesOrder)">Generate Text Untuk Email CDDB</button>
                 </div>
             </div>
         </div>

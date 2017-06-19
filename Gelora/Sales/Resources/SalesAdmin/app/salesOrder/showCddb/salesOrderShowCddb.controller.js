@@ -39,15 +39,6 @@ geloraSalesAdmin
                 })
         }
 
-        vm.generateStrings = function(salesOrder) {
-
-            SalesOrderModel.cddb.generateStrings(salesOrder.id)
-                .then(function(res) {
-                    vm.salesOrder = res.data.data
-                    alert('String CDDB berhasil di generate')
-                })
-        }
-
         vm.copyFromSalesOrder = function() {
 
             vm.salesOrder.cddb.no_ktp = vm.salesOrder.registration.ktp;
