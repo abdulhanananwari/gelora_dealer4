@@ -13,7 +13,17 @@ class Cddb {
     }
     
     public function assign($cddb) {
+    	
+    	if ($cddb['customer_code'] == 'I' || $cddb['customer_code'] == 'J' || $cddb['customer_code'] == 'C') {
 
+    		$cddb['status_kepemilikan_rumah'] = 1;
+    		$cddb['status_no_hp'] = 1;
+    	}
+    	if ($cddb['customer_code'] == 'G' || $cddb['customer_code'] == 'J') {
+    		$cddb['status_kepemilikan_rumah'] = 'N';
+    		$cddb['status_no_hp'] = 'N';
+    	}
+    	
         $this->salesOrder->cddb = $cddb;
 
         return $this->salesOrder;
