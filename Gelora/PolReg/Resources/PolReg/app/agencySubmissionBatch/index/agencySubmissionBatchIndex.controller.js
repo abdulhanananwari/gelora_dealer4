@@ -1,7 +1,7 @@
 geloraPolReg
 	.controller('AgencySubmissionBatchIndexController', function(
 		$state,
-		RegistrationAgencySubmissionBatchModel) {
+		AgencySubmissionBatchModel) {
 
 		var vm = this
 
@@ -21,7 +21,7 @@ geloraPolReg
 				vm.filter.page
 			}
 
-			RegistrationAgencySubmissionBatchModel.index(vm.filter)
+			AgencySubmissionBatchModel.index(vm.filter)
 			.then(function(res) {
 
 				vm.registrationBatches = res.data.data

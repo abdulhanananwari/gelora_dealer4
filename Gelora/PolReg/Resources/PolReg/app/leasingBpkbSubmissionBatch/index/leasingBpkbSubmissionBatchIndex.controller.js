@@ -21,7 +21,7 @@ geloraPolReg
 				vm.filter.page
 			}
 
-			RegistrationLeasingBpkbSubmissionBatchModel.index(vm.filter)
+			LeasingBpkbSubmissionBatchModel.index(vm.filter)
 			.then(function(res) {
 
 				vm.registrationBatches = res.data.data

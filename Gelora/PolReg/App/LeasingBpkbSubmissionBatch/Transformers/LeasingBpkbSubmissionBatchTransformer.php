@@ -1,0 +1,30 @@
+<?php
+
+namespace Gelora\PolReg\App\LeasingBpkbSubmissionBatch\Transformers;
+
+use League\Fractal;
+use Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel;
+
+class LeasingBpkbSubmissionBatchTransformer extends Fractal\TransformerAbstract {
+    
+    public function transform(LeasingBpkbSubmissionBatchModel $registrationLeasingBpkbSubmissionBatch) {
+        
+        return [
+            'id' => $registrationLeasingBpkbSubmissionBatch->_id,
+            '_id' => $registrationLeasingBpkbSubmissionBatch->_id,
+            
+            'mainLeasing' => $registrationLeasingBpkbSubmissionBatch->mainLeasing,
+            'subLeasing' => $registrationLeasingBpkbSubmissionBatch->subLeasing,
+            
+            'created_at' => $registrationLeasingBpkbSubmissionBatch->created_at->toDateTimeString(),
+            'creator' => $registrationLeasingBpkbSubmissionBatch->creator,
+
+            'closed_at' => $registrationLeasingBpkbSubmissionBatch->closed_at ?
+                $registrationLeasingBpkbSubmissionBatch->closed_at->toDateTimeString() : null,
+            'closer' => $registrationLeasingBpkbSubmissionBatch->closer,
+            
+            'handover_at' => $registrationLeasingBpkbSubmissionBatch->handover_at ? $registrationLeasingBpkbSubmissionBatch->handover_at->toDateTimeString() : null,
+            'handover' => $registrationLeasingBpkbSubmissionBatch->handover
+        ];
+    }
+}

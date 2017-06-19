@@ -1,5 +1,5 @@
 geloraPolReg
-	.factory('agencyInvoiceModel', function(
+	.factory('AgencyInvoiceModel', function(
 		$http,
 		LinkFactory) {
 
@@ -20,7 +20,6 @@ geloraPolReg
 		agencyInvoiceModel.update = function(id, agencyInvoice, params) {
 			return $http.post(LinkFactory.dealer.polReg.agencyInvoice.base + id, agencyInvoice, {params: params})
 		}
-		
 
 		agencyInvoiceModel.close = function(id, registrationAgencySubmissionBatch, params) {
 			return $http.post(LinkFactory.dealer.polReg.agencyInvoice.base + 'close/' + id , registrationAgencySubmissionBatch, {params: params})

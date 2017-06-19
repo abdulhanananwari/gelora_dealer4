@@ -5,15 +5,15 @@ namespace Gelora\PolReg\Http\Controllers\Api;
 use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
 use Illuminate\Http\Request;
 
-class RegistrationAgencyInvoiceController extends Controller {
+class AgencyInvoiceController extends Controller {
 
     protected $registrationBatch;
 
     public function __construct() {
         parent::__construct();
-        $this->registrationBatch = new \Gelora\PolReg\App\RegistrationAgencyInvoice\RegistrationAgencyInvoiceModel;
+        $this->registrationBatch = new \Gelora\PolReg\App\AgencyInvoice\AgencyInvoiceModel();
 
-        $this->transformer = new \Gelora\PolReg\App\RegistrationAgencyInvoice\Transformers\RegistrationAgencyInvoiceTransformer;
+        $this->transformer = new \Gelora\PolReg\App\AgencyInvoice\Transformers\AgencyInvoiceTransformer();
     }
 
     public function index(Request $request) {

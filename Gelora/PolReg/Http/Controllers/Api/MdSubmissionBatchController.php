@@ -5,14 +5,14 @@ namespace Gelora\PolReg\Http\Controllers\Api;
 use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
 use Illuminate\Http\Request;
 
-class RegistrationMdSubmissionBatchController extends Controller {
+class MdSubmissionBatchController extends Controller {
 
     protected $registrationBatch;
 
     public function __construct() {
         parent::__construct();
-        $this->registrationBatch = new \Gelora\PolReg\App\RegistrationMdSubmissionBatch\RegistrationMdSubmissionBatchModel;
-        $this->transformer = new \Gelora\PolReg\App\RegistrationMdSubmissionBatch\Transformers\RegistrationMdSubmissionBatchTransformer;
+        $this->registrationBatch = new \Gelora\PolReg\App\MdSubmissionBatch\MdSubmissionBatchModel();
+        $this->transformer = new \Gelora\PolReg\App\MdSubmissionBatch\Transformers\MdSubmissionBatchTransformer();
     }
 
     public function index(Request $request) {

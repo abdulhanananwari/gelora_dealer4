@@ -17,16 +17,16 @@ geloraPolReg
 
             if (registrationBatch.id) {
 
-                RegistrationLeasingBpkbSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
+                LeasingBpkbSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
                         assignData(res.data)
                     })
 
             } else {
 
-                RegistrationLeasingBpkbSubmissionBatchModel.store(registrationBatch)
+                LeasingBpkbSubmissionBatchModel.store(registrationBatch)
                     .then(function(res) {
-                        $state.go('registrationLeasingBpkbSubmissionBatchShow', { id: res.data.data.id })
+                        $state.go('leasingBpkbSubmissionBatchShow', { id: res.data.data.id })
                     })
 
             }
@@ -34,7 +34,7 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            RegistrationLeasingBpkbSubmissionBatchModel.close(registrationBatch.id, defaultIncludes)
+            LeasingBpkbSubmissionBatchModel.close(registrationBatch.id, defaultIncludes)
                 .then(function(res) {
                     assignData(res.data)
                 })
@@ -43,7 +43,7 @@ geloraPolReg
 
         vm.handover = function(registrationBatch) {
 
-            RegistrationLeasingBpkbSubmissionBatchModel.handover(registrationBatch.id, defaultIncludes)
+            LeasingBpkbSubmissionBatchModel.handover(registrationBatch.id, defaultIncludes)
                 .then(function(res) {
                     assignData(res.data)
                 })
@@ -55,7 +55,7 @@ geloraPolReg
 
         if ($state.params.id) {
 
-            RegistrationLeasingBpkbSubmissionBatchModel.get($state.params.id, defaultIncludes)
+            LeasingBpkbSubmissionBatchModel.get($state.params.id, defaultIncludes)
                 .then(function(res) {
                     assignData(res.data)
                 })

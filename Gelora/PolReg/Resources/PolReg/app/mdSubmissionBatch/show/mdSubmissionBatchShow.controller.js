@@ -13,17 +13,17 @@ geloraPolReg
 
             if (registrationBatch.id) {
 
-                RegistrationMdSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
+                MdSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
                         alert('Berhasil diupdate')
                     })
 
             } else {
 
-                RegistrationMdSubmissionBatchModel.store(registrationBatch)
+                MdSubmissionBatchModel.store(registrationBatch)
                     .then(function(res) {
                         alert('Berhasil disimpan')
-                        $state.go('registrationMdSubmissionBatchShow', { id: res.data.data.id })
+                        $state.go('mdSubmissionBatchShow', { id: res.data.data.id })
                     })
 
             }
@@ -31,7 +31,7 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            RegistrationMdSubmissionBatchModel.close(registrationBatch.id, {}, defaultIncludes)
+            MdSubmissionBatchModel.close(registrationBatch.id, {}, defaultIncludes)
                 .then(function(res) {
                     alert('Berhasil ditutup')
                     assignData(res.data.data)
@@ -49,7 +49,7 @@ geloraPolReg
 
         vm.sendEmail = function(registrationBatch, email) {
 
-            RegistrationMdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email }, defaultIncludes)
+            MdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email }, defaultIncludes)
                 .then(function(res) {
                     assignData(res.data.data)
                 })
@@ -57,25 +57,9 @@ geloraPolReg
 
         if ($state.params.id) {
 
-            RegistrationMdSubmissionBatchModel.get($state.params.id, defaultIncludes)
+            MdSubmissionBatchModel.get($state.params.id, defaultIncludes)
                 .then(function(res) {
                     vm.registrationBatch = assignData(res.data.data)
                 })
-        }
-
-        function assignData(data) {
-
-            vm.registrationBatch = data
-
-            if (vm.registrationBatch.registrations) {
-
-                vm.registrationBatch.registrations = vm.registrationBatch.registrations.data
-
-                vm.registrationBatch.registrations = _.map(vm.registrationBatch.registrations, function(data) {
-                    return RegistrationFactory.transform(data)
-                })
-            }
-
-            return vm.registrationBatch
         }
     })

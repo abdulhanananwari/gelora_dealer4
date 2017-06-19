@@ -1,9 +1,8 @@
 geloraPolReg
     .controller('AgencyInvoiceShowController', function(
         $state,
-        ConfigModel, JwtValidator,
-        RegistrationModel, RegistrationFactory,
-        RegistrationAgencyInvoiceModel) {
+        ConfigModel,
+        AgencyInvoiceModel) {
 
         var vm = this
 
@@ -17,7 +16,7 @@ geloraPolReg
 
             if (registrationBatch.id) {
 
-                RegistrationAgencyInvoiceModel.update(registrationBatch.id, registrationBatch, defaultIncludes)
+                AgencyInvoiceModel.update(registrationBatch.id, registrationBatch, defaultIncludes)
                     .then(function(res) {
                         alert('Batch Berhasil Diupdate')
                         assignData(res.data)
@@ -25,10 +24,10 @@ geloraPolReg
 
             } else {
 
-                RegistrationAgencyInvoiceModel.store(registrationBatch, defaultIncludes)
+                AgencyInvoiceModel.store(registrationBatch, defaultIncludes)
                     .then(function(res) {
                         alert('Batch Berhasil Disimpan')
-                        $state.go('registrationAgencyInvoiceShow', { id: res.data.data.id })
+                        $state.go('agencyInvoiceShow', { id: res.data.data.id })
                     })
 
             }
@@ -37,7 +36,7 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            RegistrationAgencyInvoiceModel.close(registrationBatch.id, registrationBatch, defaultIncludes)
+            AgencyInvoiceModel.close(registrationBatch.id, registrationBatch, defaultIncludes)
                 .then(function(res) {
                     alert('Batch Berhasil Ditutup')
                     assignData(res.data)
@@ -47,7 +46,7 @@ geloraPolReg
 
         if ($state.params.id) {
 
-            RegistrationAgencyInvoiceModel.get($state.params.id, defaultIncludes)
+            AgencyInvoiceModel.get($state.params.id, defaultIncludes)
                 .then(function(res) {
 
                     assignData(res.data)

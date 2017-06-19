@@ -1,0 +1,16 @@
+<div ng-if="registration" class="table-responsive">
+    <table class="table table-bordered" style="color: #FFF !important; max-width: 98%;">
+        <thead>
+            <tr style="background-color: #c0392b">
+                <th class="col-sm-3">Nama</th>
+                <th>Opsi</th>
+            </tr>
+        </thead>
+        <tbody ng-include="'/gelora/pol-reg-shared/app/registration/batches/mdSubmissionBatch.html'"></tbody>
+        <tbody ng-if="registration.registration_md_submission_batch_confirmed_at" ng-include="'/gelora/pol-reg-shared/app/registration/batches/agencySubmissionBatch.html'"></tbody>
+        <tbody ng-if="registration.registrationAgencySubmissionBatch.handover_at" ng-include="'/gelora/pol-reg-shared/app/registration/batches/agencyInvoice.html'"></tbody>
+        <tbody ng-if="registration.delivery.salesOrder.payment_type=='credit'&&registration.registrationAgencyInvoice.closed_at&&registration.items.BPKB.incoming" ng-include="'/gelora/pol-reg-shared/app/registration/batches/leasingBpkbSubmissionBatch.html'"></tbody>
+    </table>
+</div>
+
+<div ng-include="'/gelora/pol-reg-shared/app/registration/batches/pendings.html'"></div>

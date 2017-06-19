@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Terima</th>
+                        <th>Serah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(name, item) in salesOrder.polReg.items">
+                        <td>{{ name }}</td>
+                        <td ng-include="'incoming.html'"></td>
+                        <td>
+                            <p ng-if="!item.incoming">{{ item.name }} belum diterima dealer</p>
+                            <div ng-if="item.incoming" ng-include="'outgoing.html'"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="incoming.html">
+    <div ng-if="!item.incoming">
+        <button class="btn btn-xs btn-block btn-info" ng-click="itemIncomingEntry(item)">Input Penerimaan</button>
+    </div>
+    <div ng-if="item.incoming">
+        <p class="small-info">Diterima oleh: {{ item.incoming.creator.name }}</p>
+        <p class="small-info">Catatan: {{ item.incoming.note }}</p>
+        <p class="small-info">{{ item.incoming.creator.timestamp * 1000 | date:"MM/dd/yyyy h:mma" }}</p>
+    </div>
+</script>
+<div class="modal fade" id="item-incoming-entry-{{modalId}}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Input Penerimaan {{ selectedItem.name }}</h4>
+            </div>
+            <div class="modal-body">
+                <label>Catatan</label>
+                <input type="text" ng-model="selectedItem.note">
+                <button class="btn btn-block btn-success" ng-click="itemIncomingStore(selectedItem)">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="outgoing.html">
+    <div ng-if="!item.outgoing">
+        <button class="btn btn-xs btn-block btn-info" ng-click="itemOutgoingEntry(item)">Input Penyerahan</button>
+    </div>
+    <div ng-if="item.outgoing">
+        <p class="small-info">Diserahkan oleh: {{ item.outgoing.creator.name }}</p>
+        <p class="small-info">{{ item.outgoing.creator.timestamp * 1000 | date:"MM/dd/yyyy h:mma" }}</p>
+        <p class="small-info">Penerima: {{ item.outgoing.receiver_name }} ({{ item.outgoing.receiver_id }})</p>
+        <button class="btn btn-block btn-success btn-xs" ng-click="generateReceiptItemHandover(item)">Cetak Bukti Penyerahan</button>
+    </div>
+</script>
+<div class="modal fade" id="item-outgoing-entry-{{modalId}}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Input Penyerahan {{ selectedItem.name }}</h4>
+            </div>
+            <div class="modal-body">
+                <label>Catatan Penyerahan</label>
+                <input type="text" ng-model="selectedItem.note">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Nama Penerima</label>
+                        <input type="text" ng-model="selectedItem.receiver_name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>No KTP Penerima</label>
+                        <input type="text" ng-model="selectedItem.receiver_id">
+                    </div>
+                </div>
+                <button class="btn btn-block btn-success" ng-click="itemOutgoingStore(selectedItem)">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>

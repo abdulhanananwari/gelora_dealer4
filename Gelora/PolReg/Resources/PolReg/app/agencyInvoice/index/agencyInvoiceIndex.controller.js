@@ -1,7 +1,7 @@
 geloraPolReg
 	.controller('AgencyInvoiceIndexController', function(
 		$state,
-		RegistrationAgencyInvoiceModel) {
+		AgencyInvoiceModel) {
 
 		
 		var vm = this
@@ -23,7 +23,7 @@ geloraPolReg
 				vm.filter.page
 			}
 
-			RegistrationAgencyInvoiceModel.index(vm.filter)
+			AgencyInvoiceModel.index(vm.filter)
 			.then(function(res) {
 
 				vm.registrationBatches = res.data.data
