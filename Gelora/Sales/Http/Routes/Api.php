@@ -67,9 +67,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                         Route::post('incoming', ['uses' => 'ItemController@incoming']);
                         Route::post('outgoing', ['uses' => 'ItemController@outgoing']);
                     });
-                    Route::group(['prefix' => 'item'], function() {
-                        Route::post('incoming', ['uses' => 'ItemController@incoming']);
-                        Route::post('outgoing', ['uses' => 'ItemController@outgoing']);
+                    Route::group(['prefix' => 'cost'], function() {
+                        Route::post('/', ['uses' => 'CostController@update']);
                     });
                 });
             });

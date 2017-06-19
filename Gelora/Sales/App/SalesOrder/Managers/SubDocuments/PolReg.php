@@ -16,6 +16,7 @@ class PolReg {
     public function retrieve() {
         $subdoc = new SubDocument($this->salesOrder->polReg);
         $subdoc = $this->formatItems($subdoc);
+        $subdoc = $this->formatCosts($subdoc);
         return $subdoc;
     }
 
@@ -42,6 +43,34 @@ class PolReg {
         }
 
         $subdoc->items = $items;
+
+        return $subdoc;
+    }
+
+
+    protected function formatCosts($subdoc) {
+
+        $defaultCosts = config('gelora.polReg.defaultCosts');
+        $costs = [];
+
+        foreach ($defaultCosts as $cost) {
+            if (isset($subdoc->costs[$cost])) {
+                $costs[$cost] = $subdoc->costs[$cost];
+                unset($subdoc->costs[$cost]);
+            } else {
+                $costs[$cost] = [
+                    'name' => $cost
+                ];
+            }
+        }
+
+        if (is_array($subdoc->costs)) {
+            foreach ($subdoc->costs as $additionalItem) {
+                $costs[$additionalItem['name']] = $additionalItem;
+            }
+        }
+
+        $subdoc->costs = $costs;
 
         return $subdoc;
     }

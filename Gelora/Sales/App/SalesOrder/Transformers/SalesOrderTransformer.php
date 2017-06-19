@@ -7,7 +7,7 @@ use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class SalesOrderTransformer extends Fractal\TransformerAbstract {
 
-    public $defaultIncludes = ['unit'];
+    public $defaultIncludes = ['unit', 'salesOrderExtras'];
 
     public function transform(SalesOrderModel $salesOrder) {
         
@@ -80,5 +80,14 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
         return $this->item($unit,
                 new \Gelora\Base\App\Unit\Transformers\UnitTransformer(),
                 'units');
+    }
+    
+    public function includeSalesOrderExtras(SalesOrderModel $salesOrder) {
+        
+        $salesOrderExtras = $salesOrder->salesOrderExtras;
+
+        return $this->collection($salesOrderExtras,
+                new \Gelora\Sales\App\SalesOrderExtra\Transformers\SalesOrderExtraTransformer(),
+                'sales_order_extras');
     }
 }

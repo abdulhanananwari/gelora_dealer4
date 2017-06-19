@@ -82,6 +82,11 @@ geloraSalesShared
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/outgoing/', item, { params: params })
                 }
             },
+            cost: {
+                store: function(id, cost, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/cost/', cost, { params: params })
+                }
+            },
             generateStrings: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/generate-strings/', salesOrder, { params: params })
             },
