@@ -21,7 +21,7 @@ class Customer {
             'customer.address' =>  'required',
             'customer.ktp' =>  'required',
             'customer.id_file_uuid' =>  'required',
-            'customer.entity_id' => 'required',
+            'customer.id' => 'required',
         ];
         
         foreach ($excludes as $exclude) {

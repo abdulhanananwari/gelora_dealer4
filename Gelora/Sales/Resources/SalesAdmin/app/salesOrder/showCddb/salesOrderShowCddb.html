@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h4>Survey Customer Database</h4>
-        <button class="btn btn-block" ng-click="ctrl.copyFromSalesOrder()">Load Data Penjualan</button>
+        <button class="btn btn-block" ng-click="ctrl.copyFromSalesOrder()">Copy Data Penjualan</button>
         <label>No KTP</label>
         <input type="text" ng-model="ctrl.salesOrder.cddb.no_ktp">
         <label>Jenis Kustomer</label>
@@ -97,6 +97,8 @@
         <select ng-options="key as value for (key, value) in ctrl.cddbOptions.jenis_kartu.options" ng-model="ctrl.salesOrder.cddb.jenis_kartu"></select>
         <label>Sms Broadcast</label>
         <select ng-options="key as value for (key, value) in ctrl.cddbOptions.sms_broadcast.options" ng-model="ctrl.salesOrder.cddb.sms_broadcast"></select>
+        <label>Status Kepemilikan Rumah</label>
+        <select ng-options="key as value for (key, value) in ctrl.cddbOptions.sms_broadcast.options" ng-model="ctrl.salesOrder.cddb.sms_broadcast"></select>
         <p>Jika customer tidak punya akun sosmed, isi dengan N</p>
         <label>Akun Facebook</label>
         <input type="text" ng-model="ctrl.salesOrder.cddb.akun_facebook">
@@ -137,6 +139,6 @@
             <label>UDSLS</label>
             <input type="text" ng-model="ctrl.salesOrder.cddb.string.udsls">
         </div>
-        <button class="btn btn-block btn-success" ng-click="ctrl.generateString(ctrl.cddb)">Generate Text Untuk Email CDDB</button>
+        <button class="btn btn-block btn-success" ng-click="ctrl.generateStrings(ctrl.salesOrder)">Generate Text Untuk Email CDDB</button>
     </div>
 </div>

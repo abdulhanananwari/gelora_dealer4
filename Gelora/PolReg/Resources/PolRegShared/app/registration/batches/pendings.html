@@ -1,0 +1,63 @@
+<div ng-if="registration" class="table-responsive">
+    <table class="table  table-bordered">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Alasan</th>
+                <th>Pending</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pengiriman Faktur Ke MD</td>
+                <td>
+                    <input type="text" ng-model="registration.pending_md_submission_batch.reason">
+                </td>
+                <td>
+                    <button ng-show="!registration.pending_md_submission_batch.creator && !registration.mdSubmissionBatch" class="btn btn-block btn-danger" ng-click="action.mdSubmissionBatch.pending(registration, registration.pending_md_submission_batch.reason)">Pending Pengiriman Faktur Ke MD</button>
+
+                    <div ng-show="registration.pending_md_submission_batch.creator">
+                            
+                        <p><small>
+                        Oleh: {{ registration.pending_md_submission_batch.creator.name }}
+                        Waktu: {{ registration.pending_md_submission_batch.creator.timestamp | date }}
+                        </small></p>
+                        <button class="btn btn-block btn-danger" ng-click="action.mdSubmissionBatch.cancelPending(registration)">Pembatalan Pendingan Pengiriman Faktur Ke MD</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Proses Ke Biro Jasa</td>
+                <td>
+                    <input type="text" ng-model="registration.pending_agency_submission_batch.reason">
+                </td>
+                <td>
+                    <button ng-show="!registration.pending_agency_submission_batch.creator && !registration.agencySubmissionBatch" class="btn btn-block btn-danger" ng-click="action.agencySubmissionBatch.pending(registration, registration.pending_agency_submission_batch.reason)">Pending Pengiriman Faktur Ke Biro Jasa</button>
+                    <div ng-show="registration.pending_agency_submission_batch.creator">
+                        <p><small>
+                        Oleh: {{ registration.pending_agency_submission_batch.creator.name }}
+                        Waktu: {{ registration.pending_agency_submission_batch.creator.timestamp | date }}
+                        </small></p>
+                        <button class="btn btn-block btn-danger" ng-click="action.agencySubmissionBatch.cancelPending(registration)">Pembatalan Pendingan Proses ke Biro Jasa</button>
+                    </div>                    
+                </td>
+            </tr>
+            <tr>
+                <td>Penyerahan BPKB Ke Leasing</td>
+                <td>
+                    <input type="text" ng-model="registration.pending_leasing_bpkb_submission_batch.reason">
+                </td>
+                <td>
+                    <button ng-show="!registration.pending_leasing_bpkb_submission_batch.creator && !registration.leasingBpkbSubmissionBatch" class="btn btn-block btn-danger" ng-click="action.leasingBpkbSubmissionBatch.pending(registration, registration.pending_leasing_bpkb_submission_batch.reason)">Pending Pengiriman BPKB Ke Leasing</button>
+                    <div ng-show="registration.pending_leasing_bpkb_submission_batch.creator">
+                        <p><small>
+                        Oleh: {{ registration.pending_leasing_bpkb_submission_batch.creator.name }}
+                        Waktu: {{ registration.pending_leasing_bpkb_submission_batch.creator.timestamp | date }}
+                        </small></p>
+                        <button class="btn btn-block btn-danger" ng-click="action.leasingBpkbSubmissionBatch.cancelPending(registration)">Pembatalan Pendingan Pengiriman BPKB Ke Leasing</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

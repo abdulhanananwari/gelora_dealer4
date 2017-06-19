@@ -1,0 +1,24 @@
+<tr style="background-color: #d35400;">
+    <td>Pengiriman Data Ke Biro Jasa</td>
+    <td>
+       
+        <!-- Jika batch belum dipilih -->
+        <div ng-if="!registration.registrationAgencySubmissionBatch  && !registration.pending_agency_submission_batch" class="row">
+            <div class="col-sm-9">
+                <select ng-model="registrationAgencySubmissionBatch" ng-change="registration.registration_agency_submission_batch_id=registrationAgencySubmissionBatch.id" ng-options="registrationBatch as registrationBatch.created_at for registrationBatch in registrationAgencySubmissionBatches"></select>
+            </div>
+            <div class="col-sm-3">
+                <button ng-if="registrationAgencySubmissionBatch" class="btn btn-block btn-info" ng-click="action.agencySubmissionBatch.select(registration)">Pilih</button>
+            </div>
+        </div>
+        <!-- Batch sudah dipilih -->
+        <div ng-if="registration.registrationAgencySubmissionBatch" class="row">
+            <div class="col-sm-6">
+                <a href="{{'/pol-reg/redirect-app/registration-agency-submission-batch/' + registration.registrationAgencySubmissionBatch.id}}" class="btn btn-block btn-success">Buka</a>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-block btn-primary" ng-click="action.agencySubmissionBatch.cancel(registration)">Batalkan</a>
+            </div>
+        </div>
+    </td>
+</tr>

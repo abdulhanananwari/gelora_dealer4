@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th colspan="4">STNK</th>
+						<th rowspan="2">Pengiriman</th>
+						<th colspan="2">Faktur</th>
+					</tr>
+					<tr>
+						<th>Nama</th>
+						<th>Alamat</th>
+						<th>Motor</th>
+						<th>Warna</th>
+						<th>History</th>
+						<th>Buat Baru</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="delivery in ctrl.deliveries">
+						<td>{{ delivery.salesOrder.registration.name }}</td>
+						<td>{{ delivery.salesOrder.registration.address }}</td>
+						<td>{{ delivery.unit.type_name + ' (' + delivery.unit.type_code + ')' }}</td>
+						<td>{{ delivery.unit.color_name }}</td>
+
+						<td>{{ delivery.handover_at }}</td>
+
+						<td>
+							<div ng-repeat="registration in delivery.registrations">
+								<p>{{registration.created_at}}</p>
+								<p><a ui-sref="registrationShow({id:registration.id})" target="_blank">Faktur</a></p>
+								<p><a ng-if="registration.registration_md_submission_batch_id" ui-sref="registrationMdSubmissionBatchShow({id:registration.registration_md_submission_batch_id})" target="_blank">Batch MD</a></p>
+								<p>Status</p>
+							</div>
+						</td>
+						<td><a class="btn btn-block btn-xs btn-primary" ui-sref="registrationShow({deliveryId:delivery.id})">Buat</a></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

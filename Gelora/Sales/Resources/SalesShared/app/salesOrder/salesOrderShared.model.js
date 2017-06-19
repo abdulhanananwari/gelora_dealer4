@@ -50,6 +50,9 @@ geloraSalesShared
             update: function(id, cddb, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/', { cddb: cddb }, { params: params })
             },
+            generateStrings: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/generate-strings/', salesOrder, { params: params })
+            },
         }
 
         salesOrder.delivery = {
@@ -68,6 +71,25 @@ geloraSalesShared
             cancel: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/cancel/', salesOrder, { params: params })
             }
+        }
+
+        salesOrder.polReg = {
+            item: {
+                incoming: function(id, item, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/incoming/', item, { params: params })
+                },
+                outgoing: function(id, item, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/outgoing/', item, { params: params })
+                }
+            },
+            cost: {
+                store: function(id, cost, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/cost/', cost, { params: params })
+                }
+            },
+            generateStrings: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/generate-strings/', salesOrder, { params: params })
+            },
         }
 
         salesOrder.document = {

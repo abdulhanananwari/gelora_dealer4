@@ -21,7 +21,7 @@ class Registration {
             'registration.address' =>  'required',
             'registration.ktp' =>  'required',
             'registration.id_file_uuid' =>  'required',
-            'registration.entity_id' => 'required',
+            'registration.id' => 'required',
         ];
         
         foreach ($excludes as $exclude) {
