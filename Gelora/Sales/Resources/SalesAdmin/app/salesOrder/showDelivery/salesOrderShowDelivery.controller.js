@@ -1,48 +1,88 @@
 geloraSalesAdmin
-	.controller('SalesOrderShowDeliveryController', function(
-		$state,$scope,
-		LinkFactory,DeliveryModel,
-		SalesOrderModel, ConfigModel) {
+    .controller('SalesOrderShowDeliveryController', function(
+        $state, $scope,
+        LinkFactory,
+        SalesOrderModel, ConfigModel) {
 
-		var vm = this
+        var vm = this
 
-		$scope._ = _
-		vm.currentStateName = $state.current.name
-		vm.linkFactory = LinkFactory
+        SalesOrderModel.get($state.params.id)
+            .then(function(res) {
+                vm.salesOrder = res.data.data
+            })
 
-		SalesOrderModel.get($state.params.id)
-		.then(function(res) {
+        ConfigModel.get('gelora.delivery.types')
+            .then(function(res) {
+                vm.deliveryTypes = res.data.data
+            })
 
-			vm.salesOrder = res.data.data
-			
-		})
-		
-		DeliveryModel.index({sales_order_id: $state.params.id})
-		.then(function(res){
+        ConfigModel.get('services.google.api_credential')
+            .then(function(res) {
+                vm.googleApiKey = res.data.data
+            })
 
-			vm.deliveries = res.data.data
-		})
+        vm.store = function(salesOrder) {
 
-		ConfigModel.get('gelora.delivery.types')
-		.then(function(res) {
-			vm.deliveryTypes = res.data.data
-		})
+            SalesOrderModel.specificUpdate.deliveryRequest(salesOrder.id, _.pick(salesOrder, ['deliveryRequest']))
+                .then(function(res) {
+                    vm.salesOrder = res.data.data
+                    alert('Delivery request berhasil diupdate')
+                });
+        }
 
-		vm.store = function(salesOrder) {
+        vm.delivery = {
+            generate: function(salesOrder, unit) {
+                SalesOrderModel.delivery.generate(salesOrder.id, unit)
+                    .then(function(res) {
+                        alert('SJ berhasil digenerate')
+                        vm.salesOrder = res.data.data
+                    })
+            },
+            scan: function(salesOrder, scannedUnit) {
+                SalesOrderModel.delivery.scan(salesOrder.id, scannedUnit)
+                    .then(function(res) {
+                        alert('Unit yang di scan cocok')
+                        vm.salesOrder = res.data.data
+                    })
+            },
+            travelStart: function(salesOrder) {
+                SalesOrderModel.delivery.travelStart(salesOrder.id)
+                    .then(function(res) {
+                        alert('Pengiriman unit dimulai')
+                        vm.salesOrder = res.data.data
+                    })
+            },
+            handover: function(salesOrder, handover, params) {
+                SalesOrderModel.delivery.handover(salesOrder.id, handover, params)
+                    .then(function(res) {
+                        alert('Penerimaan unit berhasil dikonfirmasi')
+                        vm.salesOrder = res.data.data
+                    }, function(res) {
+                        console.log(res)
+                        if (res.userResponse) {
+                            vm.delivery.handover(salesOrder, handover, res.userResponse)
+                        }
+                    })
+            },
+            cancel: function(salesOrder) {
+                SalesOrderModel.delivery.cancel(salesOrder.id)
+                    .then(function(res) {
+                        alert('SJ berhasil dibatalkan')
+                        vm.salesOrder = res.data.data
+                    })
+            },
+            setHandoverLocation: function() {
 
-			SalesOrderModel.specificUpdate.deliveryRequest(salesOrder.id, _.pick(salesOrder, ['delivery_request']))
-			.then(function(res) {
-				vm.salesOrder = res.data.data
-				alert('Delivery request berhasil diupdate')
-			});
-		}
+                navigator.geolocation.getCurrentPosition(function(position) {
 
-		vm.openDelivery = function(id, type) {
-			var params = {}
-			params[type] = id
+                    if (typeof vm.salesOrder.delivery.handover == 'undefined') { vm.salesOrder.delivery.handover = {} }
+                    vm.salesOrder.delivery.handover.lat = position.coords.latitude
+                    vm.salesOrder.delivery.handover.lon = position.coords.longitude
 
-			window.open(LinkFactory.dealer.delivery.delivery.redirectApp + '?' + $.param(params))
-		}
+                    $scope.$apply()
+                })
+            }
 
+        }
 
-	})
+    })

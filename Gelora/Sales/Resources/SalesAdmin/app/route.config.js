@@ -39,8 +39,15 @@ geloraSalesAdmin
   			pageTitle: 'Dealer | Sales Admin | Sales Order Credit'
 
 		})
+		.state('salesOrderShowCddb', {
+			url: '/salesOrder/showCddb/:id',
+  			templateUrl: 'app/salesOrder/showCddb/salesOrderShowCddb.html',
+  			controller: 'SalesOrderShowCddbController as ctrl',
+  			pageTitle: 'Dealer | Sales Admin | Sales Order CDDB'
+
+		})
 		.state('salesOrderShowDelivery', {
-			url: '/salesOrder/showDelivery/:id',
+			url: '/salesOrder/showDelivery/:id/:chasisNumber',
   			templateUrl: 'app/salesOrder/showDelivery/salesOrderShowDelivery.html',
   			controller: 'SalesOrderShowDeliveryController as ctrl',
   			pageTitle: 'Dealer | Sales Admin | Sales Order Delivery'
@@ -57,6 +64,12 @@ geloraSalesAdmin
   			templateUrl: 'app/salesOrder/showApproval/salesOrderShowApproval.html',
   			controller: 'SalesOrderShowApprovalController as ctrl',
   			pageTitle: 'Dealer | Sales Admin | Sales Order Financial'
+		})
+		.state('salesOrderShowUnit', {
+			url: '/salesOrder/showUnit/:id',
+  			templateUrl: 'app/salesOrder/showUnit/salesOrderShowUnit.html',
+  			controller: 'SalesOrderShowUnitController as ctrl',
+  			pageTitle: 'Dealer | Sales Admin | Sales Order Unit'
 		})
 		.state('salesOrderShowRegistration', {
 			url: '/salesOrder/showRegistration/:id',

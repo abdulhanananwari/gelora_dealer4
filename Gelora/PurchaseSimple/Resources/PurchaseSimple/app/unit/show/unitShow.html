@@ -5,6 +5,7 @@
 		<hr>
 
 		<vehicle-model-finder2
+			ng-show="!ctrl.unit.id"
 			selected-model="selectedModel"
 			on-change="
 				ctrl.unit.brand=selectedModel.brand;

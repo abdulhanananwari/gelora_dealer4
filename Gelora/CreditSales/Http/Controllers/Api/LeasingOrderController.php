@@ -94,7 +94,7 @@ class LeasingOrderController extends Controller {
             return $this->formatErrors($validation);
         }
 
-        $leasingOrder->action()->onCreateOrUpdate();
+        $leasingOrder->action()->onCreateAndUpdate();
 
         return $this->formatItem($leasingOrder);
     }
@@ -110,7 +110,7 @@ class LeasingOrderController extends Controller {
             return $this->formatErrors($validation);
         }
 
-        $leasingOrder->action()->onCreateOrUpdate();
+        $leasingOrder->action()->onCreateAndUpdate();
 
         return $this->formatItem($leasingOrder);
     }

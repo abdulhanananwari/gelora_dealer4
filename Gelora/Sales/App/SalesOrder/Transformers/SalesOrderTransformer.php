@@ -6,12 +6,13 @@ use League\Fractal;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class SalesOrderTransformer extends Fractal\TransformerAbstract {
-    
+
+    public $defaultIncludes = ['unit'];
+
     public function transform(SalesOrderModel $salesOrder) {
         
         $transformed = [
             'id' => $salesOrder->_id,
-            '_id'=> $salesOrder->_id,
             
             'sales_note' => $salesOrder->sales_note,
             
@@ -25,15 +26,11 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             
             'leasingOrder' => (object) $salesOrder->leasingOrder,
 
-            
             'indent' => $salesOrder->indent,
             'plafond' => $salesOrder->plafond,
             
             'sales_condition' => $salesOrder->sales_condition,
             'payment_type' => $salesOrder->payment_type,
-            
-            'delivery_id' => $salesOrder->delivery_id,
-            'delivery_assigner' => (object) $salesOrder->delivery_assigner,
 
             'registration_id' => $salesOrder->registration_id,
             
@@ -58,14 +55,30 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'closed_at' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : null,
             'closer' => $salesOrder->closer,
             
-            'delivery' => (object) $salesOrder->delivery
+            'unit_id' => $salesOrder->unit_id,
         ];
         
+        $transformed['delivery'] = Partials\Delivery::transform($salesOrder);
         $transformed['leasingOrder'] = Partials\LeasingOrder::transform($salesOrder);
+        $transformed['cddb'] = Partials\Cddb::transform($salesOrder);
         
         return array_merge(
                 $transformed,
                 Partials\Price::transform($salesOrder)
         );
+    }
+
+
+    public function includeUnit(SalesOrderModel $salesOrder) {
+
+        if (is_null($salesOrder->unit_id)) {
+            return null;
+        }
+
+        $unit = $salesOrder->unit;
+
+        return $this->item($unit,
+                new \Gelora\Base\App\Unit\Transformers\UnitTransformer(),
+                'units');
     }
 }

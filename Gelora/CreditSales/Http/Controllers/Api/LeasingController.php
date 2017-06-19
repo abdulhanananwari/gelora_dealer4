@@ -27,7 +27,7 @@ class LeasingController extends Controller {
             $leasingPersonnel = \Gelora\CreditSales\App\LeasingPersonnel\LeasingPersonnelModel::
                     where('user.id', \ParsedJwt::getByKey('sub'))->first();
 
-            $query->where('_id', new ObjectID($leasingPersonnel->leasing->_id));
+            $query->where('mainLeasing.id', $leasingPersonnel['leasing']['mainLeasing']['id']);
         }
 
         $leasings = $query->get();

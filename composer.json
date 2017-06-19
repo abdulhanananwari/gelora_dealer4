@@ -26,7 +26,10 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Solumax\\": "Solumax/",
+            "Wala\\": "Wala/",
+            "Gelora\\": "Gelora/"
         }
     },
     "autoload-dev": {

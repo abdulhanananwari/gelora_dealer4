@@ -33,10 +33,14 @@ class UnitController extends Controller {
         }
 
         if ($request->has('engine_number')) {
-            $query->where('engine_number', 'LIKE', '%' . $request->get('engine_number') . '%');
+            $query->where('engine_number', $request->get('engine_number'));
         }
 
         if ($request->has('chasis_number')) {
+            $query->where('chasis_number', $request->get('chasis_number'));
+        }
+        
+        if ($request->has('chasis_number_like')) {
             $query->where('chasis_number', 'LIKE', '%' . $request->get('chasis_number') . '%');
         }
         

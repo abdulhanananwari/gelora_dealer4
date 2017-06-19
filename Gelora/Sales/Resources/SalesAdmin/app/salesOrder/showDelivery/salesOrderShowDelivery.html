@@ -1,53 +1,104 @@
-<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>		
-
+<sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
 <div class="row">
-	<div class="col-sm-12">
-
-		<div class="col-sm-6">
-			<label>Jenis Delivery</label>
-			<select ng-options="deliveryType.code as deliveryType.name for deliveryType in ctrl.deliveryTypes" ng-model="ctrl.salesOrder.delivery_request.type"></select>
-
-			<label>Special Request</label>
-			<textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.delivery_request.request"></textarea>
-
-			<hr>
-
-			<h5>Penerima</h5>
-
-			<label>Nama</label>
-			<input type="text" ng-model="ctrl.salesOrder.delivery_request.name">
-
-			<label>Nomor Telepon</label>
-			<input type="text" ng-model="ctrl.salesOrder.delivery_request.phone_number">
-
-			<label>Alamat Delivery</label>
-			<textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.delivery_request.address"></textarea>
-
-			<button class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
-
-		</div>
-		<div class="col-sm-6">
-		<h4>Monitoring Pengiriman</h4>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Tanggal SJ</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="delivery in ctrl.deliveries">
-							<td>{{delivery.id}}</td>
-							<td>{{delivery.created_at}}</td>
-							<td>{{delivery.status_for_human}}</td>
-						</tr>
-					</tbody>
-				</table>
-				<a ng-if="!ctrl.salesOrder.delivery_id && ctrl.salesOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.openDelivery(ctrl.salesOrder.id, 'sales_order_id')">Input Pengiriman</a>
-				<a ng-if="ctrl.salesOrder.delivery_id" class="btn btn-block btn-success" ng-href="{{'/delivery/redirect-app/delivery/?id=' + ctrl.salesOrder.delivery_id}}" target="_blank">Lihat Pengiriman</a>
-			</div>	
-		</div>
-	</div>
+    <div class="col-sm-6">
+        <div class="well">
+            <h4>Request Pengiriman</h4>
+            <label>Jenis Delivery</label>
+            <select ng-options="deliveryType.code as deliveryType.name for deliveryType in ctrl.salesOrder.delivery.ypes" ng-model="ctrl.salesOrder.deliveryRequest.type"></select>
+            <label>Special Request</label>
+            <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.deliveryRequest.request"></textarea>
+            <hr>
+            <h5>Penerima</h5>
+            <label>Nama</label>
+            <input type="text" ng-model="ctrl.salesOrder.deliveryRequest.name">
+            <label>Nomor Telepon</label>
+            <input type="text" ng-model="ctrl.salesOrder.deliveryRequest.phone_number">
+            <label>Alamat Delivery</label>
+            <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.deliveryRequest.address"></textarea>
+            <button class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <!-- ng-show="ctrl.salesOrder.validated_at" -->
+        <div class="well">
+            <h4>Pengiriman</h4>
+            <hr>
+            <div ng-show="!ctrl.salesOrder.delivery.generated_at">
+                <dealer-unit-search selected-unit="selectedUnit" additional-params="{'statuses_in':'IN_STOCK_SELLABLE', 'type_code':ctrl.salesOrder.vehicle.code}"></dealer-unit-search>
+                <br>
+                <button ng-show="selectedUnit" class="btn btn-block btn-danger" ng-click="ctrl.delivery.generate(ctrl.salesOrder,selectedUnit)">Generate Surat Jalan</button>
+            </div>
+            <div ng-show="ctrl.salesOrder.delivery.generated_at && !ctrl.salesOrder.delivery.handover_at">
+                <div id="scan">
+                    <button ng-hide="ctrl.salesOrder.delivery.scanner.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" data-toggle="modal" data-target="#barcode-scan-modal">Scan Barcode</button>
+                    <label ng-show="ctrl.salesOrder.delivery.scanner.timestamp">Unit discan {{ ctrl.salesOrder.delivery.scanner.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.scanner.name }}</label>
+                </div>
+                <br>
+                <div id="travel-start">
+                    <button ng-hide="ctrl.salesOrder.delivery.travel_starter.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" ng-click="ctrl.delivery.travelStart(ctrl.salesOrder)">Mulai Pengiriman</button>
+                    <label ng-show="ctrl.salesOrder.delivery.travel_starter.timestamp">Pengiriman dimulai {{ ctrl.salesOrder.delivery.travel_starter.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.travel_starter.name }}</label>
+                </div>
+                <div id="handover">
+                    <h4>Serah Terima</h4>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Nama Penerima</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover.receiver.name">
+                            <label>Nomor Telepon Penerima</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover.receiver.phone_number">
+                            <label>Catatan Serah Terima</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover.note">
+                            <label>Waktu</label>
+                            <input type="text" ng-model="ctrl.salesOrder.delivery.handover.created_at" readonly>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Lat</label>
+                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover.lat" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Lat</label>
+                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover.lon" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <img ng-show="ctrl.salesOrder.delivery.handover.lat && ctrl.salesOrder.delivery.handover.lon" class="img-responsive" ng-src="{{ 'https://maps.googleapis.com/maps/api/staticmap?center=' + ctrl.salesOrder.delivery.handover.lat + ',' + ctrl.salesOrder.delivery.handover.lon + '&markers='  + ctrl.salesOrder.delivery.handover.lat + ',' + ctrl.salesOrder.delivery.handover.lon + '&zoom=16&size=600x300&key=' + ctrl.googleApiKey }}">
+                            <br>
+                            <button ng-hide="ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" ng-click="ctrl.delivery.setHandoverLocation()">Set Sebagai Lokasi Penerimaan</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4>KTP Penerima</h4>
+                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handover.created_at" path="sales-order/delivery" subpath="ktp" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedKtpFile" on-file-uploaded="ctrl.salesOrder.delivery.handover.receiver.id_file_uuid=uploadedKtpFile.uuid"></file-manager-upload>
+                            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover.receiver.id_file_uuid}}"></file-manager-show>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Foto Serah Terima</h4>
+                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handover.created_at" path="sales-order/delivery" subpath="handover" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedHandover" on-file-uploaded="ctrl.salesOrder.delivery.handover.file_uuid=uploadedHandover.uuid"></file-manager-upload>
+                            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover.file_uuid}}"></file-manager-show>
+                        </div>
+                    </div>
+                    <div ng-if="!ctrl.salesOrder.delivery.handover.created_at">
+                        <button class="btn btn-block btn-success" ng-click="ctrl.delivery.handover(ctrl.salesOrder, ctrl.salesOrder.delivery.handover)">Serah Terima Berhasil</button>
+                        <button class="btn btn-block btn-danger" ng-click="ctrl.delivery.cancel(ctrl.salesOrder)">Batalkan SJ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="barcode-scan-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Scan Barcode</strong></h4>
+            </div>
+            <div class="modal-body">
+                <dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.delivery.scan(ctrl.salesOrder,scannedUnit)"></dealer-unit-barcode-finder>
+            </div>
+        </div>
+    </div>
 </div>

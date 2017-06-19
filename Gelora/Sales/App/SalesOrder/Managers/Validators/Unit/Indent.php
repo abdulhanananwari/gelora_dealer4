@@ -12,12 +12,9 @@ class Indent {
         $this->salesOrder = $salesOrder;
     }
 
-    public function validate($leasingOrder) {
-        
-       if ($this->salesOrder->delivery['unit_id']) {
-           return ['unit sedang dalam proses penjualan'];
-       }
-        
+    public function validate() {
+
         return true;
     }
+
 }

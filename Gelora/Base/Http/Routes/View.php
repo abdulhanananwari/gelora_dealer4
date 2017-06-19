@@ -21,4 +21,9 @@ Route::group(['prefix' => 'view'], function() {
 
         return file_get_contents(base_path() . '/Gelora/Base/Resources/Views/angularDirectives/dealerUnitBarcodeFinder.html');
     });
+    
+    Route::get('dealer-unit-show.html', function() {
+
+        return file_get_contents(base_path() . '/Gelora/Base/Resources/Views/angularDirectives/dealerUnitShow.html');
+    });
 });

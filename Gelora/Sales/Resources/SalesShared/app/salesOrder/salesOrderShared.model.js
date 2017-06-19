@@ -33,16 +33,40 @@ geloraSalesShared
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/price/', salesOrder, { params: params })
             },
             plafond: function(id, salesOrder, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/plafond/', salesOrder, { params:params })
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/plafond/', salesOrder, { params: params })
             }
         }
 
         salesOrder.leasingOrder = {
             update: function(id, leasingOrder, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/', { leasingOrder : leasingOrder }, { params: params })
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/', { leasingOrder: leasingOrder }, { params: params })
             },
             assignFromLeasingOrder: function(id, leasingOrderId, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id : leasingOrderId }, { params: params })  
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id: leasingOrderId }, { params: params })
+            }
+        }
+
+        salesOrder.cddb = {
+            update: function(id, cddb, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/', { cddb: cddb }, { params: params })
+            },
+        }
+
+        salesOrder.delivery = {
+            generate: function(id, unit) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', { unit_id: unit.id })
+            },
+            scan: function(id, unit) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/scan/', { unit_id: unit.id })
+            },
+            travelStart: function(id) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/travel-start/')
+            },
+            handover: function(id, handover, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/', { handover: handover }, { params: params })
+            },
+            cancel: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/cancel/', salesOrder, { params: params })
             }
         }
 
@@ -57,17 +81,15 @@ geloraSalesShared
             }
         }
 
-        salesOrder.delivery = {
-            generate: function(id) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery-detail/generate/')
-            }
-        }
         salesOrder.unit = {
             indent: function(id) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/indent/')
+            },
+            deselect: function(id, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, { params: params })
             }
         }
-        
+
         salesOrder.action = {
             lock: {
                 request: function(id) {

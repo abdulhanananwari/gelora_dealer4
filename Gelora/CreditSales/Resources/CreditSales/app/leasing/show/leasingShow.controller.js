@@ -21,7 +21,7 @@ geloraDealerCreditSales
 				vm.leasingPrograms = data.data
 			})
 
-			LeasingPersonnelModel.index({'leasing.mainLeasing.id': $state.params.id})
+			LeasingPersonnelModel.index({'main_leasing_id': $state.params.id})
 			.success(function(data) {
 				vm.leasingPersonnels = data.data
 			})

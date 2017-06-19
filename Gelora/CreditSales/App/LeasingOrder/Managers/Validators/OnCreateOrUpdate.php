@@ -14,14 +14,10 @@ class OnCreateOrUpdate {
 
     public function validate() {
 
-        if ($this->leasingOrder->validated_at) {
-            return ['PO sudah divalidasi. Tidak dapat diedit lagi'];
-        }
+//        if ($this->leasingOrder->validated_at) {
+//            return ['PO sudah divalidasi. Tidak dapat diedit lagi'];
+//        }
 
-        // $basicValidation = $this->leasingOrder->validate()->onValidate();
-        // if ($basicValidation !== true) {
-        //     return $basicValidation;
-        // }
         $attrVal = $this->validateAttributes();
         if ($attrVal->fails()) {
             return $attrVal->errors()->all();

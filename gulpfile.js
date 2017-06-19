@@ -56,15 +56,6 @@ elixir((mix) => {
     mix.scriptsIn('Gelora/Delivery/Resources/Delivery', 'public/gelora/delivery/app/all.js');
     mix.copy('Gelora/Delivery/Resources/Delivery', 'public/gelora/delivery');
 
-    mix.scriptsIn('Gelora/Delivery/Resources/DeliveryShared', 'public/gelora/delivery-shared/app/all.js');
-    mix.copy('Gelora/Delivery/Resources/DeliveryShared', 'public/gelora/delivery-shared');
-
-    mix.scriptsIn('Gelora/Cdb/Resources/Cdb', 'public/gelora/cdb/app/all.js');
-    mix.copy('Gelora/Cdb/Resources/Cdb', 'public/gelora/cdb');
-
-    mix.scriptsIn('Gelora/Cdb/Resources/CdbShared', 'public/gelora/cdb-shared/app/all.js');
-    mix.copy('Gelora/Cdb/Resources/CdbShared', 'public/gelora/cdb-shared');    
-
     mix.scriptsIn('Gelora/PolReg/Resources/PolReg', 'public/gelora/pol-reg/app/all.js');
     mix.copy('Gelora/PolReg/Resources/PolReg', 'public/gelora/pol-reg');
 

@@ -7,18 +7,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">SPK {{ salesOrder.id || 'Baru' }}</a>
+            <a class="navbar-brand">SPK {{ salesOrder.id || 'Baru' }} {{$state.current.name}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" ng-if="salesOrder.id">
-                <li ng-class="{active: currentStateName == 'salesOrderShow'}"><a ui-sref="salesOrderShow({id:salesOrder.id})">Data Pesanan</a></li>
-                <li ng-class="{active: currentStateName == 'salesOrderShowFinancial'}"><a ui-sref="salesOrderShowFinancial({id:salesOrder.id})">Keuangan</a></li>
-                <li ng-if="salesOrder.payment_type == 'credit'" ng-class="{active: currentStateName == 'salesOrderShowCredit'}"><a ui-sref="salesOrderShowCredit({id:salesOrder.id})">Kredit</a></li>
-                <li ng-class="{active: currentStateName == 'salesOrderShowExtra'}"><a ui-sref="salesOrderShowExtra({id:salesOrder.id})">Tambahan</a></li>
-                <li ng-class="{active: currentStateName == 'salesOrderShowDelivery'}"><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>
-                <li ng-class="{active: currentStateName == 'salesOrderShowApproval'}"><a ui-sref="salesOrderShowApproval({id:salesOrder.id})">Kunci & Validasi</a></li>
-                <li ng-class="{active: currentStateName == 'salesOrderShowRegistration'}"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
-                <li ng-class="{active: currentStateName == 'salesOrderShowDocumentation'}"><a ui-sref="salesOrderShowDocumentation({id:salesOrder.id})">Dokumen</a></li>
+                <li><a ui-sref="salesOrderShow({id:salesOrder.id})">Data Pesanan</a></li>
+                <li><a ui-sref="salesOrderShowFinancial({id:salesOrder.id})">Keuangan</a></li>
+                <li ng-show="ctrl.salesOrder.payment_type=='credit'"><a ui-sref="salesOrderShowCredit({id:salesOrder.id})">Kredit</a></li>
+                <li><a ui-sref="salesOrderShowExtra({id:salesOrder.id})">Tambahan</a></li>
+                <li><a ui-sref="salesOrderShowUnit({id:salesOrder.id})">Unit</a></li>
+                <li><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>
+                <li><a ui-sref="salesOrderShowCddb({id:salesOrder.id})">CDDB</a></li>
+                <li><a ui-sref="salesOrderShowApproval({id:salesOrder.id})">Kunci & Validasi</a></li>
+                <li><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
+                <li><a ui-sref="salesOrderShowDocumentation({id:salesOrder.id})">Dokumen</a></li>
             </ul>
         </div>
     </div>

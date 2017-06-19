@@ -46,17 +46,27 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 });
             });
 
+            Route::group(['prefix' => '{id}/cddb'], function() {
+                Route::post('/', ['uses' => 'CddbController@update']);
+            });
+
             Route::group(['prefix' => '{id}/leasing-order'], function() {
                 Route::post('/', ['uses' => 'LeasingOrderController@update']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder']);
             });
             
             Route::group(['prefix' => '{id}/delivery'], function() {
+                
                 Route::post('generate', ['uses' => 'DeliveryController@generate']);
+                Route::post('scan', ['uses' => 'DeliveryController@scan']);
+                Route::post('travel-start', ['uses' => 'DeliveryController@travelStart']);
+                Route::post('handover', ['uses' => 'DeliveryController@handover']);
+                Route::post('cancel', ['uses' => 'DeliveryController@cancel']);
             });
             
             Route::group(['prefix' => '{id}/unit'], function() {
                 Route::post('indent', ['uses' => 'UnitController@indent']);
+                Route::post('deselect', ['uses' => 'UnitController@deselect']);
 
             });
 
