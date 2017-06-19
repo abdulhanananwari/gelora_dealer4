@@ -15,55 +15,57 @@ class Cddb {
     public function generate() {
 
         $salesOrder = $this->salesOrder;
-        $cddb = $salesOrder->cddb;
-        $unit = $salesOrder->unit;
-        
-        $string = '';
-
-        $string = $string . substr($unit['engine_number'], 0, 5) . ';';
-        $string = $string . substr($unit['engine_number'], 6) . ';';
-        $string = $string . $salesOrder['registration.id_number'] . ';';
-        $string = $string . $cddb['customer_code'] . ';';
-        $string = $string . $cddb['jenis_kelamin'] . ';';
-        $string = $string . $cddb['tanggal_lahir'] . ';';
-        $string = $string . $cddb['alamat_surat'] . ';';
-        $string = $string . $cddb['kelurahan_surat'] . ';';
-        $string = $string . $cddb['kecamatan_surat'] . ';';
-        $string = $string . $cddb['kota_surat'] . ';';
-        $string = $string . $cddb['kode_pos_surat'] . ';';
-        $string = $string . $cddb['propinsi_surat'] . ';';
-        $string = $string . $cddb['agama'] . ';';
-        $string = $string . $cddb['pekerjaan'] . ';';
-        $string = $string . $cddb['pengeluaran'] . ';';
-        $string = $string . $cddb['pendidikan'] . ';';
-        $string = $string . $cddb['nama_penanggung_jawab'] . ';';
-        $string = $string . $cddb['no_hp'] . ';';
-        $string = $string . $cddb['no_telp'] . ';';
-        $string = $string . $cddb['kebersediaan_untuk_dihubungi'] . ';';
-        $string = $string . $cddb['merk_motor_yang_dimiliki_sekarang'] . ';';
-        $string = $string . $cddb['jenis_motor_yang_dimiliki_sekarang'] . ';';
-        $string = $string . $cddb['sepeda_motor_digunakan_untuk'] . ';';
-        $string = $string . $cddb['yang_menggunakan_sepeda_motor'] . ';';
-
-        // Kode sales person. Jika di CDDB tidak diisi, default ke salesman di penjualan
-        // Diberikan opsi ini supaya admin bisa isi laporan penjualan dengan flexible
-
-        if (isset($cddb['salesPersonnel']) && isset($cddb['salesPersonnel.registration_code'])) {
-            $string = $string . $cddb['salesPersonnel.registration_code'] . ';';
-        } else {
-            $string = $string . $salesOrder['salesPersonnel.registration_code'] . ';';
+        $cddb = $salesOrder['cddb'];
+        $unit = $salesOrder['unit'];
+        $data = [];
+        $data['No Mesin 1'] = substr($unit['engine_number'], 0,5);
+        $data['No Mesin 2'] = substr($unit['engine_number'], 6);
+        $data['No Ktp'] = $salesOrder['registration']['name'];
+        $data['Kode Kustomer'] = $cddb['customer_code'];
+        $data['Jenis Kelamin'] = $cddb['jenis_kelamin'];
+        $data['Alamat '] = $cddb['alamat_surat'];
+        $data['Kelurahan'] = $cddb['kelurahan_surat'];
+        $data['Kecamatan'] = $cddb['kecamatan_surat'];
+        $data['kota'] = $cddb['kota_surat'];
+        $data['kode pos'] = $cddb['kode_pos_surat'];
+        $data['Provinsi'] = $cddb['propinsi_surat'];
+        $data['Agama'] = $cddb['agama'];
+        $data['Pekerjaan'] = $cddb['pekerjaan'];
+        $data['Pengeluaran'] = $cddb['pengeluaran'];
+        $data['Pendidikan'] = $cddb['pendidikan'];
+        $data['Nama Penanggung Jawab'] = $cddb['nama_penanggung_jawab'];
+        $data['No HP'] = $cddb['no_hp'];
+        $data['No Telp'] = $cddb['no_telp'];
+        $data['kebersediaan untuk dihubungi'] = $cddb['kebersediaan_untuk_dihubungi'];
+        $data['Merk motor yang dimiliki sekarang'] = $cddb['merk_motor_yang_dimiliki_sekarang'];
+        $data['Jenis motor yang dimiliki sekarang'] = $cddb['jenis_motor_yang_dimiliki_sekarang'];
+        $data['Sepeda motor digunakan untuk'] = $cddb['sepeda_motor_digunakan_untuk'];
+        $data['Yang menggunkan sepeda motor'] = $cddb['yang_menggunakan_sepeda_motor'];
+        if (isset($cddb->salesPersonnel) && isset($cddb['salesPersonnel.registration_code'])) {
+            $data['Kode sales'] = $cddb['salesPersonnel.registration_code'];
+        }else {
+            $data['Kode sales'] = $salesOrder['salesPersonnel.registration_code'];
         }
+        $data['Status kepemilikan rumah'] = $cddb['status_kepemilikan_rumah'];
+        $data['status_no_hp'] = $cddb['status_no_hp'];
+        $data['Akun Facebook'] = $cddb['akun_facebook'];
+        $data['Akun Twitter'] = $cddb['akun_twitter'];
+        $data['Akun Instagram'] = $cddb['akun_instagram'];
+        $data['Akun Youtube'] = $cddb['akun_youtube'];
+        $data['Hobi'] = $cddb['hobi'];
+        $data['Karateristik Konsumen'] = $cddb['karakteristik_konsumen'];
 
-        $string = $string . $cddb['status_kepemilikan_rumah'] . ';';
-        $string = $string . $cddb['status_no_hp'] . ';';
-        $string = $string . $cddb['akun_facebook'] . ';';
-        $string = $string . $cddb['akun_twitter'] . ';';
-        $string = $string . $cddb['akun_instagram'] . ';';
-        $string = $string . $cddb['akun_youtube'] . ';';
-        $string = $string . $cddb['hobi'] . ';';
-        $string = $string . $cddb['karakteristik_konsumen'] . ';';
 
-        return $string;
+        $string = '';
+        foreach ($data as $key => $value) {
+            $string = $string . $value . ';';
+        }
+        return [
+            'data' => $data,
+            'string' => $string,
+        ];
+
+       
     }
 
 }

@@ -51,10 +51,10 @@ class OnValidate {
             return $plafondValidation;
         }
 
-        $balanceValidation = $this->calculateBalance();
+       /* $balanceValidation = $this->calculateBalance();
         if ($balanceValidation !== true) {
             return ['Pendapatan belum sesuai dengan pembayaran + piutang. Sesisih Rp ' . number_format($balanceValidation)];
-        }
+        }*/
 
         return true;
     }

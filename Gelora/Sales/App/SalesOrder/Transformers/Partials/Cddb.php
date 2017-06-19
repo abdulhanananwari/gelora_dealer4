@@ -58,7 +58,7 @@ class Cddb {
             'closed_at' => $cddb->closed_at ? $cddb->closed_at->toDateTimeString() : null,
             'closer' => $cddb->closer,
             
-            'string' => (object) $cddb->string, 
+            'strings' => (object) $cddb->strings, 
         ];
         
         return $transformed;
