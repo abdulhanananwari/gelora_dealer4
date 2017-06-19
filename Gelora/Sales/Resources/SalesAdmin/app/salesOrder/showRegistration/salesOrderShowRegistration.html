@@ -2,9 +2,9 @@
 <div class="row">
     <div class="col-sm-12">
         <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#faktur-data">Data Faktur</button>
-        <registration-batches registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-batches>
-        <registration-handover registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-handover>
-        <registration-cost registration-id="{{ctrl.salesOrder.usedRegistration.id}}"></registration-cost>
+        <!-- <registration-batches registration-id="{{ ctrl.salesOrder.usedRegistration.id }}"></registration-batches> -->
+        <registration-handover sales-order="ctrl.salesOrder"></registration-handover>
+        <registration-cost sales-order="ctrl.salesOrder"></registration-cost>
     </div>
 </div>
 <div class="modal fade" id="faktur-data" tabindex="-1" role="dialog">

@@ -5,7 +5,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators;
 use Solumax\PhpHelper\App\ManagerBase as Manager;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class Cddb extends Manager {
+class PolReg extends Manager {
 
     protected $salesOrder;
 
@@ -14,7 +14,7 @@ class Cddb extends Manager {
     }
 
     public function __call($name, $arguments) {
-        return $this->managerCaller($name, $arguments, $this->salesOrder, __NAMESPACE__, 'Cddb', 'validate');
+        return $this->managerCaller($name, $arguments, $this->salesOrder, __NAMESPACE__, 'PolReg', 'validate');
     }
 
     public function validate() {
