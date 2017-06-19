@@ -31,28 +31,27 @@ class ProspectController extends Controller {
         }
 
         if ($request->has('status')) {
-                switch ($request->get('status')){
-                    case 'open':
-                        $query->whereNull('closed_at');
-                        break;
-                    case 'sales_order_request_created':
-                        $query->whereNotNull('closed_at')
-                                ->whereNull('create_sales_order_responded_at')
-                                ->where('create_sales_order_request', true);
-                        break;
-                    case 'sales_order_request_not_created':
-                        $query->whereNotNull('closed_at')
-                                ->where('create_sales_order_request', false);
-                        break;
-                    case 'sales_order_request_accepted':
-                        $query->whereNotNull('create_sales_order_responded_at')
-                                ->whereNotNull('sales_order_id');
-                        break;
-                    case 'sales_order_request_rejected':
-                        $query->whereNotNull('create_sales_order_responded_at')
-                                ->whereNull('sales_order_id');
-                        break;
-                endswitch;
+            switch ($request->get('status')) {
+                case 'open':
+                    $query->whereNull('closed_at');
+                    break;
+                case 'sales_order_request_created':
+                    $query->whereNotNull('closed_at')
+                            ->whereNull('create_sales_order_responded_at')
+                            ->where('create_sales_order_request', true);
+                    break;
+                case 'sales_order_request_not_created':
+                    $query->whereNotNull('closed_at')
+                            ->where('create_sales_order_request', false);
+                    break;
+                case 'sales_order_request_accepted':
+                    $query->whereNotNull('create_sales_order_responded_at')
+                            ->whereNotNull('sales_order_id');
+                    break;
+                case 'sales_order_request_rejected':
+                    $query->whereNotNull('create_sales_order_responded_at')
+                            ->whereNull('sales_order_id');
+                    break;
             }
         }
 

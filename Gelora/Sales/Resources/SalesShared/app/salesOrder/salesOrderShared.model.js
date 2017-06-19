@@ -73,6 +73,20 @@ geloraSalesShared
             }
         }
 
+        salesOrder.polReg = {
+            item: {
+                incoming: function(id, item, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/incoming/', item, { params: params })
+                },
+                outgoing: function(id, item, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/outgoing/', item, { params: params })
+                }
+            },
+            generateStrings: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/cddb/generate-strings/', salesOrder, { params: params })
+            },
+        }
+
         salesOrder.document = {
             spk: {
                 generate: function(id) {

@@ -1,31 +1,16 @@
 geloraPolRegShared
     .directive('registrationHandover', function(
-        RegistrationModel,
+        SalesOrderModel,
         LinkFactory, JwtValidator) {
 
         return {
             templateUrl: '/gelora/pol-reg-shared/app/registration/handover/registrationHandover.html',
             scope: {
-                registrationId: '@',
-                items: '='
+                salesOrder: '='
             },
             link: function(scope, element, attrs) {
 
                 scope.modalId = Math.random().toString(36).substring(2, 7)
-
-                attrs.$observe('registrationId', function(newValue) {
-
-                    if (newValue) {
-
-                        RegistrationModel.get(newValue)
-                            .then(function(res) {
-                                scope.innerRegistration = res.data.data
-                                scope.items = scope.innerRegistration.items
-                            })
-                    }
-
-                })
-
 
                 scope.itemIncomingEntry = function(item) {
                     scope.selectedItem = item
@@ -34,10 +19,9 @@ geloraPolRegShared
 
                 scope.itemIncomingStore = function(item) {
 
-                    RegistrationModel.update.itemIncoming(scope.innerRegistration.id, item)
+                    SalesOrderModel.polReg.item.incoming(scope.salesOrder.id, item)
                         .then(function(res) {
-                            scope.innerRegistration = res.data.data
-                            scope.items = scope.innerRegistration.items
+                            scope.salesOrder = res.data.data
                             $('#item-incoming-entry-' + scope.modalId).modal('hide')
                         })
                 }
@@ -49,25 +33,20 @@ geloraPolRegShared
 
                 scope.itemOutgoingStore = function(item, params) {
 
-                    RegistrationModel.update.itemOutgoing(scope.innerRegistration.id, item, params)
+                    SalesOrderModel.polReg.item.outgoing(scope.salesOrder.id, item, params)
                         .then(function(res) {
-                            scope.innerRegistration = res.data.data
-                            scope.items = scope.innerRegistration.items
+                            scope.salesOrder = res.data.data
                             $('#item-outgoing-entry-' + scope.modalId).modal('hide')
                         }, function(res) {
 
-
                             if (res.userResponse) {
-
                                 scope.itemOutgoingStore(item, res.userResponse)
                             }
                         })
                 }
 
                 scope.generateReceiptItemHandover = function(item) {
-
                     window.open(LinkFactory.dealer.polReg.registration.views + 'generate-receipt-item-handover/' + scope.innerRegistration.id + '?' + $.param({ jwt: JwtValidator.encodedJwt, item_name: item.name }));
-
                 }
 
             }
