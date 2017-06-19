@@ -35,14 +35,7 @@ return [
             ],
         ]
     ],
-    /*'dateTypes' => [
-        [
-            'code' => 'VALIDATED_AT',
-            'name' => 'Tanggal Validasi'
-
-        ],
-    ],*/
-    'deliveryTypes' => [
+        'deliveryTypes' => [
             [
             'code' => 'IMMEDIATE_DELIVERY',
             'name' => 'Langsung',
