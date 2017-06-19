@@ -62,6 +62,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             Route::group(['prefix' => '{id}/pol-reg'], function() {
                 
                 Route::post('generate-strings', ['uses' => 'PolRegController@generateStrings']);
+                Route::post('batch', ['uses' => 'PolRegController@batch']);
                 
                 Route::group(['namespace' => 'PolReg'], function() {
                     Route::group(['prefix' => 'item'], function() {

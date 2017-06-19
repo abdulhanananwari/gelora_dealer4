@@ -1,4 +1,4 @@
-geloraPolReg
+geloraPolRegShared
 	.factory('AgencyInvoiceModel', function(
 		$http,
 		LinkFactory) {

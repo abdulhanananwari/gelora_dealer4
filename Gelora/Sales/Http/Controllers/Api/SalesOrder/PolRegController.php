@@ -25,6 +25,20 @@ class PolRegController extends SalesOrderController {
         $salesOrder->action()->polReg()->onGenerateStrings();
 
         return $this->formatItem($salesOrder);
-    } 
+    }
+    
+    public function batch($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+
+        $validation = $salesOrder->validate()->polReg()->onAssignBatch($request->get('batch'));
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->polReg()->onAssignBatch($request->get('batch'));
+
+        return $this->formatItem($salesOrder);
+    }
 
 }

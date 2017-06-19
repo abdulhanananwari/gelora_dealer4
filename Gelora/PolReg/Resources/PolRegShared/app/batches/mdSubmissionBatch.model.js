@@ -1,4 +1,4 @@
-geloraPolReg
+geloraPolRegShared
 	.factory('MdSubmissionBatchModel', function(
 		$http,
 		LinkFactory) {

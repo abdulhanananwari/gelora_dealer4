@@ -1,4 +1,4 @@
-geloraPolReg
+geloraPolRegShared
 	.factory('LeasingBpkbSubmissionBatchModel', function(
 		$http,
 		LinkFactory) {
