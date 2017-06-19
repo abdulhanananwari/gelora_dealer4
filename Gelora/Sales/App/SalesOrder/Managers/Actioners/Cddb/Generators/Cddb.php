@@ -7,7 +7,7 @@ use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 class Cddb {
 
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
@@ -17,8 +17,9 @@ class Cddb {
         $salesOrder = $this->salesOrder;
         $cddb = $salesOrder['cddb'];
         $unit = $salesOrder['unit'];
+        
         $data = [];
-        $data['No Mesin 1'] = substr($unit['engine_number'], 0,5);
+        $data['No Mesin 1'] = substr($unit['engine_number'], 0, 5);
         $data['No Mesin 2'] = substr($unit['engine_number'], 6);
         $data['No Ktp'] = $salesOrder['registration']['name'];
         $data['Kode Kustomer'] = $cddb['customer_code'];
@@ -41,11 +42,13 @@ class Cddb {
         $data['Jenis motor yang dimiliki sekarang'] = $cddb['jenis_motor_yang_dimiliki_sekarang'];
         $data['Sepeda motor digunakan untuk'] = $cddb['sepeda_motor_digunakan_untuk'];
         $data['Yang menggunkan sepeda motor'] = $cddb['yang_menggunakan_sepeda_motor'];
+        
         if (isset($cddb->salesPersonnel) && isset($cddb['salesPersonnel.registration_code'])) {
             $data['Kode sales'] = $cddb['salesPersonnel.registration_code'];
-        }else {
+        } else {
             $data['Kode sales'] = $salesOrder['salesPersonnel.registration_code'];
         }
+        
         $data['Status kepemilikan rumah'] = $cddb['status_kepemilikan_rumah'];
         $data['status_no_hp'] = $cddb['status_no_hp'];
         $data['Akun Facebook'] = $cddb['akun_facebook'];
@@ -64,8 +67,6 @@ class Cddb {
             'data' => $data,
             'string' => $string,
         ];
-
-       
     }
 
 }
