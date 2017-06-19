@@ -23,12 +23,12 @@ class SalesOrderController extends Controller {
 
         if ($request->has('from')) {
             $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay();
-            $query->where($reques->get('time_type', 'created_at'), '>=', $from);
+            $query->where($request->get('time_type', 'created_at'), '>=', $from);
         }
 
         if ($request->has('until')) {
             $until = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('until'))->endOfDay();
-            $query->where($reques->get('time_type', 'created_at'), '<=', $until);
+            $query->where($request->get('time_type', 'created_at'), '<=', $until);
         }
 
         if ($request->has('customer_name')) {
@@ -47,26 +47,25 @@ class SalesOrderController extends Controller {
         if ($request->has('payment_type')) {
             $query->where('payment_type', $request->get('payment_type'));
         }
-        
-//
-//        if ($request->get('validated') == 'true') {
-//            $query->whereNotNull('validated_at');
-//        }
-//
-//        if ($request->has('delivery')) {
-//            if ($request->get('delivery') == 'null') {
-//                $query->whereNull('delivery');
-//            } else {
-//                $query->where('delivery', $request->get('delivery'));
-//            }
-//        }
-//        if ($request->get('status') == 'on_progress') {
-//            $query->whereNull('delivery.status');
-//        }elseif ($request->get('status') == 'completed_successfully') {
-//            $query->whereNotNull('delivery.handover_at')->where('delivery.status', true);
-//        }elseif ($request->get('status') == 'cancelled') {
-//            $query->whereNull('delivery.handover_at')->where('status', false);
-//        }
+
+        if ($request->has('status')) {
+            switch ($request->get('status')) {
+                case 'validated':
+                    $query->whereNotNull('validated_at');
+                    break;
+                case 'delivery_generated':
+                    $query->whereNotNull('delivery.generated_at');
+                    break;
+                case 'delivery_handover_created':
+                    $query->whereNotNull('delivery.handover.created_at');
+                    break;
+                case 'financial_completed':
+                    $query->whereNotNull('financial_completed_at');
+                    break;
+            default;
+                break;
+            }
+        }
 
         $salesOrders = $query
                 ->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'))

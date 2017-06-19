@@ -35,8 +35,7 @@ return [
             ],
         ]
     ],
-    
-    'deliveryTypes' => [
+        'deliveryTypes' => [
             [
             'code' => 'IMMEDIATE_DELIVERY',
             'name' => 'Langsung',
