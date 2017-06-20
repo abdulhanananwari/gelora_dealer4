@@ -21,8 +21,8 @@ class Udsls {
         $delivery = $salesOrder->subDocument()->delivery();
 
         $data = [];
-        $data['No Mesin'] = $unit->engine_number;
-        $data['No Rangka'] = $unit->chasis_number;
+        $data['No Mesin'] = $unit['engine_number'];
+        $data['No Rangka'] = $unit['chasis_number'];
         $data['Kode Leasing'] = ($salesOrder->payment_type == 'credit' ? $leasingOrder->leasing['code'] : "N");
         $data['Kode Kecamatan'] = $cddb->kecamatan_surat;
 
