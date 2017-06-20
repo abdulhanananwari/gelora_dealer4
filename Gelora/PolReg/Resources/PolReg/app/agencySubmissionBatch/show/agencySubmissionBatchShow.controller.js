@@ -5,10 +5,6 @@ geloraPolReg
 
         var vm = this
 
-        var defaultIncludes = {
-            with: 'registrations.delivery.salesOrder, registrations.delivery.unit'
-        }
-
         vm.registrationBatch = {}
 
         vm.store = function(registrationBatch) {
@@ -17,8 +13,9 @@ geloraPolReg
 
                 AgencySubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
+                        assignData(res)
+
                         alert('Batch Berhasil Diupdate')
-                        assignData(res.data)
                     })
 
             } else {
@@ -35,44 +32,42 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            AgencySubmissionBatchModel.close(registrationBatch.id, defaultIncludes)
+            AgencySubmissionBatchModel.close(registrationBatch.id)
                 .then(function(res) {
+                    assignData(res)
                     alert('Batch Berhasil Ditutup')
-                    assignData(res.data)
                 })
 
         }
         vm.generateReceipt = function(registrationBatch) {
-            window.open(LinkFactory.dealer.polReg.registrationAgencySubmissionBatch.views + 'generate-agency-receipt/' + registrationBatch.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+            window.open(LinkFactory.dealer.polReg.agencySubmissionBatch.views + 'generate-agency-receipt/' + registrationBatch.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
         }
         vm.handover = function(registrationBatch) {
-            AgencySubmissionBatchModel.handover(registrationBatch.id, defaultIncludes)
+            AgencySubmissionBatchModel.handover(registrationBatch.id)
                 .then(function(res) {
-                    assignData(res.data)
+                   assignData(res)
                 })
         }
 
         if ($state.params.id) {
 
-            AgencySubmissionBatchModel.get($state.params.id, defaultIncludes)
+            AgencySubmissionBatchModel.get($state.params.id)
                 .then(function(res) {
-                    assignData(res.data)
-                })
+                    
+                 assignData(res)
+            })
         }
 
-        function assignData(data) {
 
-            vm.registrationBatch = data.data
+        function assignData(res) {
 
-            if (vm.registrationBatch.registrations) {
+            vm.registrationBatch = res.data.data
 
-                vm.registrationBatch.registrations = vm.registrationBatch.registrations.data
-
-                vm.registrationBatch.registrations = _.map(vm.registrationBatch.registrations, function(data) {
-
-                    return RegistrationFactory.transform(data)
-                })
+            if (vm.registrationBatch.salesOrders) {
+                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data    
             }
+            
             return vm.registrationBatch
         }
+
     })

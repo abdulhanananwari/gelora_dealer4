@@ -6,25 +6,21 @@ geloraPolReg
 
         var vm = this
 
-        var defaultIncludes = {
-            with: 'registrations.delivery.salesOrder,registrations.delivery.unit'
-        }
-
         vm.registrationBatch = {}
 
         vm.store = function(registrationBatch) {
 
             if (registrationBatch.id) {
 
-                AgencyInvoiceModel.update(registrationBatch.id, registrationBatch, defaultIncludes)
+                AgencyInvoiceModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
+                        assignData(res)
                         alert('Batch Berhasil Diupdate')
-                        assignData(res.data)
                     })
 
             } else {
 
-                AgencyInvoiceModel.store(registrationBatch, defaultIncludes)
+                AgencyInvoiceModel.store(registrationBatch)
                     .then(function(res) {
                         alert('Batch Berhasil Disimpan')
                         $state.go('agencyInvoiceShow', { id: res.data.data.id })
@@ -36,39 +32,33 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            AgencyInvoiceModel.close(registrationBatch.id, registrationBatch, defaultIncludes)
+            AgencyInvoiceModel.close(registrationBatch.id, registrationBatch)
                 .then(function(res) {
+                   assignData(res)
                     alert('Batch Berhasil Ditutup')
-                    assignData(res.data)
                 })
 
         }
 
         if ($state.params.id) {
 
-            AgencyInvoiceModel.get($state.params.id, defaultIncludes)
+            AgencyInvoiceModel.get($state.params.id)
                 .then(function(res) {
 
-                    assignData(res.data)
+                   assignData(res)
                 })
         }
 
-        function assignData(data) {
+        function assignData(res) {
 
-            vm.registrationBatch = data.data
+            vm.registrationBatch = res.data.data
 
-            if (vm.registrationBatch.registrations) {
-
-                vm.registrationBatch.registrations = vm.registrationBatch.registrations.data
-
-                vm.registrationBatch.registrations = _.map(vm.registrationBatch.registrations, function(data) {
-
-                    return RegistrationFactory.transform(data)
-                })
+            if (vm.registrationBatch.salesOrders) {
+                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data    
             }
+
             return vm.registrationBatch
         }
-
         vm.fileManager = {
             agencyInvoice: {
                 displayedInput: JSON.stringify({

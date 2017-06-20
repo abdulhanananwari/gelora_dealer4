@@ -12,12 +12,7 @@ class LeasingBpkbSubmissionBatchModel extends Model {
     
     protected $guarded = ['created_at', 'updated_at'];
     public $dates = ['closed_at','handover_at'];
-    // Relationship
-    
-    public function registrations() {
-        return $this->hasMany('\Gelora\PolReg\App\\Model',
-                'registration_leasing_bpkb_submission_batch_id');
-    }
+  
     
     // Managers
     

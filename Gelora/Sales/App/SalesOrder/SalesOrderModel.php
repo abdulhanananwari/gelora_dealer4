@@ -71,7 +71,7 @@ class SalesOrderModel extends Model {
     }
     public function getAgencyInvoice() {
 
-        return \Gelora\PolReg\App\AgencyInvoice\AgencyInvoiceModel::find($this->subDocument()->polReg()->agency_invoive_id);
+        return \Gelora\PolReg\App\AgencyInvoice\AgencyInvoiceModel::find($this->subDocument()->polReg()->agency_invoice_id);
     }
     public function getLeasingBpkbSubmissionBatch() {
 

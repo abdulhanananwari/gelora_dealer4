@@ -5,18 +5,18 @@ namespace Gelora\PolReg\Http\Controllers\Views;
 use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
 use Illuminate\Http\Request;
 
-class RegistrationLeasingBpkbSubmissionBatchController extends Controller {
+class AgencySubmissionBatchController extends Controller {
 
     protected $registrationBatch;
 
     public function __construct() {
         parent::__construct();
-        $this->registrationBatch = new \Gelora\PolReg\App\RegistrationLeasingBpkbSubmissionBatch\RegistrationLeasingBpkbSubmissionBatchModel;
+        $this->registrationBatch = new \Gelora\PolReg\App\AgencySubmissionBatch\AgencySubmissionBatchModel();
 
-        $this->transformer = new \Gelora\PolReg\App\RegistrationLeasingBpkbSubmissionBatch\Transformers\RegistrationLeasingBpkbSubmissionBatchTransformer();
+        $this->transformer = new \Gelora\PolReg\App\AgencySubmissionBatch\Transformers\AgencySubmissionBatchTransformer();
     }
 
-    public function generateLeasingBpkbReceipt($id) {
+    public function generateAgencyReceipt($id) {
 
         $registrationBatch = $this->registrationBatch->find($id);
 
@@ -27,7 +27,7 @@ class RegistrationLeasingBpkbSubmissionBatchController extends Controller {
             'tenantInfo' => $tenantInfo,
         ];
 
-        return view()->make('gelora.polReg::registrationBatches.leasingBpkbSubmissionBatch.leasingBpkbReceipt')
+        return view()->make('gelora.polReg::registrationBatches.agencySubmissionBatch.agencyReceipt')
                         ->with('viewData', $viewData);
     }
 

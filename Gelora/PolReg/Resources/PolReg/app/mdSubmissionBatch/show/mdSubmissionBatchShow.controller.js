@@ -13,8 +13,7 @@ geloraPolReg
 
                 MdSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
-                        vm.registrationBatch = res.data.data
-                        vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
+                        assignData(res)
                         alert('Berhasil diupdate')
                     })
 
@@ -34,8 +33,7 @@ geloraPolReg
             MdSubmissionBatchModel.close(registrationBatch.id)
                 .then(function(res) {
                     alert('Berhasil ditutup')
-                    vm.registrationBatch = res.data.data
-                    vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
+                    assignData(res)
                 })
         }
 
@@ -43,8 +41,7 @@ geloraPolReg
 
             MdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email })
                 .then(function(res) {
-                    vm.registrationBatch = res.data.data
-                    vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
+                    assignData(res)
 
                 })
         }
@@ -53,8 +50,18 @@ geloraPolReg
 
             MdSubmissionBatchModel.get($state.params.id)
                 .then(function(res) {
-                    vm.registrationBatch = res.data.data
-                    vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
+                    assignData(res)
                 })
+        }
+
+        function assignData(res) {
+
+            vm.registrationBatch = res.data.data
+
+            if (vm.registrationBatch.salesOrders) {
+                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data    
+            }
+            
+            return vm.registrationBatch
         }
     })

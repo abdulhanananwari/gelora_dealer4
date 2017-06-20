@@ -42,6 +42,6 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
         Route::post('/', ['uses' => 'LeasingBpkbSubmissionBatchController@store']);
         Route::post('{id}', ['uses' => 'LeasingBpkbSubmissionBatchController@update']);
         Route::post('close/{id}', ['uses' => 'LeasingBpkbSubmissionBatchController@close']);
-        Route::post('handover/{id}', ['uses' => 'LeasingBpkbSubmissionBatchController@close']);
+        Route::post('handover/{id}', ['uses' => 'LeasingBpkbSubmissionBatchController@handover']);
     });
 });

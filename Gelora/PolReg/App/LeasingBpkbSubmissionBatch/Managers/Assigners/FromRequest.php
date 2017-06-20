@@ -14,7 +14,7 @@ class FromRequest {
 
     public function assign(\Illuminate\Http\Request $request) {
         
-        $this->registrationBatch->fill($request->only('mainLeasing','subLeasing'));
+        $this->registrationBatch->fill($request->only('mainLeasing','subLeasing','file_uuid'));
         
         return $this->registrationBatch;
     }

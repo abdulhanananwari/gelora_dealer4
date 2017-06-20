@@ -4,7 +4,7 @@ namespace Gelora\PolReg\App\LeasingBpkbSubmissionBatch\Managers\Validators;
 
 use Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel;
 
-class OnClose {
+class OnUpdate {
 
     protected $registrationBatch;
 

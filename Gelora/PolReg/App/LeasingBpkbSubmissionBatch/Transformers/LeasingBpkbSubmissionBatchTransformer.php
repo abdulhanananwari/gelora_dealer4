@@ -17,6 +17,7 @@ class LeasingBpkbSubmissionBatchTransformer extends Fractal\TransformerAbstract 
             
             'mainLeasing' => $registrationLeasingBpkbSubmissionBatch->mainLeasing,
             'subLeasing' => $registrationLeasingBpkbSubmissionBatch->subLeasing,
+            'file_uuid' => $registrationLeasingBpkbSubmissionBatch->file_uuid,
             
             'created_at' => $registrationLeasingBpkbSubmissionBatch->created_at->toDateTimeString(),
             'creator' => $registrationLeasingBpkbSubmissionBatch->creator,
