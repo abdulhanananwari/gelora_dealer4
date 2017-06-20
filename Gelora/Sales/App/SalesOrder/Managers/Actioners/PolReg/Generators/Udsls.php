@@ -16,9 +16,9 @@ class Udsls {
 
         $salesOrder = $this->salesOrder;
         $cddb = $salesOrder->subDocument()->cddb();
-        $unit = $salesOrder->unit;
         $leasingOrder = $salesOrder->subDocument()->leasingOrder();
         $delivery = $salesOrder->subDocument()->delivery();
+        $unit = $salesOrder->unit;
 
         $data = [];
         $data['No Mesin'] = $unit->engine_number;
@@ -45,7 +45,7 @@ class Udsls {
         $data['Sms Broadcast'] = ($cddb->sms_broadcast == '1' ? "Y" : "N");
         $data['No HP'] = $salesOrder['registration.phone_number'];
         $data['Email'] = $salesOrder['registration.email'];
-        $data['Cicilan'] = ($salesOrder['payment_type'] == 'credit' ? $leasingOrder->cicilan : 0);
+        $data['Cicilan'] = ($salesOrder->payment_type == 'credit' ? $leasingOrder->cicilan : 0);
 
         $string = '';
         foreach ($data as $key => $value) {

@@ -36,4 +36,5 @@ class AgencySubmissionBatchModel extends Model {
                         where('polReg.agency_submission_batch_id', new \MongoDB\BSON\ObjectID($this->id))
                         ->get();
     }
+
 }

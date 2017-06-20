@@ -1,6 +1,6 @@
 geloraSalesShared
     .controller('ProspectIndexController', function(
-        ProspectSalesPersonnelModel, ConfigModel) {
+        ProspectModel, ConfigModel) {
 
         var vm = this
 
@@ -21,7 +21,7 @@ geloraSalesShared
         }
 
         vm.load = function(filter) {
-            ProspectSalesPersonnelModel.index(filter)
+            ProspectModel.index(filter)
                 .then(function(res) {
                     vm.prospects = res.data.data
                 })

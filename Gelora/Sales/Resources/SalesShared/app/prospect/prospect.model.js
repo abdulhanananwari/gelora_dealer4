@@ -21,37 +21,13 @@ geloraSalesShared
             return $http.post(LinkFactory.dealer.sales.prospect.base + id, prospect, { params: params })
         }
 
-        prospect.calculate = function(id) {
-            return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/calculate')
-        }
-
-        prospect.specificUpdate = {
-            deliveryRequest: function(id, prospect, params) {
-                return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/specific-update/delivery-request/', prospect, { params: params })
+        prospect.action = {
+            close: function(id, prospect, params) {
+                return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/close/', prospect, { params: params })
             },
-            price: function(id, prospect, params) {
-                return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/specific-update/price/', prospect, { params: params })
-            }
-        }
-
-        prospect.leasingOrder = {
-            select: function(id, leasingOrder, params) {
-                return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/leasing-order/select/', { leasing_order_id: leasingOrder.id }, { params: params })
+            respond: function(id, prospect, params) {
+                return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/respond/', prospect, { params: params })
             },
-            deselect: function(id, params) {
-                return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/leasing-order/deselect/', {}, { params: params })
-            },
-        }
-
-        prospect.document = {
-            spk: {
-                generate: function(id) {
-                    return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/document/spk/generate')
-                },
-                email: function(id) {
-                    return $http.post(LinkFactory.dealer.sales.prospect.base + id + '/document/spk/email')
-                }
-            }
         }
 
         return prospect

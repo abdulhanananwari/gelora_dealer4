@@ -21,6 +21,14 @@ class SalesOrderController extends Controller {
         
         $query = $this->salesOrder->newQuery();
 
+        if ($request->has('sales_personnel_access')) {
+            if ($request->get('sales_personnel_access')['team']) {
+                $query->where('salesPersonnel.team_id', $request->get('sales_personnel_access')['team']['id']);
+            } else if ($request->get('sales_personnel_access')['personnel']) {
+                $query->where('salesPersonnel.id', $request->get('sales_personnel_access')['personnel']['id']);
+            }
+        }
+
         if ($request->has('from')) {
             $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay();
             $query->where($request->get('time_type', 'created_at'), '>=', $from);

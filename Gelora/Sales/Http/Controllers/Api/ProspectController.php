@@ -20,14 +20,13 @@ class ProspectController extends Controller {
     public function index(Request $request) {
 
         $query = $this->prospect->newQuery();
-
-        if ($request->get('type') == 'all') {
-            
-        } else if ($request->get('type') == 'team') {
-            $userTeam = \Gelora\HumanResource\App\Team\TeamModel::where('leader.user.id', \ParsedJwt::getByKey('sub'))->first();
-            $query->where('salesPersonnel.team_id', $userTeam->id);
-        } else {
-            $query->where('salesPersonnel.user.id', \ParsedJwt::getByKey('sub'));
+        
+        if ($request->has('sales_personnel_access')) {
+            if ($request->get('sales_personnel_access')['team']) {
+                $query->where('salesPersonnel.team_id', $request->get('sales_personnel_access')['team']['id']);
+            } else if ($request->get('sales_personnel_access')['personnel']) {
+                $query->where('salesPersonnel.id', $request->get('sales_personnel_access')['personnel']['id']);
+            }
         }
 
         if ($request->has('status')) {

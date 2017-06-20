@@ -17,8 +17,7 @@ class OnCreate {
         
         $this->registrationBatch->assignCreator();
         
-        $this->registrationBatch->save();        
-        $this->registrationBatch->saveId();
+        $this->registrationBatch->save();   
         return $this->registrationBatch;
     }
 }

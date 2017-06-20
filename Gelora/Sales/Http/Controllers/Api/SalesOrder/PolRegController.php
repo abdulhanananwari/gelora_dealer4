@@ -27,7 +27,7 @@ class PolRegController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
     
-    public function batch($id, Request $request) {
+    public function addBatch($id, Request $request) {
         
         $salesOrder = $this->salesOrder->find($id);
 
@@ -39,6 +39,18 @@ class PolRegController extends SalesOrderController {
         $salesOrder->action()->polReg()->onAssignBatch($request->get('batch'));
 
         return $this->formatItem($salesOrder);
+    }
+    public function removeBatch($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+        
+        $validation = $salesOrder->validate()->polReg()->onRemoveBatch($request->get('batch'));
+        if ($validation !== true ) {
+            return $this->formatErrors($validation);
+        }
+        $salesOrder->action()->polReg()->onRemoveBatch($request->get('batch'));
+        return $this->formatItem($salesOrder);
+
     }
 
 }

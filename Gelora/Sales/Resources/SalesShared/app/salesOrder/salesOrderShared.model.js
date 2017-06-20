@@ -87,11 +87,15 @@ geloraSalesShared
             generateStrings: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/generate-strings/', salesOrder, { params: params })
             },
-            batch: function(id, batch, params) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/batch/', {batch: batch}, { params: params })
+            batch: {
+                store: function(id, batch, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/add-batch/', { batch: batch }, { params: params })
+                },
+                remove: function(id, batch, params) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/remove-batch/', { batch: batch }, { params: params })
+                }
             }
         }
-
         salesOrder.document = {
             spk: {
                 generate: function(id) {

@@ -13,7 +13,6 @@ class OnAssignBatch {
     }
     
     public function validate($batch) {
-        return true;
         
         $polReg = $this->salesOrder->subDocument()->polReg();
         $key = array_keys($batch)[0];

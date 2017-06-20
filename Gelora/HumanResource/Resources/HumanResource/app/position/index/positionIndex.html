@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Posisi Terdaftar</h4>
+
+		<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#positionModal">Buat Baru</a><br>
+
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nama</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="position in ctrl.positions">
+						<td>{{ position.name }}</td>
+						<td><a ui-sref="positionShow({id:position.id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="positionModal" tabindex="-1" role="dialog" aria-labelledby="positionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="positionModalLabel">Posisi</h4>
+      </div>
+      <div class="modal-body">
+      	<label>Posisi</label>
+      	<select ng-options="key as value for (key, value) in ctrl.availablePositions" ng-model="ctrl.newPosition.position"></select>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" ng-click="ctrl.store(ctrl.newPosition.position)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

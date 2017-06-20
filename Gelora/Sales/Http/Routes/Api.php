@@ -62,7 +62,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             Route::group(['prefix' => '{id}/pol-reg'], function() {
                 
                 Route::post('generate-strings', ['uses' => 'PolRegController@generateStrings']);
-                Route::post('batch', ['uses' => 'PolRegController@batch']);
+                Route::post('add-batch', ['uses' => 'PolRegController@addBatch']);
+                Route::post('remove-batch', ['uses' => 'PolRegController@removeBatch']);
                 
                 Route::group(['namespace' => 'PolReg'], function() {
                     Route::group(['prefix' => 'item'], function() {
@@ -86,6 +87,16 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
         });
     });
 
+    Route::group(['prefix' => 'prospect'], function() {
+        
+        Route::get('/', ['uses' => 'ProspectController@index']);
+        Route::get('{id}', ['uses' => 'ProspectController@get']);
+        Route::post('/', ['uses' => 'ProspectController@store']);
+        Route::post('{id}', ['uses' => 'ProspectController@update']);
+        Route::post('{id}/close', ['uses' => 'ProspectController@close']);
+        Route::post('{id}/respond', ['uses' => 'ProspectController@respond']);
+    });
+    
     Route::group(['prefix' => 'sales-order-extra'], function() {
         Route::post('/', ['uses' => 'SalesOrderExtraController@store']);
         Route::post('{id}', ['uses' => 'SalesOrderExtraController@update']);

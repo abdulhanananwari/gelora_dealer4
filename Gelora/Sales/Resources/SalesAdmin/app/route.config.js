@@ -98,8 +98,15 @@ geloraSalesAdmin
 		
 		.state('prospectIndex', {
 			url: '/prospect/index',
-  			templateUrl: 'app/prospect/index/prospectIndex.html',
+  			templateUrl: '/gelora/sales-shared/app/prospect/index/prospectIndex.html',
   			controller: 'ProspectIndexController as ctrl',
-  			pageTitle: 'Dealer | Sales Admin | Prospect'
+  			pageTitle: 'Dealer | Sales | Prospect Index'
 		})
+		.state('prospectShow', {
+			url: '/prospect/show/:id',
+  			templateUrl: '/gelora/sales-shared/app/prospect/show/prospectShow.html',
+  			controller: 'ProspectShowController as ctrl',
+  			pageTitle: 'Dealer | Sales | Prospect Show'
+		})
+
 	})

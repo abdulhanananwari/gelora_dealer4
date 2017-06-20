@@ -1,6 +1,6 @@
 geloraPolRegShared
     .directive('registrationBatches', function(
-        SalesOrderModel,
+        SalesOrderModel,LinkFactory,
         RegistrationBatchesFactory) {
 
         return {
@@ -15,11 +15,34 @@ geloraPolRegShared
                 scope.update = function(salesOrder, type) {
                     var data = {}
                     data[type] = salesOrder.polReg[type]
-                    SalesOrderModel.polReg.batch(salesOrder.id, data)
+                    SalesOrderModel.polReg.batch.store(salesOrder.id, data)
                         .then(function(res) {
                             scope.salesOrder = res.data.data
                             scope.innerSalesOrder = res.data.data
                         })
+                }
+                scope.remove = function(salesOrder, type){
+                    var data = {}
+                    data[type] = salesOrder.polReg[type]
+                    SalesOrderModel.polReg.batch.remove(salesOrder.id , data)
+                        .then(function(res) {
+                            scope.salesOrder = res.data.data
+                            scope.innerSalesOrder = res.data.data
+                        })
+                }
+                scope.redirect = {
+                    registrationMdBatch: function(salesOrder){
+                        window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp  + salesOrder.polReg.md_submission_batch_id)
+                    },
+                    agencySubmissionBatch: function(salesOrder){
+                        window.open(LinkFactory.dealer.polReg.agencySubmissionBatch.redirectApp  + salesOrder.polReg.agency_submission_batch_id)
+                    },
+                    agencyInvoice: function(salesOrder){
+                        window.open(LinkFactory.dealer.polReg.agencyInvoice.redirectApp  + salesOrder.polReg.agency_invoice_id)
+                    },
+                    leasingBpkbSubmissionBatch: function(salesOrder){
+                        window.open(LinkFactory.dealer.polReg.leasingBpkbSubmissionBatch.redirectApp  + salesOrder.polReg.leasing_bpkb_submission_batch_id)
+                    },
                 }
 
                 function loadBatch(polReg) {
@@ -50,7 +73,7 @@ geloraPolRegShared
                             break
                         case !_.isEmpty(polReg.agency_invoice_id) && _.isEmpty(polReg.leasing_bpbk_submission_batch_id):
 
-                            RegistrationBatchesFactory.agencyInvoice.index()
+                            RegistrationBatchesFactory.leasingBpkbSubmission.index()
                                 .then(function(res) {
                                     scope.leasingBpkbSubmissionBatches = res.data.data
                                 })

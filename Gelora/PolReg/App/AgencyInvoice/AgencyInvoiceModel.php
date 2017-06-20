@@ -23,7 +23,7 @@ class AgencyInvoiceModel extends Model {
     public function assign() {
         return new Managers\Assigner($this);
     }
-    
+
     // Relateds
 
     public function getSalesOrders() {
@@ -32,4 +32,5 @@ class AgencyInvoiceModel extends Model {
                         where('polReg.agency_invoice_id', new \MongoDB\BSON\ObjectID($this->id))
                         ->get();
     }
+
 }
