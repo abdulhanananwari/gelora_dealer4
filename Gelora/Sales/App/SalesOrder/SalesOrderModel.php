@@ -65,4 +65,16 @@ class SalesOrderModel extends Model {
 
         return \Gelora\PolReg\App\MdSubmissionBatch\MdSubmissionBatchModel::find($this->subDocument()->polReg()->md_submission_batch_id);
     }
+    public function getAgencySubmissionBatch() {
+
+        return \Gelora\PolReg\App\AgencySubmissionBatch\AgencySubmissionBatchModel::find($this->subDocument()->polReg()->agency_submission_batch_id);
+    }
+    public function getAgencyInvoice() {
+
+        return \Gelora\PolReg\App\AgencyInvoice\AgencyInvoiceModel::find($this->subDocument()->polReg()->agency_invoive_id);
+    }
+    public function getLeasingBpkbSubmissionBatch() {
+
+        return \Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel::find($this->subDocument()->polReg()->leasing_bpkb_submission_batch_id);
+    }    
 }

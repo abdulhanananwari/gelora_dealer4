@@ -18,10 +18,30 @@ class OnRemoveBatch {
 
         switch ($key) {
             case 'md_submission_batch_id':
-            $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
-            if ($mdSubmissionBatch->closed_at) {
-                return ['Tidak bisa merubah batch karena sudah ditutup'];
-            }
+                $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
+                    if ($mdSubmissionBatch->closed_at) {
+                        return ['Tidak bisa menghapus batch karena sudah ditutup'];
+                    }
+                break;
+            case 'agency_submission_batch_id':
+                $agencySubmissionBatch = $this->salesOrder->getAgencySubmissionBatch();
+                    if ($agencySubmissionBatch->closed_at) {
+                        return ['Tidak bisa menghapus batch karena sudah ditutup '];
+                    }
+                break;
+            case 'agency_invoice_id':
+                $agencyInvoice = $this->salesOrder->getAgencyInvoice();
+                    if ($agencyInvoice->closed_at) {
+                        return ['Tidak bisa menghapus batch karena sudah ditutup'];
+                    }
+                break;
+            case 'leasing_submission_batch_id':
+                $leasingSubmissionBatch = $this->salesOrder->getLeasingBpkbSubmissionBatch();
+                    if ($leasingSubmissionBatch->closed_at) {
+                        return ['Tidak bisa menghapus batch karena  sudah ditutup'];
+                    }
+                break;
+        default;
             break;
         }
         

@@ -21,8 +21,8 @@ class Udsls {
         $delivery = $salesOrder->subDocument()->delivery();
 
         $data = [];
-        $data['No Mesin'] = $unit->engine_number;
-        $data['No Rangka'] = $unit->chasis_number;
+        $data['No Mesin'] = $unit['engine_number'];
+        $data['No Rangka'] = $unit['chasis_number'];
         $data['Kode Leasing'] = ($salesOrder->payment_type == 'credit' ? $leasingOrder->leasing['code'] : "N");
         $data['Kode Kecamatan'] = $cddb->kecamatan_surat;
 
@@ -33,11 +33,11 @@ class Udsls {
             $data['DP Leasing'] = $leasingOrder->dp_po;
             $data['Tenor'] = $leasingOrder->tenor;
         }
-        if (!is_null($cddb->tanggal_penjualan)) {
-            $data['Tanggal Penjualan'] = $cddb->tanggal_penjualan;
-        } else {
-            $data['Tanggal Penjualan'] = $delivery->toCarbon('handover.created_at')->format('dmY');
-        }
+        // if (!is_null($cddb->tanggal_penjualan)) {
+        //     $data['Tanggal Penjualan'] = $cddb->tanggal_penjualan;
+        // } else {
+        //     $data['Tanggal Penjualan'] = $delivery->toCarbon('handover.created_at')->format('dmY');
+        // }
         $data['Unit Jual'] = 'S';
         $data['Kode Pos'] = $cddb->kode_pos_surat;
         $data['Nama Always Honda'] = $salesOrder['registration.name'];

@@ -35,13 +35,13 @@ geloraPolRegShared
                         window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp  + salesOrder.polReg.md_submission_batch_id)
                     },
                     agencySubmissionBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp  + salesOrder.polReg.agency_submission_batch_id)
+                        window.open(LinkFactory.dealer.polReg.agencySubmissionBatch.redirectApp  + salesOrder.polReg.agency_submission_batch_id)
                     },
                     leasingBpkbSubmissionBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp  + salesOrder.polReg.leasing_bpkb_submission_batch_id)
+                        window.open(LinkFactory.dealer.polReg.leasingBpkbSubmissionBatch.redirectApp  + salesOrder.polReg.leasing_bpkb_submission_batch_id)
                     },
-                    agencySubmissionBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp  + salesOrder.polReg.agency_invoice_id)
+                    agencyInvoice: function(salesOrder){
+                        window.open(LinkFactory.dealer.polReg.agencyInvoice.redirectApp  + salesOrder.polReg.agency_invoice_id)
                     },
                 }
 
