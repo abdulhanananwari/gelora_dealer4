@@ -1,8 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
         <h4>Daftar Prospek</h4>
-        <label>Type</label>
-        <select ng-options="type.code as type.name for type in ctrl.types.salespersonnel" ng-model="ctrl.filter.type"></select>
         <label>Progress</label>
         <select ng-options="key as name for (key, name) in ctrl.statuses" ng-model="ctrl.filter.status"></select>
         <button class="btn btn-primary btn-block" ng-click="ctrl.load(ctrl.filter)">Cari</button>
