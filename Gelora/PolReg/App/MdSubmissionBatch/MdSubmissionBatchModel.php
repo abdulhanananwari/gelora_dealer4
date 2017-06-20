@@ -6,7 +6,7 @@ use Solumax\PhpHelper\App\BaseModelMongo as Model;
 
 class MdSubmissionBatchModel extends Model {
 
-    protected $collection = 'registration_md_submission_batches';
+    protected $collection = 'md_submission_batches';
     protected $guarded = ['created_at', 'updated_at'];
     public $dates = ['closed_at', 'sent_at'];
 

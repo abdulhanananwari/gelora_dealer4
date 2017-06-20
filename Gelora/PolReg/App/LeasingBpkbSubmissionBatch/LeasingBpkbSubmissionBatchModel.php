@@ -8,7 +8,7 @@ class LeasingBpkbSubmissionBatchModel extends Model {
     
     protected $connection = 'mongodb';
     
-    protected $collection = 'registration_leasing_bpkb_submission_batches';
+    protected $collection = 'leasing_bpkb_submission_batches';
     
     protected $guarded = ['created_at', 'updated_at'];
     public $dates = ['closed_at','handover_at'];

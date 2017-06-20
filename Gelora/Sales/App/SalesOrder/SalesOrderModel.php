@@ -58,4 +58,11 @@ class SalesOrderModel extends Model {
     public function salesOrderExtras() {
         return $this->hasMany('\Gelora\Sales\App\SalesOrderExtra\SalesOrderExtraModel', 'sales_order_id');
     }
+
+    // Related
+
+    public function getMdSubmissionBatch() {
+
+        return \Gelora\PolReg\App\MdSubmissionBatch\MdSubmissionBatchModel::find($this->subDocument()->polReg()->md_submission_batch_id);
+    }
 }

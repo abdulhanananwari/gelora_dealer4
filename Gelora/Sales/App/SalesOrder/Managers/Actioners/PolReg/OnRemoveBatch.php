@@ -1,26 +1,26 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Validators\PolReg;
+namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\PolReg;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
+use MongoDB\BSON\ObjectID;
 
-class OnAssignBatch {
-
+class OnRemoveBatch {
+    
     protected $salesOrder;
-
+    
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
     
-    public function validate($batch) {
-        
+    public function action($batch) {
+
+      
         $polReg = $this->salesOrder->subDocument()->polReg();
+
         $key = array_keys($batch)[0];
-        
-        if (!empty($polReg->$key)) {
-            return [$key . ' sudah di set sebelumnya'];
-        }
-        
-        return true;
+        unset($polReg->$key);
+        $this->salesOrder->polReg = $polReg;
+        $this->salesOrder->save();
     }
 }
