@@ -37,11 +37,11 @@ geloraPolRegShared
                     agencySubmissionBatch: function(salesOrder){
                         window.open(LinkFactory.dealer.polReg.agencySubmissionBatch.redirectApp  + salesOrder.polReg.agency_submission_batch_id)
                     },
-                    leasingBpkbSubmissionBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.leasingBpkbSubmissionBatch.redirectApp  + salesOrder.polReg.leasing_bpkb_submission_batch_id)
-                    },
                     agencyInvoice: function(salesOrder){
                         window.open(LinkFactory.dealer.polReg.agencyInvoice.redirectApp  + salesOrder.polReg.agency_invoice_id)
+                    },
+                    leasingBpkbSubmissionBatch: function(salesOrder){
+                        window.open(LinkFactory.dealer.polReg.leasingBpkbSubmissionBatch.redirectApp  + salesOrder.polReg.leasing_bpkb_submission_batch_id)
                     },
                 }
 
@@ -73,7 +73,7 @@ geloraPolRegShared
                             break
                         case !_.isEmpty(polReg.agency_invoice_id) && _.isEmpty(polReg.leasing_bpbk_submission_batch_id):
 
-                            RegistrationBatchesFactory.agencyInvoice.index()
+                            RegistrationBatchesFactory.leasingBpkbSubmission.index()
                                 .then(function(res) {
                                     scope.leasingBpkbSubmissionBatches = res.data.data
                                 })
