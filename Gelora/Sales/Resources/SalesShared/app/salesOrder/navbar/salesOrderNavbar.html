@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right" ng-if="salesOrder.id">
                 <li><a ui-sref="salesOrderShow({id:salesOrder.id})">Data Pesanan</a></li>
                 <li><a ui-sref="salesOrderShowFinancial({id:salesOrder.id})">Keuangan</a></li>
-                <li ng-show="ctrl.salesOrder.payment_type=='credit'"><a ui-sref="salesOrderShowCredit({id:salesOrder.id})">Kredit</a></li>
+                <li ng-show="salesOrder.payment_type=='credit'"><a ui-sref="salesOrderShowCredit({id:salesOrder.id})">Kredit</a></li>
                 <li><a ui-sref="salesOrderShowExtra({id:salesOrder.id})">Tambahan</a></li>
                 <li><a ui-sref="salesOrderShowUnit({id:salesOrder.id})">Unit</a></li>
                 <li><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>

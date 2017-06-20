@@ -22,6 +22,8 @@ geloraSalesAdmin
         vm.salesConditions = { 'isi': 'On The Road', 'kosong': 'Off The Road' }
         vm.paymentTypes = { 'credit': 'Kredit', 'cash': 'Kas' }
 
+        $('.date').datepicker({dateFormat: "yy-mm-dd"});
+        
         vm.copyRegistrationFromCustomer = function() {
             vm.salesOrder.registration = angular.copy(vm.salesOrder.customer);
         }

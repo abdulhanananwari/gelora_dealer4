@@ -35,9 +35,10 @@ class OnValidate {
             return $attrVal;
         }
 
-        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasing_order_id)) {
+        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder)) {
             return ['Leasing order harus dipilih dulu untuk penjualan kredit'];
         }
+        
         if ($this->salesOrder->payment_type == 'credit') {
 
             $leasingOrderValidation = $this->checkIfPoIsValid();

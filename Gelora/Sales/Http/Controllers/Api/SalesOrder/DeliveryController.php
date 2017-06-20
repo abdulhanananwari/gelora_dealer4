@@ -77,7 +77,6 @@ class DeliveryController extends SalesOrderController {
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
-
         $salesOrder->action()->delivery()->onHandover();
 
         return $this->formatItem($salesOrder);

@@ -2,12 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group name="gelora_dealer">
-            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/Sales/App/SalesOrder/Managers/Assigners/OnCreateAndUpdate.php</file>
-        </group>
+<<<<<<< HEAD
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/PolReg/Http/Controllers/Api/AgencyInvoiceController.php</file>
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/PolReg/App/AgencyInvoice/Transformers/AgencyInvoiceTransformer.php</file>
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/PolReg/Http/Controllers/Api/AgencySubmissionBatchController.php</file>
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/PolReg/Http/Controllers/Api/LeasingBpkbSubmissionBatchController.php</file>
 =======
-        <group name="gelora_dealer"/>
->>>>>>> Pengerjaan cddb
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Solumax/PhpHelper/App/Mongo/SubDocument.php</file>
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/Sales/App/SalesOrder/Managers/Actioners/Cddb/Generators/Udsls.php</file>
+            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/Sales/App/SalesOrder/Managers/Actioners/Delivery/OnHandover.php</file>
+>>>>>>> Updated cddb data
+        </group>
     </open-files>
 </project-private>

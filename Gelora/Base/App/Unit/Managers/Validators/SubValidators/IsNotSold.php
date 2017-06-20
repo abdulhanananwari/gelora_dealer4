@@ -4,7 +4,7 @@ namespace Gelora\Base\App\Unit\Managers\Validators\SubValidators;
 
 use Gelora\Base\App\Unit\UnitModel;
 
-class NotSold {
+class IsNotSold {
     
     protected $unit;
     

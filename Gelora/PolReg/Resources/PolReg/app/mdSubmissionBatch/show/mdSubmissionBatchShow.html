@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Batch Faktur ke MD {{ ctrl.registrationBatch.id || 'Baru' }}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div style="width: 100%;" class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td class="col-sm-6">Ditutup</td>
+                                <td>{{ ctrl.registrationBatch.closed_at }}</td>
+                            </tr>
+                            <tr>
+                                <td>Dikirimkan Tanggal</td>
+                                <td>{{ ctrl.registrationBatch.sent_at }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <button ng-if="!ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
+                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
+                <div ng-if="ctrl.registrationBatch.closed_at">
+                    <label>Email</label>
+                    <input type="text" ng-model="ctrl.email">
+                    <button class="btn btn-block btn-primary" ng-click="ctrl.sendEmail(ctrl.registrationBatch, ctrl.email)">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Salesman</th>
+                        <th>Type Motor</th>
+                        <th>Warna</th>
+                        <th>No Rangka</th>
+                        <th>No Mesin</th>
+                        <th>Serah Terima</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="salesOrder in ctrl.registrationBatch.salesOrders">
+                    <tr class="info">
+                        <td>{{salesOrder.customer.name}}</td>
+                        <td>{{salesOrder.customer.address}}</td>
+                        <td>{{salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{salesOrder.unit.type_name}}</td>
+                        <td>{{salesOrder.unit.color_name}}</td>
+                        <td>{{salesOrder.unit.chasis_number}}</td>
+                        <td>{{salesOrder.unit.engine_number}}</td>
+                        <td>{{salesOrder.delivery.handover.created_at}}</td>
+                        <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="20">
+                            <p>{{ salesOrder.polReg.strings.cddb.string }}</p>
+                            <p>{{ salesOrder.polReg.strings.udstk.string }}</p>
+                            <p>{{ salesOrder.polReg.strings.udsls.string }}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

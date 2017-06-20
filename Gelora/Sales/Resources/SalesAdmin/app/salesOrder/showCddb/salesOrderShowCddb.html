@@ -129,16 +129,6 @@
         </div>
         <label>Tanggal Penjualan (override)</label>
         <input type="text" class="sales-date" ng-model="ctrl.salesOrder.cddb.tanggal_penjualan" onfocus="this.blur()">
-        <button class="btn btn-block btn-success" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
-        <hr>
-        <div ng-show="ctrl.salesOrder.cddb.string">
-            <label>CDDB</label>
-            <input type="text" ng-model="ctrl.salesOrder.cddb.string.cddb">
-            <label>UDSTK</label>
-            <input type="text" ng-model="ctrl.salesOrder.cddb.string.udstk">
-            <label>UDSLS</label>
-            <input type="text" ng-model="ctrl.salesOrder.cddb.string.udsls">
-        </div>
-        <button class="btn btn-block btn-success" ng-click="ctrl.generateStrings(ctrl.salesOrder)">Generate Text Untuk Email CDDB</button>
+        <button class="btn btn-block btn-success" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button><br>
     </div>
 </div>

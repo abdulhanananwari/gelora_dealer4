@@ -242,8 +242,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         
-
-	    'ParsedJwt' => Wala\Jwt\Facade\ParsedJwtFacade::class,
+        'ParsedJwt' => Wala\Jwt\Facade\ParsedJwtFacade::class,
         'Setting' => Solumax\Setting\App\Setting\Facades\SettingFacade::class,
         'SolTransaction' => \Solumax\TransactionClient\Facade\SolTransactionFacade::class,
         'SolLog' => Solumax\Logger\App\Log\Facade\LogFacade::class,

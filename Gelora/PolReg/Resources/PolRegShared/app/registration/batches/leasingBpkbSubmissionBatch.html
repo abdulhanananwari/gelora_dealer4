@@ -1,23 +1,7 @@
-<tr style="background-color: #f39c12;">
-    <td>Pengiriman BPKB Ke Leasing</td>
+<tr style="background-color: #d35400;">
+    <td>Batch BPKB Ke Leasing</td>
     <td>
-        <!-- Jika batch belum dipilih -->
-        <div ng-if="!registration.registrationLeasingBpkbSubmissionBatch  && !registration.pending_leasing_bpkb_submission_batch" class="row">
-            <div class="col-sm-9">
-                <select ng-model="registrationLeasingBpkbSubmissionBatch" ng-change="registration.registration_leasing_bpkb_submission_batch_id=registrationLeasingBpkbSubmissionBatch.id" ng-options="registrationBatch as registrationBatch.created_at for registrationBatch in registrationLeasingBpkbSubmissionBatches"></select>
-            </div>
-            <div class="col-sm-3">
-                <button ng-if="registrationLeasingBpkbSubmissionBatch" class="btn btn-block btn-info" ng-click="action.leasingBpkbSubmissionBatch.select(registration)">Pilih</button>
-            </div>
-        </div>
-        <!-- Batch sudah dipilih -->
-        <div ng-if="registration.registrationLeasingBpkbSubmissionBatch" class="row">
-            <div class="col-sm-6">
-                <a href="{{'/pol-reg/redirect-app/registration-leasing-bpkb-submission-batch/' + registration.registrationLeasingBpkbSubmissionBatch.id}}" class="btn btn-block btn-success">Buka</a>
-            </div>
-            <div class="col-sm-6">
-                <button class="btn btn-block btn-primary" ng-click="action.leasingBpkbSubmissionBatch.cancel(registration)">Batalkan</a>
-            </div>
-        </div>
+        <select ng-model="salesOrder.polReg.leasing_bpkb_submission_batch_id" ng-change="update(salesOrder, 'leasing_bpkb_submission_batch_id')" ng-options="registrationBatch.id as registrationBatch.created_at for registrationBatch in leasingBpkbSubmissionBatches"></select>
+        <button ng-if="salesOrder.polReg.leasing_bpkb_submission_batch_id" class="btn btn-block btn-info" ng-click="redirect.leasingBpkbSubmissionBatch(salesOrder)">Pilih</button>
     </td>
 </tr>

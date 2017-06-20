@@ -61,6 +61,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
         $transformed['leasingOrder'] = Partials\LeasingOrder::transform($salesOrder);
         $transformed['cddb'] = Partials\Cddb::transform($salesOrder);
         $transformed['polReg'] = Partials\PolReg::transform($salesOrder);
+        $transformed['financialBalance'] = Partials\FinancialBalance::transform($salesOrder);
         
         return array_merge(
                 $transformed,

@@ -37,7 +37,7 @@ class OnGenerate {
 
         $_unit = new SubDocument();
         $_unit->fill($unit->toArray());
-        $this->salesOrder->unit = $_unit;
+        $this->salesOrder->unit_id = $_unit->id;
     }
 
 }
