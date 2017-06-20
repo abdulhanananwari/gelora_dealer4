@@ -1,7 +1,7 @@
 <?php
 
 $middleware = ['wala.jwt.autoParse.parser', 'wala.jwt.autoParse.validation',
-    'auth.db.overwrite'];
+    'auth.db.overwrite', 'salesPersonnelAccess'];
 
 Route::group(['prefix' => 'api-sales-personnel', 'namespace' => 'Api', 'middleware' => $middleware], function() {
 

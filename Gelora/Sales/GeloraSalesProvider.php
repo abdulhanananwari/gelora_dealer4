@@ -3,10 +3,11 @@
 namespace Gelora\Sales;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\Router;
 
 class GeloraSalesProvider extends ServiceProvider {
 
-    public function boot() {
+    public function boot(Router $router) {
 
         require __DIR__ . '/Http/routes.php';
 
@@ -15,6 +16,8 @@ class GeloraSalesProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/Database/MigrationsMongo/' => database_path('migrations-mongo/gelora/sales'),
                 ], 'migrations');
+        
+        $router->aliasMiddleware('salesPersonnelAccess', Http\Middlewares\SalesPersonnelAccess::class);
     }
 
     public function register() {
