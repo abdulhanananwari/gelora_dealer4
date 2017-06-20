@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Personnel Terdaftar</h4>
+        <a class="btn btn-block btn-primary" ui-sref="personnelShow">Buat Baru</a>
+        <br>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Posisi</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="personnel in ctrl.personnels">
+                        <td>{{ personnel.entity.name }}</td>
+                        <td>{{ personnel.position }}</td>
+                        <td><a ui-sref="personnelShow({id:personnel.id})">Buka</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

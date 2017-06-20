@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h5>Personnel</h5>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <entity-finder-modal ng-if="!ctrl.personnel.id" selected-entity="ctrl.personnel.entity" on-entity-selected="ctrl.personnel.entity_id=ctrl.personnel.entity.id"></entity-finder-modal>
+                <br>
+                <label>Nama</label>
+                <input type="text" ng-model="ctrl.personnel.entity.name" readonly>
+            </div>
+            <div class="col-sm-6">
+                <account-finder-modal ng-if="!ctrl.personnel.id || !ctrl.personnel.user" selected-user="ctrl.personnel.user" on-user-selected="ctrl.personnel.user_id=ctrl.personnel.user.id"></account-finder-modal>
+                <br>
+                <label>User</label>
+                <input type="text" ng-model="ctrl.personnel.user.email" readonly>
+            </div>
+        </div>
+        <label>Posisi</label>
+        <select ng-options="key as value for (key, value) in ctrl.positions" ng-model="ctrl.personnel.position"></select>
+        <label>Team</label>
+        <select ng-options="team.id as team.name for team in ctrl.teams" ng-model="ctrl.personnel.team_id"></select>
+        <!-- <button class="btn btn-xs" ng-click="ctrl.personnel.position=null;">Hapus Posisi</button> -->
+        <button class="btn btn-xs" ng-click="ctrl.personnel.team_id=null;">Hapus Team</button>
+        <br>
+        <br>
+        <label>Kode Sales Person</label>
+        <input type="text" ng-model="ctrl.personnel.registration_code">
+        <button class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.personnel)">Simpan</button><br>
+
+        <div class="well">
+        	<p>Pendaftaran user baru</p>
+        	<input type="email" placeholder="email" ng-model="newUserEmail">
+        	<button class="btn btn-block btn-warning" ng-click="ctrl.registerNewUser(newUserEmail)">Daftarkan</button>
+        </div>
+    </div>
+</div>

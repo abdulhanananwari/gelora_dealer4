@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Team {{ ctrl.team.name || 'Baru' }}</h4>
+		<hr>
+
+		<label>Nama</label>
+		<input type="text" ng-model="ctrl.team.name">
+		<label>Pilih Leader</label>
+		<select ng-options="personnel as personnel.entity.name for personnel in ctrl.personnels track by personnel.id" ng-model="ctrl.team.leader"></select>
+		<hr>
+		
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nama</th>
+						<th>Posisi</th>
+						<th>Buka</th>
+						<!-- <th>Remove</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="personnel in ctrl.personnels">
+						<td>{{ personnel.entity.name }}</td>
+						<td>{{ personnel.position_text }}</td>
+						<td><a ui-sref="personnelShow({id:personnel.id})">Buka</a></td></td>
+						<!-- <td><button class="btn btn-sm" ng-click="ctrl.removePersonnel(personnel)" >Hapus</button></td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<button class="btn btn-block btn-success" ng-click="ctrl.store(ctrl.team)">Simpan</button>
+	</div>
+</div>

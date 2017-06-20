@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-sm-12">
+
+		<h4>Team Terdaftar</h4>
+
+		<a class="btn btn-block btn-primary" ui-sref="teamShow">Buat Baru</a><br>
+
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nama</th>
+						<th>Buka</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="team in ctrl.teams">
+						<td>{{ team.name }}</td>
+						<td><a ui-sref="teamShow({id:team.id})">Buka</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

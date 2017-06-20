@@ -193,6 +193,7 @@ return [
         \Gelora\Sales\GeloraSalesProvider::class,
         \Gelora\Cdb\GeloraCdbProvider::class,
         \Gelora\PolReg\GeloraPolRegProvider::class,
+        \Gelora\HumanResource\GeloraHumanResourceProvider::class,
     ],
 
     /*
