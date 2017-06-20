@@ -19,7 +19,7 @@ geloraPolReg
 
             } else {
 
-                MdSubmissionBatchModel.store(registrationBatch)
+                MdSubmissionBatchModel.store(registrationBatch) 
                     .then(function(res) {
                         alert('Berhasil disimpan')
                         $state.go('mdSubmissionBatchShow', { id: res.data.data.id })
@@ -42,7 +42,6 @@ geloraPolReg
             MdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email })
                 .then(function(res) {
                     assignData(res)
-
                 })
         }
 
@@ -59,9 +58,9 @@ geloraPolReg
             vm.registrationBatch = res.data.data
 
             if (vm.registrationBatch.salesOrders) {
-                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data    
+                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
             }
-            
+
             return vm.registrationBatch
         }
     })

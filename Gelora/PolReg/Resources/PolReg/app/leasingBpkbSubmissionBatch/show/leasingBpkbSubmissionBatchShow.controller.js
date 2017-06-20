@@ -32,8 +32,8 @@ geloraPolReg
 
             LeasingBpkbSubmissionBatchModel.close(registrationBatch.id)
                 .then(function(res) {
-                    
-                   assignData(res)
+
+                    assignData(res)
                 })
 
         }
@@ -43,7 +43,7 @@ geloraPolReg
             LeasingBpkbSubmissionBatchModel.handover(registrationBatch.id)
                 .then(function(res) {
 
-                   assignData(res)
+                    assignData(res)
                 })
         }
 
@@ -55,8 +55,7 @@ geloraPolReg
 
             LeasingBpkbSubmissionBatchModel.get($state.params.id)
                 .then(function(res) {
-
-                  assignData(res)
+                    assignData(res)
                 })
         }
 
@@ -66,8 +65,8 @@ geloraPolReg
             vm.registrationBatch = res.data.data
 
             if (vm.registrationBatch.salesOrders) {
-                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data    
-            } 
+                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
+            }
 
             return vm.registrationBatch
         }

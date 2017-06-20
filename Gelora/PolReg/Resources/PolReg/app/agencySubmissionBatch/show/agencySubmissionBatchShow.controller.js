@@ -14,7 +14,6 @@ geloraPolReg
                 AgencySubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
                         assignData(res)
-
                         alert('Batch Berhasil Diupdate')
                     })
 
@@ -45,7 +44,7 @@ geloraPolReg
         vm.handover = function(registrationBatch) {
             AgencySubmissionBatchModel.handover(registrationBatch.id)
                 .then(function(res) {
-                   assignData(res)
+                    assignData(res)
                 })
         }
 
@@ -53,9 +52,9 @@ geloraPolReg
 
             AgencySubmissionBatchModel.get($state.params.id)
                 .then(function(res) {
-                    
-                 assignData(res)
-            })
+
+                    assignData(res)
+                })
         }
 
 
@@ -64,9 +63,9 @@ geloraPolReg
             vm.registrationBatch = res.data.data
 
             if (vm.registrationBatch.salesOrders) {
-                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data    
+                vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
             }
-            
+
             return vm.registrationBatch
         }
 

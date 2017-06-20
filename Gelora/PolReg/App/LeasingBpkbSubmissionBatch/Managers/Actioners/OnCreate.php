@@ -15,8 +15,8 @@ class OnCreate {
     public function action() {
 
         $this->registrationBatch->assignEntityData('creator');
-        
         $this->registrationBatch->save();
+        
         return $this->registrationBatch;
     }
 

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                 <file-manager-upload ng-if="ctrl.registrationBatch.id" displayed-input='{{ ctrl.fileManager.leasingBpkb.displayedInput }}' additional-data='{{ ctrl.fileManager.leasingBpkb.additionalData }}' validations='{{ ctrl.fileManager.leasingBpkb.validations }}' uploaded-file="uploadedLeasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedLeasingBpkb.uuid;ctrl.store(ctrl.registrationBatch);">
+                <file-manager-upload ng-if="ctrl.registrationBatch.id" displayed-input='{{ ctrl.fileManager.leasingBpkb.displayedInput }}' additional-data='{{ ctrl.fileManager.leasingBpkb.additionalData }}' validations='{{ ctrl.fileManager.leasingBpkb.validations }}' uploaded-file="uploadedLeasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedLeasingBpkb.uuid;ctrl.store(ctrl.registrationBatch);">
                 </file-manager-upload>
                 <file-manager-show file-uuid="{{ ctrl.registrationBatch.file_uuid }}" display-type="img"></file-manager-show>
             </div>
