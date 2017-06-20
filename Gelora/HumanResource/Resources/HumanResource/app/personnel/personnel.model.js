@@ -21,6 +21,10 @@ geloraHumanResource
 			return $http.post(LinkFactory.dealer.humanResource.personnel.base + id, personnel)
 		}
 
+		personnelModel.delete = function(id, personnel) {
+			return $http.delete(LinkFactory.dealer.humanResource.personnel.base + id, personnel)
+		}
+
 		personnelModel.registerNewUser = function(email) {
 			return $http.post(LinkFactory.dealer.humanResource.personnel.base + 'register-new-user', {email: email})
 		}

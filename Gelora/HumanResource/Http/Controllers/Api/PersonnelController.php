@@ -94,6 +94,13 @@ class PersonnelController extends Controller {
         return $this->formatItem($personnel);
     }
     
+    public function delete($id) {
+        
+        $personnel = $this->personnel->find($id);
+        $personnel->delete();
+        return $this->formatData([true]);
+    }
+    
     public function registerNewUser(Request $request) {
         
         $user = new \Solumax\AuthClient\Data\User();
