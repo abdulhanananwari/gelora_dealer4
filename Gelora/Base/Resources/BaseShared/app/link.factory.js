@@ -75,8 +75,7 @@ geloraBaseShared
                     purchase: apps.dealer.purchase + 'purchase/'
                 },
                 inventoryManagement: {
-                    movementOrderHeader: apps.dealer.inventoryManagement + 'movement-order-header/',
-                    movementOrderDetail: apps.dealer.inventoryManagement + 'movement-order-detail/',
+                    movementOrder: apps.dealer.inventoryManagement + 'movement-order/',
                 },
                 creditSales: {
                     leasing: {
