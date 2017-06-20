@@ -15,20 +15,20 @@ class OnGenerate {
 
     public function action($unit) {
 
-        $this->processDelivery();
-        $this->processUnit($unit);
-
+        $this->processDelivery($unit);
         $this->salesOrder->action()->onUpdate();
     }
 
-    protected function processDelivery() {
+    protected function processDelivery($unit) {
 
         $delivery = new SubDocument();
 
         $delivery->generated_at = \Carbon\Carbon::now('UTC')->timestamp;
         $delivery->generator = $this->salesOrder->assignEntityData();
+        $delivery->unit = $this->processUnit($unit);
 
         $this->salesOrder->delivery = $delivery;
+        $this->salesOrder->unit_id = $delivery->unit->id;
     }
 
     protected function processUnit($unit) {
@@ -37,7 +37,8 @@ class OnGenerate {
 
         $_unit = new SubDocument();
         $_unit->fill($unit->toArray());
-        $this->salesOrder->unit_id = $_unit->id;
+
+        return $_unit;
     }
 
 }
