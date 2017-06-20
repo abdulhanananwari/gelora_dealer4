@@ -3,7 +3,7 @@ var geloraSalesPersonnel = angular
 		'ui.router', 'angular-jwt',
 		'Solumax.Loading', 'Solumax.ErrorInterceptor', 'Solumax.JwtManager',
 		'Solumax.TenantDatabaseConnection', 'Solumax.PageTitle', 'Solumax.Calculator',
-		'Solumax.EntityFinder', 'Solumax.Pagination',
+		'Solumax.Entity', 'Solumax.Pagination',
 		'Solumax.Setting', 'Solumax.FileManager',
 		'Gelora.BaseShared', 'Gelora.SalesShared', 'Gelora.HumanResourceShared',
 		'Gelora.Vehicle.Shared'
