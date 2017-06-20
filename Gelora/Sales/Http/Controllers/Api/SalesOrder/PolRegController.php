@@ -40,5 +40,17 @@ class PolRegController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    public function remove($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+        
+        $validation = $salesOrder->validate()->polReg()->onRemoveBatch($request->get('batch'));
+        if ($validation !== true ) {
+            return $this->formatErrors($validation);
+        }
+        $salesOrder->action()->polReg()->onRemoveBatch($request->get('batch'));
+        return $this->formatItem($salesOrder);
+
+    }
 
 }

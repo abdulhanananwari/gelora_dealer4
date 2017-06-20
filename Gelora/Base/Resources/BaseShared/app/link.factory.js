@@ -131,17 +131,21 @@ geloraBaseShared
 				polReg: {
 					mdSubmissionBatch: {
 						base: apps.dealer.polReg + 'api/md-submission-batch/',
+						redirectApp: apps.dealer.polReg + 'redirect-app/registration-md-submission-batch/',
 					},
 					agencySubmissionBatch: {
 						base: apps.dealer.polReg + 'api/agency-submission-batch/',
 						views: apps.dealer.polReg + 'views/agency-submission-batch/',
+						redirectApp: apps.dealer.polReg + 'redirect-app/registration-agency-submission-batch/',
 					},
 					agencyInvoice: {
 						base: apps.dealer.polReg + 'api/agency-invoice/',
+						redirectApp: apps.dealer.polReg + 'redirect-app/registration-agency-invoice/',
 					},
 					leasingBpkbSubmissionBatch: {
 						base: apps.dealer.polReg + 'api/leasing-bpkb-submission-batch/',
 						views: apps.dealer.polReg + 'views/leasing-bpkb-submission-batch/',
+						redirectApp: apps.dealer.polReg + 'redirect-app/registration-leasing-bpkb-submission-batch/',
 					}
 				},
 				views: {
