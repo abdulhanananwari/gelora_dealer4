@@ -32,9 +32,8 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <file-manager-upload ng-if="ctrl.registrationBatch.id" displayed-input='{{ ctrl.fileManager.leasingBpkb.displayedInput }}' additional-data='{{ ctrl.fileManager.leasingBpkb.additionalData }}' validations='{{ ctrl.fileManager.leasingBpkb.validations }}' uploaded-file="uploadedLeasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedLeasingBpkb.uuid;ctrl.store(ctrl.registrationBatch);">
-                </file-manager-upload>
-                <file-manager-show file-uuid="{{ ctrl.registrationBatch.file_uuid }}" display-type="img"></file-manager-show>
+                <file-manager-upload path="leasing-bpkb" subpath="leasingBpkb" fileable-type="LeasingBpkb" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedLeasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedLeasingBpkb.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
+                <file-manager-show display-type="img" file-uuid="{{ctrl.registrationBatch.file_uuid}}"></file-manager-show>
             </div>
             <div class="col-sm-3">
                 <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
