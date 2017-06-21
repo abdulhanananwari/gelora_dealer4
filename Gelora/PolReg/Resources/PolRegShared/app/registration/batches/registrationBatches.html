@@ -10,6 +10,6 @@
         <tbody ng-include="'/gelora/pol-reg-shared/app/registration/batches/mdSubmissionBatch.html'"></tbody>
         <tbody ng-include="'/gelora/pol-reg-shared/app/registration/batches/agencySubmissionBatch.html'"></tbody>
         <tbody ng-include="'/gelora/pol-reg-shared/app/registration/batches/agencyInvoice.html'"></tbody>
-        <tbody ng-include="'/gelora/pol-reg-shared/app/registration/batches/leasingBpkbSubmissionBatch.html'"></tbody>
+        <tbody ng-if="salesOrder.payment_type=='credit'" ng-include="'/gelora/pol-reg-shared/app/registration/batches/leasingBpkbSubmissionBatch.html'"></tbody>
     </table>
 </div>
