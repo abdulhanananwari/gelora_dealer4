@@ -19,6 +19,8 @@ class OnRespond {
 
         if ($this->prospect->create_sales_order_response) {
             $this->generateSalesOrder();
+        } else {
+            $this->prospect->closed_at = null;
         }
 
         $this->prospect->save();
