@@ -3,7 +3,6 @@
 namespace Gelora\PolReg\App\LeasingBpkbSubmissionBatch\Managers\Actioners;
 
 use Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel;
-use Solumax\PhpHelper\App\Mongo\SubDocument;
 
 class OnClose {
 
