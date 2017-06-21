@@ -5,7 +5,6 @@ namespace Gelora\Sales\Http\Controllers\Report;
 use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
 use Illuminate\Http\Request;
 use MongoDB\BSON\UTCDateTime;
-use MongoDB\BSON\Regex;
 use Solumax\PhpHelper\Http\ControllerExtensions\CsvParseAndCreate;
 
 class SalesOrderController extends Controller {
@@ -24,64 +23,20 @@ class SalesOrderController extends Controller {
     public function index(Request $request) {
 
         $query = [
-                [
-                '$lookup' => [
-                    'from' => 'leasing_orders',
-                    'localField' => 'leasing_order_id',
-                    'foreignField' => 'id',
-                    'as' => 'leasing_order'
-                ]
-            ],
-                [
-                '$unwind' => [
-                    'path' => '$leasing_order', 'preserveNullAndEmptyArrays' => true
-                ]
-            ],
-                [
-                '$lookup' => [
-                    'from' => 'deliveries',
-                    'localField' => 'delivery_id',
-                    'foreignField' => 'id',
-                    'as' => 'delivery'
-                ]
-            ],
-                [
-                '$unwind' => [
-                    'path' => '$delivery', 'preserveNullAndEmptyArrays' => true
-                ]
-            ],
-            [
-                '$lookup' => [
-                    'from' => 'units',
-                    'localField' => 'delivery.unit_id',
-                    'foreignField' => 'id',
-                    'as' => 'unit'
-                ]
-            ],
-                [
-                '$unwind' => [
-                    'path' => '$unit', 'preserveNullAndEmptyArrays' => true
-                ]
-            ],
-                [
-                '$lookup' => [
-                    'from' => 'registrations',
-                    'localField' => 'registration_id',
-                    'foreignField' => 'id',
-                    'as' => 'usedRegistration'
-                ]
-            ],
-                [
-                '$unwind' => [
-                    'path' => '$usedRegistration', 'preserveNullAndEmptyArrays' => true
-                ]
-            ],
-                
+                    [
+                        '$lookup' => [
+                            'from' => 'units',
+                            'localField' => 'unit_id',
+                            'foreignField' => 'id',
+                            'as' => 'unit'
+                        ]
+                    ],
+                    ['$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
         ];
         if ($request->has('delivery_from')) {
 
             $deliveryFrom = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('delivery_from'))->startOfDay()->getTimestamp() * 1000);
-            $subquery = ['$match' => ['delivery.handover_at' => ['$gte' => $deliveryFrom]]];
+            $subquery = ['$match' => ['delivery.handover.created_at' => ['$gte' => $deliveryFrom]]];
             $query[] = $subquery;
         }
 
@@ -90,7 +45,7 @@ class SalesOrderController extends Controller {
 
             $deliveryUntil = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('delivery_until'))->endOfDay()->getTimestamp() * 1000);
 
-            $subquery = ['$match' => ['delivery.handover_at' => ['$lte' => $deliveryUntil]]];
+            $subquery = ['$match' => ['delivery.handover.created_at' => ['$lte' => $deliveryUntil]]];
             $query[] = $subquery;
         }
 
@@ -121,12 +76,12 @@ class SalesOrderController extends Controller {
         }
 
         if ($request->has('main_leasing_id')) {
-            $subquery = ['$match' => ['leasing_order.mainLeasing.id' => (int) $request->get('main_leasing_id')]];
+            $subquery = ['$match' => ['leasingOrder.mainLeasing.id' => (int) $request->get('main_leasing_id')]];
             $query[] = $subquery;
         }
 
         if ($request->has('sub_leasing_id')) {
-            $subquery = ['$match' => ['leasing_order.subLeasing.id' => (int) $request->get('sub_leasing_id')]];
+            $subquery = ['$match' => ['leasingOrder.subLeasing.id' => (int) $request->get('sub_leasing_id')]];
             $query[] = $subquery;
         }
 
@@ -150,12 +105,10 @@ class SalesOrderController extends Controller {
             );
         });
 
-        // return response()->json($salesOrders);
-
         if (count($salesOrders) == 0) {
             return 'Tidak ada data penjualan untuk kriteria diatas';
         }
-        //return response()->json($salesOrders);
+        // return response()->json($salesOrders);
 
         return $this->createCsv($this->transformer->transformCollection($salesOrders));
     }

@@ -23,7 +23,7 @@ class SalesOrderReportTransformer {
             'id' => $salesOrder->_id,
             '_id' => $salesOrder->_id,
             
-            'Tanggal SJ' => $salesOrder['delivery']['handover_at'],
+            'Tanggal SJ' => $salesOrder['delivery']['handover']['created_at'],
             'Nomor Rangka' => $salesOrder['unit']['chasis_number'],
             'Nomor Mesin' => $salesOrder['unit']['engine_number'],
             
@@ -51,14 +51,14 @@ class SalesOrderReportTransformer {
 
             'Tgl DO Motor' => $salesOrder['unit']['sj_date'],
             'Jenis Penjualan' => $salesOrder->payment_type,
-            'Nomor Surat Jalan' => $salesOrder['unit']['sj_number'],
+            'Nomor Surat Jalan' => $salesOrder->unit->sj_number,
             'Harga OTR' => $salesOrder->on_the_road,
             'Kondisi Jual' => $salesOrder->sales_condition,
             
-            'Notice Pajak' => $salesOrder['usedRegistration']['costs']['Notice Pajak']['amount'],
+            //'Notice Pajak' => $salesOrder['usedRegistration']['costs']['Notice Pajak']['amount'],
             
-            'Sales' => $salesOrder->salesPersonnel['entity']['name'],
-            'ID Sales' => $salesOrder->salesPersonnel['entity']['id'],
+            // 'Sales' => $salesOrder->salesPersonnel['entity']['name'],
+            // 'ID Sales' => $salesOrder->salesPersonnel['entity']['id'],
             
             'closed_at' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : '',
             'closer_name' => $salesOrder->closer['name'],
