@@ -7,6 +7,8 @@ $middlewares = ['wala.jwt.request.parser', 'wala.jwt.request.validation',
  	
  		Route::group(['prefix' => 'sales-order'], function() {
  			Route::get('delivery/print/{id}',['uses' => 'SalesOrderController@generateDeliveryNote']);
+ 			Route::get('pol-reg/generate-receipt-costs/{id}', ['uses' => 'SalesOrderController@generateRecepitCosts']);
+ 			Route::get('pol-reg/generate-receipt-item-handover/{id}', ['uses' => 'SalesOrderController@generateReceiptItemHandover']);
  		});
  });
 

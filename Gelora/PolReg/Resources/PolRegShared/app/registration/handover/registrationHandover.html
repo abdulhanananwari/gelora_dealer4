@@ -15,7 +15,7 @@
                         <td ng-include="'incoming.html'"></td>
                         <td>
                             <p ng-if="!item.incoming">{{ item.name }} belum diterima dealer</p>
-                            <div ng-if="item.incoming" ng-include="'outgoing.html'"></div>
+                            <div ng-if="item.incoming || item.outgoing" ng-include="'outgoing.html'"></div>
                         </td>
                     </tr>
                 </tbody>
