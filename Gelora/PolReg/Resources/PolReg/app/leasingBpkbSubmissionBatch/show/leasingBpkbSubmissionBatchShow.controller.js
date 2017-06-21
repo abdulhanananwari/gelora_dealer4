@@ -70,21 +70,4 @@ geloraPolReg
 
             return vm.registrationBatch
         }
-
-        vm.fileManager = {
-            leasingBpkb: {
-                displayedInput: JSON.stringify({
-                    file: { label: "Bukti Tanda Terima BPKB ke Leasing", show: true },
-                }),
-                additionalData: JSON.stringify({
-                    image: { resize: { height: 1300, width: 1300 } },
-                    path: 'registration-leasing-bpkb',
-                    subpath: $state.params.id,
-                    fileable_type: 'RegistrationLeasingBpkb',
-                    fileable_id: $state.params.id,
-                    name: 'Leasing Bpkb'
-                }),
-            }
-        }
-
     })
