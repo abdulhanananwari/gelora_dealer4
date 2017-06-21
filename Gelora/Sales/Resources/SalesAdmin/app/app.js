@@ -3,7 +3,9 @@ var geloraSalesAdmin = angular
         'ui.router', 'angular-jwt',
         'Solumax.Loading', 'Solumax.ErrorInterceptor', 'Solumax.JwtManager', 'Solumax.Loading',
         'Solumax.TenantDatabaseConnection', 'Solumax.PageTitle', 'Solumax.Calculator', 'Solumax.Pagination',
-        'Solumax.Setting', 'Solumax.FileManager', 'Gelora.CreditSalesShared', 'Solumax.TransactionPlugins',
+        'Solumax.Messenger',
+        'Solumax.Setting', 'Solumax.FileManager', 'Solumax.TransactionPlugins',
+        'Gelora.CreditSalesShared',
         'Gelora.BaseShared', 'Gelora.SalesShared', 'Gelora.PolRegShared','Gelora.HumanResourceShared',
         'Gelora.Vehicle.Shared', 'Solumax.Entity' 
     ])
