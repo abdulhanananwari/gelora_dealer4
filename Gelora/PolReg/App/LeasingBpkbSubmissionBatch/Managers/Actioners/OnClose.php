@@ -13,14 +13,13 @@ class OnClose {
     }
 
     public function action() {
-        
         $salesOrders = $this->registrationBatch->getSalesOrders();
-
         foreach ($salesOrders as $salesOrder) {
-           
             $this->assignLeasingBpkbHandover($salesOrder);
         }
+
         \DB::transaction(function() use ($salesOrders) {
+
             foreach ($salesOrders as $salesOrder) {
                 $salesOrder->save();
             }
@@ -34,16 +33,21 @@ class OnClose {
     }
     protected function assignLeasingBpkbHandover($salesOrder) {
         
-        $customerHandover = $salesOrder->polReg;
-       
-        $customerHandover['customer_handovers']['BPKB'] = [
-            'username' => \ParsedJwt::getByKey('name'),
-            'receiver_name' => $this->registrationBatch->receiver_name,
-            'leasing_bpkb_submission_id' => $this->registrationBatch->id,
-            'timestamp' => \Carbon\Carbon::now()->timestamp
-        ];
+        $itemName = 'BPKB';
 
-        $salesOrder->polReg = $customerHandover;
+        $outgoing = new \Solumax\PhpHelper\App\Mongo\SubDocument;
+        $outgoing->name = $itemName;
+        $outgoing->receiver_name = $this->registrationBatch->mainLeasing['name'];
+        $outgoing->receiver_id = $this->registrationBatch->mainLeasing['id'];
+        $outgoing->leasing_bpkb_submission_batch_id = $this->registrationBatch->id;
+        $outgoing->creator = $this->registrationBatch->assignEntityData();
+        
+        $polReg = $salesOrder->subDocument()->polReg();
+        $polReg->set('items.' . $itemName . '.outgoing', $outgoing);
+
+        $salesOrder->polReg = $polReg;
+
+        return $salesOrder;
     }
     
 }
