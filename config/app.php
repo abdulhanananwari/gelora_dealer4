@@ -185,6 +185,7 @@ return [
         \Solumax\PhpHelper\SolumaxPhpHelperProvider::class,
         \Solumax\Setting\SolumaxSettingProvider::class,
         \Solumax\TransactionClient\SolumaxTransactionClientProvider::class,
+        \Solumax\Logger\SolumaxLoggerProvider::class,
         
         \Gelora\Base\GeloraBaseProvider::class,
         \Gelora\InventoryManagement\GeloraInventoryManagementProvider::class,
