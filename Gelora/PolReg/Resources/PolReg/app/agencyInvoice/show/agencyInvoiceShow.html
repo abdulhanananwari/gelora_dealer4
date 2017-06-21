@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-sm-4">
-               <file-manager-upload path="agency-invoice" subpath="agencyInvoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
+               <file-manager-upload path="polreg" subpath="agency-invoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
                 <file-manager-show display-type="img" file-uuid="{{ctrl.registrationBatch.file_uuid}}"></file-manager-show>
             </div>
             <div class="col-sm-4">
