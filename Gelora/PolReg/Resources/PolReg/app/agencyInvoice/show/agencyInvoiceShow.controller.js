@@ -59,19 +59,4 @@ geloraPolReg
 
             return vm.registrationBatch
         }
-        vm.fileManager = {
-            agencyInvoice: {
-                displayedInput: JSON.stringify({
-                    file: { label: "Kwitansi Penagihan BPKB Kendaraan Bermotor", show: true },
-                }),
-                additionalData: JSON.stringify({
-                    image: { resize: { height: 1300, width: 1300 } },
-                    path: 'registration-agency-invoice',
-                    subpath: $state.params.id,
-                    fileable_type: 'RegistrationAgencyInvoice',
-                    fileable_id: $state.params.id,
-                    name: 'Agency Invoice'
-                })
-            }
-        }
     })
