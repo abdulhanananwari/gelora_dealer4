@@ -56,16 +56,16 @@
                         <th>Nomor Rangka</th>
                         <th>Nomor Mesin</th>
                     </tr>
-                    @foreach($viewData['registrationBatch']->registrations as $registration)
+                    @foreach($viewData['registrationBatch']->getSalesOrders() as $salesOrder)
                     <tr>
-                        <td>{{ $registration->salesOrder->customer['name'] }}</td>
-                        <td>{{ $registration->salesOrder->registration['name'] }}</td>
-                        <td>{{ $registration->salesOrder->delivery->unit->type_name }}</td>
-                        <td>{{ $registration->salesOrder->delivery->unit->type_code }}</td>
-                        <td>{{ $registration->salesOrder->delivery->unit->color_name }}</td>
-                        <td>{{ $registration->salesOrder->delivery->unit->color_code }}</td>
-                        <td>{{ $registration->salesOrder->delivery->unit->chasis_number }}</td>
-                        <td>{{ $registration->salesOrder->delivery->unit->engine_number }}</td>
+                        <td>{{ $salesOrder->customer['name'] }}</td>
+                        <td>{{ $salesOrder->registration['name'] }}</td>
+                        <td>{{ $salesOrder->unit->type_name }}</td>
+                        <td>{{ $salesOrder->unit->type_code }}</td>
+                        <td>{{ $salesOrder->unit->color_name }}</td>
+                        <td>{{ $salesOrder->unit->color_code }}</td>
+                        <td>{{ $salesOrder->unit->chasis_number }}</td>
+                        <td>{{ $salesOrder->unit->engine_number }}</td>
                     </tr>
                     @endforeach
                 </table><br>

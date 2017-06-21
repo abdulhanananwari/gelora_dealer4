@@ -51,16 +51,17 @@ geloraInventoryManagement
   			pageTitle: 'Dealer | Inventory Management | Lokasi'
 		})
 
-		.state('movementOrderHeaderIndex', {
-			url: '/movement-order-header/index',
-  			templateUrl: 'app/movementOrderHeader/index/movementOrderHeaderIndex.html',
-  			controller: 'MovementOrderHeaderIndexController as ctrl',
+
+		.state('movementOrderIndex', {
+			url: '/movementOrder/index',
+  			templateUrl: 'app/movementOrder/index/movementOrderIndex.html',
+  			controller: 'MovementOrderIndexController as ctrl',
   			pageTitle: 'Dealer | Inventory Management | Perpindahan'
 		})
-		.state('movementOrderHeaderShow', {
-			url: '/movement-order-header/show/:id',
-  			templateUrl: 'app/movementOrderHeader/show/movementOrderHeaderShow.html',
-  			controller: 'MovementOrderHeaderShowController as ctrl',
+		.state('movementOrderShow', {
+			url: '/movementOrder/show/:id',
+  			templateUrl: 'app/movementOrder/show/movementOrderShow.html',
+  			controller: 'MovementOrderShowController as ctrl',
   			pageTitle: 'Dealer | Inventory Management | Perpindahan'
 		})
 	})

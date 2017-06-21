@@ -10,10 +10,10 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
         Route::get('generate-receipt-registration-cost/{id}', ['uses' => 'RegistrationController@generateReceiptRegistrationCost']);
     });
 
-    Route::group(['prefix' => 'registration-agency-submission-batch'], function() {
-        Route::get('generate-agency-receipt/{id}', ['uses' => 'RegistrationAgencySubmissionBatchController@generateAgencyReceipt']);
+    Route::group(['prefix' => 'agency-submission-batch'], function() {
+        Route::get('generate-agency-receipt/{id}', ['uses' => 'AgencySubmissionBatchController@generateAgencyReceipt']);
     });
-    Route::group(['prefix' => 'registration-leasing-bpkb-submission-batch'], function() {
-        Route::get('generate-leasing-bpkb-receipt/{id}', ['uses' => 'RegistrationLeasingBpkbSubmissionBatchController@generateLeasingBpkbReceipt']);
+    Route::group(['prefix' => 'leasing-bpkb-submission-batch'], function() {
+        Route::get('generate-leasing-bpkb-receipt/{id}', ['uses' => 'LeasingBpkbSubmissionBatchController@generateLeasingBpkbReceipt']);
     });
 });

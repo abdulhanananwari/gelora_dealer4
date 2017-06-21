@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <fieldset ng-disabled="ctrl.movementOrder.closed_at">
+                <label>Mover</label>
+                <input type='text' ng-model='ctrl.movementOrder.mover'>
+                <label>Date</label>
+                <input type='text' id='date' ng-model='ctrl.movementOrder.date'>
+                <label>Note</label>
+                <input type='text' ng-model='ctrl.movementOrder.note'>
+                <p>Lokasi Tujuan: {{ ctrl.movementOrder.toLocation.name || 'Belum Dipilih' }}</p>
+                <label>Lokasi Baru</label>
+                <dealer-location-finder location="location" on-location-selected="ctrl.movementOrder.toLocation=location"></dealer-location-finder>
+            </fieldset>
+        </div>
+        <div class="well" ng-if='!ctrl.movementOrder.closed_at && ctrl.movementOrder.id'>
+            <h4>Tambah Unit</h4>
+            <dealer-unit-search selected-unit="ctrl.unit" on-unit-selected="ctrl.addUnit(ctrl.unit)" additional-params="ctrl.unitSearchAdditionalParams"></dealer-unit-search>
+        </div>
+        <div class="well">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Warna</th>
+                            <th>Engine Number</th>
+                            <th>Chasis Number</th>
+                            <th>Lokasi Sekarang</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='unit in ctrl.movementOrder.units'>
+                            <td>{{ unit.type_name }}</td>
+                            <td>{{ unit.color_name }}</td>
+                            <td>{{ unit.engine_number }}</td>
+                            <td>{{ unit.chasis_number }}</td>
+                            <td>{{ unit.currentLocation.data.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-if="!ctrl.movementOrder.closed_at">
+            <button class="btn btn-block btn-info" ng-click="ctrl.store(ctrl.movementOrder)">Simpan</button>
+            <br>
+            <button ng-if="ctrl.movementOrder.id" class="btn btn-block btn-danger" ng-click="ctrl.close(ctrl.movementOrder)">Perpindahan Unit Telah Selesai </button>
+            <br>
+        </div>
+        <button ng-if="ctrl.movementOrder.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.print()">Print</button>
+    </div>
+</div>
+<div class="hidden-xs hidden-sm hidden-md hidden-lg">
+    <div id="printarea" ng-include="ctrl.printData.template"></div>
+</div>

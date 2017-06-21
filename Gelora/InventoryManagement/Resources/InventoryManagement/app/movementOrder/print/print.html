@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="/standard/printing/pos58.css">
+<body>
+    <div class="row">
+        <div class="col-sm-12">
+            <div>
+                <h4>Perpindahan Unit. ID: {{ ctrl.movementOrder.id }}</h4>
+                <div>
+                    <p>Mover : {{ctrl.movementOrder.mover}}</p>
+                    <p>Tanggal Dibuat : {{ctrl.movementOrder.created_at}}</p>
+                    <p>Tanggal : {{ctrl.movementOrder.date}}</p>
+                    <p>Catatan : {{ctrl.movementOrder.note}}</p>
+                    <p>Lokasi Tujuan : {{ctrl.movementOrder.toLocation.name }}</p>
+                    <p>Selesai : {{ctrl.movementOrder.closed_at }}</p>
+                </div>
+                <table border="1" style=" border-collapse: collapse; border: 1px solid black; width: 100%;">
+                    <tr>
+                        <th>Model</th>
+                        <th>Warna</th>
+                        <th>Engine Number</th>
+                        <th>Chasis Number</th>
+                        <th>Lokasi Sekarang</th>
+                    </tr>
+                    <tr ng-repeat='unit in ctrl.movementOrder.units'>
+                        <td>{{ unit.type_name }}</td>
+                        <td>{{ unit.color_name }}</td>
+                        <td>{{ unit.engine_number }}</td>
+                        <td>{{ unit.chasis_number }}</td>
+                        <td>{{ unit.currentLocation.data.name }}</td>
+                    </tr>
+                </table>
+                <br>
+                <table border="1" style="text-align: center; border-collapse: collapse; border: 1px solid black; width: 100%; table-layout: fixed;">
+                    <tr style="height: 6em; vertical-align: text-bottom;">
+                        <td>{{ ctrl.printData.creatorName }}</td>
+                        <td>{{ ctrl.movementOrder.mover }}</td>
+                        <td>Diselesaikan Oleh:</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

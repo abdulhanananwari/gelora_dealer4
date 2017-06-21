@@ -19,6 +19,7 @@ geloraSalesAdmin
         vm.store = function(salesOrder) {
             SalesOrderModel.leasingOrder.update(salesOrder.id, salesOrder.leasingOrder)
                 .then(function(res) {
+                    alert('Update berhasil')
                     vm.salesOrder = res.data.data
                 })
         }

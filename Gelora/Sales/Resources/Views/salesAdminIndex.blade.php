@@ -34,7 +34,8 @@
     <script type="text/javascript" src="/gelora/credit-sales-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/sales-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/pol-reg-shared/app/all.js"></script>
-
+    <script type="text/javascript" src="/gelora/human-resource-shared/app/all.js"></script>
+    
     <!-- Replace For Production -->
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11019/') : 'https://transaction.hondagelora.com/'}}plugins2/all.js"></script>
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11088/') : 'https://kendaraan.hondagelora.com/'}}shared/all.js"></script>

@@ -54,12 +54,12 @@
                         <td>{{salesOrder.customer.name}}</td>
                         <td>{{salesOrder.customer.address}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
-                        <td>{{salesOrder.unit.type_name}}</td>
-                        <td>{{salesOrder.unit.color_name}}</td>
-                        <td>{{salesOrder.unit.chasis_number}}</td>
-                        <td>{{salesOrder.unit.engine_number}}</td>
+                        <td>{{salesOrder.unit.data.type_name}}</td>
+                        <td>{{salesOrder.unit.data.color_name}}</td>
+                        <td>{{salesOrder.unit.data.chasis_number}}</td>
+                        <td>{{salesOrder.unit.data.engine_number}}</td>
                         <td>{{salesOrder.delivery.handover.created_at}}</td>
-                        <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+                        <td><a href="{{'/sales-admin/redirect-app/sales-order/?id=' + salesOrder.id}}" target="_blank">Buka Penjualan</a></td>
                     </tr>
                     <tr>
                         <td colspan="20">

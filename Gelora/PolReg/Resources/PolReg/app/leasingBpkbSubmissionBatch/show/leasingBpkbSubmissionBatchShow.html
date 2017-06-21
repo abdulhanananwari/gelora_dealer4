@@ -32,13 +32,13 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <file-manager-upload ng-if="ctrl.registrationBatch.closed_at" displayed-input='{{ ctrl.fileManager.leasingBpkb.displayedInput }}' additional-data='{{ ctrl.fileManager.leasingBpkb.additionalData }}' uploaded-file="uploadedleasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedleasingBpkb.uuid;ctrl.store(ctrl.registrationBatch);">
+                <file-manager-upload ng-if="ctrl.registrationBatch.id" displayed-input='{{ ctrl.fileManager.leasingBpkb.displayedInput }}' additional-data='{{ ctrl.fileManager.leasingBpkb.additionalData }}' validations='{{ ctrl.fileManager.leasingBpkb.validations }}' uploaded-file="uploadedLeasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedLeasingBpkb.uuid;ctrl.store(ctrl.registrationBatch);">
                 </file-manager-upload>
                 <file-manager-show file-uuid="{{ ctrl.registrationBatch.file_uuid }}" display-type="img"></file-manager-show>
             </div>
             <div class="col-sm-3">
                 <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
-                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.registrations.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
+                <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
                 <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.generateReceipt(ctrl.registrationBatch)">Cetak Bukti Penyerahan</button>
                 <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.handover(ctrl.registrationBatch)">Konfirmasi Serah Terima</button>
             </div>
@@ -63,16 +63,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="registration in ctrl.registrationBatch.registrations">
-                        <td>{{registration.delivery.salesOrder.customer.name}}</td>
-                        <td>{{registration.delivery.salesOrder.customer.address}}</td>
-                        <td>{{registration.delivery.salesOrder.salesPersonnel.entity.name}}</td>
-                        <td>{{registration.delivery.unit.type_name}}</td>
-                        <td>{{registration.delivery.unit.color_name}}</td>
-                        <td>{{registration.delivery.unit.chasis_number}}</td>
-                        <td>{{registration.delivery.unit.engine_number}}</td>
-                        <td>{{registration.delivery.handover_at}}</td>
-                        <td><a ui-sref="registrationShow({id:registration.id})">Buka</a></td>
+                    <tr ng-repeat="salesOrder in ctrl.registrationBatch.salesOrders">
+                        <td>{{salesOrder.customer.name}}</td>
+                        <td>{{salesOrder.customer.address}}</td>
+                        <td>{{salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{salesOrder.unit.data.type_name}}</td>
+                        <td>{{salesOrder.unit.data.color_name}}</td>
+                        <td>{{salesOrder.unit.data.chasis_number}}</td>
+                        <td>{{salesOrder.unit.data.engine_number}}</td>
+                        <td>{{salesOrder.delivery.handover.created_at}}</td>
+                        <td><a href="{{'/sales-admin/redirect-app/sales-order/?id=' + salesOrder.id}}" target="_blank">Buka Penjualan</a></td>
                     </tr>
                 </tbody>
             </table>

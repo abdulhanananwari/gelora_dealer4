@@ -27,10 +27,9 @@ geloraDealerLeasingApp
 
 				LeasingOrderModel.store(leasingOrder)
 					.then(function(res) {
-						vm.leasingOrder = res.data.data
+						$state.go('leasingOrderShow', {id: res.data.data.id})
 						alert('PO berhasil disimpan')
 					})
-					
 			}
 		}
 	})

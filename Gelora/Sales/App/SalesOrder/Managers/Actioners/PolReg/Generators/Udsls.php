@@ -27,11 +27,12 @@ class Udsls {
         $data['Kode Kecamatan'] = $cddb->kecamatan_surat;
 
         if ($salesOrder->payment_type == 'credit') {
-            $data['DP Leasing'] = '0';
-            $data['Tenor'] = '0';
-        } else {
             $data['DP Leasing'] = $leasingOrder->dp_po;
             $data['Tenor'] = $leasingOrder->tenor;
+            
+        } else {
+            $data['DP Leasing'] = '0';
+            $data['Tenor'] = '0';
         }
         if (!is_null($cddb->tanggal_penjualan)) {
             $data['Tanggal Penjualan'] = $cddb->tanggal_penjualan;
