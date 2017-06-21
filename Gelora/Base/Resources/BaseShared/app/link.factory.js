@@ -116,6 +116,9 @@ geloraBaseShared
                         delivery: {
                             scan: apps.dealer.sales + 'api/sales-order/delivery/scan',
                             print: apps.dealer.sales + 'views/sales-order/delivery/print/',
+                        },
+                        polReg: {
+                            views : apps.dealer.sales + 'views/sales-order/pol-reg/',
                         }
                     },
                     prospect: {
