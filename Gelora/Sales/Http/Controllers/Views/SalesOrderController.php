@@ -34,5 +34,23 @@ class SalesOrderController extends Controller {
         return view()->make('gelora.sales::delivery.generateDeliveryNote')
                         ->with('viewData', $viewData);
     }
+    public function generateReceiptItemHandover($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+        
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
+                        ->first()->data_1;
+        
+        $outgoing = $salesOrder->subDocument()->polReg()
+                ->get('items.' . $request->get('item_name') . '.outgoing');
 
+        $viewData = [
+            'salesOrder' => $salesOrder,
+            'tenantInfo' => $tenantInfo,
+            'outgoing' => $outgoing,
+        ];
+
+        return view()->make('gelora.sales::polReg.generateReceiptItemHandover')
+                        ->with('viewData', $viewData);
+    }
 }

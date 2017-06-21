@@ -46,7 +46,7 @@ geloraPolRegShared
                 }
 
                 scope.generateReceiptItemHandover = function(item) {
-                    window.open(LinkFactory.dealer.polReg.registration.views + 'generate-receipt-item-handover/' + scope.innerRegistration.id + '?' + $.param({ jwt: JwtValidator.encodedJwt, item_name: item.name }));
+                    window.open(LinkFactory.dealer.sales.salesOrder.polReg.views + 'generate-receipt-item-handover/' + scope.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt, item_name: item.name }));
                 }
 
             }
