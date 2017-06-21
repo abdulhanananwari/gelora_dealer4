@@ -16,9 +16,11 @@ class ItemOutgoing {
         
         $incoming = $this->salesOrder->subDocument()->polReg()->get('items.' . $itemName . '.outgoing');
         if (!empty($incoming)) {
-            return ['Penerimaan sudah dibuat sebelumnya'];
+            return ['Penyerahan sudah dibuat sebelumnya'];
         }
-        
+        if ($itemName == 'BPKB' && $this->salesOrder->payment_type == 'credit') {
+            return ['Penjualan adalah kredit, BPKB tidak dapat diserahkan langsung ke customer '];
+        }
         $requestValidation = $this->validateRequest($request);
         if ($requestValidation->fails()) {
             return $requestValidation->errors()->all();
