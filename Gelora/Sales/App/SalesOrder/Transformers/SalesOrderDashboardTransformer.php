@@ -16,7 +16,9 @@ class SalesOrderDashboardTransformer extends Fractal\TransformerAbstract {
             'delivery_handover_created_at' => $salesOrder->subDocument()->delivery()->toCarbon('handover.created_at', true),
             'main_leasing_name' => $salesOrder->subDocument()->leasingOrder()->get('mainLeasing.name'),
             'sub_leasing_name' => $salesOrder->subDocument()->leasingOrder()->get('subLeasing.name'),
-            'payment_type' => $salesOrder->payment_type
+            'payment_type' => $salesOrder->payment_type,
+            'unit_type_name' => $salesOrder->unit->type_name,
+            'unit_type_code' => $salesOrder->unit->type_code,
         ];
 
         return $data;

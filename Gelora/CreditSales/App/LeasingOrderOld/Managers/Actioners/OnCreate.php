@@ -15,7 +15,5 @@ class OnCreate {
     public function action() {
         
         $this->leasingOrder->save();
-
-        $this->leasingOrder->saveId();
     }
 }

@@ -15,7 +15,6 @@ class OnCreate {
     public function action() {
 
         $this->unit->save();
-        $this->unit->saveId();
     }
 
 }
