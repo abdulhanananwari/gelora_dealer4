@@ -21,6 +21,7 @@ class SalesOrderReportTransformer {
             'id' => $salesOrder->_id,
             '_id' => $salesOrder->_id,
             
+            'Tanggal SPK' => $salesOrder->created_at->toDateTimeString(),
             'Tanggal SJ' => $salesOrder->delivery->handover->created_at->toDateTime()->format('d-m-Y'),
             'Nomor Rangka' => $salesOrder->unit->chasis_number,
             'Nomor Mesin' => $salesOrder->unit->engine_number,
@@ -31,11 +32,7 @@ class SalesOrderReportTransformer {
             'No KTP' => $salesOrder->customer['ktp'],
             'Nomor Telephone' => $salesOrder->customer['phone_number'],
             
-            'Kelurahan' => $salesOrder->cddb['kelurahan_surat_name'],
-            'Kecamatan' => $salesOrder->cddb['kecamatan_surat_name'],
-            'Kota' => $salesOrder->cddb['kota_surat_name'],
             'Alamat Kirim' => $salesOrder->deliveryRequest['address'],
-            'Diskon' => $salesOrder->discount,
             
             'Biaya dan Hadiah' => $salesOrder->retrieve()->salesOrderExtraString(),
             
@@ -45,19 +42,20 @@ class SalesOrderReportTransformer {
             'Dp PO' => $salesOrder->leasingOrder['dp_po'],
             'Memo Leasing' => $salesOrder->leasingOrder['note'],
             'Jumlah Pencairan' => $salesOrder->leasingOrder['leasing_payable'],
-
-
+            
             'Tgl DO Motor' => $salesOrder->unit->sj_date,
-            'Jenis Penjualan' => $salesOrder->payment_type,
             'Nomor Surat Jalan' => $salesOrder->unit->sj_number,
-            'Harga OTR' => $salesOrder->on_the_road,
+            
             'Kondisi Jual' => $salesOrder->sales_condition,
+            'Jenis Penjualan' => $salesOrder->payment_type,
+            'Harga On TR' => $salesOrder->on_the_road,
+            'Harga Off TR' => $salesOrder->off_the_road,
+            'Diskon' => $salesOrder->discount,
             
             'Sales' => $salesOrder->salesPersonnel['entity']['name'],
             'ID Sales' => $salesOrder->salesPersonnel['entity']['id'],
             'closed_at' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : '',
             'closer_name' => $salesOrder->closer['name'],
-            
         ];
 
         return $data;
