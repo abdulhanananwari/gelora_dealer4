@@ -5,7 +5,7 @@ geloraSalesShared
 
 		return {
 			restrict: "AE",
-			templateUrl: '/gelora/sales-shared/app/salesOrder/filter/salesOrderFilter.html',
+			templateUrl: '/gelora/sales-shared/app/salesOrder/directives/filter/salesOrderFilter.html',
 			scope: {
 				salesOrders: '=',
 				meta: '=',

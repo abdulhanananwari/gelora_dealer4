@@ -3,7 +3,7 @@ geloraSalesShared
                 $state) {
 
             return {
-                templateUrl: '/gelora/sales-shared/app/salesOrder/navbar/salesOrderNavbar.html',
+                templateUrl: '/gelora/sales-shared/app/salesOrder/directives/navbar/salesOrderNavbar.html',
                 scope: {
                     salesOrder: '='
                 },

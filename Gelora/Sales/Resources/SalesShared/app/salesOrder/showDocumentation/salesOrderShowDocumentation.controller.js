@@ -1,4 +1,4 @@
-geloraSalesAdmin
+geloraSalesShared
     .controller('SalesOrderShowDocumentationController', function(
         $http, $state,
         LinkFactory, JwtValidator,

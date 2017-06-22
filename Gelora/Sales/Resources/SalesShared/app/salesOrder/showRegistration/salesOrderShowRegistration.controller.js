@@ -1,4 +1,4 @@
-geloraSalesAdmin
+geloraSalesShared
     .controller('SalesOrderShowRegistrationController', function(
         $state,
         SalesOrderModel) {
