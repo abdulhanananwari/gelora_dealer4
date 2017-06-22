@@ -9,7 +9,6 @@ geloraSalesShared
             until: moment().format("YYYY-MM-DD"),
             time_type: 'delivery.generated_at',
             transformer: 'SalesOrderDashboardTransformer',
-            status: 'delivery_generated',
         }
 
         vm.load = function(filter) {
