@@ -2,7 +2,8 @@
     <div class="col-sm-12">
         <h4>Penjualan</h4>
         <hr>
-        <sales-order-filter sales-orders="ctrl.salesOrders" meta="ctrl.meta" page="ctrl.page"></sales-order-filter>
+        <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#spk-filter-modal">SPK Filter</button>
+        <br>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -33,6 +34,24 @@
                 </tbody>
             </table>
         </div>
-        <pagination pagination="ctrl.meta.pagination" page="page" on-load-page="ctrl.page=page"></pagination>
+        <pagination pagination="ctrl.meta.pagination" page="ctrl.filter.page" on-load-page="ctrl.load(ctrl.filter)"></pagination>
+    </div>
+</div>
+<div class="modal fade" id="spk-filter-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Filter</strong></h4>
+            </div>
+            <div class="modal-body">
+                <label>Nama Customer</label>
+                <input type="text" ng-model="ctrl.filter.customer_name">
+                <label>Nomor Telepon Customer</label>
+                <input type="text" ng-model="ctrl.filter.customer_phone_number" name="phone_number">
+                <sales-order-filter filter="ctrl.filter"></sales-order-filter>
+                <button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter)">Cari</button>
+            </div>
+        </div>
     </div>
 </div>

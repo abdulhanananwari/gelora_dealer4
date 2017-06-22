@@ -1,59 +1,53 @@
-<button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#spk-filter-modal-{{modalId}}">SPK Filter</button>
-<br>
-<!--  style="padding:8px 8px;border:1px solid #607285;" -->
-<div class="modal fade" id="spk-filter-modal-{{modalId}}" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><strong>Filter</strong></h4>
+<div class="row">
+    <div class="col-sm-4">
+        <label><strong>Tanggal</strong></label>
+        <br>
+        <label>Jenis Tanggal</label>
+        <select ng-options="code as name for (code,name) in dateTypes" ng-model="filter.time_type"></select>
+        <div class="row">
+            <div class="col-sm-6">
+                <label>Dari Tanggal</label>
+                <input type="text" ng-model="filter.from" class="date">
             </div>
-            <div class="modal-body">
-                <label>Nama Customer</label>
-                <input type="text" ng-model="filter.customer_name">
-                <label>Nomor Telepon Customer</label>
-                <input type="text" ng-model="filter.customer_phone_number" name="phone_number">
-                <label>Sales ID</label>
-                <input type="text" ng-model="filter.salesperson_entity_id">
-                <label>Jenis Penjualan</label>
-                <select ng-options="customerType as customerType for customerType in customerTypes" ng-model="filter.customer_type"></select>
-                <label>Jenis Pembayaran</label>
-                <select ng-options="key as value for (key, value) in paymentTypes" ng-model="filter.payment_type"></select>
-                <label>Status</label>
-                <select ng-options="key as value for (key, value) in statuses" ng-model="filter.status"></select>
-                <label><strong>Tanggal</strong></label>
-                <br>
-                <label>Jenis Tanggal</label>
-                <select ng-options="code as name for (code,name) in dateTypes" ng-model="filter.time_type"></select>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label>Dari Tanggal</label>
-                        <input type="text" ng-model="filter.from" class="date">
-                    </div>
-                    <div class="col-sm-6">
-                        <label>Sampai Tanggal</label>
-                        <input type="text" ng-model="filter.until" class="date">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label>Pengurutan Berdasarkan</label>
-                        <select ng-options="code as name for (code,name) in dateTypes" ng-model="filter.order_by"></select>
-                    </div>
-                    <div class="col-sm-4">
-                        <label>Pengurutan</label>
-                        <select ng-model="filter.order" ng-init="asc" name="order">
-                            <option value="asc">Terlama</option>
-                            <option value="desc">Terbaru</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <label>Hasil Per Halaman</label>
-                        <input type="text" ng-model="filter.paginate" name="paginate">
-                    </div>
-                </div>
-                <button class="btn btn-block btn-info" ng-click="load(filter)">Cari</button>
+            <div class="col-sm-6">
+                <label>Sampai Tanggal</label>
+                <input type="text" ng-model="filter.until" class="date">
             </div>
         </div>
+    </div>
+    <div class="col-sm-4">
+        <label>Leasing</label>
+        <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="filter.main_leasing_id=mainLeasing.id;filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
+        <label>Sales</label>
+        <personnel-finder selected-personnel="salesPersonnel" on-personnel-selected="filter.sales_personnel_id=salesPersonnel.entity.id"></personnel-finder>
+        <br>
+        <input type="text" ng-model="filter.sales_personnel_id">
+    </div>
+    <div class="col-sm-4">
+        <label>Jenis kustomer</label>
+        <select ng-options="customerType as customerType for customerType in customerTypes" ng-model="filter.customer_type"></select>
+        <label>Jenis pembayaran</label>
+        <select ng-options="key as value for (key, value) in paymentTypes" ng-model="filter.payment_type"></select>
+        <label>Type dan warna motor</label>
+        <vehicle-model-finder2 selected-model="selectedModel" on-change="filter.type_name=selectedModel.name;
+            filter.color_name=selectedModel.variant.name">
+        </vehicle-model-finder2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <label>Pengurutan Berdasarkan</label>
+        <select ng-options="code as name for (code,name) in dateTypes" ng-model="filter.order_by"></select>
+    </div>
+    <div class="col-sm-4">
+        <label>Pengurutan</label>
+        <select ng-model="filter.order" ng-init="asc" name="order">
+            <option value="asc">Terlama</option>
+            <option value="desc">Terbaru</option>
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <label>Hasil Per Halaman</label>
+        <input type="text" ng-model="filter.paginate" name="paginate">
     </div>
 </div>

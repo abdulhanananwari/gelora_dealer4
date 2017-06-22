@@ -89,6 +89,12 @@ geloraSalesAdmin
                         controller: 'SalesOrderReportController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Report'
                     })
+                    .state('salesOrderDashboard', {
+                        url: '/salesOrder/dashboard',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/dashboard/salesOrderDashboard.html',
+                        controller: 'SalesOrderDashboardController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Sales Order Report'
+                    })
                     .state('cancelledSalesOrderIndex', {
                         url: '/cancelledSalesOrder/index',
                         templateUrl: 'app/cancelledSalesOrder/index/cancelledSalesOrderIndex.html',
