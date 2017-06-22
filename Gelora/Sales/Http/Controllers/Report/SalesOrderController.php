@@ -23,18 +23,18 @@ class SalesOrderController extends Controller {
     public function index(Request $request) {
 
         $query = [
-                    [
-                        '$lookup' => [
-                            'from' => 'units',
-                            'localField' => 'unit_id',
-                            'foreignField' => 'id',
-                            'as' => 'unit'
-                        ]
-                    ],
-                    ['$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
+                [
+                '$lookup' => [
+                    'from' => 'units',
+                    'localField' => 'unit_id',
+                    'foreignField' => 'id',
+                    'as' => 'unit'
+                ]
+            ],
+                ['$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
         ];
-        if ($request->has('delivery_from')) {
 
+        if ($request->has('delivery_from')) {
             $deliveryFrom = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('delivery_from'))->startOfDay()->getTimestamp() * 1000);
             $subquery = ['$match' => ['delivery.handover.created_at' => ['$gte' => $deliveryFrom]]];
             $query[] = $subquery;
@@ -42,25 +42,19 @@ class SalesOrderController extends Controller {
 
 
         if ($request->has('delivery_until')) {
-
             $deliveryUntil = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('delivery_until'))->endOfDay()->getTimestamp() * 1000);
-
             $subquery = ['$match' => ['delivery.handover.created_at' => ['$lte' => $deliveryUntil]]];
             $query[] = $subquery;
         }
 
         if ($request->has('sales_order_from')) {
-
             $salesOrderFrom = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('sales_order_from'))->startOfDay()->getTimestamp() * 1000);
-
             $subquery = ['$match' => ['created_at' => ['$gte' => $salesOrderFrom]]];
             $query[] = $subquery;
         }
 
         if ($request->has('sales_order_until')) {
-
             $salesOrderUntil = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('sales_order_until'))->endOfDay()->getTimestamp() * 1000);
-
             $subquery = ['$match' => ['created_at' => ['$lte' => $salesOrderUntil]]];
             $query[] = $subquery;
         }
@@ -108,7 +102,7 @@ class SalesOrderController extends Controller {
         if (count($salesOrders) == 0) {
             return 'Tidak ada data penjualan untuk kriteria diatas';
         }
-       
+
         return $this->createCsv($this->transformer->transformCollection($salesOrders));
     }
 
