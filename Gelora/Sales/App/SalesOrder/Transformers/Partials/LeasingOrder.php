@@ -36,6 +36,11 @@ class LeasingOrder {
             
             'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->invoice_generated_at->toDateTimeString() : null,
             'invoice_generator' => $leasingOrder->invoice_generator,    
+            
+            'payment_transaction_uuid' => $leasingOrder->payment_transaction_uuid,
+            'payment_at' => $leasingOrder->payment_at ? $leasingOrder->payment_at->toDateTimeString() : null,
+            'payment_creator' => $leasingOrder->payment_creator,    
+            
         ];
         
         return $transformed;

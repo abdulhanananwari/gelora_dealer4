@@ -71,21 +71,21 @@ geloraSalesShared
                     datasets: [{
                         label: 'Total',
                         data: _.map(grouped.byDate, function(value) {
-                            return _.toLength(value.salesOrders) + 1
+                            return value.salesOrders.length
                         }),
                         borderColor: "rgba(255,0,0,1)",
                         fill: false
                     }, {
                         label: 'Kredit',
                         data: _.map(grouped.byDate, function(value) {
-                            return _.toLength(_.filter(value.salesOrders, { payment_type: 'credit' })) + 1
+                            return _.filter(value.salesOrders, { 'payment_type' : 'credit' }).length
                         }),
                         borderColor: "rgba(234, 188, 2,1)",
                         fill: false
                     },{
                         label: 'Cash',
                         data: _.map(grouped.byDate, function(value) {
-                            return _.toLength(_.filter(value.salesOrders, { payment_type: 'cash' })) + 1
+                            return _.filter(value.salesOrders, { 'payment_type' : 'cash' }).length
                         }),
                         borderColor: "rgba(66, 134, 244,1)",
                         fill: false
@@ -95,11 +95,6 @@ geloraSalesShared
                     title: {
                         text: 'Penjualan'
                     },
-                    scales: {
-                        xAxes: [{
-
-                        }]
-                    }
                 }
             })
         }

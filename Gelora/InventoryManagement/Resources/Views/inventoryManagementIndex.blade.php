@@ -35,7 +35,7 @@
     <script src="/solumax/dependencies/all.js"></script>
     <script src="/solumax/setting/app.js"></script>
 
-    <script type="text/javascript" src="/solumax/file-manager/v2/file-manager.js"></script>
+    <script type="text/javascript" src="/solumax/file-manager/v3.0/file-manager.js"></script>
 
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11088/') : 'https://kendaraan.hondagelora.com/'}}shared/all.js"></script>
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':10777/') : 'https://entity.hondagelora.com/'}}plugins/v2/all.js"></script>
