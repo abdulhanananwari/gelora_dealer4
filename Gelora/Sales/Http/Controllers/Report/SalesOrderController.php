@@ -32,7 +32,6 @@ class SalesOrderController extends Controller {
             ], [
                 '$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
         ];
-
         if ($request->has('from')) {
             $from = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay()->getTimestamp() * 1000);
             $subquery = ['$match' => [$request->get('time_type') => ['$gte' => $from]]];
