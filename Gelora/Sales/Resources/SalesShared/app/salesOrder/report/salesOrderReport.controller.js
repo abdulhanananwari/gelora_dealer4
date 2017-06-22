@@ -5,10 +5,8 @@ geloraSalesShared
         var vm = this
 
         vm.filter = {
-            delivery_from: moment().subtract(30, 'days').format("YYYY-MM-DD"),
-            delivery_until: moment().format("YYYY-MM-DD"),
-            sales_order_from: moment().subtract(30, 'days').format("YYYY-MM-DD"),
-            sales_order_until: moment().format("YYYY-MM-DD"),
+            from: moment().subtract(30, 'days').format("YYYY-MM-DD"),
+            until: moment().format("YYYY-MM-DD"),
         }
 
         vm.customerTypes = ['Perorangan', 'Badan Usaha']

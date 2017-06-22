@@ -33,30 +33,20 @@ class SalesOrderController extends Controller {
                 '$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
         ];
 
-        if ($request->has('delivery_from')) {
-            $deliveryFrom = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('delivery_from'))->startOfDay()->getTimestamp() * 1000);
-            $subquery = ['$match' => ['delivery.handover.created_at' => ['$gte' => $deliveryFrom]]];
+        if ($request->has('from')) {
+            $from = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay()->getTimestamp() * 1000);
+            $subquery = ['$match' => [$request->get('time_type') => ['$gte' => $from]]];
             $query[] = $subquery;
         }
 
 
-        if ($request->has('delivery_until')) {
-            $deliveryUntil = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('delivery_until'))->endOfDay()->getTimestamp() * 1000);
-            $subquery = ['$match' => ['delivery.handover.created_at' => ['$lte' => $deliveryUntil]]];
+        if ($request->has('until')) {
+            $until = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('until'))->endOfDay()->getTimestamp() * 1000);
+            $subquery = ['$match' => [$request->get('time_type') => ['$lte' => $until]]];
             $query[] = $subquery;
         }
 
-        if ($request->has('sales_order_from')) {
-            $salesOrderFrom = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('sales_order_from'))->startOfDay()->getTimestamp() * 1000);
-            $subquery = ['$match' => ['created_at' => ['$gte' => $salesOrderFrom]]];
-            $query[] = $subquery;
-        }
-
-        if ($request->has('sales_order_until')) {
-            $salesOrderUntil = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('sales_order_until'))->endOfDay()->getTimestamp() * 1000);
-            $subquery = ['$match' => ['created_at' => ['$lte' => $salesOrderUntil]]];
-            $query[] = $subquery;
-        }
+     
 
         if ($request->has('type_name')) {
             $subquery = ['$match' => ['unit.type_name' => $request->get('type_name')]];
@@ -107,7 +97,7 @@ class SalesOrderController extends Controller {
             if (count($salesOrders) == 0) {
                 return 'Tidak ada data penjualan untuk kriteria diatas';
             }
-            
+            return response()->json($salesOrders);
             return $this->createCsv($this->transformer->transformCollection($salesOrders));
         }
     }

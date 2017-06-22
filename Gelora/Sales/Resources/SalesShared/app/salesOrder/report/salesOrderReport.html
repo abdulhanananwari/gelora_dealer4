@@ -1,36 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h4>Laporan Penjualan</h4>
-        <div class="col-sm-4">
-            <h5>Tanggal SJ</h5>
-            <label>Dari Tanggal</label>
-            <input type="text" ng-model="ctrl.filter.delivery_from" class="date">
-            <label>Sampai Tanggal</label>
-            <input type="text" ng-model="ctrl.filter.delivery_until" class="date">
-            <h5>Tanggal SPK</h5>
-            <label>Dari Tanggal</label>
-            <input type="text" ng-model="ctrl.filter.sales_order_from" class="date">
-            <label>Sampai Tanggal</label>
-            <input type="text" ng-model="ctrl.filter.sales_order_until" class="date">
-        </div>
-        <div class="col-sm-4">
-            <h5>Leasing</h5>
-            <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.filter.main_leasing_id=mainLeasing.id;ctrl.filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
-            <h5>Sales</h5>
-            <personnel-finder selected-personnel="salesPersonnel" on-personnel-selected="ctrl.filter.sales_personnel_id=salesPersonnel.entity.id"></personnel-finder>
-            <br>
-            <input type="text" ng-model="ctrl.filter.sales_personnel_id">
-        </div>
-        <div class="col-sm-4">
-            <h5>Jenis penjualan</h5>
-            <select ng-options="customerType as customerType for customerType in ctrl.customerTypes" ng-model="ctrl.filter.customer_type"></select>
-            <h5>Jenis pembayaran</h5>
-            <select ng-options="key as value for (key, value) in ctrl.paymentTypes" ng-model="ctrl.filter.payment_type"></select>
-            <h5>Type dan warna motor</h5>
-            <vehicle-model-finder2 selected-model="selectedModel" on-change="ctrl.filter.type_name=selectedModel.name;
-            ctrl.filter.color_name=selectedModel.variant.name">
-            </vehicle-model-finder2>
-        </div>
+       <sales-order-filter filter="ctrl.filter"></sales-order-filter>
     </div>
 </div>
 <div class="row">
