@@ -1,11 +1,21 @@
 <div class="row">
     <div class="col-sm-12">
         <h4>Laporan Penjualan</h4>
-        <sales-order-filter filter="ctrl.filter"></sales-order-filter>
+        <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#report-filter-modal">Filter Report Penjualan</button>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12">
-        <button class="btn btn-block btn-warning" ng-click="ctrl.download(ctrl.filter)">Download Report</button>
+<div class="modal fade" id="report-filter-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Filter</strong></h4>
+            </div>
+            <div class="modal-body">
+                <sales-order-filter filter="ctrl.filter"></sales-order-filter>
+                <button class="btn btn-block btn-info" ng-click="ctrl.download(ctrl.filter)">Download Report</button>
+            </div>
+        </div>
     </div>
 </div>
+
