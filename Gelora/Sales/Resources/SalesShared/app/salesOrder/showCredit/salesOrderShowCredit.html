@@ -101,9 +101,10 @@
     <div class="col-sm-3">
         <div class="well" ng-if="ctrl.salesOrder.delivery.handover">
             <h4>Pencatatan Piutang</h4>
-            <due-show ng-if="ctrl.salesOrder.leasingOrder.due_uuid" uuid="{{ ctrl.salesOrder.leasingOrder.due_uuid }}"></due-show>
-            <button class="btn btn-block btn-warning" ng-click="generate.invoice(leasingOrder)">Cetak Invoice (ng show kalau udah proses delivery)</button>
-            <button class="btn btn-block btn-warning" ng-click="generate.agreementBPKB(leasingOrder)">Cetak Surat Pernyataan BPKB (ng show kalau udah proses penagihan)</button>
+            <due-show ng-if="ctrl.salesOrder.leasingOrder.payment_transaction_uuid" uuid="{{ ctrl.salesOrder.leasingOrder.payment_transaction_uuid }}"></due-show>
+            <due-create ng-if="ctrl.salesOrder.leasingOrder.invoice_generated_at" type="R" entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ ctrl.salesOrder.id }}"></due-create>
+            <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
+            <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
         </div>
     </div>
 </div>

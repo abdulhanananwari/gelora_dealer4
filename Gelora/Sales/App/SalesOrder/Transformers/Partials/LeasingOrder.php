@@ -34,8 +34,12 @@ class LeasingOrder {
             'due_uuid' => $leasingOrder->due_uuid,
             'joinPromos' => $leasingOrder->joinPromos ? (array) $leasingOrder->joinPromos : [],
             
-            'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->invoice_generated_at->toDateTimeString() : null,
-            'invoice_generator' => $leasingOrder->invoice_generator,    
+            'invoice_generated_at' => $leasingOrder->toCarbon('invoice_generated_at') ? $leasingOrder->toCarbon('invoice_generated_at')->toDateTimeString() : null,
+            'invoice_generator' => $leasingOrder->invoice_generator,
+
+            'payment_transaction_uuid' => $leasingOrder->payment_transaction_uuid,
+            'payment_at' => $leasingOrder->toCarbon('payment_at') ? $leasingOrder->toCarbon('payment_at')->toDateTimeString() : null,
+            'payment_creator' => $leasingOrder->payment_creator,    
         ];
         
         return $transformed;
