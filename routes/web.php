@@ -12,6 +12,6 @@
 */
 
 Route::get('/', function () {
-    return redirect('/gelora/base/index.html');
+    return redirect('/gelora/sales/admin/index.html');
     return view('welcome');
 });

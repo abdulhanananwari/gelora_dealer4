@@ -17,8 +17,7 @@ Route::group(['prefix' => 'redirect-app'], function() {
 
     Route::middleware($middlewares)->get('sales-order/redirected', function() {
 
-        $tumr = new \Solumax\AuthClient\Data\TenantUserModuleRole();
-        if ($tumr->check('ADMIN_ACCESS')) {
+        if (\SolAuthClient::hasAccess('ADMIN_ACCESS')) {
             $link = "/gelora/sales/admin/index.html#/salesOrder/show/" .
                     request("id", "");
             return response('', 302, ['Location' => $link]);

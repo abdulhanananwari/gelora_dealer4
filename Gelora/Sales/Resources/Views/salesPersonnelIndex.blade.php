@@ -38,6 +38,7 @@
     <script type="text/javascript" src="/gelora/human-resource-shared/app/all.js"></script>
 
     <!-- Replace For Production -->
+    <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11019/') : 'https://transaction.hondagelora.com/'}}plugins2/all.js"></script>
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11088/') : 'https://kendaraan.hondagelora.com/'}}shared/all.js"></script>
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':10777/') : 'https://entity.hondagelora.com/'}}plugins/v2/all.js"></script>
 
@@ -66,7 +67,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a ui-sref='index' data-toggle="collapse" data-target="#mainNavbar">Home</a></li>
-            <li sol-auth></li>
+            <li sol-auth module-id="30000"></li>
           </ul>
         </div>
 

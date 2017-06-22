@@ -14,6 +14,7 @@ var geloraSalesAdmin = angular
         var appFactory = {};
 
         appFactory.moduleId = '30000';
+        appFactory.type = 'admin'
 
         return appFactory;
     })

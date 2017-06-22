@@ -56,8 +56,8 @@
 </div>
 <button ng-if="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
 <br>
-<div class="row">
-    <div class="col-sm-9">
+<div class="row" ng-show="ctrl.appType=='admin'">
+    <div class="col-sm-9" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
         <h4>Join Promo</h4>
         <button class="btn btn-block btn-info" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.push({})">Tambah Join Promo</button>
         <br>
@@ -99,16 +99,13 @@
         </div>
     </div>
     <div class="col-sm-3">
-        <div class="well" ng-if="ctrl.salesOrder.delivery.handover">
+        <div class="well" ng-show="ctrl.salesOrder.validated_at">
             <h4>Pencatatan Piutang</h4>
-            <due-show ng-if="ctrl.salesOrder.leasingOrder.payment_transaction_uuid" uuid="{{ ctrl.salesOrder.leasingOrder.payment_transaction_uuid }}"></due-show>
-            <due-create ng-if="ctrl.salesOrder.leasingOrder.invoice_generated_at" type="R" entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ ctrl.salesOrder.id }}"></due-create>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-sm-12">
         <div class="well">

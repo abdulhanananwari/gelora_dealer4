@@ -32,7 +32,6 @@ class LeasingOrder {
             'memo_file_uuid' => $leasingOrder->memo_file_uuid,
             
             'due_uuid' => $leasingOrder->due_uuid,
-            'joinPromos' => $leasingOrder->joinPromos ? (array) $leasingOrder->joinPromos : [],
             
             'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->toCarbon('invoice_generated_at', true) : null,
             'invoice_generator' => $leasingOrder->invoice_generator,
@@ -42,6 +41,10 @@ class LeasingOrder {
             'payment_creator' => $leasingOrder->payment_creator,    
 
         ];
+        
+        if (\SolAuthClient::hasAccess('VIEW_LEASING_ORDER_JOIN_PROMOS')) {
+            $transformed['joinPromos'] = (array) $leasingOrder->joinPromos;
+        }
         
         return $transformed;
     }
