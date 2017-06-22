@@ -310,7 +310,7 @@ class SpkPdf {
 
         $this->pdf->SetFont('Arial', '', 7);
         $this->pdf->SetX(posX($width, 5));
-        $this->pdf->MultiCell(0, 5, $this->salesOrder->retrieve()->statusText());
+        $this->pdf->MultiCell(0, 5, $this->salesOrder->retrieve()->leasingOrder()->statusText());
         $this->pdf->SetFont('Arial', '', 10);
         
 

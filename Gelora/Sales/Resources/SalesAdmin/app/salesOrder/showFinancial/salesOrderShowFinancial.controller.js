@@ -53,7 +53,7 @@ geloraSalesAdmin
 
             } else {
 
-                var leasingPayable = typeof vm.salesOrder.selectedLeasingOrder != 'undefined' ? vm.salesOrder.selectedLeasingOrder.leasing_payable : 0;
+                var leasingPayable = typeof vm.salesOrder.leasingOrder != 'undefined' ? vm.salesOrder.leasingOrder.leasing_payable : 0;
 
                 vm.paymentUnreceived = vm.salesOrder.financialBalance.grand_total - leasingPayable -
                     (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)

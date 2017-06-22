@@ -14,13 +14,13 @@ class LeasingOrder {
     
     public function calculate() {
         
-        $selectedLeasingOrder = $this->salesOrder->selectedLeasingOrder;
+        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
         
-        if (!empty($selectedLeasingOrder)) {
+        if (!empty($leasingOrder)) {
             
             return [
-                'receivable' => $selectedLeasingOrder->leasing_payable,
-                'otr_difference_with_selected_leasing_order' => $this->salesOrder->on_the_road - $this->salesOrder->selectedLeasingOrder->on_the_road, 
+                'receivable' => $leasingOrder->leasing_payable,
+                'otr_difference_with_selected_leasing_order' => $this->salesOrder->on_the_road - $leasingOrder->on_the_road, 
             ];
             
         } else {

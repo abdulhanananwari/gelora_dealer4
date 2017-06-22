@@ -1,6 +1,6 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Retrievers;
+namespace Gelora\Sales\App\SalesOrder\Managers\Retrievers\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
