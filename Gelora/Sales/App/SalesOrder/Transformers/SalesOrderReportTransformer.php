@@ -22,7 +22,7 @@ class SalesOrderReportTransformer {
             '_id' => $salesOrder->_id,
             
             'Tanggal SPK' => $salesOrder->created_at->toDateTimeString(),
-            'Tanggal SJ' => $salesOrder->delivery->handover->created_at->toDateTime()->format('d-m-Y'),
+            'Tanggal SJ' => $salesOrder->delivery->handover->created_at->toDateTime()->format('Y-m-d'),
             'Nomor Rangka' => $salesOrder->unit->chasis_number,
             'Nomor Mesin' => $salesOrder->unit->engine_number,
             

@@ -15,10 +15,15 @@ class SalesOrderController extends Controller {
 
         $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderTransformer();
         $this->dataName = 'sales_orders';
+
+        if (request()->has('transformer')) {
+            $transformer = '\\Gelora\\Sales\\App\\SalesOrder\\Transformers\\' . request()->get('transformer');
+            $this->transformer = new $transformer;
+        }
     }
 
     public function index(Request $request) {
-        
+
         $query = $this->salesOrder->newQuery();
 
         if ($request->has('sales_personnel_access')) {
@@ -31,7 +36,7 @@ class SalesOrderController extends Controller {
 
         if ($request->has('from')) {
             $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay();
-            $query->where($request->get('time_type', 'delivery.created_at'), '>=', $from);
+            $query->where($request->get('time_type', 'created_at'), '>=', $from);
         }
 
         if ($request->has('until')) {
@@ -70,30 +75,40 @@ class SalesOrderController extends Controller {
                 case 'financial_completed':
                     $query->whereNotNull('financial_completed_at');
                     break;
-            default;
-                break;
+                default;
+                    break;
             }
         }
 
-        $salesOrders = $query
-                ->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'))
-                ->paginate((int) $request->get('paginate', 20));
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
 
         switch ($request->get('transformer')) {
             case 'simple':
                 $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderSimpleTransformer();
                 break;
+            case 'dashboard':
+                $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderDashboardTransformer();
+                break;
             default:
                 break;
         }
 
-        return $this->formatCollection($salesOrders, [], $salesOrders);
+        if ($request->has('paginate')) {
+
+            $salesOrders = $query->paginate((int) $request->get('paginate', 20));
+            return $this->formatCollection($salesOrders, [], $salesOrders);
+
+        } else {
+
+            $salesOrders = $query->get();
+            return $this->formatCollection($salesOrders);
+        }
     }
 
     public function get($id) {
 
         $salesOrder = $this->salesOrder->find($id);
-        
+
         return $this->formatItem($salesOrder);
     }
 
@@ -132,4 +147,5 @@ class SalesOrderController extends Controller {
 
         return response()->json(['data' => $salesOrder->calculate()->salesOrderBalance()]);
     }
+
 }
