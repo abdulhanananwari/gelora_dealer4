@@ -21,7 +21,5 @@ Route::group(['prefix' => 'api-sales-personnel', 'namespace' => 'Api', 'middlewa
         Route::get('{id}', ['uses' => 'SalesOrderController@get']);
         Route::post('/', ['uses' => 'SalesOrderController@store']);
         Route::post('{id}', ['uses' => 'SalesOrderController@update']);
-        Route::post('{id}/close', ['uses' => 'SalesOrderController@close']);
-        Route::post('{id}/respond', ['uses' => 'SalesOrderController@respond']);
     });
 });

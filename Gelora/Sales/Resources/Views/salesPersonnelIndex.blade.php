@@ -28,6 +28,7 @@
     <script type="text/javascript" src="/standard/localforage/localforage.min.js"></script>
     <script type="text/javascript" src="/standard/uri-1.17.0/uri.min.js"></script>
     <script type="text/javascript" src="/standard/moment-2.11.2/moment.min.js"></script>
+    <script type="text/javascript" src="/custom/chart/Chart.min.js"></script>
 
     <script type="text/javascript" src="/solumax/setting/app.js"></script>
     <script type="text/javascript" src="/solumax/dependencies/all.js"></script>
