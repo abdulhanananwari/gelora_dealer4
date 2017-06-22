@@ -1,4 +1,4 @@
-geloraSalesAdmin
+geloraSalesShared
     .controller('SalesOrderShowCreditController', function(
         $state,
         SalesOrderModel, ConfigModel) {

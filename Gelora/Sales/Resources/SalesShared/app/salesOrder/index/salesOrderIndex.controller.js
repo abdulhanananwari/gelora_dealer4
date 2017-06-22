@@ -1,4 +1,4 @@
-geloraSalesAdmin
+geloraSalesShared
 	.controller('SalesOrderIndexController', function(
 		$timeout, $scope, $compile,
 		SalesOrderModel) {

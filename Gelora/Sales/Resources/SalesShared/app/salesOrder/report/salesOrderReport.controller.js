@@ -1,4 +1,4 @@
-geloraSalesAdmin
+geloraSalesShared
     .controller('SalesOrderReportController', function(
         SalesOrderModel, LinkFactory, JwtValidator) {
 

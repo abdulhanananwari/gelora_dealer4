@@ -1,4 +1,4 @@
-geloraSalesAdmin
+geloraSalesShared
     .controller('SalesOrderShowUnitController', function(
         $state,
         SalesOrderModel, ConfigModel) {
