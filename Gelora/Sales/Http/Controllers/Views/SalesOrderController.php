@@ -22,8 +22,8 @@ class SalesOrderController extends Controller {
         $unit = $salesOrder->unit;
 
         $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                ->first()->data_1;
-        
+                        ->first()->data_1;
+
         $viewData = [
             'salesOrder' => $salesOrder,
             'unit' => $unit,
@@ -34,13 +34,14 @@ class SalesOrderController extends Controller {
         return view()->make('gelora.sales::delivery.generateDeliveryNote')
                         ->with('viewData', $viewData);
     }
+
     public function generateReceiptItemHandover($id, Request $request) {
-        
+
         $salesOrder = $this->salesOrder->find($id);
-        
+
         $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
                         ->first()->data_1;
-        
+
         $outgoing = $salesOrder->subDocument()->polReg()
                 ->get('items.' . $request->get('item_name') . '.outgoing');
 
@@ -53,4 +54,60 @@ class SalesOrderController extends Controller {
         return view()->make('gelora.sales::polReg.generateReceiptItemHandover')
                         ->with('viewData', $viewData);
     }
+
+    public function generateInvoice($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $validation = $salesOrder->validate()->leasingOrder()->onGenerateInvoice();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
+                        ->first()->data_1;
+
+        $leasingOrder = $salesOrder->subDocument()->leasingOrder();
+        $unit = $salesOrder->unit;
+        $viewData = [
+            'salesOrder' => $salesOrder,
+            'unit' => $unit,
+            'leasingOrder' => $leasingOrder,
+            'jwt' => \ParsedJwt::getJwt(),
+            'tenantInfo' => $tenantInfo,
+            'requestUri' => $request->getURI(),
+        ];
+        
+        $salesOrder->action()->leasingOrder()->onGenerateInvoice();
+
+        return view()->make('gelora.sales::leasingOrder.generateInvoice')
+                        ->with('viewData', $viewData);
+    }
+
+    public function generateAgreementBPKB($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
+                        ->first()->data_1;
+
+        $settingAgreementBpkb = (object) \Setting::where('object_type', 'AGREEMENT_BPKB')
+                        ->first()->data_1;
+
+        $leasingOrder = $salesOrder->subDocument()->leasingOrder();
+        $leasing = $leasingOrder->leasing['mainLeasing'];
+
+        $viewData = [
+            'leasingOrder' => $leasingOrder,
+            'settingAgreementBpkb' => $settingAgreementBpkb,
+            'salesOrder' => $salesOrder,
+            'leasing' => $leasing,
+            'jwt' => \ParsedJwt::getJwt(),
+            'tenantInfo' => $tenantInfo,
+        ];
+
+        return view()->make('gelora.sales::leasingOrder.generateAgreementBPKB')
+                        ->with('viewData', $viewData);
+    }
+
 }
