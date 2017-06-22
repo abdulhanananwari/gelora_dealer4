@@ -15,7 +15,6 @@ class SalesOrderController extends Controller {
 
     public function __construct() {
         parent::__construct();
-
         $this->salesOrder = new \Gelora\Sales\App\SalesOrder\SalesOrderModel();
         $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderReportTransformer();
     }
@@ -30,8 +29,8 @@ class SalesOrderController extends Controller {
                     'foreignField' => 'id',
                     'as' => 'unit'
                 ]
-            ],
-                ['$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
+            ], [
+                '$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
         ];
 
         if ($request->has('delivery_from')) {
@@ -99,11 +98,18 @@ class SalesOrderController extends Controller {
             );
         });
 
-        if (count($salesOrders) == 0) {
-            return 'Tidak ada data penjualan untuk kriteria diatas';
-        }
+        if ($request->get('dashboard') == 'true') {
+            
+            return $this->formatData($this->transformer->transformCollection($salesOrders));
+            
+        } else {
 
-        return $this->createCsv($this->transformer->transformCollection($salesOrders));
+            if (count($salesOrders) == 0) {
+                return 'Tidak ada data penjualan untuk kriteria diatas';
+            }
+            
+            return $this->createCsv($this->transformer->transformCollection($salesOrders));
+        }
     }
 
 }

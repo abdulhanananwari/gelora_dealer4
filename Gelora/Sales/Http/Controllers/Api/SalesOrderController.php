@@ -31,7 +31,7 @@ class SalesOrderController extends Controller {
 
         if ($request->has('from')) {
             $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay();
-            $query->where($request->get('time_type', 'created_at'), '>=', $from);
+            $query->where($request->get('time_type', 'delivery.created_at'), '>=', $from);
         }
 
         if ($request->has('until')) {
