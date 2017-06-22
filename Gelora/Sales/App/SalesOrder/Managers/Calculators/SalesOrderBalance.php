@@ -18,12 +18,11 @@ class SalesOrderBalance {
         
         $transactions = $this->salesOrder->calculate()->subBalance()->transaction();
         $receivables = $this->salesOrder->calculate()->subBalance()->receivable();
-        $leasingOrder = $this->salesOrder->selectedLeasingOrder;
-        
+        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
+      
         $leasingPayable = $leasingOrder ? $leasingOrder->leasing_payable : 0;
         $paymentUnreceived = $salesOrderAndExtras['grand_total'] - $leasingPayable -
                 ($transactions['total'] + $receivables['total']);
-        
         return [
             'details' => [
                 'salesOrderAndExtras' => $salesOrderAndExtras,

@@ -262,6 +262,7 @@ class SpkPdf {
     protected function generateCreditData() {
 
         $width = $this->pdf->GetPageWidth();
+        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
 
         function posX($width, $col) {
             return (($width - 10) / 6 * $col) + 15;
@@ -293,25 +294,25 @@ class SpkPdf {
         $this->pdf->Line(0 + 15, $y, $width - 15, $y);
         $this->pdf->Ln(2);
 
-        foreach ($this->salesOrder->leasingOrders as $leasingOrder) {
+       
 
-            $this->pdf->SetX(posX($width, 0));
-            $this->pdf->Cell(0, 5, $leasingOrder->mainLeasing['name'], 0, 0);
+        $this->pdf->SetX(posX($width, 0));
+        $this->pdf->Cell(0, 5, $leasingOrder->mainLeasing['name'], 0, 0);
 
-            $this->pdf->SetX(posX($width, 2));
-            $this->pdf->Cell(0, 5, number_format($leasingOrder->dp_po), 0, 0);
+        $this->pdf->SetX(posX($width, 2));
+        $this->pdf->Cell(0, 5, number_format($leasingOrder->dp_po), 0, 0);
 
-            $this->pdf->SetX(posX($width, 3));
-            $this->pdf->Cell(0, 5, number_format($leasingOrder->tenor), 0, 0);
+        $this->pdf->SetX(posX($width, 3));
+        $this->pdf->Cell(0, 5, number_format($leasingOrder->tenor), 0, 0);
 
-            $this->pdf->SetX(posX($width, 4));
-            $this->pdf->Cell(0, 5, number_format($leasingOrder->cicilan), 0, 0);
+        $this->pdf->SetX(posX($width, 4));
+        $this->pdf->Cell(0, 5, number_format($leasingOrder->cicilan), 0, 0);
 
-            $this->pdf->SetFont('Arial', '', 7);
-            $this->pdf->SetX(posX($width, 5));
-            $this->pdf->MultiCell(0, 5, $leasingOrder->retrieve()->statusText());
-            $this->pdf->SetFont('Arial', '', 10);
-        }
+        $this->pdf->SetFont('Arial', '', 7);
+        $this->pdf->SetX(posX($width, 5));
+        $this->pdf->MultiCell(0, 5, $this->salesOrder->retrieve()->leasingOrder()->statusText());
+        $this->pdf->SetFont('Arial', '', 10);
+        
 
         $this->generateLine();
     }

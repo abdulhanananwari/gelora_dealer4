@@ -92,7 +92,6 @@ class OnValidate {
     protected function calculateBalance() {
 
         $balance = $this->salesOrder->calculate()->SalesOrderBalance()['payment_unreceived'];
-
         if ($balance == 0) {
             return true;
         } else {
