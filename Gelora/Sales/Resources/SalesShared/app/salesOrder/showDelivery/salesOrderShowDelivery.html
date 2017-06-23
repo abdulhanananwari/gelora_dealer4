@@ -28,6 +28,9 @@
                 <button ng-show="selectedUnit" class="btn btn-block btn-danger" ng-click="ctrl.delivery.generate(ctrl.salesOrder,selectedUnit)">Generate Surat Jalan</button>
             </div>
             <div ng-show="ctrl.salesOrder.delivery.generated_at && !ctrl.salesOrder.delivery.handover_at">
+                <div>
+                    <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateNote(ctrl.salesOrder)" >Cetak Surat Jalan</button><br>
+                </div>
                 <div id="scan">
                     <button ng-hide="ctrl.salesOrder.delivery.scanner.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" data-toggle="modal" data-target="#barcode-scan-modal">Scan Barcode</button>
                     <label ng-show="ctrl.salesOrder.delivery.scanner.timestamp">Unit discan {{ ctrl.salesOrder.delivery.scanner.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.scanner.name }}</label>
