@@ -3,8 +3,8 @@ var geloraSalesPersonnel = angular
         'ui.router', 'angular-jwt',
         'Solumax.Loading', 'Solumax.ErrorInterceptor', 'Solumax.JwtManager',
         'Solumax.TenantDatabaseConnection', 'Solumax.PageTitle', 'Solumax.Calculator',
-        'Solumax.Entity', 'Solumax.Pagination',
-        'Solumax.Setting', 'Solumax.FileManager',
+        'Solumax.Entity', 'Solumax.Pagination', 'Solumax.Messenger',
+        'Solumax.Setting', 'Solumax.FileManager',  'Solumax.TransactionPlugins',
         'Gelora.BaseShared', 'Gelora.SalesShared', 'Gelora.HumanResourceShared',
         'Gelora.Vehicle.Shared'
     ])
@@ -12,7 +12,8 @@ var geloraSalesPersonnel = angular
 
         var appFactory = {};
 
-        appFactory.moduleId = '30000';
+        appFactory.moduleId = '30000'
+        appFactory.type = 'personnel'
 
         return appFactory;
     })
@@ -20,5 +21,9 @@ var geloraSalesPersonnel = angular
 
         LinkFactory.dealer.sales.prospect = {
             base: BaseLinkFactory.apps.dealer.sales + 'api-sales-personnel/prospect/',
+        }
+
+        LinkFactory.dealer.sales.salesOrder = {
+            base: BaseLinkFactory.apps.dealer.sales + 'api-sales-personnel/sales-order/',
         }
     })

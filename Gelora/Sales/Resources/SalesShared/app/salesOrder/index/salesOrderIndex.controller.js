@@ -4,7 +4,9 @@ geloraSalesShared
 
         var vm = this
 
-        vm.filter = {}
+        vm.filter = {
+            paginate: 20
+        }
 
         vm.load = function(filter) {
 
@@ -17,4 +19,5 @@ geloraSalesShared
                     vm.meta = res.data.meta
                 })
         }
+        vm.load()
     })

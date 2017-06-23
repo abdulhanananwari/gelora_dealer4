@@ -4,7 +4,7 @@
         <div class="well">
             <h4>Request Pengiriman</h4>
             <label>Jenis Delivery</label>
-            <select ng-options="deliveryType.code as deliveryType.name for deliveryType in ctrl.salesOrder.delivery.ypes" ng-model="ctrl.salesOrder.deliveryRequest.type"></select>
+            <select ng-options="deliveryType.code as deliveryType.name for deliveryType in ctrl.deliveryTypes" ng-model="ctrl.salesOrder.deliveryRequest.type"></select>
             <label>Special Request</label>
             <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.deliveryRequest.request"></textarea>
             <hr>

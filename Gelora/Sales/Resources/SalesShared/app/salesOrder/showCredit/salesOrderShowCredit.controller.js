@@ -1,9 +1,12 @@
 geloraSalesShared
     .controller('SalesOrderShowCreditController', function(
         $state,
-        SalesOrderModel, ConfigModel) {
+        LinkFactory, JwtValidator, ConfigModel, AppFactory,
+        SalesOrderModel) {
 
         var vm = this
+
+        vm.appType = AppFactory.type
 
         SalesOrderModel.get($state.params.id)
             .then(function(res) {
@@ -31,5 +34,13 @@ geloraSalesShared
                     alert('Berhasil menyambungkan PO ' + leasingOrderId)
                     vm.salesOrder = res.data.data
                 })
+        }
+        vm.generate = {
+            invoice: function() {
+                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+            },
+            agreementBPKB: function() {
+                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-agreementBPKB/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+            }
         }
     })

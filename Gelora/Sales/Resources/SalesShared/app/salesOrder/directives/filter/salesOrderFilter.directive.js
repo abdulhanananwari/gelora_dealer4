@@ -1,28 +1,27 @@
 geloraSalesShared
-	.directive('salesOrderFilter', function(
-		$timeout,
-		SalesOrderModel) {
+    .directive('salesOrderFilter', function(
+        $timeout,
+        SalesOrderModel) {
 
-		return {
-			restrict: "AE",
-			templateUrl: '/gelora/sales-shared/app/salesOrder/directives/filter/salesOrderFilter.html',
-			scope: {
-				filter: '='
-			},
-			link: function(scope, element, attrs) {
-				
-				_.assignWith(scope.filter, {
-					time_type: 'created_at',
-					order_by: 'created_at',
-					order: 'desc'
-				})
+        return {
+            restrict: "AE",
+            templateUrl: '/gelora/sales-shared/app/salesOrder/directives/filter/salesOrderFilter.html',
+            scope: {
+                filter: '='
+            },
+            link: function(scope, element, attrs) {
 
-				$('.date').datepicker({dateFormat: "yy-mm-dd"});
+                _.assignWith(scope.filter, {
+                    order_by: 'created_at',
+                    order: 'desc'
+                })
 
-				scope.customerTypes = ['Perorangan', 'Badan Usaha']
-				scope.paymentTypes = {'credit': 'Kredit', 'cash': 'Kas'}
-				scope.statuses = {'validated' : 'Validasi', 'delivery_generated' : 'Sudah Buat Surat Jalan', 'delivery_handover_created': 'Sudah serah terima', 'financial_completed' : 'Konsumen yang sudah lunas'}
-			    scope.dateTypes = {'created_at' : 'Tanggal SPK', 'validated_at' : 'Tanggal Validasi','delivery_generated_at':'Tanggal Buat Surat Jalan', 'delivery_handover_created_at': 'Tanggal Serah terima kendaraan'}
-			}
-		}
-	})
+                $('.date').datepicker({ dateFormat: "yy-mm-dd" });
+
+                scope.customerTypes = ['Perorangan', 'Badan Usaha']
+                scope.paymentTypes = { 'credit': 'Kredit', 'cash': 'Kas' }
+                scope.statuses = { 'validated': 'Validasi', 'delivery_generated': 'Sudah Buat Surat Jalan', 'delivery_handover_created': 'Sudah serah terima', 'financial_completed': 'Konsumen yang sudah lunas' }
+                scope.dateTypes = { 'created_at': 'Tanggal SPK', 'validated_at': 'Tanggal Validasi', 'delivery.generated_at': 'Tanggal Buat Surat Jalan', 'delivery.handover.created_at': 'Tanggal Serah terima kendaraan' }
+            }
+        }
+    })

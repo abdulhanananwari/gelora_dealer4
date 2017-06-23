@@ -16,6 +16,5 @@ class OnCreate {
         
         $this->salesOrder->assignEntityData('creator');
         $this->salesOrder->save();
-        $this->salesOrder->saveId();
     }
 }

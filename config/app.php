@@ -249,6 +249,7 @@ return [
         'SolTransaction' => \Solumax\TransactionClient\Facade\SolTransactionFacade::class,
         'SolLog' => Solumax\Logger\App\Log\Facade\LogFacade::class,
         'SolFileManager' => \Solumax\FileManager\App\File\Facade\FileFacade::class,
+	'SolAuthClient' => Solumax\AuthClient\Facade\SolAuthClientFacade::class,
     ],
 
 ];

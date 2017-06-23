@@ -38,7 +38,7 @@ class OnValidate {
         if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder)) {
             return ['Leasing order harus dipilih dulu untuk penjualan kredit'];
         }
-        
+
         if ($this->salesOrder->payment_type == 'credit') {
 
             $leasingOrderValidation = $this->checkIfPoIsValid();
@@ -92,7 +92,6 @@ class OnValidate {
     protected function calculateBalance() {
 
         $balance = $this->salesOrder->calculate()->SalesOrderBalance()['payment_unreceived'];
-
         if ($balance == 0) {
             return true;
         } else {

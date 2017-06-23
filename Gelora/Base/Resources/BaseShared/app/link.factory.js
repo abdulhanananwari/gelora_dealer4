@@ -118,6 +118,9 @@ geloraBaseShared
                         },
                         polReg: {
                             views : apps.dealer.sales + 'views/sales-order/pol-reg/',
+                        },
+                        leasingOrder: {
+                            views : apps.dealer.sales + 'views/sales-order/leasing-order/',
                         }
                     },
                     prospect: {

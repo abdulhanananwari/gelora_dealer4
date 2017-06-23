@@ -40,11 +40,12 @@ class PriceDifferences {
         }
         
         // Perbedaan dengan OTR Leasing Order
+        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
         
-        if ($this->salesOrder->selectedLeasingOrder) {
+        if ($leasingOrder) {
             
             $data['price_difference_with_leasing_order'] =
-                    $this->salesOrder->selectedLeasingOrder->on_the_road - 
+                    $leasingOrder->on_the_road - 
                     $this->salesOrder->on_the_road;
         }
         
