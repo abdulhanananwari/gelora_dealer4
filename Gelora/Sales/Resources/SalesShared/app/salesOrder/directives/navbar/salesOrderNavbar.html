@@ -19,7 +19,7 @@
                 <li><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>
                 <li><a ui-sref="salesOrderShowCddb({id:salesOrder.id})">CDDB</a></li>
                 <li><a ui-sref="salesOrderShowApproval({id:salesOrder.id})">Kunci & Validasi</a></li>
-                <li ng-show="ctrl.salesOrder.validated_at"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
+                <li ng-show="salesOrder.validated_at"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
                 <li><a ui-sref="salesOrderShowDocumentation({id:salesOrder.id})">Dokumen</a></li>
             </ul>
         </div>
