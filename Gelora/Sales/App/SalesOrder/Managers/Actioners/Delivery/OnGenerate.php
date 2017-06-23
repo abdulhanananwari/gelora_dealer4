@@ -4,6 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Delivery;
 
 use Solumax\PhpHelper\App\Mongo\SubDocument;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
+use MongoDB\BSON\ObjectID;
 
 class OnGenerate {
 
@@ -28,7 +29,7 @@ class OnGenerate {
         $delivery->unit = $this->processUnit($unit);
 
         $this->salesOrder->delivery = $delivery;
-        $this->salesOrder->unit_id = $delivery->unit->id;
+        $this->salesOrder->unit_id = new ObjectID($delivery->unit->_id);
     }
 
     protected function processUnit($unit) {

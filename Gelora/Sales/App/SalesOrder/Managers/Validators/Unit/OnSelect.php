@@ -22,9 +22,9 @@ class OnSelect {
             return ['Unit sudah dipakai di penjualan lain. ID Penjualan: ' . $unit->sales_order_id];
         }
 
-//        if ($unit->current_status !== 'IN_STOCK_SELLABLE') {
-//            return ['Unit tidak dapat dijual'];
-//        }
+       if ($unit->current_status !== 'IN_STOCK_SELLABLE') {
+           return ["Status unit tidak dapat dijual\nStatus sekarang: " . $unit->current_status];
+       }
 
         if (is_null($unit->pdi_at)) {
             return ['Unit belum di PDI'];

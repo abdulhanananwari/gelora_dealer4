@@ -18,6 +18,8 @@ class OnCancel {
 
         $this->salesOrder->unset('unit');
         $this->salesOrder->unset('delivery');
+        
+        $this->salesOrder->save();
     }
     
     protected function processUnit($unit) {

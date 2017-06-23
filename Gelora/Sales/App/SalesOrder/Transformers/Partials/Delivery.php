@@ -16,6 +16,8 @@ class Delivery {
         $transformed = [
             'generated_at' => $delivery->toCarbon('generated_at') ? $delivery->toCarbon('generated_at')->toDateTimeString() : null,
             'generator' => (object) $delivery->generator,
+            'delivery_note_generator' => (object) $delivery->delivery_note_generator,
+            'delivery_note_generated_count' => $delivery->delivery_note_generated_count,
             'scanner' => (object) $delivery->scanner,
             'travel_starter' => (object) $delivery->travel_starter,
             'handover' => $handover,
@@ -23,5 +25,6 @@ class Delivery {
 
         return $transformed;
     }
+    
 
 }
