@@ -5,9 +5,9 @@ geloraSalesShared
         var vm = this
 
         vm.filter = {
-            paginate: 20
+            paginate: 20,
         }
-
+        
         vm.load = function(filter) {
 
         	vm.filter.page = 
