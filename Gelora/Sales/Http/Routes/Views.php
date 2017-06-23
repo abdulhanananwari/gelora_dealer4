@@ -6,7 +6,7 @@ $middlewares = ['wala.jwt.request.parser', 'wala.jwt.request.validation',
  Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $middlewares], function() {
  	
  		Route::group(['prefix' => 'sales-order'], function() {
- 			Route::get('delivery/print/{id}',['uses' => 'SalesOrderController@generateDeliveryNote']);
+ 			Route::get('delivery/generate-delivery-note/{id}',['uses' => 'SalesOrderController@generateDeliveryNote']);
  			Route::get('pol-reg/generate-receipt-costs/{id}', ['uses' => 'SalesOrderController@generateRecepitCosts']);
  			Route::get('pol-reg/generate-receipt-item-handover/{id}', ['uses' => 'SalesOrderController@generateReceiptItemHandover']);
  			Route::get('leasing-order/generate-invoice/{id}',['uses' => 'SalesOrderController@generateInvoice']);

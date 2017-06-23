@@ -45,7 +45,7 @@
                 <td style="width: 40%;">
                     <p><strong>BUKTI TERIMA KENDARAAN</strong></p>
                     <P>No SPK : {{ $viewData['salesOrder']->id }} </P>
-
+                    <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
                     <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
                 </td>
             </tr>		
@@ -58,19 +58,6 @@
                     <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
-                </td>
-               
-              <!--   <td style="float: right;">
-                    <p>Delivery Request</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['name'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['phone_number'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['address'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['type'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['request'] }}</p>
-                </td>
-                 -->
-                <td>
-                    <p>No Spk: {{ $viewData['salesOrder']->id }} </p>
                 </td>
             </tr>
         </table>
