@@ -114,7 +114,7 @@ geloraBaseShared
                         report: apps.dealer.sales + 'report/sales-order',
                         delivery: {
                             scan: apps.dealer.sales + 'api/sales-order/delivery/scan',
-                            print: apps.dealer.sales + 'views/sales-order/delivery/print/',
+                            views: apps.dealer.sales + 'views/sales-order/delivery/',
                         },
                         polReg: {
                             views : apps.dealer.sales + 'views/sales-order/pol-reg/',
