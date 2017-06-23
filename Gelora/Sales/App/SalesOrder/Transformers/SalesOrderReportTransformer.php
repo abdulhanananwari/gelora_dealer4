@@ -41,7 +41,7 @@ class SalesOrderReportTransformer {
             
             
             'Nomor PO' =>$leasingOrder->po_number,
-            'Nama Leasing' => $leasingOrder->mainLeasing['name'],
+            'Nama Leasing' => $leasingOrder->get('mainLeasing.name'),
             'Tenor' => $leasingOrder->tenor,
             'Dp PO' => $leasingOrder->dp_po,
             'Memo Leasing' => $leasingOrder->note,
