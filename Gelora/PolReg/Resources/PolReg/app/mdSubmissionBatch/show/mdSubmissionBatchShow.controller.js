@@ -19,7 +19,7 @@ geloraPolReg
 
             } else {
 
-                MdSubmissionBatchModel.store(registrationBatch) 
+                MdSubmissionBatchModel.store(registrationBatch)
                     .then(function(res) {
                         alert('Berhasil disimpan')
                         $state.go('mdSubmissionBatchShow', { id: res.data.data.id })
@@ -38,10 +38,15 @@ geloraPolReg
         }
 
         vm.sendEmail = function(registrationBatch, email) {
+            
+            document.dispatchEvent(new CustomEvent("loading"))
 
             MdSubmissionBatchModel.sendEmail(registrationBatch.id, { email: email })
                 .then(function(res) {
+
+                    alert('Berhasil mengirim email')
                     assignData(res)
+                    document.dispatchEvent(new CustomEvent("stop-loading"))
                 })
         }
 

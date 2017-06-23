@@ -16,7 +16,9 @@ class SalesOrderReportTransformer {
     }
 
     public function transform(SalesOrderModel $salesOrder) {
-   
+        
+        $leasingOrder = $salesOrder->subDocument()->leasingOrder();
+
         $data = [
             'id' => $salesOrder->_id,
             '_id' => $salesOrder->_id,
@@ -36,12 +38,14 @@ class SalesOrderReportTransformer {
             
             'Biaya dan Hadiah' => $salesOrder->retrieve()->salesOrderExtraString(),
             
-            'Nomor PO' =>$salesOrder->leasingOrder['po_number'],
-            'Nama Leasing' => $salesOrder->leasingOrder['mainLeasing']['name'],
-            'Tenor' => $salesOrder->leasingOrder['tenor'],
-            'Dp PO' => $salesOrder->leasingOrder['dp_po'],
-            'Memo Leasing' => $salesOrder->leasingOrder['note'],
-            'Jumlah Pencairan' => $salesOrder->leasingOrder['leasing_payable'],
+            
+            
+            'Nomor PO' =>$leasingOrder->po_number,
+            'Nama Leasing' => $leasingOrder->mainLeasing['name'],
+            'Tenor' => $leasingOrder->tenor,
+            'Dp PO' => $leasingOrder->dp_po,
+            'Memo Leasing' => $leasingOrder->note,
+            'Jumlah Pencairan' => $leasingOrder->leasing_payable,
             
             'Tgl DO Motor' => $salesOrder->unit->sj_date,
             'Nomor Surat Jalan' => $salesOrder->unit->sj_number,
