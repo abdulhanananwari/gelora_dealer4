@@ -38,8 +38,10 @@ class SalesOrderReportTransformer {
             
             'Biaya dan Hadiah' => $salesOrder->retrieve()->salesOrderExtraString(),
             
+            
+            
             'Nomor PO' =>$leasingOrder->po_number,
-            'Nama Leasing' => $leasingOrder->mainLeasing->name,
+            'Nama Leasing' => $leasingOrder->mainLeasing['name'],
             'Tenor' => $leasingOrder->tenor,
             'Dp PO' => $leasingOrder->dp_po,
             'Memo Leasing' => $leasingOrder->note,
