@@ -59,17 +59,6 @@
                     <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
                 </td>
-               
-              <!--   <td style="float: right;">
-                    <p>Delivery Request</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['name'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['phone_number'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['address'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['type'] }}</p>
-                    <p>{{ $viewData['salesOrder']->delivery_rerquest['request'] }}</p>
-                </td>
-                 -->
-               
             </tr>
         </table>
         <br>

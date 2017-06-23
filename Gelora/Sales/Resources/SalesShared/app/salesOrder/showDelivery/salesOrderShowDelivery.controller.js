@@ -38,8 +38,8 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            generateNote: function() {
-               window.open(LinkFactory.dealer.sales.salesOrder.delivery.views + 'generate-note/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+            generateDeliveryNote: function() {
+               window.open(LinkFactory.dealer.sales.salesOrder.delivery.views + 'generate-delivery-note/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
             scan: function(salesOrder, scannedUnit) {
                 SalesOrderModel.delivery.scan(salesOrder.id, scannedUnit)

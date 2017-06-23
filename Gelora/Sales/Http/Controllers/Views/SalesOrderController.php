@@ -16,7 +16,7 @@ class SalesOrderController extends Controller {
         $this->dataName = 'salesOrders';
     }
 
-    public function generateNote($id, Request $request) {
+    public function generateDeliveryNote($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
         $unit = $salesOrder->unit;
@@ -31,7 +31,7 @@ class SalesOrderController extends Controller {
             'jwt' => \ParsedJwt::getJwt(),
         ];
 
-        return view()->make('gelora.sales::delivery.generateNote')
+        return view()->make('gelora.sales::delivery.generateDeliveryNote')
                         ->with('viewData', $viewData);
     }
 
