@@ -2,10 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="gelora_dealer">
-            <file>file:/D:/Dev/Solumax1/gelora_dealer4/routes/web.php</file>
-            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Solumax/AuthClient/Facade/SolAuthClient.php</file>
-            <file>file:/D:/Dev/Solumax1/gelora_dealer4/Gelora/Sales/App/SalesOrder/Transformers/Partials/LeasingOrder.php</file>
-        </group>
+        <group name="gelora_dealer"/>
     </open-files>
 </project-private>
