@@ -15,6 +15,7 @@
                         <th>Tanggal</th>
                         <th>Kunci</th>
                         <th>Validasi</th>
+                        <th>Pengiriman</th>
                         <th>Tagih Leasing</th>
                         <th>Laporan ke MD</th>
                         <th>Serah Ke Biro Jasa</th>
@@ -32,6 +33,7 @@
                         <td>{{salesOrder.created_at | fromDateTimeString}}</td>
                         <td>{{salesOrder.locked_at  | fromDateTimeString }}</td>
                         <td>{{salesOrder.validated_at | fromDateTimeString }}</td>
+                        <td>{{salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.leasingOrder.invoice_generated_at.date | fromDateTimeString}}</td>
                         <td><a ng-if="salesOrder.polReg.md_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-md-submission-batch/' + salesOrder.polReg.md_submission_batch_id}}">Buka</a></td>
                         <td><a ng-if="salesOrder.polReg.agency_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-agency-submission-batch/' + salesOrder.polReg.agency_submission_batch_id}}">Buka</a></td>

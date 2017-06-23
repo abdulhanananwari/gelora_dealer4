@@ -86,6 +86,7 @@ class DeliveryController extends SalesOrderController {
 
         $salesOrder = $this->salesOrder->find($id);
         
+        // Nge check udah handover belum. Kalau belum boleh di cancel
         $validation = $salesOrder->validate()->delivery()->onHandoverPreAssign();
         if ($validation !== true) {
             return $this->formatErrors($validation);

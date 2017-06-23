@@ -43,21 +43,25 @@
                     <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
                 </td>
                 <td style="width: 40%;">
-                    <p><strong>BUKTI TERIMA KENDARAAN</strong></p>
-                    <P>No SPK : {{ $viewData['salesOrder']->id }} </P>
-                    <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
-                    <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
+                    <p><strong>SURAT JALAN</strong></p>
+                    <img style="max-height: 50%;" src="{{ $viewData['salesOrder']->retrieve()->barcode() }}" class="img-responsive">
+                    <P>{{ $viewData['salesOrder']->id }} </p>
                 </td>
             </tr>		
         </table>
 
         <table class="table">
             <tr>
-                <td>
+                <td style="width: 50%;">
                     <p>Kepada,</p>
                     <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
+                </td>
+                <td style="width: 50%;">
+                    <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
+                    <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
+                    <p>Cetakan Ke: {{ $viewData['delivery']->delivery_note_generated_count }}</p>
                 </td>
             </tr>
         </table>
@@ -103,7 +107,7 @@
             </tr>
         </table>
 
-        <p style="text-align: justify;">Periksa Kondisi Kendaraan anda , cek no mesin di kendaraan dengan surat jalan, jika ada kelainan di kendaraan atau beda no mesin dikendaraan dengan surat jalan, jangan tanda tangani surat ini. klaim setelah ditanda tangani surat ini tidak kami layani, Kecuali yang menyangkut ke garansi HONDA</p>
+        <p style="text-align: justify;">Periksa Kondisi Kendaraan anda, cek no mesin di kendaraan dengan surat jalan. jika ada kelainan di kendaraan atau beda no mesin dikendaraan dengan surat jalan, jangan tanda tangani surat ini. Klaim setelah ditanda tangani surat ini tidak kami layani. Kecuali yang menyangkut ke garansi HONDA</p>
 
         <script type="text/javascript">
             window.print()

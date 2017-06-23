@@ -19,6 +19,7 @@ class SalesOrderController extends Controller {
     public function generateDeliveryNote($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->action()->delivery()->onGenerateDeliveryNote();
         $unit = $salesOrder->unit;
 
         $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
@@ -26,6 +27,7 @@ class SalesOrderController extends Controller {
 
         $viewData = [
             'salesOrder' => $salesOrder,
+            'delivery' => $salesOrder->subDocument()->delivery(),
             'unit' => $unit,
             'tenantInfo' => $tenantInfo,
             'jwt' => \ParsedJwt::getJwt(),

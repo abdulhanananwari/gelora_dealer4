@@ -28,20 +28,19 @@
                 <button ng-show="selectedUnit" class="btn btn-block btn-danger" ng-click="ctrl.delivery.generate(ctrl.salesOrder,selectedUnit)">Generate Surat Jalan</button>
             </div>
             <div ng-show="ctrl.salesOrder.delivery.generated_at && !ctrl.salesOrder.delivery.handover_at">
-            
-                <div ng-hide="ctrl.salesOrder.delivery.travel_starter.timestamp || ctrl.salesOrder.delivery.handover.created_at">
-                    <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)" >Cetak Surat Jalan</button><br>
+                <div ng-hide="ctrl.salesOrder.delivery.handover.created_at">
+                    <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
+                    <label ng-show="ctrl.salesOrder.delivery.delivery_note_generator.timestamp"><br>SJ sudah dicetak {{ ctrl.salesOrder.delivery.delivery_note_generated_count }} kali, terakhir pada {{ ctrl.salesOrder.delivery.delivery_note_generator.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.delivery_note_generator.name }}<br><br></label><br>
                 </div>
-                    
-                
                 <div id="scan">
                     <button ng-hide="ctrl.salesOrder.delivery.scanner.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" data-toggle="modal" data-target="#barcode-scan-modal">Scan Barcode</button>
                     <label ng-show="ctrl.salesOrder.delivery.scanner.timestamp">Unit discan {{ ctrl.salesOrder.delivery.scanner.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.scanner.name }}</label>
+                    <br>
                 </div>
-                <br>
                 <div id="travel-start">
                     <button ng-hide="ctrl.salesOrder.delivery.travel_starter.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" ng-click="ctrl.delivery.travelStart(ctrl.salesOrder)">Mulai Pengiriman</button>
                     <label ng-show="ctrl.salesOrder.delivery.travel_starter.timestamp">Pengiriman dimulai {{ ctrl.salesOrder.delivery.travel_starter.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.travel_starter.name }}</label>
+                    <br>
                 </div>
                 <div id="handover">
                     <h4>Serah Terima</h4>
