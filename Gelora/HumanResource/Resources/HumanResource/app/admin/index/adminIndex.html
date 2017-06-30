@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Admin</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Slack</th>
+                        <th>Hapus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="admin in ctrl.admins">
+                        <td>{{ admin.user.name }}</td>
+                        <td>{{ admin.user.email }}</td>
+                        <td><input type="text" ng-model="admin.slack"></td>
+                        <td>
+                            <button class="btn btn-block btn-xs btn-danger" ng-click="ctrl.delete(admin)">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-block btn-danger" ng-click="ctrl.store()">Simpan</button>
+        <hr>
+        <label>Tambah</label>
+        <account-finder-modal selected-user="user" on-user-selected="ctrl.add(user)"></account-finder-modal>
+    </div>
+</div>
