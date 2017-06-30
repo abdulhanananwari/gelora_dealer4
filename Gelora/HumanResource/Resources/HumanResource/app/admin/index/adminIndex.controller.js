@@ -47,13 +47,16 @@ geloraHumanResource
                 }
             }, function() {
 
-                vm.adminSlackChannels = [{
-                    name: 'PROSPECT_SPK',
-                    description: 'Penginputan SPK dan prospek'
-                }, {
-                    name: 'SPK_VALIDATION',
-                    description: 'Request Validasi SPK'
-                }]
+                vm.adminSlackChannels = {
+                    'PROSPECT_SPK': {
+                        name: 'PROSPECT_SPK',
+                        description: 'Penginputan SPK dan prospek'
+                    },
+                    'SPK_VALIDATION': {
+                        name: 'SPK_VALIDATION',
+                        description: 'Request Validasi SPK'
+                    }
+                }
             })
 
     })

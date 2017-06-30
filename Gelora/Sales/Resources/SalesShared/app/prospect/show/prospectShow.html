@@ -210,6 +210,6 @@
     <input type="text" ng-model="ctrl.create_sales_order_response_note">
     <p><small>Dibuat: {{ ctrl.prospect.create_sales_order_responded_at | date }} ({{ ctrl.prospect.create_sales_order_responder.name }})</small></p>
     <button ng-if="!ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" ng-click="ctrl.respond(ctrl.prospect)">Respon dan Generate Sales Order</button>
-    <a ng-if="ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" href="/sales-admin/redirect-app/sales-order/?id={{ ctrl.prospect.sales_order_id }}">Buka Sales Order</a>
+    <a ng-if="ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" href="/sales/redirect-app/sales-order/?id={{ ctrl.prospect.sales_order_id }}">Buka Sales Order</a>
 </div>
 <br>

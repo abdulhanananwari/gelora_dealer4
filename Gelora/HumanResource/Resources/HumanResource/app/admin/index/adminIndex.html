@@ -36,14 +36,14 @@
                     <tr>
                     	<th>Nama</th>
                         <th>Fungsi</th>
-                        <th>Channel</th>
+                        <th>Webhook</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="channel in ctrl.adminSlackChannels">
                         <td>{{ channel.name }}</td>
                         <td>{{ channel.description }}</td>
-                        <td><input type="text" ng-model="channel.channel"></td>
+                        <td><input type="text" ng-model="channel.webhook"></td>
                     </tr>
                 </tbody>
             </table>
