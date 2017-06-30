@@ -16,12 +16,21 @@ geloraHumanResource
             _.remove(vm.admins, admin)
         }
 
-        vm.store = function() {
+        vm.store = {
+            admin: function() {
 
-            SettingModel.store({ unique: true, object_type: 'ADMINS', data_1: vm.admins })
-                .then(function(res) {
-                    alert('Setting berhasil disimpan')
-                })
+                SettingModel.store({ unique: true, object_type: 'ADMINS', data_1: vm.admins })
+                    .then(function(res) {
+                        alert('Setting berhasil disimpan')
+                    })
+            },
+            channel: function() {
+
+                SettingModel.store({ unique: true, object_type: 'ADMIN_SLACK_CHANNELS', data_1: vm.adminSlackChannels })
+                    .then(function(res) {
+                        alert('Setting berhasil disimpan')
+                    })
+            }
         }
 
         SettingModel.index({ unique: true, object_type: 'ADMINS' })
@@ -29,6 +38,22 @@ geloraHumanResource
                 if (res.data.data.data_1) {
                     vm.admins = res.data.data.data_1
                 }
+            })
+
+        SettingModel.index({ unique: true, object_type: 'ADMIN_SLACK_CHANNELS' })
+            .then(function(res) {
+                if (res.data.data.data_1) {
+                    vm.adminSlackChannels = res.data.data.data_1
+                }
+            }, function() {
+
+                vm.adminSlackChannels = [{
+                    name: 'PROSPECT_SPK',
+                    description: 'Penginputan SPK dan prospek'
+                }, {
+                    name: 'SPK_VALIDATION',
+                    description: 'Request Validasi SPK'
+                }]
             })
 
     })
