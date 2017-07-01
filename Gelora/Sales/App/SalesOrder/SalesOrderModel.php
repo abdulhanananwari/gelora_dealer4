@@ -9,7 +9,7 @@ class SalesOrderModel extends Model {
     protected $connection = 'mongodb';
     protected $collection = 'sales_orders';
     protected $guarded = ['created_at', 'updated_at'];
-    public $dates = ['locked_at', 'validated_at'];
+    public $dates = ['locked_at', 'validated_at', 'financial_closed_at'];
 
     // Managers
 
@@ -44,7 +44,7 @@ class SalesOrderModel extends Model {
     public function email() {
         return new Managers\Emailer($this);
     }
-    
+
     public function subDocument() {
         return new Managers\SubDocument($this);
     }
@@ -54,7 +54,7 @@ class SalesOrderModel extends Model {
     public function unit() {
         return $this->belongsTo('\Gelora\Base\App\Unit\UnitModel', 'unit_id');
     }
-    
+
     public function salesOrderExtras() {
         return $this->hasMany('\Gelora\Sales\App\SalesOrderExtra\SalesOrderExtraModel', 'sales_order_id');
     }
@@ -65,16 +65,20 @@ class SalesOrderModel extends Model {
 
         return \Gelora\PolReg\App\MdSubmissionBatch\MdSubmissionBatchModel::find($this->subDocument()->polReg()->md_submission_batch_id);
     }
+
     public function getAgencySubmissionBatch() {
 
         return \Gelora\PolReg\App\AgencySubmissionBatch\AgencySubmissionBatchModel::find($this->subDocument()->polReg()->agency_submission_batch_id);
     }
+
     public function getAgencyInvoice() {
 
         return \Gelora\PolReg\App\AgencyInvoice\AgencyInvoiceModel::find($this->subDocument()->polReg()->agency_invoice_id);
     }
+
     public function getLeasingBpkbSubmissionBatch() {
 
         return \Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel::find($this->subDocument()->polReg()->leasing_bpkb_submission_batch_id);
-    }    
+    }
+
 }

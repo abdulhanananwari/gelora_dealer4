@@ -55,6 +55,14 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
+            indent: function(note) {
+
+                SalesOrderModel.action.indent.indent($state.params.id, note)
+                    .then(function(res) {
+                        alert('Data indent berhasil dibuat')
+                        vm.salesOrder = res.data.data
+                    })
+            }
         }
 
 

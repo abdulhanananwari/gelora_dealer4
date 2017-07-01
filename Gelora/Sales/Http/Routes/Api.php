@@ -29,6 +29,10 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                     Route::post('validate', ['uses' => 'ValidationController@validate']);
                     Route::post('unvalidate', ['uses' => 'ValidationController@unvalidate']);
                 });
+
+                Route::group(['prefix' => 'indent'], function() {
+                    Route::post('indent', ['uses' => 'IndentController@indent']);
+                });
             });
 
             Route::group(['prefix' => '{id}/specific-update'], function() {
@@ -60,11 +64,11 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             });
 
             Route::group(['prefix' => '{id}/pol-reg'], function() {
-                
+
                 Route::post('generate-strings', ['uses' => 'PolRegController@generateStrings']);
                 Route::post('add-batch', ['uses' => 'PolRegController@addBatch']);
                 Route::post('remove-batch', ['uses' => 'PolRegController@removeBatch']);
-                
+
                 Route::group(['namespace' => 'PolReg'], function() {
                     Route::group(['prefix' => 'item'], function() {
                         Route::post('incoming', ['uses' => 'ItemController@incoming']);
@@ -88,7 +92,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
     });
 
     Route::group(['prefix' => 'prospect'], function() {
-        
+
         Route::get('/', ['uses' => 'ProspectController@index']);
         Route::get('{id}', ['uses' => 'ProspectController@get']);
         Route::post('/', ['uses' => 'ProspectController@store']);
@@ -96,7 +100,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
         Route::post('{id}/close', ['uses' => 'ProspectController@close']);
         Route::post('{id}/respond', ['uses' => 'ProspectController@respond']);
     });
-    
+
     Route::group(['prefix' => 'sales-order-extra'], function() {
         Route::post('/', ['uses' => 'SalesOrderExtraController@store']);
         Route::post('{id}', ['uses' => 'SalesOrderExtraController@update']);

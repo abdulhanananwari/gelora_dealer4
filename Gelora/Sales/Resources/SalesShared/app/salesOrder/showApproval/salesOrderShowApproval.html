@@ -1,65 +1,59 @@
 <sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
-
 <div class="well" ng-if="ctrl.salesOrder && !ctrl.salesOrder.locked_at">
-	<div class="row">
-		<div class="col-sm-12">
-
-			<h4>Kunci</h4>
-
-			<input type="checkbox" class="form-not-applied" ng-model="ctrl.lockCheck">
-			<label>Kunci data dari perubahan oleh salesman</label><br>
-
-			<button ng-disabled="!ctrl.lockCheck" class="btn btn-block btn-warning" ng-click="ctrl.action.lock(ctrl.salesOrder)">Kunci SPK</button>
-
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Kunci</h4>
+            <input type="checkbox" class="form-not-applied" ng-model="ctrl.lockCheck">
+            <label>Kunci data dari perubahan oleh salesman</label>
+            <br>
+            <button ng-disabled="!ctrl.lockCheck" class="btn btn-block btn-warning" ng-click="ctrl.action.lock(ctrl.salesOrder)">Kunci SPK</button>
+        </div>
+    </div>
 </div>
-
 <div class="well" ng-if="ctrl.salesOrder && !ctrl.salesOrder.validated_at">
-	<div class="row">
-		<div class="col-sm-12">
-
-			<h4>Validasi</h4>
-
-			<input type="checkbox" class="form-not-applied" ng-model="ctrl.validationCheck">
-			<label>Data sudah benar</label><br>
-				<div ng-if="ctrl.validationCheck">
-					<input type="text" ng-model="ctrl.salesOrder.plafond" placeholder="Masukan kode plafond">
-					<button class="btn btn-xs btn-block" ng-click="ctrl.store(ctrl.salesOrder)" >Input Plafond</button><br>
-				</div>
-			<button ng-disabled="!ctrl.validationCheck" class="btn btn-block btn-warning" ng-click="ctrl.action.validate(ctrl.salesOrder)">Validasi SPK</button>
-
-		</div>
-	</div>
-</div>
-
-<div class="well" ng-if="ctrl.salesOrder && ctrl.salesOrder.validated_at">
-	<div class="row">
-		<div class="col-sm-12">
-			<h4>Unit Indent</h4>
-			<input type="checkbox" class="form-not-applied" ng-model="ctrl.indentCheck">
-			<button ng-disabled="!ctrl.indentCheck" class="btn btn-block btn-warning" ng-click="ctrl.unitIndent(ctrl.salesOrder)">Unit Indent</button>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Validasi</h4>
+            <input type="checkbox" class="form-not-applied" ng-model="ctrl.validationCheck">
+            <label>Data sudah benar</label>
+            <br>
+            <div ng-if="ctrl.validationCheck">
+                <input type="text" ng-model="ctrl.salesOrder.plafond" placeholder="Masukan kode plafond">
+                <button class="btn btn-xs btn-block" ng-click="ctrl.store(ctrl.salesOrder)">Input Plafond</button>
+                <br>
+            </div>
+            <button ng-disabled="!ctrl.validationCheck" class="btn btn-block btn-warning" ng-click="ctrl.action.validate(ctrl.salesOrder)">Validasi SPK</button>
+        </div>
+    </div>
 </div>
 <div class="well" ng-if="ctrl.salesOrder && ctrl.salesOrder.validated_at">
-	<div class="row">
-		<div class="col-sm-12">
-			<h4>Validasi: {{ ctrl.salesOrder.validated_at }}</h4>
-		</div>
-	</div>
-	<button class="btn btn-warning btn-block" ng-click="ctrl.action.unvalidate(ctrl.salesOrder)">Batalkan Validasi</button>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Unit Indent</h4>
+            <input type="text" ng-model="ctrl.salesOrder.indent.note">
+            <p ng-show="ctrl.salesOrder.indent.creator">Dibuat oleh: {{ ctrl.salesOrder.indent.creator.name }} ({{ ctrl.salesOrder.indent.creator.timestamp * 1000 | date }})</p>
+            <button ng-hide="ctrl.salesOrder.indent.creator" class="btn btn-block btn-warning" ng-click="ctrl.action.indent(ctrl.salesOrder.indent.note)">Unit Indent</button>
+        </div>
+    </div>
+</div>
+<div class="well" ng-if="ctrl.salesOrder && ctrl.salesOrder.validated_at">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Validasi: {{ ctrl.salesOrder.validated_at }}</h4>
+        </div>
+    </div>
+    <button class="btn btn-warning btn-block" ng-click="ctrl.action.unvalidate(ctrl.salesOrder)">Batalkan Validasi</button>
 </div>
 <div class="well" ng-if="ctrl.salesOrder">
-	<div class="row">
-		<div class="col-sm-12">
-			<h4>Batalkan SPK</h4>
-			<input type="checkbox" class="form-not-applied" ng-model="ctrl.cancelledCheck">
-			<div ng-if="ctrl.cancelledCheck">
-				<label>Alasan Pembatalan SPK</label>
-				<input type="text" ng-model="ctrl.cancelledSalesOrder.reason">
-				<button class="btn btn-block" ng-click="ctrl.cancel(ctrl.cancelledSalesOrder)">Batalkan SPK</button>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Batalkan SPK</h4>
+            <input type="checkbox" class="form-not-applied" ng-model="ctrl.cancelledCheck">
+            <div ng-if="ctrl.cancelledCheck">
+                <label>Alasan Pembatalan SPK</label>
+                <input type="text" ng-model="ctrl.cancelledSalesOrder.reason">
+                <button class="btn btn-block" ng-click="ctrl.cancel(ctrl.cancelledSalesOrder)">Batalkan SPK</button>
+            </div>
+        </div>
+    </div>
 </div>

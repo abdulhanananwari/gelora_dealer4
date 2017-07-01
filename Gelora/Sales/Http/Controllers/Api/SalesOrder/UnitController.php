@@ -13,28 +13,14 @@ class UnitController extends SalesOrderController {
         parent::__construct();
     }
 
-    public function indent($id, Request $request) {
-
-        $salesOrder = $this->salesOrder->find($id);
-
-        $validation = $salesOrder->validate()->unit()->indent($salesOrder);
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }
-        
-        $salesOrder->action()->unit()->indent();
-
-        return $this->formatItem($salesOrder);
-    }
-
     public function deselect($id) {
 
         $salesOrder = $this->salesOrder->find($id);
-        
-        /*$validation = $salesOrder->validate()->unit()->onDeselect();
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }*/
+
+        /* $validation = $salesOrder->validate()->unit()->onDeselect();
+          if ($validation !== true) {
+          return $this->formatErrors($validation);
+          } */
 
         $salesOrder->action()->unit()->onDeselect();
 

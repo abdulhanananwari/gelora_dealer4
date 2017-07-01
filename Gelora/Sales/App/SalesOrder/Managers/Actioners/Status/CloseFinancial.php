@@ -1,10 +1,10 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Unit;
+namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Status;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class Indent {
+class CloseFinancial {
 
     protected $salesOrder;
 
@@ -14,11 +14,9 @@ class Indent {
 
     public function action() {
 
-        $indent = [
-            'creator' => $this->salesOrder->assignEntityData(),
-        ];
+        $this->salesOrder->financial_closed_at = \Carbon\Carbon::now();
+        $this->salesOrder->assignEntityData('financial_closer');
 
-        $this->salesOrder->indent = $indent;
         $this->salesOrder->save();
     }
 

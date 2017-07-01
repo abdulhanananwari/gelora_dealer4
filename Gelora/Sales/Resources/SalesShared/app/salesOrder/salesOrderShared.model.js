@@ -108,9 +108,6 @@ geloraSalesShared
         }
 
         salesOrder.unit = {
-            indent: function(id) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/indent/')
-            },
             deselect: function(id, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, { params: params })
             }
@@ -135,6 +132,11 @@ geloraSalesShared
                 unvalidate: function(id) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/unvalidate/')
                 }
+            },
+            indent: {
+                indent: function(id, note) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', {note: note})
+                },
             }
         }
 
