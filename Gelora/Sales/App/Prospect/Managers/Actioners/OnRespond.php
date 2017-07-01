@@ -41,10 +41,10 @@ class OnRespond {
 
     protected function notifyToEmailOnReject() {
         
-        $mailable = new \Gelora\Sales\App\Prospect\Mailables\ProspectOnRespondReject($this->prospect);
-        
-        \Mail::to($this->prospect->getAttribute('salesPersonnel.email'))
-                ->send($mailable);
+        \Mail::raw('Proses prospek ke SPK direject', function($message) {
+            $message->to($this->prospect->getAttribute('salesPersonnel.email'))
+                    ->subject('Proses prospek ke SPK direject');
+        });
     }
     
 
