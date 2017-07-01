@@ -1,29 +1,21 @@
 <div class="row">
-	<div class="col-sm-12">
-
-		<div class="well">
-
-			<h4>Penerimaan Unit</h4>
-
-			<div ng-if="!ctrl.storageLocation">
-				<label>Pilih lokasi penyimpanan unit</label>
-				<dealer-location-finder location="ctrl.storageLocation" on-location-selected="ctrl.goTolocationSelected()"></dealer-location-finder>
-			</div>
-
-
-			<div ng-if="ctrl.storageLocation">
-
-				<div class="text-center">
-					Penerimaan Unit Ke Lokasi: <span class="text-danger">{{ ctrl.storageLocation.name }}</span>
-				</div>
-
-				<hr>
-
-				<dealer-unit-search selected-unit="ctrl.unit" on-unit-selected="ctrl.receive(ctrl.unit)"></dealer-unit-search><br>
-				<!-- <button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br> -->
-				<dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.receive(scannedUnit)"></dealer-unit-barcode-finder>
-			</div>
-		</div>
-
-	</div>
+    <div class="col-sm-12">
+        <div class="well">
+            <h4>Penerimaan Unit</h4>
+            <div ng-if="!ctrl.storageLocation">
+                <label>Pilih lokasi penyimpanan unit</label>
+                <dealer-location-finder location="ctrl.storageLocation" on-location-selected="ctrl.goTolocationSelected()"></dealer-location-finder>
+            </div>
+            <div ng-if="ctrl.storageLocation">
+                <div class="text-center">
+                    Penerimaan Unit Ke Lokasi: <span class="text-danger">{{ ctrl.storageLocation.name }}</span>
+                </div>
+                <hr>
+                <dealer-unit-search selected-unit="ctrl.unit" on-unit-selected="ctrl.receive(ctrl.unit)"></dealer-unit-search>
+                <br>
+                <!-- <button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br> -->
+                <dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.receive(scannedUnit)"></dealer-unit-barcode-finder>
+            </div>
+        </div>
+    </div>
 </div>
