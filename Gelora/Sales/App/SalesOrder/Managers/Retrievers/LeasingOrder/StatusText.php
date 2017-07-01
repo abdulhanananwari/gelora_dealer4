@@ -15,14 +15,16 @@ class StatusText {
     public function retrieve() {
     
     $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
+    $status = '';
 
     if ($leasingOrder->po_file_uuid) {
-        return 'PO  diterima' ."\n";
-    }elseif ($leasingOrder->memo_file_uuid) {
-        return 'Memo diterima' ."\n";
+        $status = $status .  'PO  diterima' ."\n";
+    }
+    if ($leasingOrder->memo_file_uuid) {
+        $status = $status . 'Memo diterima' ."\n";
     }
 
-    return $this->salesOrder;
+    return $status;
     
     }
 }

@@ -97,7 +97,7 @@ class SalesOrderController extends Controller {
                         ->first()->data_1;
 
         $leasingOrder = $salesOrder->subDocument()->leasingOrder();
-        $leasing = $leasingOrder->leasing['mainLeasing'];
+        $leasing = $leasingOrder->mainLeasing;
 
         $viewData = [
             'leasingOrder' => $leasingOrder,
