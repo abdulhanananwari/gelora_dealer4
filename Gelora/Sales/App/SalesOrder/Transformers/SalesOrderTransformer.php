@@ -47,8 +47,8 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'unvalidator' => $salesOrder->unvalidator,
             
             // Konsumen sudah tidak punya hutang lagi ke dealer
-            'financial_completed_at' => $salesOrder->financial_completed_at ? $salesOrder->financial_completed_at->toDateTimeString() : null,
-            'financial_completer' => $salesOrder->financial_completer,
+            'financial_closed_at' => $salesOrder->financial_closed_at ? $salesOrder->financial_closed_at->toDateTimeString() : null,
+            'financial_closer' => $salesOrder->financial_closer,
             
             // Udah selesai semua, ga ada sangkut paut lagi sama kita
             'closed_at' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : null,

@@ -14,7 +14,7 @@ class OnUnvalidate {
     
     public function validate() {
         
-        if ($this->salesOrder->financial_completed_at) {
+        if ($this->salesOrder->financial_closed_at) {
             return ['Data SPK tidak dapat dirubah karena transaksi keuangan utk SPK ini sudah ditutup'];
         }
         

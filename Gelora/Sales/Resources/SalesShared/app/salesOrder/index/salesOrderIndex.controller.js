@@ -7,12 +7,12 @@ geloraSalesShared
         vm.filter = {
             paginate: 20,
         }
-        
+
         vm.load = function(filter) {
 
-        	vm.filter.page = 
+            vm.filter.page =
 
-            SalesOrderModel.index(filter)
+                SalesOrderModel.index(filter)
                 .then(function(res) {
 
                     vm.salesOrders = res.data.data

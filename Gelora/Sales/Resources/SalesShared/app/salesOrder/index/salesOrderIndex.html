@@ -31,7 +31,7 @@
                         <td>{{salesOrder.vehicle.variant.name}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
                         <td>{{salesOrder.created_at | fromDateTimeString}}</td>
-                        <td>{{salesOrder.locked_at  | fromDateTimeString }}</td>
+                        <td>{{salesOrder.locked_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.validated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.leasingOrder.invoice_generated_at.date | fromDateTimeString}}</td>
@@ -55,10 +55,16 @@
                 <h4 class="modal-title"><strong>Filter</strong></h4>
             </div>
             <div class="modal-body">
-                <label>Nama Customer</label>
-                <input type="text" ng-model="ctrl.filter.customer_name">
-                <label>Nomor Telepon Customer</label>
-                <input type="text" ng-model="ctrl.filter.customer_phone_number" name="phone_number">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Nama Customer</label>
+                        <input type="text" ng-model="ctrl.filter.customer_name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Nomor Telepon Customer</label>
+                        <input type="text" ng-model="ctrl.filter.customer_phone_number" name="phone_number">
+                    </div>
+                </div>
                 <sales-order-filter filter="ctrl.filter"></sales-order-filter>
                 <button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter)">Cari</button>
             </div>

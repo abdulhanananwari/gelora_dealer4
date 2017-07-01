@@ -72,8 +72,8 @@ class SalesOrderController extends Controller {
                 case 'delivery_handover_created':
                     $query->whereNotNull('delivery.handover.created_at');
                     break;
-                case 'financial_completed':
-                    $query->whereNotNull('financial_completed_at');
+                case 'financial_closed':
+                    $query->whereNotNull('financial_closed_at');
                     break;
                 default;
                     break;

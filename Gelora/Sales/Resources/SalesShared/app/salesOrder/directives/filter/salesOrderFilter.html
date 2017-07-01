@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-sm-4">
-        <label><strong>Tanggal</strong></label>
-        <br>
+        <label>Tanggal</label><br>
         <label>Jenis Tanggal</label>
         <select ng-options="code as name for (code,name) in dateTypes" ng-model="filter.time_type"></select>
         <div class="row">
@@ -14,6 +13,8 @@
                 <input type="text" ng-model="filter.until" class="date">
             </div>
         </div>
+        <label>Status SPK</label>
+        <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select>
     </div>
     <div class="col-sm-4">
         <label>Leasing</label>
