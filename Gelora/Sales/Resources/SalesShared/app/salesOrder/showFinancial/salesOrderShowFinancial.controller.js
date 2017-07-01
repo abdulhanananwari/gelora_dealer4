@@ -24,7 +24,7 @@ geloraSalesShared
 
         vm.load = function() {
 
-            SalesOrderModel.get($state.params.id)
+            SalesOrderModel.get($state.params.id, {with: 'price'})
                 .then(function(res) {
                     vm.salesOrder = res.data.data
                     vm.calculatePaymentUnreceived(false)
@@ -55,7 +55,7 @@ geloraSalesShared
 
                 var leasingPayable = typeof vm.salesOrder.leasingOrder != 'undefined' ? vm.salesOrder.leasingOrder.leasing_payable : 0;
 
-                vm.paymentUnreceived = vm.salesOrder.financialBalance.grand_total - leasingPayable -
+                vm.paymentUnreceived = vm.salesOrder.financialBalance.grand_total - vm.salesOrder.financialBalance.leasing_payable -
                     (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)
             }
         }

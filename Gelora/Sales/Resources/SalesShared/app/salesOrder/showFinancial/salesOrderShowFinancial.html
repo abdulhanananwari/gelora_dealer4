@@ -16,7 +16,7 @@
                         <!-- Baris 1. Menampilkan harga dari master dan inputan -->
                         <tr>
                             <td>{{ ctrl.salesOrder.sales_condition == 'isi' ? 'Harga Isi' : 'Harga Kosong' }}</td>
-                            <td>{{ ctrl.salesOrder.sales_condition == 'isi' ? ctrl.salesOrder.price.on_the_road : ctrl.salesOrder.price.off_the_road | number }}</td>
+                            <td>{{ ctrl.salesOrder.sales_condition == 'isi' ? ctrl.salesOrder.price.data.on_the_road : ctrl.salesOrder.price.data.off_the_road | number }}</td>
                             <td>
                                 <form name="price_form">
                                     <input ng-show="ctrl.salesOrder.sales_condition == 'isi'" type="number" ng-model="ctrl.salesOrder.on_the_road">
@@ -44,6 +44,11 @@
                             <td>(-) Total Discount</td>
                             <td></td>
                             <td>{{ ctrl.salesOrder.discount | number }}</td>
+                        </tr>
+                        <tr ng-show="ctrl.salesOrder.financialBalance.leasing_payable">
+                            <td>(-) Piutang Leasing</td>
+                            <td></td>
+                            <td>{{ ctrl.salesOrder.financialBalance.leasing_payable | number }}</td>
                         </tr>
                         <tr>
                             <td colspan="2"><strong>Total Unit</strong></td>
