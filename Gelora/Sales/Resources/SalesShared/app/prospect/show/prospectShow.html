@@ -146,10 +146,10 @@
     <hr>
     <div class="row">
         <div class="col-sm-6">
-            <personnel-finder selected-personnel="ctrl.salesOrder.salesPersonnel"></personnel-finder>
+            <personnel-finder selected-personnel="personnel" on-personnel-selected="ctrl.prospect.salesPersonnel=personnel"></personnel-finder>
         </div>
         <div class="col-sm-6">
-            <input type="text" ng-model="ctrl.salesOrder.salesPersonnel.entity.name" readonly>
+            <input type="text" ng-model="ctrl.prospect.salesPersonnel.entity.name" readonly>
         </div>
     </div>
 </div>

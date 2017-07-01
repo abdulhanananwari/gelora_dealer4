@@ -21,6 +21,8 @@ class PersonnelTransformer extends Fractal\TransformerAbstract {
             
             'team_id' => $personnel->team_id, 
             'registration_code' => $personnel->registration_code,
+            'slack_account' => $personnel->slack_account,
+            'email' => $personnel->email,
             
             'position' => $personnel->position,
             'position_text' => config('gelora.humanResource.availablePositions')[$personnel->position],
