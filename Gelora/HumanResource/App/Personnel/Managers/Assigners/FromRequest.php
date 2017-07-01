@@ -14,7 +14,7 @@ class FromRequest {
     
     public function assign(\Illuminate\Http\Request $request) {
         
-        $this->personnel->fill($request->only('team_id', 'position', 
+        $this->personnel->fill($request->only('team_id', 'position', 'slack_account', 'email', 
                 'registration_code', 'entity_id', 'user_id'));
         
         $this->personnel->entity = $request->get('entity');

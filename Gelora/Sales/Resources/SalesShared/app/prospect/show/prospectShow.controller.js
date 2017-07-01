@@ -36,7 +36,7 @@ geloraSalesShared
                 ProspectModel.update(prospect.id, prospect)
                     .then(function(res) {
                         vm.prospect = res.data.data
-                        alert('Berhasil mengupdate SPK');
+                        alert('Berhasil mengupdate Prospect');
                     })
 
             } else {

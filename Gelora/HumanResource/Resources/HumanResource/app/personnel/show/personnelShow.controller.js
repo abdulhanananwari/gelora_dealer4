@@ -25,6 +25,7 @@ geloraHumanResource
                 PersonnelModel.update(personnel.id, personnel)
                     .then(function(res) {
                         vm.personnel = res.data.data
+                        alert('Berhasi menyimpan data sales')
                     })
 
             } else {

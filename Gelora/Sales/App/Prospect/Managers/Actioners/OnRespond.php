@@ -21,6 +21,7 @@ class OnRespond {
             $this->generateSalesOrder();
         } else {
             $this->prospect->closed_at = null;
+            $this->notifyToEmailOnReject();
         }
 
         $this->prospect->save();
@@ -37,5 +38,14 @@ class OnRespond {
 
         return $salesOrder;
     }
+
+    protected function notifyToEmailOnReject() {
+        
+        $mailable = new \Gelora\Sales\App\Prospect\Mailables\ProspectOnRespondReject($this->prospect);
+        
+        \Mail::to($this->prospect->getAttribute('salesPersonnel.email'))
+                ->send($mailable);
+    }
+    
 
 }

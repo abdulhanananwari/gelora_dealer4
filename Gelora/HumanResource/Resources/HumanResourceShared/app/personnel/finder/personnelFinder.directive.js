@@ -1,43 +1,43 @@
 geloraHumanResourceShared
-	.directive('personnelFinder', function(
-		PersonnelModel, TeamModel,
-		$state, $timeout) {
+        .directive('personnelFinder', function (
+                PersonnelModel, TeamModel,
+                $state, $timeout) {
 
-		return {
-			templateUrl: '/gelora/human-resource-shared/app/personnel/finder/personnelFinder.html',
-			scope: {
-				selectedPersonnel: '=',
-				onPersonnelSelected: '&'
-			},
-			link: function(scope, element, attrs) {
+            return {
+                templateUrl: '/gelora/human-resource-shared/app/personnel/finder/personnelFinder.html',
+                scope: {
+                    selectedPersonnel: '=',
+                    onPersonnelSelected: '&'
+                },
+                link: function (scope, element, attrs) {
 
-				scope.modalId = Math.random().toString(36).substring(2, 7)
+                    scope.modalId = Math.random().toString(36).substring(2, 7)
 
-				scope.search = function(filter) {
+                    scope.search = function (filter) {
 
-					PersonnelModel.index(filter)
-					.then(function(res) {
-						scope.personnels = res.data.data
-						scope.meta = res.data.meta
-					})
+                        PersonnelModel.index(filter)
+                                .then(function (res) {
+                                    scope.personnels = res.data.data
+                                    scope.meta = res.data.meta
+                                })
 
-				}
+                    }
 
-				scope.select = function(personnel) {
+                    scope.select = function (personnel) {
 
-					scope.selectedPersonnel = personnel;
-					$timeout(function() {
-						scope.onPersonnelSelected();
-					}, 250);
+                        scope.selectedPersonnel = personnel;
+                        $timeout(function () {
+                            scope.onPersonnelSelected();
+                        }, 250);
 
-					$('#personnel-finder-modal-' + scope.modalId).modal('hide');
-				}
+                        $('#personnel-finder-modal-' + scope.modalId).modal('hide');
+                    }
 
-				TeamModel.index()
-				.then(function(res) {
-					scope.teams = res.data.data
-				})
+                    TeamModel.index()
+                            .then(function (res) {
+                                scope.teams = res.data.data
+                            })
 
-			}
-		}
-	})
+                }
+            }
+        })
