@@ -10,7 +10,7 @@
             </div>
         </li>
         <li ng-click="select(repeatedLocation)" ng-repeat="repeatedLocation in locations | filter:query">
-            <a><span>{{repeatedLocation.name}}</span><span class="pull-right">{{repeatedLocation.id}}</span></a>
+            <a><span>{{repeatedLocation.name}}</span><span class="pull-right">{{repeatedLocation.id | limitTo:-2 }}</span></a>
         </li>
     </ul>
 </div>
