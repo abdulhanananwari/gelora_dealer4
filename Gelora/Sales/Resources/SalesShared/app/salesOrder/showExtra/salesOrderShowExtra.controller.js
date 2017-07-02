@@ -40,6 +40,10 @@ geloraSalesShared
                 }
             }
 
+            vm.deleteFocused = function(salesOrderExtra) {
+                
+            }
+
             SalesProgramModel.index({active: true})
                     .then(function (res) {
                         vm.salesPrograms = res.data.data

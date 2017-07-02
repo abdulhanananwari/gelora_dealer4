@@ -59,8 +59,11 @@
                             <th>Quantity x Price Per Unit</th>
                             <th>Total</th>
                         </tr>
-                        <tr ng-repeat="extra in ctrl.salesOrder.salesOrderExtras">
-                            <td>{{extra.item_name}}</td>
+                        <tr ng-repeat="extra in ctrl.salesOrder.salesOrderExtras.data">
+                            <td>
+                                <p>{{extra.item_name}}</p>
+                                <p ng-show="extra.sales_program_id"><a ng-href="{{'/base/redirect-app/sales-program/' + extra.sales_program_id}}" target="_blank">Buka Program ({{extra.sales_program_id | limitTo:-5}})</a></p>
+                            </td>
                             <td>{{extra.quantity}} x {{extra.price_per_unit | number}}</td>
                             <td>{{extra.total | number}}</td>
                         </tr>

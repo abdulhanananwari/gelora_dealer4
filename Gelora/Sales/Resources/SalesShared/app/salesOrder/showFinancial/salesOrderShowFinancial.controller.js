@@ -24,7 +24,7 @@ geloraSalesShared
 
         vm.load = function() {
 
-            SalesOrderModel.get($state.params.id, {with: 'price'})
+            SalesOrderModel.get($state.params.id, { with: 'price,salesOrderExtras' })
                 .then(function(res) {
                     vm.salesOrder = res.data.data
                     vm.calculatePaymentUnreceived(false)
@@ -53,11 +53,20 @@ geloraSalesShared
 
             } else {
 
-                var leasingPayable = typeof vm.salesOrder.leasingOrder != 'undefined' ? vm.salesOrder.leasingOrder.leasing_payable : 0;
-
-                vm.paymentUnreceived = vm.salesOrder.financialBalance.grand_total - vm.salesOrder.financialBalance.leasing_payable -
-                    (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)
+                calculatePaymentUnreceivedLocally()
             }
         }
 
+        function calculatePaymentUnreceivedLocally() {
+
+            var balance = vm.salesOrder.financialBalance.grand_total
+
+            if (vm.salesOrder.payment_type == 'credit') {
+                balance = balance - vm.salesOrder.financialBalance.leasing_payable
+            }
+
+            balance = balance - (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)
+
+            vm.paymentUnreceived = balance
+        }
     })
