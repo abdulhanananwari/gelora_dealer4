@@ -126,8 +126,8 @@ geloraSalesShared
                 },
             },
             validation: {
-                validate: function(id) {
-                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/validate/')
+                validate: function(id, body) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/validate/', body)
                 },
                 unvalidate: function(id) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/unvalidate/')
