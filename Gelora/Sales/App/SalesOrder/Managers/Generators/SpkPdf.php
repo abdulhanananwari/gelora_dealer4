@@ -16,7 +16,7 @@ class SpkPdf {
         $this->pdf = new \FPDF();
     }
 
-    public function generate() {
+    public function generate($download = false) {
 
         $filename = 'SPK-' . $this->salesOrder->id . '-' . \Carbon\Carbon::now()->timestamp . '.pdf';
 
@@ -37,12 +37,14 @@ class SpkPdf {
 
         $this->generateFooter();
 
+        if ($download) {
 
-        $content = $this->pdf->Output('S', $filename);
+            return $this->pdf->Output('D', $filename);
+        } else {
 
-//        return $content;
-
-        return $this->upload($content);
+            $content = $this->pdf->Output('S', $filename);
+            return $this->upload($content);
+        }
     }
 
     protected function generateLine($draw = true) {
@@ -152,6 +154,7 @@ class SpkPdf {
             $file = \SolFileManager::model()
                     ->where('uuid', $registration->id_file_uuid)
                     ->first();
+            $this->pdf->Cell(0, 10, 'ID untuk STNK', 0, 2);
             $this->pdf->Image($file->getFullUrl(), null, null, $width / 4);
         }
 
@@ -195,11 +198,11 @@ class SpkPdf {
         } else {
             $this->pdf->Cell(0, 5, 'Harga Off TR: Rp ' . number_format($this->salesOrder->off_the_road), 0, 2);
         }
-        
+
         if ($this->salesOrder->discount > 0) {
             $this->pdf->Cell(0, 5, 'Discount: Rp ' . number_format($this->salesOrder->discount), 0, 2);
         }
-        
+
         if ($this->salesOrder->mediator_fee > 0) {
             $this->pdf->Cell(0, 5, 'Mediator Fee: Rp ' . number_format($this->salesOrder->mediator_fee), 0, 2);
             $this->pdf->Cell(0, 5, 'Mediator: ' . $this->salesOrder->getAttribute('mediator.name'), 0, 2);
@@ -218,7 +221,7 @@ class SpkPdf {
 
         $this->pdf->Ln(5);
         $this->pdf->SetFont('Arial', 'B', 11);
-        $this->pdf->Cell(0, 10, 'SIDE ORDERS', 0, 2);
+        $this->pdf->Cell(0, 10, 'LAIN-LAIN', 0, 2);
 
         $this->pdf->SetFont('Arial', '', 10);
 
@@ -299,7 +302,7 @@ class SpkPdf {
         $this->pdf->Line(0 + 15, $y, $width - 15, $y);
         $this->pdf->Ln(2);
 
-       
+
 
         $this->pdf->SetX(posX($width, 0));
         $this->pdf->Cell(0, 5, $leasingOrder->mainLeasing['name'], 0, 0);
@@ -317,7 +320,7 @@ class SpkPdf {
         $this->pdf->SetX(posX($width, 5));
         $this->pdf->MultiCell(0, 5, $this->salesOrder->retrieve()->leasingOrder()->statusText());
         $this->pdf->SetFont('Arial', '', 10);
-        
+
 
         $this->generateLine();
     }
