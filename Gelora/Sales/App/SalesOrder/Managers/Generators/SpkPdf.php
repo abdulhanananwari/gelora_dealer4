@@ -20,7 +20,7 @@ class SpkPdf {
 
         $filename = 'SPK-' . $this->salesOrder->id . '-' . \Carbon\Carbon::now()->timestamp . '.pdf';
 
-        $this->pdf->AddPage('P', 'Legal');
+        $this->pdf->AddPage('P', 'A4');
 
         $this->generateHeading();
 
@@ -196,8 +196,13 @@ class SpkPdf {
             $this->pdf->Cell(0, 5, 'Harga Off TR: Rp ' . number_format($this->salesOrder->off_the_road), 0, 2);
         }
         
-        if ($this->salesOrder->total_discount > 0) {
-            $this->pdf->Cell(0, 5, 'Discount: Rp ' . number_format($this->salesOrder->total_discount), 0, 2);
+        if ($this->salesOrder->discount > 0) {
+            $this->pdf->Cell(0, 5, 'Discount: Rp ' . number_format($this->salesOrder->discount), 0, 2);
+        }
+        
+        if ($this->salesOrder->mediator_fee > 0) {
+            $this->pdf->Cell(0, 5, 'Mediator Fee: Rp ' . number_format($this->salesOrder->mediator_fee), 0, 2);
+            $this->pdf->Cell(0, 5, 'Mediator: ' . $this->salesOrder->getAttribute('mediator.name'), 0, 2);
         }
 
         $this->generateLine();
