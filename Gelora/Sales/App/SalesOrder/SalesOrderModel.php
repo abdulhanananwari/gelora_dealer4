@@ -51,6 +51,10 @@ class SalesOrderModel extends Model {
 
     //Relationship
 
+    public function price() {
+        return $this->belongsTo('\Gelora\Base\App\Price\PriceModel', 'vehicle.id', 'model_id');
+    }
+
     public function unit() {
         return $this->belongsTo('\Gelora\Base\App\Unit\UnitModel', 'unit_id');
     }

@@ -5,31 +5,38 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Calculators;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class SalesOrderBalance {
-    
+
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     public function calculate() {
-        
+
         $salesOrderAndExtras = $this->salesOrder->calculate()->subBalance()->salesOrderAndExtras();
-        
+        $balance = $salesOrderAndExtras['grand_total'];
+
+        // If credit, subtract PO
+        if ($this->salesOrder->payment_type == 'credit') {
+            
+            $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
+            $leasingPayable = $leasingOrder->on_the_road - $leasingOrder->dp_po;
+            
+            $balance = $balance - $leasingPayable;
+        }
+
+        // Subtract payments made
         $transactions = $this->salesOrder->calculate()->subBalance()->transaction();
-        $receivables = $this->salesOrder->calculate()->subBalance()->receivable();
-        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
-      
-        $leasingPayable = $leasingOrder ? $leasingOrder->leasing_payable : 0;
-        $paymentUnreceived = $salesOrderAndExtras['grand_total'] - $leasingPayable -
-                ($transactions['total'] + $receivables['total']);
+        $balance = $balance - $transactions['total'];
+
         return [
             'details' => [
                 'salesOrderAndExtras' => $salesOrderAndExtras,
                 'transactions' => $transactions,
-                'receivables' => $receivables,
             ],
-            'payment_unreceived' => $paymentUnreceived,
+            'payment_unreceived' => $balance,
         ];
     }
+
 }

@@ -20,4 +20,13 @@ geloraSalesShared
                 })
         }
 
+        vm.updatePolReg = function(salesOrder) {
+
+            SalesOrderModel.polReg.update(salesOrder.id, salesOrder.polReg)
+                .then(function(res) {
+                    vm.salesOrder = res.data.data
+                    alert('Data Pol Reg berhasil diupdate')
+                })
+        }
+
     })

@@ -43,6 +43,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
             Route::group(['prefix' => '{id}/delivery'], function() {
                 Route::post('generate', ['uses' => 'DeliveryController@generate']);
+                Route::post('/', ['uses' => 'DeliveryController@update']);
                 Route::post('scan', ['uses' => 'DeliveryController@scan']);
                 Route::post('travel-start', ['uses' => 'DeliveryController@travelStart']);
                 Route::post('handover', ['uses' => 'DeliveryController@handover']);
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
             Route::group(['prefix' => '{id}/pol-reg'], function() {
 
+                Route::post('/', ['uses' => 'PolRegController@update']);
                 Route::post('generate-strings', ['uses' => 'PolRegController@generateStrings']);
                 Route::post('add-batch', ['uses' => 'PolRegController@addBatch']);
                 Route::post('remove-batch', ['uses' => 'PolRegController@removeBatch']);

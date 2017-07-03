@@ -1,9 +1,6 @@
 [submodule "Solumax/AuthClient"]
 	path = Solumax/AuthClient
 	url = git@bitbucket.org:rezariantono/solumax2_auth_client.git
-[submodule "Solumax/PhpHelper"]
-	path = Solumax/PhpHelper
-	url = git@bitbucket.org:rezariantono/solumax2_php_helper.git
 [submodule "resources/angular"]
 	path = resources/angular
 	url = git@bitbucket.org:rezariantono/solumax2_spa_dependencies.git
@@ -25,3 +22,6 @@
 [submodule "Solumax/Logger"]
 	path = Solumax/Logger
 	url = git@bitbucket.org:rezariantono/solumax2_logger3.git
+[submodule "Solumax/PhpHelper"]
+	path = Solumax/PhpHelper
+	url = git@bitbucket.org:rezariantono/solumax2_php_helper.git
