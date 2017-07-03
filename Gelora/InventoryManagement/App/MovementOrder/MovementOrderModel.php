@@ -3,6 +3,7 @@
 namespace Gelora\InventoryManagement\App\MovementOrder;
 
 use Solumax\PhpHelper\App\BaseModelMongo as Model;
+use MongoDB\BSON\ObjectID;
 
 class MovementOrderModel extends Model {
     
@@ -26,7 +27,13 @@ class MovementOrderModel extends Model {
     
     // Relationships
     public function getUnits() {
+        
+        $unitIds = [];
+        foreach($this->unit_ids as $unitId) {
+            $unitIds[] = new ObjectID($unitId);
+        }
+        
         return \Gelora\Base\App\Unit\UnitModel::
-                whereIn('id', ($this->unit_ids ? $this->unit_ids : []))->get();
+                whereIn('_id', $unitIds)->get();
     }
 }

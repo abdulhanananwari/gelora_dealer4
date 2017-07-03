@@ -16,11 +16,11 @@ class FromRequest {
 
         $keys = ['date', 'note', 'mover', 'toLocation'];
         $this->movementOrder->fill($request->only($keys));
-        
-        if ($this->movementOrder->id) {
+
+        if ($request->has('units')) {
             $this->assignUnits($request->get('units'));
         }
-            
+
         return $this->movementOrder;
     }
 
@@ -30,7 +30,7 @@ class FromRequest {
         foreach ($units as $unit) {
             $unitIds[] = $unit['id'];
         }
-        
+
         $this->movementOrder->unit_ids = $unitIds;
     }
 
