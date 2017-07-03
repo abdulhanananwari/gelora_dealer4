@@ -5,17 +5,23 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class Delivery {
-    
+
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     public function assign(\Illuminate\Http\Request $request) {
 
-        $this->salesOrder->delivery = $request->get('delivery');
+        $delivery = $this->salesOrder->subDocument()->delivery();
 
+        $delivery->fill([
+            'driver' => $request->get('delivery.driver')
+        ]);
+
+        $this->salesOrder->delivery = $delivery;
         return $this->salesOrder;
     }
+
 }

@@ -1,7 +1,7 @@
 geloraSalesShared
     .controller('SalesOrderShowDeliveryController', function(
         $state, $scope,
-        LinkFactory,JwtValidator,
+        LinkFactory, JwtValidator, SettingModel,
         SalesOrderModel, ConfigModel) {
 
         var vm = this
@@ -9,6 +9,9 @@ geloraSalesShared
         SalesOrderModel.get($state.params.id)
             .then(function(res) {
                 vm.salesOrder = res.data.data
+                if (vm.salesOrder.delivery.generated_at) {
+                    loadDrivers()
+                }
             })
 
         ConfigModel.get('gelora.delivery.types')
@@ -20,6 +23,14 @@ geloraSalesShared
             .then(function(res) {
                 vm.googleApiKey = res.data.data
             })
+
+        function loadDrivers() {
+
+            SettingModel.index({ object_type: 'DRIVERS', single: true })
+                .then(function(res) {
+                    vm.drivers = res.data.data.data_1
+                })
+        }
 
         vm.store = function(salesOrder) {
 
@@ -36,10 +47,19 @@ geloraSalesShared
                     .then(function(res) {
                         alert('SJ berhasil digenerate')
                         vm.salesOrder = res.data.data
+                        loadDrivers()
+                    })
+            },
+            update: function(salesOrder) {
+
+                SalesOrderModel.delivery.update(salesOrder.id, salesOrder.delivery)
+                    .then(function(res) {
+                        alert('SJ berhasil update')
+                        vm.salesOrder = res.data.data
                     })
             },
             generateDeliveryNote: function() {
-               window.open(LinkFactory.dealer.sales.salesOrder.delivery.views + 'generate-delivery-note/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+                window.open(LinkFactory.dealer.sales.salesOrder.delivery.views + 'generate-delivery-note/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
             scan: function(salesOrder, scannedUnit) {
                 SalesOrderModel.delivery.scan(salesOrder.id, scannedUnit)

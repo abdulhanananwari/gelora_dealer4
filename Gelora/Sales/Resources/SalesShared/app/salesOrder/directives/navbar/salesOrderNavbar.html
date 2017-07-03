@@ -15,11 +15,11 @@
                 <li><a ui-sref="salesOrderShowFinancial({id:salesOrder.id})">Keuangan</a></li>
                 <li ng-show="salesOrder.payment_type=='credit'"><a ui-sref="salesOrderShowCredit({id:salesOrder.id})">Kredit</a></li>
                 <li><a ui-sref="salesOrderShowExtra({id:salesOrder.id})">Tambahan</a></li>
-                <li><a ui-sref="salesOrderShowUnit({id:salesOrder.id})">Unit</a></li>
+                <li ng-show="salesOrder.delivery.generated_at"><a ui-sref="salesOrderShowUnit({id:salesOrder.id})">Unit</a></li>
                 <li><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>
                 <li><a ui-sref="salesOrderShowCddb({id:salesOrder.id})">CDDB</a></li>
                 <li><a ui-sref="salesOrderShowApproval({id:salesOrder.id})">Kunci & Validasi</a></li>
-                <li ng-show="salesOrder.validated_at"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
+                <li ng-show="salesOrder.delivery.handover.created_at"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
                 <li><a ui-sref="salesOrderShowDocumentation({id:salesOrder.id})">Dokumen</a></li>
             </ul>
         </div>

@@ -3,7 +3,7 @@ var geloraBase = angular
             'Solumax.Loading', 'Solumax.ErrorInterceptor', 'Solumax.JwtManager', 'Solumax.Setting',
             'Solumax.Pagination', 'Solumax.CsvUploader',
             'Solumax.TenantDatabaseConnection', 'Solumax.Entity', 'Solumax.PageTitle',
-            'Gelora.BaseShared', 'Gelora.Vehicle.Shared'
+            'Gelora.BaseShared', 'Gelora.Vehicle.Shared', 'Solumax.AccountPlugin'
         ])
         .factory('AppFactory', function () {
 
