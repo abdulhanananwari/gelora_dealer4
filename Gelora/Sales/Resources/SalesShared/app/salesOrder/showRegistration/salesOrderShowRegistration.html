@@ -4,14 +4,21 @@
         <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#faktur-data">Data Faktur</button>
         <br>
         <div class="well">
-            
-        <label>Catatan Untuk Biro Jasa</label>
-        <input type="text" ng-model="ctrl.salesOrder.polReg.agency_note">
-        <button class="btn btn-block btn-primary" ng-click="ctrl.updatePolReg(ctrl.salesOrder)">Simpan</button>
+            <label>Catatan Untuk Biro Jasa</label>
+            <input type="text" ng-model="ctrl.salesOrder.polReg.agency_note">
+            <button class="btn btn-block btn-primary" ng-click="ctrl.updatePolReg(ctrl.salesOrder)">Simpan</button>
         </div>
-        <registration-batches sales-order="ctrl.salesOrder"></registration-batches>
-        <registration-handover sales-order="ctrl.salesOrder"></registration-handover>
-        <registration-cost sales-order="ctrl.salesOrder"></registration-cost>
+        <div class="row">
+            <div class="col-sm-4">
+                <registration-batches sales-order="ctrl.salesOrder"></registration-batches>
+            </div>
+            <div class="col-sm-4">
+                <registration-handover sales-order="ctrl.salesOrder"></registration-handover>
+            </div>
+            <div class="col-sm-4">
+                <registration-cost sales-order="ctrl.salesOrder"></registration-cost>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal fade" id="faktur-data" tabindex="-1" role="dialog">
