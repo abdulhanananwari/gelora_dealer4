@@ -1,7 +1,7 @@
 <tr style="background-color: #d35400;">
     <td>Invoice Dari Biro Jasa</td>
     <td>
-        <select ng-model="salesOrder.polReg.agency_invoice_id" ng-change="update(salesOrder, 'agency_invoice_id')" ng-options="registrationBatch.id as registrationBatch.created_at for registrationBatch in agencyInvoices"></select>
+        <select ng-model="salesOrder.polReg.agency_invoice_id" ng-change="update(salesOrder, 'agency_invoice_id')" ng-options="registrationBatch.id as (registrationBatch.created_at + ' | ' + registrationBatch.agent.name) for registrationBatch in agencyInvoices"></select>
     </td>
     <td>
     	<span ng-if="salesOrder.polReg.agency_invoice_id">
