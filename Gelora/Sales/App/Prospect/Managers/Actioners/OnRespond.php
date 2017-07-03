@@ -19,6 +19,7 @@ class OnRespond {
 
         if ($this->prospect->create_sales_order_response) {
             $this->generateSalesOrder();
+            $this->notifyToEmailOnApprove();
         } else {
             $this->prospect->closed_at = null;
             $this->notifyToEmailOnReject();
@@ -51,6 +52,19 @@ class OnRespond {
         \Mail::raw($string, function($message) use ($email) {
             $message->to($email)
                     ->subject('Proses prospek ke SPK direject');
+        });
+    }
+    protected function notifyToEmailOnApprove() {
+        $email = $this->prospect->getAttribute('salesPersonnel.email');
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return ;
+        }
+        
+        $string = "Proses prospek ke SPK di Approve Oleh Admin \n " . url('sales/redirect-app/prospect/?id=' . $this->prospect->id); 
+        
+        \Mail::raw($string, function($message) use ($email) {
+            $message->to($email)
+                    ->subject('Proses prospek ke SPK di Approve');
         });
     }
     
