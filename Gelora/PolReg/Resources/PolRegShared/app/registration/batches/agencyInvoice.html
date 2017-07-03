@@ -1,12 +1,11 @@
-<tr style="background-color: #d35400;">
-    <td>Invoice Dari Biro Jasa</td>
-    <td>
-        <select ng-model="salesOrder.polReg.agency_invoice_id" ng-change="update(salesOrder, 'agency_invoice_id')" ng-options="registrationBatch.id as registrationBatch.created_at for registrationBatch in agencyInvoices"></select>
-    </td>
-    <td>
-    	<span ng-if="salesOrder.polReg.agency_invoice_id">
+<td>
+    Invoice Dari Biro Jasa
+</td>
+<td>
+    <select ng-hide="salesOrder.polReg.agency_invoice_id" ng-model="salesOrder.polReg.agency_invoice_id" ng-change="update(salesOrder, 'agency_invoice_id')" ng-options="registrationBatch.id as (registrationBatch.created_at + ' | ' + registrationBatch.agent.name) for registrationBatch in agencyInvoices"></select>
+    <span ng-if="salesOrder.polReg.agency_invoice_id">
+            <p>Batch ID: {{ salesOrder.polReg.agency_invoice_id }}</p>
     		<button ng-if="salesOrder.polReg.agency_invoice_id" class="btn btn-block btn-info" ng-click="redirect.agencyInvoice(salesOrder)">Buka</button>     
         	<button class="btn btn-block btn-danger" ng-click="remove(salesOrder, 'agency_invoice_id')">Hapus</button>
     	</span>
-    </td>
-</tr>
+</td>
