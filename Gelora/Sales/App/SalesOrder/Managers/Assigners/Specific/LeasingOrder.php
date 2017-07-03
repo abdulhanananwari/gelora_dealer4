@@ -12,10 +12,9 @@ class LeasingOrder {
         $this->salesOrder = $salesOrder;
     }
     
-    public function assign(\Illuminate\Http\Request $request) {
-    	
+    public function assign($leasingOrder) {
 
-        $this->salesOrder->leasingOrder = $request->get('leasingOrder');
+        $this->salesOrder->leasingOrder = $leasingOrder;
 
         return $this->salesOrder;
     }
