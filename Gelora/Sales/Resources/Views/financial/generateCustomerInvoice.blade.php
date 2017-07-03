@@ -41,25 +41,62 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table">
+                <h2 class="text-center">INVOICE PENAGIHAN</h2>
+                <hr>
+                <table style="width: 100%">
                     <tr>
-                        <td style="width: 50%;">
-                            <p>Kepada,</p>
-                            <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
-                            <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
-                            <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
+                        <td style="width: 70%;">
+                            <table>
+                                <tr>
+                                    <td style="width: 50%;">Nama customer</td>
+                                    <td style="width: 50%;">{{ $viewData['salesOrder']->customer['name'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sejumlah</td>
+                                    <td><strong>Rp {{ number_format($viewData['balance']['payment_unreceived']) }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Untuk</td>
+                                    <td>Pelunasan SPK {{ $viewData['salesOrder']->id }}</td>
+                                </tr>
+                            </table>
                         </td>
-                        <td style="width: 50%;">
+                        <td style="width: 30%;" valign="top">
                             <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
                             <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
                         </td>
                     </tr>
                 </table>
-                <table class="table">
-                    <tr>
-                        <td style="width: 100%;">
-                            <p></p>
-
+                <br>
+                <p><strong>Petunjuk Pembayaran:</strong></p>
+                <ul>
+                    <li>Pembayaran via bank transfer harap dilakukan ke rekening {{ $viewData['tenantInfo']->BANK }} nomor account <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NUMBER }}</strong> atas nama <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NAME }}</strong> dengan mencantumkan keterangan <strong>PEL SPK {{ substr($viewData['salesOrder']->id, -5) }}</strong></li>
+                </ul>
+                <br>
+                <table style="width: 100%;" class="table-bordered">
+                    <tr style="height: 100px;" class="text-center">
+                        <td style="width: 25%;" valign="top">
+                            <p >Pembuat</p>
+                        </td>
+                        <td style="width: 25%;" valign="top">
+                            <p >Mengetahui</p>
+                        </td>
+                        <td style="width: 25%;" valign="top">
+                            <p >Yang Menerima</p>
+                        </td>
+                        <td style="width: 25%;" valign="top">
+                            <p >Konsumen</p>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>
+                            <p>{{ $viewData['jwt']->name }}</p>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
                         </td>
                     </tr>
                 </table>

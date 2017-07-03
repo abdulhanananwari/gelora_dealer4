@@ -61,11 +61,11 @@ class SalesOrderController extends Controller {
 
         $salesOrder = $this->salesOrder->find($id);
 
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                        ->first()->data_1;
+        $tenantInfo = (object) \Setting::retrieve()->data('TENANT_INFO')->data_1;
         
         $viewData = [
             'salesOrder' => $salesOrder,
+            'balance' => $salesOrder->calculate()->salesOrderBalance(),
             'unit' => $salesOrder->unit,
             'jwt' => \ParsedJwt::getJwt(),
             'tenantInfo' => $tenantInfo,
