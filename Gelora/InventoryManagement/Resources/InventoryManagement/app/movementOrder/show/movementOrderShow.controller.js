@@ -73,8 +73,7 @@ geloraInventoryManagement
         }
 
         if ($state.params.id) {
-
-            MovementOrderModel.get($state.params.id)
+            MovementOrderModel.get($state.params.id, {with:'units'})
                 .then(function(res) {
                     assignData(res.data.data)
                     vm.unitSearchAdditionalParams.current_location_id_not = res.data.data.toLocation.id

@@ -14,9 +14,9 @@ class OnUpdate {
 
     public function validate() {
 
-        if ($this->salesOrder->validated_at) {
-            return ['Tidak dapat merubah data karena sudah divalidasi'];
-        }
+        // if ($this->salesOrder->validated_at) {
+        //     return ['Tidak dapat merubah data karena sudah divalidasi'];
+        // }
 
         $attrValidation = $this->validateAttributes();
         if ($attrValidation->fails()) {

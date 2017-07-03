@@ -57,6 +57,9 @@
                     <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
                     <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
+                    @if(isset($viewData['salesOrder']->leasingOrder))
+                        <p style="margin-top: 10px;">Leasing : {{$viewData['salesOrder']->leasingOrder['mainLeasing']['name']}}</p>
+                    @endif
                 </td>
                 <td style="width: 50%;">
                     <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
@@ -91,13 +94,11 @@
                     <br><br>
                     <p>{{$viewData['jwt']->name}}</p>
                 </td>
-                @if(isset($viewData['deliveryBatch']))
                 <td>
-                    <p>Delivery Batch</p>
+                    <p>Supir</p>
                     <br><br>
-                    <p>{{$viewData['deliveryBatch']->driver_name}}</p>
+                    <p>{{$viewData['salesOrder']->delivery['driver_name']}}</p>
                 </td>
-                @endif
                 <td style="vertical-align: text-bottom;">
                     <p>Disetujui Oleh</p>
                 </td>

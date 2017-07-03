@@ -17,10 +17,10 @@ class PolRegController extends SalesOrderController {
         
         $salesOrder = $this->salesOrder->find($id);
 
-//        $validation = $salesOrder->validate()->registration()->onUpdate();
-//        if ($validation !== true) {
-//            return $this->formatErrors($validation);
-//        }
+        $validation = $salesOrder->validate()->polReg()->onGenerateStrings();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
 
         $salesOrder->action()->polReg()->onGenerateStrings();
 

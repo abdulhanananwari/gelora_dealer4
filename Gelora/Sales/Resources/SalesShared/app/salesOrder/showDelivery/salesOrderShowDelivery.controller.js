@@ -1,7 +1,7 @@
 geloraSalesShared
     .controller('SalesOrderShowDeliveryController', function(
         $state, $scope,
-        LinkFactory,JwtValidator,
+        LinkFactory,JwtValidator,SettingModel,
         SalesOrderModel, ConfigModel) {
 
         var vm = this
@@ -20,7 +20,11 @@ geloraSalesShared
             .then(function(res) {
                 vm.googleApiKey = res.data.data
             })
-
+        SettingModel.index({object_type: 'DRIVERS', single: true})
+        .then(function(res) {
+            vm.drivers = res.data.data.data_1
+        })
+        
         vm.store = function(salesOrder) {
 
             SalesOrderModel.specificUpdate.deliveryRequest(salesOrder.id, _.pick(salesOrder, ['deliveryRequest']))

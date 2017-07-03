@@ -20,8 +20,7 @@ class FromRequest {
         if ($this->movementOrder->id) {
             $this->assignUnits($request->get('units'));
         }
-        
-
+            
         return $this->movementOrder;
     }
 

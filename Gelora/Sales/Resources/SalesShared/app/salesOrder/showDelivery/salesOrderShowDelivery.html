@@ -23,15 +23,19 @@
             <h4>Pengiriman</h4>
             <hr>
             <div ng-show="!ctrl.salesOrder.delivery.generated_at">
+                <select ng-options="driver as driver.name for driver in ctrl.drivers" ng-model="ctrl.salesOrder.delivery.driver"></select>
                 <dealer-unit-search selected-unit="selectedUnit" additional-params="{'statuses_in':'IN_STOCK_SELLABLE', 'type_code':ctrl.salesOrder.vehicle.code}"></dealer-unit-search>
                 <br>
                 <button ng-show="selectedUnit" class="btn btn-block btn-danger" ng-click="ctrl.delivery.generate(ctrl.salesOrder,selectedUnit)">Generate Surat Jalan</button>
             </div>
             <div ng-show="ctrl.salesOrder.delivery.generated_at && !ctrl.salesOrder.delivery.handover_at">
+                <label>Supir</label>
+                <input type="text" ng-model="ctrl.salesOrder.delivery.driver.name" readonly>
                 <div ng-hide="ctrl.salesOrder.delivery.handover.created_at">
                     <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
                     <label ng-show="ctrl.salesOrder.delivery.delivery_note_generator.timestamp"><br>SJ sudah dicetak {{ ctrl.salesOrder.delivery.delivery_note_generated_count }} kali, terakhir pada {{ ctrl.salesOrder.delivery.delivery_note_generator.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.delivery_note_generator.name }}<br><br></label><br>
                 </div>
+
                 <div id="scan">
                     <button ng-hide="ctrl.salesOrder.delivery.scanner.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" data-toggle="modal" data-target="#barcode-scan-modal">Scan Barcode</button>
                     <label ng-show="ctrl.salesOrder.delivery.scanner.timestamp">Unit discan {{ ctrl.salesOrder.delivery.scanner.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.scanner.name }}</label>
