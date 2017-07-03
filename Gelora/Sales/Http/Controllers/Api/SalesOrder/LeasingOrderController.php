@@ -16,7 +16,7 @@ class LeasingOrderController extends SalesOrderController {
     public function update($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->leasingOrder($request);
+        $salesOrder->assign()->specific()->leasingOrder($request->get('leasingOrder'));
 
         $validation = $salesOrder->validate()->leasingOrder()->onUpdate();
         if ($validation !== true) {
