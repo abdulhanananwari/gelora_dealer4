@@ -26,7 +26,7 @@ class OnUpdate {
         if ($this->salesOrder->sales_condition == 'kosong' && $this->salesOrder->payment_type == 'credit') {
             return ['Tidak dapat menggunakan kredit leasing untuk kondisi jual kosong'];
         }
-        
+
         if ($this->salesOrder->payment_type == 'cash' && !is_null($this->salesOrder->leasing_order_id)) {
             return ['Tidak bisa menyimpan data PO untuk penjualan cash'];
         }
@@ -37,9 +37,9 @@ class OnUpdate {
     protected function validateAttributes() {
 
         return \Validator::make($this->salesOrder->toArray(), [
-            'customer' => 'required',
-            'customer.name' => 'required:customer',
-            'customer.phone_number' => 'required:customer',
+                    'customer' => 'required',
+                    'customer.name' => 'required:customer',
+                    'customer.phone_number' => 'required:customer',
         ]);
     }
 

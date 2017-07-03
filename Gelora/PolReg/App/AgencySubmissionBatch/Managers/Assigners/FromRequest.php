@@ -14,7 +14,7 @@ class FromRequest {
 
     public function assign(\Illuminate\Http\Request $request) {
 
-        $this->registrationBatch->fill($request->only('agent'));
+        $this->registrationBatch->fill($request->only('agent', 'agency_note', 'internal_note'));
 
         return $this->registrationBatch;
     }

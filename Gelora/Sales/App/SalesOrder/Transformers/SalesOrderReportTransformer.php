@@ -47,7 +47,7 @@ class SalesOrderReportTransformer {
             'Memo Leasing' => $leasingOrder->note,
             'Jumlah Pencairan' => $leasingOrder->leasing_payable,
             
-            'Tgl DO Motor' => $salesOrder->unit->sj_date,
+            'Tgl DO Motor' => $salesOrder->unit->created_at,
             'Nomor Surat Jalan' => $salesOrder->unit->sj_number,
             
             'Kondisi Jual' => $salesOrder->sales_condition,

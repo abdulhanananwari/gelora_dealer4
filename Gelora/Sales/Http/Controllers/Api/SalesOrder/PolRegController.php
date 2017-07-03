@@ -13,14 +13,30 @@ class PolRegController extends SalesOrderController {
         parent::__construct();
     }
     
-    public function generateStrings($id, Request $request) {
+    public function update($id, Request $request) {
         
         $salesOrder = $this->salesOrder->find($id);
-
+        $salesOrder->assign()->specific()->polReg($request);
+        
 //        $validation = $salesOrder->validate()->registration()->onUpdate();
 //        if ($validation !== true) {
 //            return $this->formatErrors($validation);
 //        }
+
+        $salesOrder->action()->onUpdate();
+
+        return $this->formatItem($salesOrder);
+
+    }
+    
+    public function generateStrings($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+
+        $validation = $salesOrder->validate()->polReg()->onGenerateStrings();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
 
         $salesOrder->action()->polReg()->onGenerateStrings();
 

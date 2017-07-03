@@ -1,7 +1,7 @@
 geloraSalesShared
     .controller('SalesOrderShowFinancialController', function(
         $state,
-        LinkFactory,
+        LinkFactory, JwtValidator,
         SalesOrderModel,
         TransactionModel, DueModel) {
 
@@ -22,15 +22,12 @@ geloraSalesShared
             }
         }
 
-        vm.load = function() {
 
-            SalesOrderModel.get($state.params.id)
-                .then(function(res) {
-                    vm.salesOrder = res.data.data
-                    vm.calculatePaymentUnreceived(false)
-                })
-        }
-        vm.load()
+        SalesOrderModel.get($state.params.id, { with: 'price,salesOrderExtras' })
+            .then(function(res) {
+                vm.salesOrder = res.data.data
+                vm.calculatePaymentUnreceived(false)
+            })
 
 
         vm.updatePrice = function(salesOrder) {
@@ -39,6 +36,10 @@ geloraSalesShared
                 .then(function(res) {
                     vm.salesOrder = res.data.data
                 });
+        }
+
+        vm.generateCustomerInvoice = function(salesOrder) {
+            window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
         }
 
         vm.calculatePaymentUnreceived = function(onServer) {
@@ -53,11 +54,16 @@ geloraSalesShared
 
             } else {
 
-                var leasingPayable = typeof vm.salesOrder.leasingOrder != 'undefined' ? vm.salesOrder.leasingOrder.leasing_payable : 0;
 
-                vm.paymentUnreceived = vm.salesOrder.financialBalance.grand_total - leasingPayable -
-                    (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)
+                var balance = vm.salesOrder.financialBalance.grand_total
+
+                if (vm.salesOrder.payment_type == 'credit') {
+                    balance = balance - vm.salesOrder.financialBalance.leasing_payable
+                }
+
+                balance = balance - (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)
+
+                vm.paymentUnreceived = balance
             }
         }
-
     })

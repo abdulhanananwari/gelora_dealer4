@@ -41,9 +41,12 @@
                         </td>
                     </tr>
                 </table>
-
+                <hr>
                 <p style="text-align: center;"><strong>Penyerahan Dokumen Ke Biro Jasa</strong></p>
+                <br>
                 
+                <p>Catatan: {{ $viewData['registrationBatch']->agency_note }}</p>
+                <br>
 
                 <table class="table" width="100%">
                     <tr>
@@ -55,6 +58,7 @@
                         <th>Kode Warna</th>
                         <th>Nomor Rangka</th>
                         <th>Nomor Mesin</th>
+                        <th>Catatan</th>
                     </tr>
                     @foreach($viewData['registrationBatch']->getSalesOrders() as $salesOrder)
                     <tr>
@@ -66,6 +70,7 @@
                         <td>{{ $salesOrder->unit->color_code }}</td>
                         <td>{{ $salesOrder->unit->chasis_number }}</td>
                         <td>{{ $salesOrder->unit->engine_number }}</td>
+                        <td>{{ $salesOrder->getAttribute('polReg.agency_note') }}</td>
                     </tr>
                     @endforeach
                 </table><br>

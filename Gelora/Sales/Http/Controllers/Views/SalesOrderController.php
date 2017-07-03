@@ -57,7 +57,27 @@ class SalesOrderController extends Controller {
                         ->with('viewData', $viewData);
     }
 
-    public function generateInvoice($id, Request $request) {
+    public function generateCustomerInvoice($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $tenantInfo = (object) \Setting::retrieve()->data('TENANT_INFO')->data_1;
+        
+        $viewData = [
+            'salesOrder' => $salesOrder,
+            'balance' => $salesOrder->calculate()->salesOrderBalance(),
+            'unit' => $salesOrder->unit,
+            'jwt' => \ParsedJwt::getJwt(),
+            'tenantInfo' => $tenantInfo,
+        ];
+
+//        $salesOrder->action()->onGenerateInvoice();
+
+        return view()->make('gelora.sales::financial.generateCustomerInvoice')
+                        ->with('viewData', $viewData);
+    }
+
+    public function generateLeasingOrderInvoice($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
 
@@ -79,7 +99,7 @@ class SalesOrderController extends Controller {
             'tenantInfo' => $tenantInfo,
             'requestUri' => $request->getURI(),
         ];
-        
+
         $salesOrder->action()->leasingOrder()->onGenerateInvoice();
 
         return view()->make('gelora.sales::leasingOrder.generateInvoice')

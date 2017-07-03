@@ -24,11 +24,18 @@
                         </tbody>
                     </table>
                 </div>
+
+                <label>Catatan Untuk Biro Jasa</label>
+                <input type="text" ng-model="ctrl.registrationBatch.agency_note">
+
+                <label>Catatan Internal</label>
+                <input type="text" ng-model="ctrl.registrationBatch.internal_note">
+
             </div>
             <div class="col-sm-6">
                 <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
                 <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Konfirmasi</button>
-                <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.generateReceipt(ctrl.registrationBatch)">Cetak Bukti Penyerahan</button>
+                <button ng-if="ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.generateReceipt(ctrl.registrationBatch)">Cetak Bukti Penyerahan</button>
                 <button ng-if="ctrl.registrationBatch.closed_at && !ctrl.registrationBatch.handover_at" class="btn btn-block btn-primary" ng-click="ctrl.handover(ctrl.registrationBatch)">Konfirmasi Serah Terima</button>
             </div>
         </div>
@@ -43,6 +50,7 @@
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Salesman</th>
+                        <th>Catatan</th>
                         <th>Type Motor</th>
                         <th>Warna</th>
                         <th>No Rangka</th>
@@ -56,6 +64,7 @@
                         <td>{{salesOrder.customer.name}}</td>
                         <td>{{salesOrder.customer.address}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{salesOrder.polReg.agency_note}}</td>
                         <td>{{salesOrder.unit.data.type_name}}</td>
                         <td>{{salesOrder.unit.data.color_name}}</td>
                         <td>{{salesOrder.unit.data.chasis_number}}</td>

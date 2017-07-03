@@ -33,6 +33,22 @@ class DeliveryController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
 
+    public function update($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->delivery($request);
+
+        $validation = $salesOrder->validate()->delivery()->onUpdate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->onUpdate();
+
+        return $this->formatItem($salesOrder);
+    }
+    
+
     public function scan($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);

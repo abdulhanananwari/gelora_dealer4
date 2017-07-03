@@ -15,6 +15,7 @@
     </div>
     <div class="col-sm-3">
         <h5>Detail PO</h5>
+        <button class="btn btn-block btn-info btn-xs" ng-click="ctrl.copyLeasingOrderFromSalesOrder()">Copy data dari SPK</button>
         <label>Nama Kustomer</label>
         <input type="text" ng-model="ctrl.salesOrder.leasingOrder.customer.name">
         <label>Alamat Kustomer</label>
@@ -106,7 +107,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div ng-hide="ctrl.salesOrder.leasingOrder.mainLeasing" class="row">
     <div class="col-sm-12">
         <div class="well">
             <h5>Copy Dari PO Leasing</h5>

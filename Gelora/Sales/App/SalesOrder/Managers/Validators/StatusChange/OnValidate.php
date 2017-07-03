@@ -12,49 +12,43 @@ class OnValidate {
         $this->salesOrder = $salesOrder;
     }
 
-    /*
-     * Data yg perlu divalidasi:
-     * - Kelengkapan data customer (KTP dan entity id terdaftar)
-     *      - Jika minta faktur pajak, NPWP diupload
-     * - Kelengkapan data registration (KTP dan entity id terdaftar)
-     *      Jika on the road:
-     *      - KTP sudah diupload
-     * - Jika kredit:
-     *      - PO sudah lengkap dan divalidasi
-     * - Pembayaran
-     *      - Pembayaran (dikurangi pokok hutang leasing) sudah cukup     *      
-     * - CDDB
-     *      - Data CDDB sudah lengkap dan closed
-     *      
-     */
-
     public function validate() {
 
-        $attrVal = $this->validateAttributes();
-        if ($attrVal !== true) {
-            return $attrVal;
-        }
+        if (request()->get('bypass_attributes_validation') != 'true') {
 
-        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder)) {
-            return ['Leasing order harus dipilih dulu untuk penjualan kredit'];
-        }
+            $attrVal = $this->validateAttributes();
+            if ($attrVal !== true) {
 
-        if ($this->salesOrder->payment_type == 'credit') {
-
-            $leasingOrderValidation = $this->checkIfPoIsValid();
-            if ($leasingOrderValidation !== true) {
-                return $leasingOrderValidation;
+                return [
+                        [
+                        'type' => 'confirm',
+                        'text' => implode("\n", array_merge($attrVal, ['Yakin lanjutkan tanpa validasi data?'])),
+                        'if_confirmed' => 'bypass_attributes_validation'
+                    ]
+                ];
             }
         }
 
-        $plafondValidation = $this->checkPlafond();
-        if ($plafondValidation !== true) {
-            return $plafondValidation;
+
+        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder->dp_po)) {
+
+            return ['Leasing order harus diinput dulu untuk penjualan kredit'];
         }
 
-        $balanceValidation = $this->calculateBalance();
-        if ($balanceValidation !== true) {
-            return ['Pendapatan belum sesuai dengan pembayaran + piutang. Sesisih Rp ' . number_format($balanceValidation)];
+        if (request()->get('bypass_plafond_required_validation') != 'true') {
+
+            $plafondValidation = $this->checkPlafond();
+            if ($plafondValidation !== true) {
+                return $plafondValidation;
+            }
+        }
+
+        if (request()->get('bypass_balance_validation') != 'true') {
+
+            $balanceValidation = $this->calculateBalance();
+            if ($balanceValidation !== true) {
+                return $balanceValidation;
+            }
         }
 
         return true;
@@ -92,43 +86,34 @@ class OnValidate {
     protected function calculateBalance() {
 
         $balance = $this->salesOrder->calculate()->SalesOrderBalance()['payment_unreceived'];
+
         if ($balance == 0) {
             return true;
         } else {
-            return $balance;
+            return [
+                    [
+                    'type' => 'confirm',
+                    'text' => 'Masih ada kekurangan pembayaran senilai ' . number_format($balance) . '. Yakin mau lanjutkan validasi?',
+                    'if_confirmed' => 'bypass_balance_validation'
+                ]
+            ];
         }
-    }
-
-    protected function checkIfPoIsValid() {
-
-        $setting = \Setting::retrieve()->data('BUSINESS_PROCEDURES')['data_1'];
-        $required = !empty($setting['LEASING_ORDER_MUST_BE_COMPLETE']) ?
-                $setting['LEASING_ORDER_MUST_BE_COMPLETE'] : false;
-
-        if ($required && !$this->salesOrder->selectedLeasingOrder->validate()->status()->validatedAndPoReceived()) {
-            return ['PO belum lengkap dan divalidasi'];
-        }
-
-        return true;
     }
 
     protected function checkPlafond() {
 
-        if (request()->get('bypass_plafond_required_validation') != 'true') {
-
-            if (!$this->salesOrder->plafond) {
-                return [
-                        ['text' => 'Kode plafond belum diinput. Yakin lanjutkan?',
-                        'type' => 'confirm',
-                        'if_confirmed' => 'bypass_plafond_required_validation']
-                ];
-            }
+        if (!$this->salesOrder->plafond) {
+            return [
+                    [
+                    'text' => 'Kode plafond belum diinput. Yakin lanjutkan?',
+                    'type' => 'confirm',
+                    'if_confirmed' => 'bypass_plafond_required_validation'
+                ]
+            ];
         }
 
-        $plafond = $this->salesOrder->retrieve()->plafond();
-
+        $plafond = base64_decode($this->salesOrder->plafond, true);
         $inputEncoding = 'iso-2022-jp';
-
         $check = iconv($inputEncoding, 'UTF-8//IGNORE', $plafond);
 
         if ($plafond != $check) {
@@ -144,8 +129,10 @@ class OnValidate {
                 ]
             ]);
         } catch (\GuzzleHttp\Exception\ServerException $e) {
-            return ['Check validation plafond gagal. SERVER VALIDASI ERROR'];
+
+            return ['Check validation plafond gagal. SERVER ERROR'];
         } catch (\GuzzleHttp\Exception\ClientException $e) {
+
             return ['Check validation plafond gagal. CLIENT ERROR'];
         }
 

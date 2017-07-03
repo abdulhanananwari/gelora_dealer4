@@ -18,6 +18,12 @@ geloraSalesShared
                 vm.dueDayTypes = res.data.data
             })
 
+        vm.copyLeasingOrderFromSalesOrder = function() {
+
+            vm.salesOrder.leasingOrder.customer = _.pick(vm.salesOrder.customer, ['name', 'address', 'ktp'])
+            vm.salesOrder.leasingOrder.registration = _.pick(vm.salesOrder.registration, ['name', 'address', 'ktp'])
+            vm.salesOrder.leasingOrder.vehicle = angular.copy(vm.salesOrder.vehicle);
+        }
 
         vm.store = function(salesOrder) {
             SalesOrderModel.leasingOrder.update(salesOrder.id, salesOrder.leasingOrder)

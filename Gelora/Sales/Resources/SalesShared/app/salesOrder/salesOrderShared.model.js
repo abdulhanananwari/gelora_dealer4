@@ -34,6 +34,9 @@ geloraSalesShared
             },
             plafond: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/plafond/', salesOrder, { params: params })
+            },
+            polReg: function(id, polReg, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/pol-reg/', polReg, { params: params })
             }
         }
 
@@ -56,6 +59,9 @@ geloraSalesShared
             generate: function(id, unit) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', { unit_id: unit.id })
             },
+            update: function(id, delivery) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/', {delivery: delivery})
+            },
             scan: function(id, unit) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/scan/', { unit_id: unit.id })
             },
@@ -71,6 +77,9 @@ geloraSalesShared
         }
 
         salesOrder.polReg = {
+            update: function(id, polReg, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/', polReg, { params: params })
+            },
             item: {
                 incoming: function(id, item, params) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/incoming/', item, { params: params })
@@ -126,8 +135,8 @@ geloraSalesShared
                 },
             },
             validation: {
-                validate: function(id) {
-                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/validate/')
+                validate: function(id, body) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/validate/', body)
                 },
                 unvalidate: function(id) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/validation/unvalidate/')
@@ -135,7 +144,7 @@ geloraSalesShared
             },
             indent: {
                 indent: function(id, note) {
-                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', {note: note})
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', { note: note })
                 },
             }
         }
