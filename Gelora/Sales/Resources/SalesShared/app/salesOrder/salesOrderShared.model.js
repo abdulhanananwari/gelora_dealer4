@@ -34,6 +34,9 @@ geloraSalesShared
             },
             plafond: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/plafond/', salesOrder, { params: params })
+            },
+            polReg: function(id, polReg, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/pol-reg/', polReg, { params: params })
             }
         }
 
@@ -71,6 +74,9 @@ geloraSalesShared
         }
 
         salesOrder.polReg = {
+            update: function(id, polReg, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/', polReg, { params: params })
+            },
             item: {
                 incoming: function(id, item, params) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/pol-reg/item/incoming/', item, { params: params })
@@ -135,7 +141,7 @@ geloraSalesShared
             },
             indent: {
                 indent: function(id, note) {
-                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', {note: note})
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', { note: note })
                 },
             }
         }

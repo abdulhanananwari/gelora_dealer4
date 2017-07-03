@@ -13,6 +13,8 @@ class PolReg {
         $polReg = $salesOrder->subDocument()->polReg();
         
         $transformed = [
+            'agency_note' => $polReg->agency_note,
+            
             'items' => (array) $polReg->items,
             'costs' => (array) $polReg->costs,
             
