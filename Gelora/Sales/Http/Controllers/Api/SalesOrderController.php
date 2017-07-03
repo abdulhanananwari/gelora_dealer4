@@ -100,7 +100,6 @@ class SalesOrderController extends Controller {
 
             $salesOrders = $query->paginate((int) $request->get('paginate', 20));
             return $this->formatCollection($salesOrders, [], $salesOrders);
-
         } else {
 
             $salesOrders = $query->get();

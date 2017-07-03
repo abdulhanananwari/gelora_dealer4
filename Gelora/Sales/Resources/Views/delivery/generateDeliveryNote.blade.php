@@ -96,7 +96,7 @@
                 <p>Supir</p>
                 <br>
                 <br>
-                <p>{{ $viewData['salesOrder']->getAttribute('delivery.driver.name') }}</p>
+                <p>{{ $viewData['delivery']->get('driver.name') }}</p>
             </td>
             <td style="vertical-align: text-bottom;">
                 <p>Disetujui Oleh</p>

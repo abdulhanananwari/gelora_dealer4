@@ -14,10 +14,9 @@ class OnUpdate {
 
     public function validate() {
 
-        $onUpdateValidation = $this->salesOrder->validate()->onUpdate();
-        if ($onUpdateValidation !== true) {
-            return $onUpdateValidation;
-        }
+       if ($this->salesOrder->subDocument()->leasingOrder()->payment_at) {
+           return ['PO sudah tidak dapat di edit'];
+       }
 
         return true;
     }

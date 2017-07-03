@@ -12,6 +12,13 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
         Route::get('financial/generate-customer-invoice/{id}', ['uses' => 'SalesOrderController@generateCustomerInvoice']);
         Route::get('leasing-order/generate-leasing-order-invoice/{id}', ['uses' => 'SalesOrderController@generateInvoice']);
         Route::get('leasing-order/generate-agreementBPKB/{id}', ['uses' => 'SalesOrderController@generateAgreementBPKB']);
+
+        Route::group(['prefix' => '{id}', 'namespace' => 'SalesOrder'], function() {
+
+            Route::group(['prefix' => 'document'], function() {
+                Route::get('spk/download', ['uses' => 'SpkController@download']);
+            });
+        });
     });
 });
 
