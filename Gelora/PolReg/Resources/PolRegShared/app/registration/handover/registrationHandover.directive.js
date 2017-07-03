@@ -38,7 +38,6 @@ geloraPolRegShared
                             scope.salesOrder = res.data.data
                             $('#item-outgoing-entry-' + scope.modalId).modal('hide')
                         }, function(res) {
-
                             if (res.userResponse) {
                                 scope.itemOutgoingStore(item, res.userResponse)
                             }
