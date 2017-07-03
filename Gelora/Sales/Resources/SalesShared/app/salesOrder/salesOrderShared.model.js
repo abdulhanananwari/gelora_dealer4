@@ -56,6 +56,9 @@ geloraSalesShared
             generate: function(id, unit) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/generate/', { unit_id: unit.id })
             },
+            update: function(id, delivery) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/', {delivery: delivery})
+            },
             scan: function(id, unit) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/scan/', { unit_id: unit.id })
             },

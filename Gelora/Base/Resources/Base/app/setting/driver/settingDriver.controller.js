@@ -27,16 +27,10 @@ geloraBase
 			})
 		}
 
-		vm.addDriver = function(data_1) {
-
-			if (_.isNull(data_1.user_id)) {
-				alert('User Id Harus Ada')
-				return;
-			}
-
-			vm.driver.data_1.push(_.pick(data_1, ['user_id','name']));
+		vm.addDriver = function(driver) {
+			vm.driver.data_1.push(_.pick(driver, ['id','name']));
 		}
-
+		
 		vm.removeDriver = function(driver) {
 			_.remove(vm.driver.data_1, driver)
 		}

@@ -19,8 +19,9 @@ geloraSalesShared
             })
 
         vm.copyLeasingOrderFromSalesOrder = function() {
-            vm.salesOrder.leasingOrder.customer = angular.copy(vm.salesOrder.customer);
-            vm.salesOrder.leasingOrder.registration =angular.copy(vm.salesOrder.registration);
+
+            vm.salesOrder.leasingOrder.customer = _.pick(vm.salesOrder.customer, ['name', 'address', 'ktp'])
+            vm.salesOrder.leasingOrder.registration = _.pick(vm.salesOrder.registration, ['name', 'address', 'ktp'])
             vm.salesOrder.leasingOrder.vehicle = angular.copy(vm.salesOrder.vehicle);
         }
 
