@@ -41,6 +41,15 @@ geloraSalesShared
                     vm.salesOrder = res.data.data
                 })
         }
+        vm.leasingOrder = {
+            update : function(salesOrder) {
+                SalesOrderModel.leasingOrder.update(salesOrder.id, salesOrder.leasingOrder)
+                .then(function(res) {
+                    alert('PO berhasil di update')
+                    vm.salesOrder = res.data.data
+                })
+            }
+        }
         vm.generate = {
             invoice: function() {
                 window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));

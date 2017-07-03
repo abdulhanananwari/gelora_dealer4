@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-<button ng-if="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.salesOrder)">Simpan</button>
+<button ng-if="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.update(ctrl.salesOrder)">Simpan</button>
 <br>
 <div class="row" ng-show="ctrl.appType=='admin'">
     <div class="col-sm-9" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">

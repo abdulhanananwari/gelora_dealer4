@@ -17,7 +17,7 @@ class Delivery {
         $delivery = $this->salesOrder->subDocument()->delivery();
 
         $delivery->fill([
-            'driver' => $request->get('delivery.driver')
+            'driver' => $request->get('driver')
         ]);
 
         $this->salesOrder->delivery = $delivery;
