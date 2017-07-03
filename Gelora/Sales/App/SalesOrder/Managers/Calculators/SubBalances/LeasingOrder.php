@@ -16,17 +16,17 @@ class LeasingOrder {
         
         $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
         
-        if (!empty($leasingOrder)) {
+        if (is_object($leasingOrder) && $leasingOrder->on_the_road) {
             
             return [
-                'receivable' => $leasingOrder->leasing_payable,
+                'leasing_payable' => $leasingOrder->on_the_road - $leasingOrder->dp_po,
                 'otr_difference_with_selected_leasing_order' => $this->salesOrder->on_the_road - $leasingOrder->on_the_road, 
             ];
             
         } else {
             
             return [
-                'receivable' => 0,
+                'leasing_payable' => 0,
                 'otr_difference_with_selected_leasing_order' => 0
             ];
         }

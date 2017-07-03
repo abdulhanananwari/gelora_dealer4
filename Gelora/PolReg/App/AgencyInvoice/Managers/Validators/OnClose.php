@@ -13,20 +13,20 @@ class OnClose {
     }
 
     public function validate() {
-        
+
         $attrsValidation = $this->validateAttributes();
         if ($attrsValidation->fails()) {
             return $attrsValidation->errors()->all();
         }
-        
+
         return true;
     }
-    
+
     protected function validateAttributes() {
-        
+
         return \Validator::make($this->registrationBatch->toArray(), [
-            'agent' => 'required',
-            'file_uuid' => 'required'
+                    'agent' => 'required',
+                    'file_uuid' => 'required'
         ]);
     }
 

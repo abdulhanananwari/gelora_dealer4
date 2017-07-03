@@ -19,22 +19,20 @@ class FinancialBalance extends Fractal\TransformerAbstract {
     
     public static function transform (SalesOrderModel $salesOrder) {
         
-        $x = $salesOrder->calculate()->subBalance()->salesOrderAndExtras();
+        $data = $salesOrder->calculate()->subBalance()->salesOrderAndExtras();
         
-        /*
-         * Kalau selectedLeasingOrder di load, sekalian hitung sisa piutang
-         */
-        if (strpos(request()->get('with'), 'selectedLeasingOrder') !== false || strpos(request()->get('include'), 'selectedLeasingOrder') !== false) {
-            $x = (array) $x + (array) $salesOrder->calculate()->subBalance()->leasingOrder();
+        if ($salesOrder->payment_type == 'credit') {
+            $data = array_merge($data, $salesOrder->calculate()->subBalance()->leasingOrder());
         }
+        
         
         /*
          * Kalau price di load, sekalian hitung selisih OTR
          */
         if (strpos(request()->get('with'), 'price') !== false || strpos(request()->get('include'), 'price') !== false) {
-            $x = array_merge($x, $salesOrder->calculate()->subBalance()->priceDifferences());
+            $data = array_merge($data, $salesOrder->calculate()->subBalance()->priceDifferences());
         }
         
-        return $x;
+        return $data;
     }
 }

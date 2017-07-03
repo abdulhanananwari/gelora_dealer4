@@ -70,6 +70,21 @@ return [
                 'name' => 'Kode Dealer',
                 'code' => 'DEALER_CODE',
                 'type' => 'unique'
+            ],
+            [
+                'name' => 'Bank',
+                'code' => 'BANK',
+                'type' => 'unique'
+            ],
+            [
+                'name' => 'Nomor Bank Account',
+                'code' => 'BANK_ACCOUNT_NUMBER',
+                'type' => 'unique'
+            ],
+            [
+                'name' => 'Nama Bank Account',
+                'code' => 'BANK_ACCOUNT_NAME',
+                'type' => 'unique'
             ]
         ],
         

@@ -121,6 +121,9 @@ geloraBaseShared
                         },
                         leasingOrder: {
                             views : apps.dealer.sales + 'views/sales-order/leasing-order/',
+                        },
+                        financial: {
+                            views: apps.dealer.sales + 'views/sales-order/financial/',
                         }
                     },
                     prospect: {

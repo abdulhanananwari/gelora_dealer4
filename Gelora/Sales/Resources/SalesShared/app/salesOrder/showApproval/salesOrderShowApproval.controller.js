@@ -7,9 +7,7 @@ geloraSalesShared
 
         var vm = this
 
-        $scope._ = _
-        vm.currentStateName = $state.current.name
-        vm.linkFactory = LinkFactory
+        var validationBypasses = {}
 
         function load() {
 
@@ -43,9 +41,16 @@ geloraSalesShared
             },
             validate: function() {
 
-                SalesOrderModel.action.validation.validate($state.params.id)
+                SalesOrderModel.action.validation.validate($state.params.id, validationBypasses)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
+                    }, function(res) {
+
+                        if (res.userResponse) {
+                            _.assignWith(validationBypasses, res.userResponse)
+                            vm.action.validate()
+                        }
+
                     })
             },
             unvalidate: function() {
@@ -73,6 +78,7 @@ geloraSalesShared
                     vm.salesOrder = res.data.data
                 })
         }
+
         vm.cancel = function(cancelledSalesOrder) {
 
             vm.cancelledSalesOrder.sales_order = vm.salesOrder
