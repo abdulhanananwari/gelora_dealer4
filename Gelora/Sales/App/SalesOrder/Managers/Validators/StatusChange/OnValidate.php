@@ -30,7 +30,7 @@ class OnValidate {
         }
 
 
-        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder->dp_po)) {
+        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder['dp_po'])) {
 
             return ['Leasing order harus diinput dulu untuk penjualan kredit'];
         }
@@ -67,7 +67,7 @@ class OnValidate {
         if ($priceValidation !== true) {
             return $priceValidation;
         }
-
+        
         if ($this->salesOrder->sales_condition == 'isi') {
             $registrationValidation = $this->salesOrder->validate()->data()->registration();
             if ($registrationValidation !== true) {
@@ -80,6 +80,7 @@ class OnValidate {
                 return $mediatorValidation;
             }
         }
+       
         return true;
     }
 

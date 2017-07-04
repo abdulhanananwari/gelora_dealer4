@@ -54,6 +54,9 @@
                 <p>Kepada,</p>
                 <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
                 <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
+                <p>{{ $viewData['salesOrder']->customer['kecamatan'] }}</p>
+                <p>{{ $viewData['salesOrder']->customer['kelurahan'] }}</p>
+                <p>{{ $viewData['salesOrder']->customer['kode_pos'] }}</p>
                 <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
                 @if(isset($viewData['salesOrder']->leasingOrder))
                 <p style="margin-top: 10px;">Leasing : {{$viewData['salesOrder']->leasingOrder['mainLeasing']['name']}}</p>
