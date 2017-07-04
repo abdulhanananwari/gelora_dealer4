@@ -28,6 +28,10 @@ geloraSalesShared
         }
         load()
 
+        vm.download = function(salesOrder) {
+            window.open(LinkFactory.dealer.sales.salesOrder.views + salesOrder.id + '/document/spk/download?jwt=' + JwtValidator.encodedJwt)
+        }
+
         vm.generateAndDownload = function(salesOrder) {
 
             SalesOrderModel.document.spk.generate($state.params.id)
@@ -36,6 +40,7 @@ geloraSalesShared
                 })
 
         }
+
         vm.sendEmail = function(salesOrder) {
         	
             SalesOrderModel.document.spk.email($state.params.id)

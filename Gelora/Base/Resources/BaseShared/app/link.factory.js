@@ -111,6 +111,7 @@ geloraBaseShared
                 sales: {
                     salesOrder: {
                         base: apps.dealer.sales + 'api/sales-order/',
+                        views: apps.dealer.sales + 'views/sales-order/',
                         report: apps.dealer.sales + 'report/sales-order',
                         delivery: {
                             scan: apps.dealer.sales + 'api/sales-order/delivery/scan',
@@ -174,7 +175,7 @@ geloraBaseShared
                         locationFinder: apps.dealer.base + 'view/dealer-location-finder.html',
                         unitBarcodeFinder: apps.dealer.base + 'view/dealer-unit-barcode-finder.html',
                         unitShow: apps.dealer.base + 'view/dealer-unit-show.html'
-                    }
+                    },
                 },
                 plugins: {
                     leasingSelector: domains.dealer + 'gelora/dealer-plugins/leasing-selector/app.js',
