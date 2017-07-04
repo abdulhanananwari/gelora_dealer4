@@ -1,7 +1,7 @@
 geloraSalesShared
         .controller('SalesOrderShowExtraController', function (
                 $scope, $state,
-                SalesOrderModel, SalesOrderExtraSharedModel, SalesProgramModel,
+                SalesOrderModel, SalesOrderExtraSharedModel, SalesProgramModel,SalesExtraModel,
                 LinkFactory) {
 
             var vm = this
@@ -45,8 +45,13 @@ geloraSalesShared
             }
 
             SalesProgramModel.index({active: true})
-                    .then(function (res) {
-                        vm.salesPrograms = res.data.data
-                    })
+            .then(function (res) {
+                vm.salesPrograms = res.data.data
+            })
+            
+            SalesExtraModel.index()
+            .then(function(res){
+                vm.salesExtras = res.data.data
+            })
 
         })
