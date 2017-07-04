@@ -39,7 +39,7 @@ class SpkPdf {
 
         if ($download) {
 
-            return $this->pdf->Output('D', $filename);
+            return $this->pdf->Output('I', $filename);
         } else {
 
             $content = $this->pdf->Output('S', $filename);
@@ -92,24 +92,27 @@ class SpkPdf {
         $this->pdf->SetFont('Arial', 'B', 13);
         $this->pdf->Cell(0, 10, 'SURAT PEMESANAN KENDARAAN', 0, 2);
 
+        $y = $this->pdf->GetY();
 
         $this->pdf->SetFont('Arial', '', 10);
-        $this->pdf->Cell(0, 7, 'Dibuat: ' . $this->salesOrder->created_at->toDateString(), 0, 0);
+        $this->pdf->Cell(0, 7, 'Dibuat: ' . $this->salesOrder->created_at->toDateTimeString(), 0, 2);
+        $this->pdf->Cell(0, 7, 'Oleh: ' . $this->salesOrder->getAttribute('creator.name'), 0, 0);
+        $this->pdf->setY($y);
 
-        if ($this->salesOrder->locked_at) {
-            $this->pdf->SetX($width / 4 * 1.3);
-            $this->pdf->Cell(0, 7, 'Kunci: ' . $this->salesOrder->locked_at->toDateString(), 0, 0);
-        }
 
         if ($this->salesOrder->validated_at) {
-            $this->pdf->SetX($width / 4 * 2);
-            $this->pdf->Cell(0, 7, 'Validasi: ' . $this->salesOrder->locked_at->toDateString(), 0, 0);
+            $this->pdf->SetX($width / 3);
+            $this->pdf->Cell(0, 7, 'Validasi: ' . $this->salesOrder->validated_at->toDateTimeString(), 0, 2);
+            $this->pdf->Cell(0, 7, 'Oleh: ' . $this->salesOrder->getAttribute('validator.name'), 0, 0);
+            $this->pdf->setY($y);
         }
 
-        $this->pdf->SetX($width / 4 * 2.7);
-        $this->pdf->Cell(0, 7, 'Generated: ' . \Carbon\Carbon::now()->toDateTimeString(), 0, 0);
+        $this->pdf->SetX($width / 3 * 2);
+        $this->pdf->Cell(0, 7, 'Cetak: ' . \Carbon\Carbon::now()->toDateTimeString(), 0, 2);
+        $this->pdf->Cell(0, 7, 'Oleh: ' . \ParsedJwt::getByKey('name'), 0, 0);
+        $this->pdf->setY($y);
 
-        $this->pdf->Ln(8);
+        $this->pdf->Ln(15);
         $this->generateLine(false);
     }
 
@@ -155,7 +158,9 @@ class SpkPdf {
                     ->where('uuid', $registration->id_file_uuid)
                     ->first();
             $this->pdf->Cell(0, 10, 'ID untuk STNK', 0, 2);
-            $this->pdf->Image($file->getFullUrl(), null, null, $width / 4);
+
+            list($imageWidth, $imageHeight) = getimagesize($file->getFullUrl());
+            $this->pdf->Image($file->getFullUrl(), null, null, ($imageHeight > $imageWidth ? null : ($width / 4)), ($imageHeight > $imageWidth ? ($width / 4) : null));
         }
 
         $this->pdf->SetY($maxY);
@@ -184,7 +189,7 @@ class SpkPdf {
         }
 
         $this->pdf->SetY($y);
-        $this->pdf->SetX($width / 2);
+        $this->pdf->SetX($width / 3);
 
         $this->pdf->SetFont('Arial', 'B', 10);
         $this->pdf->Cell(0, 10, 'HARGA', 0, 2);
@@ -295,7 +300,7 @@ class SpkPdf {
         $this->pdf->Cell(0, 5, 'Cicilan', 0, 0);
 
         $this->pdf->SetX(posX($width, 5));
-        $this->pdf->Cell(0, 5, 'Status', 0, 1);
+        $this->pdf->Cell(0, 5, 'Nomor PO', 0, 1);
 
         $this->pdf->Ln(2);
         $y = $this->pdf->GetY();
@@ -318,7 +323,7 @@ class SpkPdf {
 
         $this->pdf->SetFont('Arial', '', 7);
         $this->pdf->SetX(posX($width, 5));
-        $this->pdf->MultiCell(0, 5, $this->salesOrder->retrieve()->leasingOrder()->statusText());
+        $this->pdf->MultiCell(0, 5, $leasingOrder->po_number);
         $this->pdf->SetFont('Arial', '', 10);
 
 
