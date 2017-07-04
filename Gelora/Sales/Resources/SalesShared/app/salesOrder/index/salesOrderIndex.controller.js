@@ -10,14 +10,12 @@ geloraSalesShared
 
         vm.load = function(filter) {
 
-            vm.filter.page =
-
-                SalesOrderModel.index(filter)
+            SalesOrderModel.index(filter)
                 .then(function(res) {
 
                     vm.salesOrders = res.data.data
                     vm.meta = res.data.meta
                 })
         }
-        vm.load()
+        vm.load(vm.filter)
     })

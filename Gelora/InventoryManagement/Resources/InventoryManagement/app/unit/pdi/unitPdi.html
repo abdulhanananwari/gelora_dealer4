@@ -7,7 +7,7 @@
 
 			<dealer-unit-search selected-unit="ctrl.unit"></dealer-unit-search><br>
 			<!-- <button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br> -->
-			<dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.pdi(scannedUnit, true, ctrl.comment)" android-scan-url="{{ ctrl.androidScanUrl }}"></dealer-unit-barcode-finder>
+			<dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.pdi(scannedUnit, true, ctrl.comment)" android-scan-url="{{window.location.href + '{CODE}' }}"></dealer-unit-barcode-finder>
 			
 		</div>
 

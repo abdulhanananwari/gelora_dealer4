@@ -51,12 +51,18 @@
                     <input type="text" ng-model="ctrl.unit.received_at">
                     <label>Diterima Oleh</label>
                     <input type="text" ng-model="ctrl.unit.receiver.name">
+                    <span ng-hide="ctrl.unit.received_at">
+                        <dealer-location-finder location="selectedLocation"></dealer-location-finder>
+                        <br>
+                        <button class="btn btn-block btn-danger" ng-click="ctrl.action.receive(ctrl.unit, selectedLocation)">Terima</button>
+                    </span>
                 </div>
                 <div class="col-sm-6">
                     <label>PDI</label>
                     <input type="text" ng-model="ctrl.unit.pdi_at">
                     <label>Di PDI Oleh</label>
                     <input type="text" ng-model="ctrl.unit.pdi_man.name">
+                    <button ng-hide="ctrl.unit.pdi_at" class="btn btn-block btn-danger" ng-click="ctrl.action.pdi(ctrl.unit)">PDI</button>
                 </div>
             </div>
         </div>

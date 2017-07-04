@@ -9,7 +9,7 @@ trait Action {
     public function actionReceive($id, Request $request) {
 
         $unit = $this->unit->find($id);
-        
+
         $validation = $unit->validate()->onReceive($request->get('location_id'));
         if ($validation !== true) {
             return $this->formatErrors($validation);

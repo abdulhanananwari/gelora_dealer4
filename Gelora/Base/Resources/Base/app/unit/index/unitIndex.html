@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="col-sm-12">
 
 		<dealer-unit-search selected-unit="selectedUnit" on-unit-selected="ctrl.selectUnit(selectedUnit.id)"></dealer-unit-search>
@@ -14,6 +14,8 @@
 						<th>Kode Warna</th>
 						<th>No Mesin</th>
 						<th>No Rangka</th>
+						<th>Diterima</th>
+						<th>PDI</th>
 						<th>Buka</th>
 					</tr>
 				</thead>
@@ -26,6 +28,8 @@
 						<td>{{unit.color_code}}</td>
 						<td>{{unit.engine_number}}</td>
 						<td>{{unit.chasis_number}}</td>
+						<td>{{ unit.received_at | date }}</td>
+						<td>{{unit.pdi_at | date }}</td>
 						<td><a ui-sref="unitShow({id:unit.id})">Buka</a></td>
 					</tr>
 				</tbody>
@@ -34,4 +38,4 @@
 			<pagination pagination="ctrl.meta.pagination" page="page" on-load-page="ctrl.get(page)"></pagination>
 			
 	</div>
-</div>
+</div> -->
