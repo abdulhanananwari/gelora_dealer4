@@ -1,74 +1,65 @@
 <div class="row">
-	<div class="col-sm-12">
-		<div class="well">
-			<h4>Unit</h4>
-
-			<div class="row">
-				<div class="col-sm-4">
-					
-					<vehicle-model-finder2
-						selected-model="model"
-						on-change="ctrl.filter.type_code=model.code;ctrl.filter.color_code=model.variant.code;">	
-					</vehicle-model-finder2>
-
-				</div>
-				<div class="col-sm-4">
-					
-					<label>Status</label>
-					<select ng-options="unitStatus.code as unitStatus.name for unitStatus in ctrl.unitStatuses" ng-model="ctrl.filter.status"></select>
-					<dealer-location-finder 
-					location="ctrl.storageLocation"
-					on-location-selected="ctrl.filter.current_location_id=ctrl.storageLocation.id;">			
-					</dealer-location-finder>
-
-				</div>
-				<div class="col-sm-4">
-					
-					<input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.received">
-					<label>Sudah diterima</label><br>
-
-					<input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.pdi">
-					<label>Sudah di PDI</label>
-
-				</div>
-			</div>
-			<br>
-			<button class="btn btn-block btn-danger" ng-click="ctrl.load(ctrl.filter)">Cari Unit</button>		
-		</div>
-	</div>
+    <div class="col-sm-12">
+        <div class="well">
+            <h4>Unit</h4>
+            <div class="row">
+                <div class="col-sm-4">
+                    <vehicle-model-finder2 selected-model="model" on-change="ctrl.filter.type_code=model.code;ctrl.filter.color_code=model.variant.code;">
+                    </vehicle-model-finder2>
+                </div>
+                <div class="col-sm-4">
+                    <label>Status</label>
+                    <select ng-options="unitStatus.code as unitStatus.name for unitStatus in ctrl.unitStatuses" ng-model="ctrl.filter.status"></select>
+                    <dealer-location-finder location="ctrl.storageLocation" on-location-selected="ctrl.filter.current_location_id=ctrl.storageLocation.id;">
+                    </dealer-location-finder>
+                </div>
+                <div class="col-sm-4">
+                    <input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.received">
+                    <label>Sudah diterima</label>
+                    <br>
+                    <input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.pdi">
+                    <label>Sudah di PDI</label>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-block btn-danger" ng-click="ctrl.load(ctrl.filter)">Cari Unit</button>
+        </div>
+    </div>
 </div>
-
-
 <div class="row">
-	<div class="col-sm-12">
-		<div class="table-responsive">
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Type</th>
-						<th>Kode</th>
-						<th>Warna</th>
-						<th>Nomor Rangka</th>
-						<th>Nomor Mesin</th>
-						<th>Status</th>
-						<th>Lokasi</th>
-						<th>Buka</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="unit in ctrl.units">
-						<td>{{unit.type_name}}</td>
-						<td>{{unit.type_code}}</td>
-						<td>{{unit.color_name}}</td>
-						<td>{{unit.chasis_number}}</td>
-						<td>{{unit.engine_number}}</td>
-						<td>{{unit.current_status_text}}</td>
-						<td>{{unit.currentLocation.data.name}}</td>
-						<td><a ng-href="{{'/base/redirect-app/unit/' + unit.id}}" target="_blank">Buka</a></td>
-					</tr>
-				</thead>
-			</table>
-		</div>
-		<pagination pagination="ctrl.meta.pagination" page="ctrl.filter.page" on-load-page="ctrl.load(ctrl.filter)"></pagination>
-	</div>
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Kode</th>
+                        <th>Warna</th>
+                        <th>Nomor Rangka</th>
+                        <th>Nomor Mesin</th>
+                        <th>Status</th>
+                        <th>Lokasi</th>
+                        <th>Diterima</th>
+                        <th>PDI</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="unit in ctrl.units">
+                        <td>{{unit.type_name}}</td>
+                        <td>{{unit.type_code}}</td>
+                        <td>{{unit.color_name}}</td>
+                        <td>{{unit.chasis_number}}</td>
+                        <td>{{unit.engine_number}}</td>
+                        <td>{{unit.current_status_text}}</td>
+                        <td>{{unit.currentLocation.data.name}}</td>
+                        <td>{{unit.received_at | date}}</td>
+                        <td>{{unit.pdi_at | date}}</td>
+                        <td><a ng-href="{{'/base/redirect-app/unit/' + unit.id}}" target="_blank">Buka</a></td>
+                    </tr>
+                    </thead>
+            </table>
+        </div>
+        <pagination pagination="ctrl.meta.pagination" page="ctrl.filter.page" on-load-page="ctrl.load(ctrl.filter)"></pagination>
+    </div>
 </div>
