@@ -111,7 +111,7 @@
                 <h4 class="modal-title"><strong>Scan Barcode</strong></h4>
             </div>
             <div class="modal-body">
-                <dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.delivery.scan(ctrl.salesOrder,scannedUnit)"></dealer-unit-barcode-finder>
+                <dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.delivery.scan(ctrl.salesOrder,scannedUnit)" android-scan-url="{{window.location.href + '{CODE}' }}"></dealer-unit-barcode-finder>
             </div>
         </div>
     </div>
