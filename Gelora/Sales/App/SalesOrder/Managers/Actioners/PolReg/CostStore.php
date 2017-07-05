@@ -12,36 +12,28 @@ class CostStore {
         $this->salesOrder = $salesOrder;
     }
 
-    public function action($itemName, \Illuminate\Http\Request $request) {
+    public function action(\Illuminate\Http\Request $request) {
 
-        $cost = new \Solumax\PhpHelper\App\Mongo\SubDocument;
-        $cost->name = $itemName;
-        foreach ($request->only('amount', 'amount_to_charge_to_customer', 'charge_to_customer') as $key => $value) {
-            $cost->$key = $value;
-        }
-        $cost->creator = $this->salesOrder->assignEntityData();
-        $cost = $this->createSalesOrderExtra($cost);
+        $cost = [
+            'name' => $request->get('name'),
+            'amount' => $request->get('amount'),
+            'charge_to_customer' => $request->get('charge_to_customer'),
+            'creator' => $this->salesOrder->assignEntityData(),
+        ];
         
-        $polReg = $this->salesOrder->subDocument()->polReg();
-        $polReg->set('costs.' . $itemName, $cost);
+        if ($request->get('charge_to_customer') == true) {
 
-        $this->salesOrder->polReg = $polReg;
-        $this->salesOrder->save();
-    }
-
-    protected function createSalesOrderExtra($cost) {
-
-        if ($cost->get('charge_to_customer') == true) {
-
+            $cost['amount_to_charge_to_customer'] = $request->get('amount_to_charge_to_customer');
+            
             $salesOrderExtra = new \Gelora\Sales\App\SalesOrderExtra\SalesOrderExtraModel;
             $salesOrderExtra->assign()->fromPolRegCost($this->salesOrder, $cost);
             $salesOrderExtra->calculate()->total();
             $salesOrderExtra->save();
 
-            $cost->set('sales_order_extra_id', $salesOrderExtra->id);
+            $cost['sales_order_extra_id'] = $salesOrderExtra->id;
         }
         
-        return $cost;
+        $this->salesOrder->setAttribute('polReg.costs.' . $request->get('name'), $cost);
+        $this->salesOrder->save();
     }
-
 }
