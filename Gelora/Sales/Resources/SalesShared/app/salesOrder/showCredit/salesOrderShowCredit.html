@@ -56,7 +56,7 @@
     </div>
 </div>
 <button ng-show="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.update(ctrl.salesOrder)">Simpan</button>
-<button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.updatePostValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
+<button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.updateAfterValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
 <br>
 <div class="row" ng-show="ctrl.appType=='admin'">
     <div class="col-sm-9" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">

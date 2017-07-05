@@ -30,9 +30,11 @@ class OnValidate {
         }
 
 
-        if ($this->salesOrder->payment_type == 'credit' && is_null($this->salesOrder->leasingOrder['dp_po'])) {
-
-            return ['Leasing order harus diinput dulu untuk penjualan kredit'];
+        if ($this->salesOrder->payment_type == 'credit'
+                && is_null($this->salesOrder->getAttribute('leasingOrder.dp_po'))
+                && is_null($this->salesOrder->getAttribute('leasingOrder.on_the_road'))
+        ) {
+            return ['OTR PO & DP PO harus diinput dulu untuk penjualan kredit'];
         }
 
         if (request()->get('bypass_plafond_required_validation') != 'true') {
@@ -67,7 +69,7 @@ class OnValidate {
         if ($priceValidation !== true) {
             return $priceValidation;
         }
-        
+
         if ($this->salesOrder->sales_condition == 'isi') {
             $registrationValidation = $this->salesOrder->validate()->data()->registration();
             if ($registrationValidation !== true) {
@@ -80,7 +82,7 @@ class OnValidate {
                 return $mediatorValidation;
             }
         }
-       
+
         return true;
     }
 

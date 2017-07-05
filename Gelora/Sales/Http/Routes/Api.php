@@ -61,7 +61,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
             Route::group(['prefix' => '{id}/leasing-order'], function() {
                 Route::post('/', ['uses' => 'LeasingOrderController@update']);
-                Route::post('post-validation', ['uses' => 'LeasingOrderController@updatePostValidation']);
+                Route::post('after-validation', ['uses' => 'LeasingOrderController@updateAfterValidation']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder']);
             });
 

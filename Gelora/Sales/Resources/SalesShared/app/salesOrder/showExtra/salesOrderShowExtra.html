@@ -17,7 +17,7 @@
 </div>
 <br>
 <div class="dropdown dropdown-scroll">
-    <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">{{ctrl.focused.sales_extra_id ?  ctrl.focused.item_name : 'Pilih Sales Extra' }} <span class="caret"></span>
+    <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">{{ctrl.focused.sales_extra_id ? ctrl.focused.item_name : 'Pilih Sales Extra' }} <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation">
@@ -28,7 +28,7 @@
                 <input type="text" class="form-control" ng-model="x"></input>
             </div>
         </li>
-        <li role="presentation" ng-click="ctrl.focused={};ctrl.focused.sales_extra_id=salesExtra.id;ctrl.focused.item_name=salesExtra.name;ctrl.focused.item_code=0;ctrl.focused.price_per_unit=0;ctrl.focused.quantity=1" ng-repeat='salesExtra in ctrl.salesExtras | filter:x'><a> {{ salesExtra.name }} | {{ salesExtra.type }}</a>
+        <li role="presentation" ng-click="ctrl.focused={};ctrl.focused.sales_extra_id=salesExtra.id;ctrl.focused.item_name=salesExtra.name;ctrl.focused.item_code=salesExtra.type;ctrl.focused.price_per_unit=0;ctrl.focused.quantity=1" ng-repeat='salesExtra in ctrl.salesExtras | filter:x'><a> {{ salesExtra.name }} | {{ salesExtra.type }}</a>
         </li>
     </ul>
 </div>
@@ -89,19 +89,22 @@
                             <th>Quantity</th>
                             <th>PPN</th>
                             <th>Total</th>
-                            <th>Sales program ID</th>
+                            <th>Program / Extra ID</th>
                             <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="extra in ctrl.salesOrder.salesOrderExtras" ng-click="ctrl.focused=extra">
+                        <tr ng-repeat="extra in ctrl.salesOrder.salesOrderExtras">
                             <td>{{extra.item_name}}</td>
                             <td>{{extra.item_code}}</td>
                             <td>{{extra.price_per_unit | number}}</td>
                             <td>{{extra.quantity}}</td>
                             <td>{{extra.vat | number}}</td>
                             <td>{{extra.total | number}}</td>
-                            <td><a ng-href="{{'/base/redirect-app/sales-program/' + extra.sales_program_id}}" target="_blank">{{extra.sales_program_id}}</a></td>
+                            <td>
+                                <a ng-href="{{'/base/redirect-app/sales-program/' + extra.sales_program_id}}" target="_blank">{{extra.sales_program_id}}</a>
+                                <a ng-href="{{'/base/redirect-app/sales-extra/' + extra.sales_extra_id}}" target="_blank">{{extra.sales_extra_id}}</a>
+                            </td>
                             <td>
                                 <button class="btn btn-xs btn-success" ng-click="ctrl.focused=extra">Edit</button>
                             </td>

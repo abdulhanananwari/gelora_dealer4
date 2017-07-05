@@ -23,7 +23,7 @@ class OnCreateAndUpdate {
     }
 
     protected function validateAttributes() {
-        
+
         return \Validator::make($this->salesExtra->toArray(), [
                     'name' => 'required',
                     'type' => 'required',

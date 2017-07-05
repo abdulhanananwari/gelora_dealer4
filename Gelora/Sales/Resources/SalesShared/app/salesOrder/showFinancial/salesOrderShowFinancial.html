@@ -1,5 +1,11 @@
 <sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
 <div class="well">
+    <div class="row visible-print">
+        <div class="col-sm-12">
+            <h2>ID SPK {{ ctrl.salesOrder.id }}</h2>
+            <h4>Cetak: {{ ctrl.date | fromDateTimeString:"YYYY-MM-DD HH:mm" }}</h4>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-6">
             <h4>Pembelian</h4>
@@ -82,13 +88,14 @@
         <div class="col-sm-6">
             <h4>Pembayaran</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue" on-updated="ctrl.calculatePaymentUnreceived(false)"></transaction-due-list>
-            <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
-            <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
-            <button ng-show="ctrl.paymentUnreceived > 0 && ctrl.salesOrder.validated_at" class="btn btn-warning btn-sm btn-block" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder)">Cetak Invoice</button>
-            <!-- <due-create type="R" entity-id="{{ ctrl.salesOrder.customer.id }}" entity-name="{{ ctrl.salesOrder.customer.name }}" entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ ctrl.salesOrder.id }}"></due-create> -->
+            <div class="hidden-print">
+                <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+                <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+                <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-warning btn-sm btn-block" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder)">Cetak Invoice</button>
+            </div>
         </div>
     </div>
     <p class="text-center"><strong>Kekurangan: Rp {{ ctrl.paymentUnreceived | number }}</strong></p>
     <p ng-if="ctrl.paymentUnreceived < 0" class="text-danger text-center"><small>Pembayaran Sudah Berlebih</small></p>
-    <button class="btn btn-success btn-block" ng-click="ctrl.calculatePaymentUnreceived(true)">Hitung Ulang</button>
+    <button class="btn btn-success btn-block hidden-print" ng-click="ctrl.calculatePaymentUnreceived(true)">Hitung Ulang</button>
 </div>

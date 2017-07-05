@@ -7,6 +7,8 @@ geloraSalesShared
 
         var vm = this
 
+        vm.date = new Date();
+
         vm.transactionCreatorModal = {
             setting: {
                 transactable: {

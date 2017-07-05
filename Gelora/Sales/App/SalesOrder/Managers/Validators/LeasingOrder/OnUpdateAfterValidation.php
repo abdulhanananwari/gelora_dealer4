@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnUpdate {
+class OnUpdateAfterValidation {
 
     protected $salesOrder;
 
@@ -14,6 +14,9 @@ class OnUpdate {
 
     public function validate() {
 
+        if ($this->salesOrder->financial_closed_at) {
+            return ['PO tidak dapat di edit karena status financial SPK sudah ditutup'];
+        }
 
         return true;
     }
