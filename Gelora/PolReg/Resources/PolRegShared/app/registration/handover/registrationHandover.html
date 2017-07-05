@@ -18,6 +18,13 @@
                             <div ng-if="item.incoming || item.outgoing" ng-include="'outgoing.html'"></div>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label>Tambah Barang Baru</label>
+                            <input type="text" ng-model="newItemName">
+                            <button ng-show='newItemName' class="btn btn-block btn-info btn-xs" ng-click="addItem(newItemName)">Tambah</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -55,6 +62,7 @@
     <div ng-if="item.outgoing">
         <p class="small-info">Diserahkan oleh: {{ item.outgoing.creator.name }}</p>
         <p class="small-info">{{ item.outgoing.creator.timestamp * 1000 | date:"MM/dd/yyyy h:mma" }}</p>
+        <p class="small-info" ng-show="item.outgoing.note">Catatan: {{ item.outgoing.note }}</p>
         <p class="small-info">Penerima: {{ item.outgoing.receiver_name }} ({{ item.outgoing.receiver_id }})</p>
         <button class="btn btn-block btn-success btn-xs" ng-click="generateReceiptItemHandover(item)">Cetak Bukti Penyerahan</button>
     </div>
