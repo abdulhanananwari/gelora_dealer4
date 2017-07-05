@@ -60,8 +60,8 @@ class SalesOrderController extends Controller {
     public function generateCustomerInvoice($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        
-        $validation = $salesOrder->validate()->statusChange()->onGenerateCustomerInvoice($request->get('invoice_amount'));
+
+        $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request->get('invoice_amount'));
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
