@@ -30,12 +30,14 @@ geloraPolReg
 
         vm.close = function(registrationBatch) {
 
-            AgencyInvoiceModel.close(registrationBatch.id, registrationBatch)
-                .then(function(res) {
-                    assignData(res)
-                    alert('Batch Berhasil Ditutup')
-                })
+            if (confirm('Tutup jika sudah yakin total invoice dari biro jasa sudah sama')) {
 
+                AgencyInvoiceModel.close(registrationBatch.id, registrationBatch)
+                    .then(function(res) {
+                        assignData(res)
+                        alert('Batch Berhasil Ditutup')
+                    })
+            }
         }
 
         if ($state.params.id) {
