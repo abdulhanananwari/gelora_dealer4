@@ -13,38 +13,38 @@ class OnFinancialClose {
     }
 
     public function validate() {
-
-        if (empty($this->salesOrder->subDocument()->leasingOrder()->get('payment_at'))) {
-            return ['Leasing Belum Membayar Pokok Hutang'];
-        }
-        $balance = $this->calculateBalance();
-        if ($balance !== true) {
-            return ['SPK belum bisa di tutup karena kustomer masih mempunyai hutang Rp ' . number_format($balance)];
-        }
-        $costs = $this->salesOrder->subDocument()->polReg()->get('costs.' .  );
-        if ($costs < 0 ) {
-                return ['Pol Reg costs belum di input'];
-        }
-
-        if (empty($this->salesOrder->subDocument()->polReg()->get('generator'))) {
-            return ['Data Pol Reg belum digenerate'];
+        
+        $leasingPaymentValidation = $this->validateLeasingPayment();
+        if ($leasingPaymentValidation !== true) {
+            return $leasingPaymentValidation;
         }
         
-        if (empty($this->salesOrder->subDocument()->polReg()->get('agency_invoice_id'))) {
+        $paymentUnreceived = $this->salesOrder->calculate()->SalesOrderBalance()['payment_unreceived'];
+        if ($paymentUnreceived !== 0) {
+            return ['SPK belum bisa di tutup karena kustomer masih mempunyai hutang Rp ' . number_format($paymentUnreceived)];
+        }
+        
+        $totalCost = collect($this->salesOrder->getAttribute('polReg.costs'))->sum('amount');
+        if ($totalCost <= 0) {
+            return ['Biaya PolReg belum di input'];
+        }
+
+        if (empty($this->salesOrder->getAttribute('polReg.agency_invoice_id'))) {
             return ['Batch invoice biro jasa belum diassign'];
         }
+
+        return true;
+    }
+    
+    protected function validateLeasingPayment() {
+        
+        if ($this->salesOrder->payment_type == 'credit' && !$this->salesOrder->getAttribute('leasingOrder.payment_at')) {
+            return ['PO Leasing belum cair'];
+        }
+        
+        // Kemungkinan perlu ditambah validasi pembayaran join promo
         
         return true;
     }
-
-    protected function calculateBalance() {
-
-        $balance = $this->salesOrder->calculate()->SalesOrderBalance()['payment_unreceived'];
-        if ($balance == 0) {
-            return true;
-        } else {
-            return $balance;
-        }
-    }
-
+    
 }
