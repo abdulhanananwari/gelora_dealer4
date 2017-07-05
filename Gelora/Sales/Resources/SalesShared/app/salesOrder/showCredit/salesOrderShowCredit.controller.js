@@ -48,11 +48,19 @@ geloraSalesShared
                     alert('PO berhasil di update')
                     vm.salesOrder = res.data.data
                 })
+            },
+            updatePostValidation : function(salesOrder) {
+                SalesOrderModel.leasingOrder.updatePostValidation(salesOrder.id, salesOrder.leasingOrder)
+                .then(function(res){
+                    alert('PO berhasil di update')
+                    vm.salesOrder =  res.data.data
+                })
             }
         }
         vm.generate = {
             invoice: function() {
-                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+               
+                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
             agreementBPKB: function() {
                 window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-agreementBPKB/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));

@@ -41,4 +41,8 @@ class SalesOrderExtraModel extends Model {
         return $this->belongsTo('\Gelora\Base\App\SalesProgram\SalesProgramModel',
                 'sales_program_id');
     }
+    public function salesExtra() {
+        return $this->belongsTo('\Gelora\Base\App\SalesExtra\SalesExtraModel',
+                'sales_extra_id');
+    }
 }

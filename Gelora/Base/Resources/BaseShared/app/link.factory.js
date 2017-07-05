@@ -69,6 +69,9 @@ geloraBaseShared
                     },
                     salesProgram: {
                         base: apps.dealer.base + 'api/sales-program/'
+                    },
+                    salesExtra: {
+                        base: apps.dealer.base + 'api/sales-extra/'
                     }
                 },
                 purchase: {

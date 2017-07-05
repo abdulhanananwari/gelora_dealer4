@@ -16,6 +16,23 @@
     </ul>
 </div>
 <br>
+<div class="dropdown dropdown-scroll">
+    <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">{{ctrl.focused.sales_extra_id ?  ctrl.focused.item_name : 'Pilih Sales Extra' }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation">
+            <div class="input-group input-group-sm search-control">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control" ng-model="x"></input>
+            </div>
+        </li>
+        <li role="presentation" ng-click="ctrl.focused={};ctrl.focused.sales_extra_id=salesExtra.id;ctrl.focused.item_name=salesExtra.name;ctrl.focused.item_code=0;ctrl.focused.price_per_unit=0;ctrl.focused.quantity=1" ng-repeat='salesExtra in ctrl.salesExtras | filter:x'><a> {{ salesExtra.name }} | {{ salesExtra.type }}</a>
+        </li>
+    </ul>
+</div>
+<br>
 <div class="well">
     <div class="row">
         <div class="col-sm-12">

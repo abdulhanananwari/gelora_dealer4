@@ -49,15 +49,20 @@
                             <table>
                                 <tr>
                                     <td style="width: 50%;">Nama customer</td>
-                                    <td style="width: 50%;">{{ $viewData['salesOrder']->customer['name'] }}</td>
+                                    <td style="width: 50%; padding-left: 5px;">{{ $viewData['salesOrder']->customer['name'] }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Sejumlah</td>
-                                    <td><strong>Rp {{ number_format($viewData['balance']['payment_unreceived']) }}</strong></td>
+                                    <td style="font-size: 1.2em;">Total Terhutang</td>
+                                    <td style="padding-left: 5px;"><strong>Rp {{ number_format($viewData['balance']['payment_unreceived']) }}</strong></td>
                                 </tr>
+                                <tr>
+                                    <td style="font-size: 1.2em;">Total Tagihan Ini</td>
+                                    <td style="padding-left: 5px;"><strong>Rp {{ number_format($viewData['invoiceAmount'])}}</strong></td>
+                                </tr>
+                                
                                 <tr>
                                     <td>Untuk</td>
-                                    <td>Pelunasan SPK {{ $viewData['salesOrder']->id }}</td>
+                                    <td style="padding-left: 5px;">Pelunasan SPK {{ $viewData['salesOrder']->id }}</td>
                                 </tr>
                             </table>
                         </td>
@@ -69,7 +74,7 @@
                 </table>
                 <br>
                 <p><strong>Petunjuk Pembayaran:</strong></p>
-                <ul>
+                <ul>         
                     <li>Pembayaran via bank transfer harap dilakukan ke rekening {{ $viewData['tenantInfo']->BANK }} nomor account <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NUMBER }}</strong> atas nama <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NAME }}</strong> dengan mencantumkan keterangan <strong>PEL SPK {{ substr($viewData['salesOrder']->id, -5) }}</strong></li>
                 </ul>
                 <br>

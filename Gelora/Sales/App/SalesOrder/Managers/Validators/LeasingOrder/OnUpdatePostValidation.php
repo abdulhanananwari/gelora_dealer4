@@ -14,10 +14,6 @@ class OnUpdate {
 
     public function validate() {
 
-       $onUpdateValidation = $this->salesOrder->validate()->onUpdate();
-        if ($onUpdateValidation !== true) {
-            return $onUpdateValidation;
-        }
 
         return true;
     }

@@ -27,7 +27,20 @@ class LeasingOrderController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    public function updatePostValidation($id, Request $request) {
 
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->leasingOrderPostValidation($request);
+
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdatePostValidation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->leasingOrder()->onUpdate();
+
+        return $this->formatItem($salesOrder);
+    }
     public function assignFromLeasingOrder($id, Request $request) {
         
         $salesOrder = $this->salesOrder->find($id);
