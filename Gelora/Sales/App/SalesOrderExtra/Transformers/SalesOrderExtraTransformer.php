@@ -9,11 +9,13 @@ class SalesOrderExtraTransformer extends Fractal\TransformerAbstract {
 
     public function transform(SalesOrderExtraModel $salesOrderExtra) {
 
+
         return [
             'id' => $salesOrderExtra->_id,
             '_id' => $salesOrderExtra->_id,
             'item_name' => $salesOrderExtra->item_name,
             'item_code' => $salesOrderExtra->item_code,
+
             'quantity' => (int) $salesOrderExtra->quantity,
             'price_per_unit' => (int) $salesOrderExtra->price_per_unit,
             'vat' => (int) $salesOrderExtra->vat,
@@ -22,5 +24,4 @@ class SalesOrderExtraTransformer extends Fractal\TransformerAbstract {
             'sales_extra_id' => $salesOrderExtra->sales_extra_id,
         ];
     }
-
 }
