@@ -25,9 +25,7 @@ geloraPolReg
                         alert('Batch Berhasil Disimpan')
                         $state.go('agencyInvoiceShow', { id: res.data.data.id })
                     })
-
             }
-
         }
 
         vm.close = function(registrationBatch) {
@@ -56,6 +54,25 @@ geloraPolReg
             if (vm.registrationBatch.salesOrders) {
                 vm.registrationBatch.salesOrders = vm.registrationBatch.salesOrders.data
             }
+
+            vm.subtotals = {}
+            _.each(vm.registrationBatch.salesOrders, function(salesOrder) {
+                _.each(salesOrder.polReg.costs, function(cost) {
+                    if (vm.subtotals[cost.name]) {
+                        vm.subtotals[cost.name] = vm.subtotals[cost.name] + cost.amount
+                    } else {
+                        vm.subtotals[cost.name] = cost.amount
+                    }
+                })
+            })
+
+            vm.total = _.sum(_.map(vm.subtotals, function(subtotal) {
+                if (subtotal) {
+                    return _.toNumber(subtotal)
+                } else {
+                    return 0
+                }
+            }))
 
             return vm.registrationBatch
         }
