@@ -42,20 +42,27 @@ geloraSalesShared
                 })
         }
         vm.leasingOrder = {
-            update : function(salesOrder) {
+            update: function(salesOrder) {
                 SalesOrderModel.leasingOrder.update(salesOrder.id, salesOrder.leasingOrder)
-                .then(function(res) {
-                    alert('PO berhasil di update')
-                    vm.salesOrder = res.data.data
-                })
+                    .then(function(res) {
+                        alert('PO berhasil di update')
+                        vm.salesOrder = res.data.data
+                    })
+            },
+            updateAfterValidation: function(salesOrder) {
+                SalesOrderModel.leasingOrder.updateAfterValidation(salesOrder.id, salesOrder.leasingOrder)
+                    .then(function(res) {
+                        alert('PO berhasil di update')
+                        vm.salesOrder = res.data.data
+                    })
             }
         }
         vm.generate = {
             invoice: function() {
-                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
             agreementBPKB: function() {
-                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-agreementBPKB/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-agreement-bpkb/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             }
         }
     })

@@ -56,11 +56,20 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
         Route::post('/', ['uses' => 'LocationController@store']);
         Route::put('{id}', ['uses' => 'LocationController@update']);
     });
+    
     Route::group(['prefix' => 'sales-program'], function() {
         Route::get('/', ['uses' => 'SalesProgramController@index']);
         Route::get('{id}', ['uses' => 'SalesProgramController@get']);
 
         Route::post('/', ['uses' => 'SalesProgramController@store']);
         Route::put('{id}', ['uses' => 'SalesProgramController@update']);
+    });
+    
+    Route::group(['prefix' => 'sales-extra'], function() {
+        Route::get('/', ['uses' => 'SalesExtraController@index']);
+        Route::get('{id}', ['uses' => 'SalesExtraController@get']);
+
+        Route::post('/', ['uses' => 'SalesExtraController@store']);
+        Route::post('{id}', ['uses' => 'SalesExtraController@update']);
     });
 });

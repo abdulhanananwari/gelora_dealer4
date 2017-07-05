@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>{{ctrl.salesExtra.code ? (ctrl.salesExtra.name) : 'Baru'}}</h4>
+        <hr>
+        <label>Nama </label>
+        <input type="text" ng-model="ctrl.salesExtra.name">
+        <label>Jenis</label>
+        <select ng-model="ctrl.salesExtra.type" ng-options="type as type for type in ctrl.types"></select>
+        <button class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.salesExtra)">Simpan</button>
+    </div>
+</div>

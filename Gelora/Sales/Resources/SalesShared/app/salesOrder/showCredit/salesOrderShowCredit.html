@@ -56,7 +56,7 @@
     </div>
 </div>
 <button ng-show="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.update(ctrl.salesOrder)">Simpan</button>
-<button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.updatePostValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
+<button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.updateAfterValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
 <br>
 <div class="row" ng-show="ctrl.appType=='admin'">
     <div class="col-sm-9" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
@@ -105,6 +105,12 @@
             <h4>Pencatatan Piutang</h4>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
+        </div>
+    </div>
+    <div class="col-sm-3">
+         <div class="well" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
+            <h4>Pembayaran Piutang Leasing</h4>
+            <transaction-create related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po }}" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
         </div>
     </div>
 </div>

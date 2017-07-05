@@ -105,4 +105,16 @@ geloraBase
   			controller: 'SalesProgramShowController as ctrl',
   			pageTitle: 'Dealer | Base | Sales Program Show'
 		})
+		.state('salesExtraIndex', {
+			url: '/salesExtra/index',
+  			templateUrl: 'app/salesExtra/index/salesExtraIndex.html',
+  			controller: 'SalesExtraIndexController as ctrl',
+  			pageTitle: 'Dealer | Base | Sales Extra Index'
+		})
+		.state('salesExtraShow', {
+			url: '/salesExtra/show/:id',
+  			templateUrl: 'app/salesExtra/show/salesExtraShow.html',
+  			controller: 'SalesExtraShowController as ctrl',
+  			pageTitle: 'Dealer | Base | Sales Extra Show'
+		})
 	})
