@@ -15,7 +15,7 @@ class FromRequest {
     public function assign(\Illuminate\Http\Request $request) {
         
         $this->salesOrderExtra->fill($request->only(
-                'sales_order_id','sales_program_id',
+                'sales_order_id','sales_program_id','sales_extra_id',
                 'item_name', 'item_code',
                 'price_per_unit', 'quantity', 'vat',
                 'total'));

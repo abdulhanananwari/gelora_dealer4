@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>Telah terima dari</td>
                                     <td style="padding-left:5px;padding-right:5px;">:</td>
-                                    <td>{{ $viewData['leasingOrder']->mainLeasing['name'] }}</td>
+                                    <td>{{ $viewData['leasingOrder']->mainLeasing['name'] }} | {{$viewData['leasingOrder']->customer['name']}}</td>
                                 </tr>
                                 <tr>
                                     <td>Untuk</td>
@@ -81,7 +81,7 @@
                                 <tr>
                                     <td style="padding-top: 10px;">Pelunasan</td>
                                     <td style="padding-left:5px;padding-right:75px;"></td>
-                                    <td style="padding-top: 10px;">{{ number_format($viewData['leasingOrder']->leasing_payable) }}</td>
+                                    <td style="padding-top: 10px;">{{ number_format($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po) }}</td>
                                 </tr>
                             </table>
                             <br>

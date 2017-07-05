@@ -4,18 +4,18 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class LeasingOrderPostValidation {
-    
+class LeasingOrderAfterValidation {
+
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     public function assign(\Illuminate\Http\Request $request) {
-        
+
         $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
-        
+
         $leasingOrder->fill([
             'customer' => $request->get('customer'),
             'registration' => $request->get('registration'),
@@ -25,7 +25,8 @@ class LeasingOrderPostValidation {
         ]);
 
         $this->salesOrder->leasingOrder = $leasingOrder;
-        
+
         return $this->salesOrder;
     }
+
 }

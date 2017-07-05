@@ -69,6 +69,7 @@ class SalesOrderController extends Controller {
             'unit' => $salesOrder->unit,
             'jwt' => \ParsedJwt::getJwt(),
             'tenantInfo' => $tenantInfo,
+            'invoiceAmount' => $request->get('invoice_amount'),
         ];
 
 //        $salesOrder->action()->onGenerateInvoice();

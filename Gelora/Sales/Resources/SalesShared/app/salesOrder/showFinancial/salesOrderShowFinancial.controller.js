@@ -7,6 +7,8 @@ geloraSalesShared
 
         var vm = this
 
+        vm.date = new Date();
+
         vm.transactionCreatorModal = {
             setting: {
                 transactable: {
@@ -39,7 +41,11 @@ geloraSalesShared
         }
 
         vm.generateCustomerInvoice = function(salesOrder) {
-            window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+            var invoiceAmount = prompt("Jumlah tagihan:", vm.paymentUnreceived)
+            if (invoiceAmount != null) {
+                window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt , invoice_amount: invoiceAmount}));
+            }
+            
         }
 
         vm.calculatePaymentUnreceived = function(onServer) {

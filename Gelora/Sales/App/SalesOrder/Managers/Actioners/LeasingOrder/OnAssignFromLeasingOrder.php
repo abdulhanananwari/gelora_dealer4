@@ -6,6 +6,11 @@ use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class OnAssignFromLeasingOrder {
     
+    /*
+     * Assign PO dari inputan orang leasing
+     * 
+     */
+    
     protected $salesOrder;
     
     public function __construct(SalesOrderModel $salesOrder) {
