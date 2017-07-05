@@ -13,4 +13,10 @@ Route::group(['prefix' => 'redirect-app'], function() {
             return redirect('/gelora/base/index.html#/salesProgram/show/' . $id);
         });
     });
+
+    Route::group(['prefix' => 'sales-extra'], function() {
+        Route::get('{id}', function($id) {
+            return redirect('/gelora/base/index.html#/salesExtra/show/' . $id);
+        });
+    });
 });
