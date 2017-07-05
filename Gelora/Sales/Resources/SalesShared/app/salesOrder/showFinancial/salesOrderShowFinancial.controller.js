@@ -47,7 +47,12 @@ geloraSalesShared
             }
             
         }
-
+        vm.financialClose = function(salesOrder) {
+            SalesOrderModel.action.financial.close(salesOrder.id, salesOrder)
+                .then(function(res){
+                    vm.salesOrder = res.data.data
+                })
+        }
         vm.calculatePaymentUnreceived = function(onServer) {
 
             if (onServer) {
