@@ -6,8 +6,9 @@ use League\Fractal;
 use Gelora\Sales\App\SalesOrderExtra\SalesOrderExtraModel;
 
 class SalesOrderExtraTransformer extends Fractal\TransformerAbstract {
-    
+
     public function transform(SalesOrderExtraModel $salesOrderExtra) {
+
         
         return [
             'id' =>  $salesOrderExtra->_id,
@@ -18,9 +19,9 @@ class SalesOrderExtraTransformer extends Fractal\TransformerAbstract {
             
             'quantity' => (int) $salesOrderExtra->quantity, 
             'price_per_unit' => (int) $salesOrderExtra->price_per_unit, 
-            'sales_program_id' => $salesOrderExtra->sales_program_id,
             'vat' => (int) $salesOrderExtra->vat, 
             'total' => (int) $salesOrderExtra->total, 
         ];
     }
+    
 }
