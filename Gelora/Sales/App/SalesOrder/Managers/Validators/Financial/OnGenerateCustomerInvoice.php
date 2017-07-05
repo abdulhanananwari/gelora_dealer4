@@ -1,6 +1,6 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Validators\StatusChange;
+namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Financial;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
