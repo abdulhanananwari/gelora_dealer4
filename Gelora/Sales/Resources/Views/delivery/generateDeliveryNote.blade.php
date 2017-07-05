@@ -69,7 +69,6 @@
             </td>
         </tr>
     </table>
-    <br>
     <table class="table">
         <tr>
             <td>Merk</td>
@@ -84,9 +83,18 @@
             <td>{{$viewData['unit']->color_name}}</td>
             <td>{{$viewData['unit']->chasis_number}}</td>
             <td>{{$viewData['unit']->engine_number}}</td>
+        </tr>       
+    </table>
+    <table class="table">
+        <tr>
+            <td>Kelengkapan Dan Hadiah</td>
+        </tr>
+        <tr> 
+            @foreach($viewData['salesOrder']->salesOrderExtras as $extra)
+            <td>{{$extra->salesExtra['name']}}</td>
+            @endforeach
         </tr>
     </table>
-    <!--kelengkapan dan hadiah belum  dikerjakan  -->
     <table border="1" class="table text-center">
         <tr>
             <td>
