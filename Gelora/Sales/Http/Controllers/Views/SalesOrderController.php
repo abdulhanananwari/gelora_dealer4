@@ -44,12 +44,13 @@ class SalesOrderController extends Controller {
         $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
                         ->first()->data_1;
 
-        $outgoing = $salesOrder->subDocument()->polReg()
-                ->get('items.' . $request->get('item_name') . '.outgoing');
+        $outgoing = $salesOrder->getAttribute('polReg.items.' . $request->get('item_name') . '.outgoing');
+        $item = $salesOrder->getAttribute('polReg.items.' . $request->get('item_name'));
 
         $viewData = [
             'salesOrder' => $salesOrder,
             'tenantInfo' => $tenantInfo,
+            'item' => $item,
             'outgoing' => $outgoing,
         ];
 

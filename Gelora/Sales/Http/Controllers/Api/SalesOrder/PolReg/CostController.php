@@ -17,12 +17,12 @@ class CostController extends SalesOrderController {
         
         $salesOrder = $this->salesOrder->find($id);
         
-        $validation = $salesOrder->validate()->polReg()->costStore($request->get('name'), $request);
+        $validation = $salesOrder->validate()->polReg()->costStore($request);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
         
-        $salesOrder->action()->polReg()->costStore($request->get('name'), $request);
+        $salesOrder->action()->polReg()->costStore($request);
         
         return $this->formatItem($salesOrder);
     }
