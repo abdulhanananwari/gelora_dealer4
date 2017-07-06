@@ -3,31 +3,7 @@
 
 <head>
     <title>SJ</title>
-    <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css">
-    <style type="text/css">
-    @media print {
-        html,
-        body {
-            height: 100%;
-            /*overflow: hidden;*/
-            background: #FFF;
-            font-size: 0.8em !important;
-        }
-    }
-    
-    .table {
-        border-style: none !important;
-        border: 0 !important;
-    }
-    
-    p {
-        margin: 0;
-    }
-    
-    table > tr > td {
-        vertical-align: top;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css"> 
 </head>
 
 <body>
