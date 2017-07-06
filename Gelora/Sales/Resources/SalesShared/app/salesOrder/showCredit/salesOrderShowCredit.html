@@ -1,5 +1,15 @@
 <sales-order-navbar sales-order="ctrl.salesOrder"></sales-order-navbar>
 <div class="row">
+    <div class="col-sm-12">
+        <div class="well" ng-hide="ctrl.salesOrder.leasingOrder.mainLeasing">
+            <h5>Copy Dari PO Leasing</h5>
+            <label>PO ID</label>
+            <input type="text" ng-model="leasing_order_id">
+            <button class="btn btn-block btn-danger btn-block" ng-click="ctrl.assignFromLeasingOrder(leasing_order_id)">Sambungkan</button>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-3">
         <h5>Leasing</h5>
         <leasing-selector selected-main-leasing="ctrl.salesOrder.leasingOrder.mainLeasing" selected-sub-leasing="ctrl.salesOrder.leasingOrder.subLeasing"></leasing-selector>
@@ -59,70 +69,63 @@
 <button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.updateAfterValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
 <br>
 <div class="row" ng-show="ctrl.appType=='admin'">
-    <div class="col-sm-9" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
-        <h4>Join Promo</h4>
-        <button class="btn btn-block btn-info" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.push({})">Tambah Join Promo</button>
-        <br>
-        <div class="table-reponsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Jumlah Piutang Leasing</th>
-                        <th>Jenis Tanggal Jatuh Tempo</th>
-                        <th>Adjustment Tanggal Jatuh Tempo</th>
-                        <th>Hutang ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="joinPromo in ctrl.salesOrder.leasingOrder.joinPromos">
-                        <td>
-                            <input type="text" ng-model="joinPromo.name">
-                        </td>
-                        <td>
-                            <input type="number" ng-model="joinPromo.transfer_amount">
-                        </td>
-                        <td>
-                            <select ng-options="key as value for (key,value) in ctrl.dueDayTypes" ng-model="joinPromo.due_day_type"></select>
-                        </td>
-                        <td>
-                            <input type="text" ng-model="joinPromo.due_day_count">
-                        </td>
-                        <td>
-                            <due-show ng-if="joinPromo.due_uuid" uuid="{{joinPromo.due_uuid}}"></due-show>
-                        </td>
-                    </tr>
-                    <tr class="warning">
-                        <td colspan="2">Total Piutang Leasing</td>
-                        <td colspan="3"><strong>Rp {{ ctrl._.sumBy(ctrl.ctrl.salesOrder.leasingOrder.financial.joinPromos, 'transfer_amount') | number }}</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
+        <div class="well">
+            <h4>Join Promo</h4>
+            <button class="btn btn-block btn-info" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.push({})">Tambah Join Promo</button>
+            <br>
+            <div class="table-reponsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Jumlah Piutang Leasing</th>
+                            <th>Jenis Tanggal Jatuh Tempo</th>
+                            <th>Adjustment Tanggal Jatuh Tempo</th>
+                            <th>Hutang ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="joinPromo in ctrl.salesOrder.leasingOrder.joinPromos">
+                            <td>
+                                <input type="text" ng-model="joinPromo.name">
+                            </td>
+                            <td>
+                                <input type="number" ng-model="joinPromo.transfer_amount">
+                            </td>
+                            <td>
+                                <select ng-options="key as value for (key,value) in ctrl.dueDayTypes" ng-model="joinPromo.due_day_type"></select>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="joinPromo.due_day_count">
+                            </td>
+                            <td>
+                                <due-show ng-if="joinPromo.due_uuid" uuid="{{joinPromo.due_uuid}}"></due-show>
+                            </td>
+                        </tr>
+                        <tr class="warning">
+                            <td colspan="2">Total Piutang Leasing</td>
+                            <td colspan="3"><strong>Rp {{ ctrl._.sumBy(ctrl.ctrl.salesOrder.leasingOrder.financial.joinPromos, 'transfer_amount') | number }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div class="well" ng-show="ctrl.salesOrder.validated_at">
+    <div class="col-sm-6" ng-show="ctrl.salesOrder.validated_at && !ctrl.salesOrder.leasingOrder.payment_at">
+        <div class="well">
             <h4>Pencatatan Piutang</h4>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
         </div>
     </div>
-    <div class="col-sm-6">
-         <div class="well" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
+    <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.payment_at">
+        <div class="well">
             <h4>Pembayaran Piutang Leasing</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
 
-            <transaction-create ng-show="!ctrl.salesOrder.leasingOrder.payment_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po }}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.leasingOrder.paymentReceived(ctrl.salesOrder)"></transaction-create>
-        </div>
-    </div>
-</div>
-<div ng-hide="ctrl.salesOrder.leasingOrder.mainLeasing" class="row">
-    <div class="col-sm-12">
-        <div class="well">
-            <h5>Copy Dari PO Leasing</h5>
-            <label>PO ID</label>
-            <input type="text" ng-model="leasing_order_id">
-            <button class="btn btn-block btn-danger btn-block" ng-click="ctrl.assignFromLeasingOrder(leasing_order_id)">Sambungkan</button>
+            <transaction-create ng-hide="ctrl.salesOrder.leasingOrder.payment_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po }}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.leasingOrder.paymentReceived(ctrl.salesOrder)"></transaction-create>
+            <label ng-show="ctrl.salesOrder.leasingOrder.payment_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name }} ({{ ctrl.salesOrder.leasingOrder.payment_at }})</label>
         </div>
     </div>
 </div>
