@@ -56,6 +56,12 @@ geloraSalesShared
                         alert('PO berhasil di update')
                         vm.salesOrder = res.data.data
                     })
+            },
+            paymentReceivable: function(salesOrder){
+                SalesOrderModel.leasingOrder.paymentReceivable(salesOrder.id, salesOrder.leasingOrder)
+                    .then(function(res) {
+                        vm.salesOrder = res.data.data
+                    })
             }
         }
         vm.generate = {
