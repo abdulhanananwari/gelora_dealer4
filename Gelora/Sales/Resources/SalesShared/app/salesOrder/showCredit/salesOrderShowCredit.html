@@ -107,10 +107,11 @@
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-6">
          <div class="well" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
             <h4>Pembayaran Piutang Leasing</h4>
-            <transaction-create related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po }}" setting="ctrl.transactionCreatorModal.setting" ></transaction-create>
+            <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
+            <transaction-create ng-show="!ctrl.salesOrder.leasingOrder.payment_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po }}" setting="ctrl.transactionCreatorModal.setting" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.leasingOrder.paymentReceivable(ctrl.salesOrder)"></transaction-create>
         </div>
     </div>
 </div>
