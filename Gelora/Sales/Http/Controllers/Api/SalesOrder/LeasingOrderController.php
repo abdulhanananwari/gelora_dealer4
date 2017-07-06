@@ -72,5 +72,18 @@ class LeasingOrderController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    public function poCompleted($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->leasingOrder()->onPoCompleted($request->get('po_complete'));
+
+        return $this->formatItem($salesOrder);
+    }
 
 }

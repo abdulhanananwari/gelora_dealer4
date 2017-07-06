@@ -30,7 +30,9 @@ class LeasingOrder {
             
             'po_file_uuid' => $leasingOrder->po_file_uuid,
             'memo_file_uuid' => $leasingOrder->memo_file_uuid,
-            
+            'po_complete' => (bool) $leasingOrder->po_complete,
+            'po_completer' => $leasingOrder->po_completer,
+
             'due_uuid' => $leasingOrder->due_uuid,
             
             'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->toCarbon('invoice_generated_at', true) : null,

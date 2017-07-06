@@ -63,6 +63,12 @@ geloraSalesShared
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })
+            },
+            poCompleted: function(salesOrder, po_complete){
+                SalesOrderModel.leasingOrder.poCompleted(salesOrder.id, {po_complete:po_complete})
+                    .then(function(res) {
+                        vm.salesOrder = res.data.data
+                    })
             }
         }
         vm.generate = {
@@ -71,6 +77,9 @@ geloraSalesShared
             },
             agreementBPKB: function() {
                 window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-agreement-bpkb/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
-            }
+            },
+            leasingOrderReceipt: function() {
+                window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-receipt/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
+            },
         }
     })
