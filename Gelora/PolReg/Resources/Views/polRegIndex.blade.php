@@ -38,6 +38,7 @@
     <script type="text/javascript" src="/gelora/base-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/credit-sales-shared/app/all.js"></script>
     <script type="text/javascript" src="/gelora/pol-reg-shared/app/all.js"></script>
+    <script type="text/javascript" src="/gelora/sales-shared/app/all.js"></script>
 
     <!-- Replace for production --> 
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11019/') : 'https://transaction.hondagelora.com/'}}plugins2/all.js"></script>
@@ -70,7 +71,6 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a ui-sref='index'>Home</a></li>
             <li sol-auth module-id="30000"></li>
-
           </ul>
         </div>
 

@@ -3,7 +3,7 @@
         <h4>Batch Tagihan / Faktur yang Masuk dari Biro Jasa {{ ctrl.registrationBatch.id || 'Baru' }}</h4>
         <hr>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <entity-finder-modal selected-entity="agent" on-entity-selected="ctrl.registrationBatch.agent=agent"></entity-finder-modal>
                 <br>
                 <div class="table-responsive">
@@ -21,11 +21,33 @@
                     </table>
                 </div>
             </div>
-            <div class="col-sm-4">
-               <file-manager-upload path="polreg" subpath="agency-invoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
+            <div class="col-sm-3">
+               <file-manager-upload ng-hide="ctrl.registrationBatch.closed_at" path="polreg" subpath="agency-invoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
                 <file-manager-show display-type="img" file-uuid="{{ctrl.registrationBatch.file_uuid}}"></file-manager-show>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in ctrl.subtotals">
+                                <td>{{ key }}</td>
+                                <td>Rp {{ value | number }}</td>
+                            </tr>
+                            <tr class="text-danger warning">
+                                <td>Total</td>
+                                <td>Rp {{ ctrl.total | number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-3">
                 <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
                 <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Konfirmasi</button>
             </div>
@@ -43,7 +65,7 @@
                         <th>Type Motor</th>
                         <th>Warna</th>
                         <th>No Rangka</th>
-                        <th>Serah Terima</th>
+                        <th class="col-sm-3">Cost</th>
                         <th>Buka</th>
                     </tr>
                 </thead>
@@ -53,7 +75,10 @@
                         <td>{{salesOrder.unit.data.type_name}}</td>
                         <td>{{salesOrder.unit.data.type_code}}</td>
                         <td>{{salesOrder.unit.data.chasis_number}}</td>
-                        <td>{{salesOrder.delivery.handover.created_at}}</td>
+                        <td>
+                            <button class="btn btn-xs btn-block btn-primary" ng-click="salesOrder.showPolRegCost=!salesOrder.showPolRegCost">Biaya</button>
+                            <registration-cost ng-show="salesOrder.showPolRegCost" sales-order="salesOrder"></registration-cost>
+                        </td>
                         <td><a href="{{'/sales/redirect-app/sales-order/?id=' + salesOrder.id}}"  target="_blank">Buka Penjualan</a></td>
                     </tr>
                 </tbody>

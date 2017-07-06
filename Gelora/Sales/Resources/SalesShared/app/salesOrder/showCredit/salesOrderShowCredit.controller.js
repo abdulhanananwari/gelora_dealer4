@@ -22,7 +22,8 @@ geloraSalesShared
 
             vm.salesOrder.leasingOrder.customer = _.pick(vm.salesOrder.customer, ['name', 'address', 'ktp'])
             vm.salesOrder.leasingOrder.registration = _.pick(vm.salesOrder.registration, ['name', 'address', 'ktp'])
-            vm.salesOrder.leasingOrder.vehicle = angular.copy(vm.salesOrder.vehicle);
+            vm.salesOrder.leasingOrder.vehicle = vm.salesOrder.vehicle;
+            vm.salesOrder.leasingOrder.on_the_road = vm.salesOrder.on_the_road
         }
 
         vm.store = function(salesOrder) {

@@ -11,32 +11,45 @@ class OnClose {
     public function __construct(ProspectModel $prospect) {
         $this->prospect = $prospect;
     }
-    
+
     public function validate() {
-        
-        $attributeValidation = $this->validateAttributes();
-        if ($attributeValidation->fails()) {
-            return $attributeValidation->errors()->all();
+
+        if ($this->prospect->create_sales_order_request) {
+
+            $attributeValidation = $this->validateAttributesIfCreateSalesOrderRequest();
+            if ($attributeValidation->fails()) {
+                return $attributeValidation->errors()->all();
+            }
+
+            return true;
+            
+        } else {
+
+            $attributeValidation = $this->validateAttributesIfNotCreateSalesOrderRequest();
+            if ($attributeValidation->fails()) {
+                return $attributeValidation->errors()->all();
+            }
+            
+            return true;
         }
-        
-        /*
-         * ABDUL
-         * 
-         * Buatin validasi onClose
-         * Validasi harus semua data lengkap
-         */
-        
-        return true;
     }
-    
-    protected function validateAttributes() {
-        
+
+    protected function validateAttributesIfCreateSalesOrderRequest() {
+
         return \Validator::make($this->prospect->toArray(), [
-            'customer.name' => 'required',
-            'customer.phone_number' => 'required',
-            'salesPersonnel.id' => 'required',
-            'vehicle' => 'required',
+                    'customer.name' => 'required',
+                    'customer.phone_number' => 'required',
+                    'salesPersonnel.id' => 'required',
+                    'vehicle' => 'required',
         ]);
     }
     
+    protected function validateAttributesIfNotCreateSalesOrderRequest() {
+
+        return \Validator::make($this->prospect->toArray(), [
+                    'closing_note' => 'required',
+        ]);
+    }
+
+
 }

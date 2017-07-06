@@ -31,93 +31,113 @@
 </head>
 
 <body>
-    <table class="table">
-        <tr>
-            <td style="width: 10%; padding-right: 10px;">
-                <img style="width: auto; max-height: 5em !important;" class="img-responsive" src="{{ $viewData['tenantInfo']->LOGO }}">
-            </td>
-            <td style="width: 50%;">
-                <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
-                <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
-                <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
-            </td>
-            <td style="width: 40%;">
-                <p><strong>SURAT JALAN</strong></p>
-                <img style="max-height: 50%;" src="{{ $viewData['salesOrder']->retrieve()->barcode() }}" class="img-responsive">
-                <P>{{ $viewData['salesOrder']->id }} </p>
-            </td>
-        </tr>
-    </table>
-    <table class="table">
-        <tr>
-            <td style="width: 50%;">
-                <p>Kepada,</p>
-                <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
-                <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
-                <p>{{ $viewData['salesOrder']->customer['kecamatan'] }}</p>
-                <p>{{ $viewData['salesOrder']->customer['kelurahan'] }}</p>
-                <p>{{ $viewData['salesOrder']->customer['kode_pos'] }}</p>
-                <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
-                @if(isset($viewData['salesOrder']->leasingOrder))
-                <p style="margin-top: 10px;">Leasing : {{$viewData['salesOrder']->leasingOrder['mainLeasing']['name']}}</p>
-                @endif
-            </td>
-            <td style="width: 50%;">
-                <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
-                <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
-                <p>Cetakan Ke: {{ $viewData['delivery']->delivery_note_generated_count }}</p>
-            </td>
-        </tr>
-    </table>
-    <table class="table">
-        <tr>
-            <td>Merk</td>
-            <td>Type</td>
-            <td>Warna</td>
-            <td>No Rangka</td>
-            <td>No Mesin</td>
-        </tr>
-        <tr>
-            <td>{{$viewData['unit']->brand }}</td>
-            <td>{{$viewData['unit']->type_name}} ({{ $viewData['unit']->type_code }})</td>
-            <td>{{$viewData['unit']->color_name}}</td>
-            <td>{{$viewData['unit']->chasis_number}}</td>
-            <td>{{$viewData['unit']->engine_number}}</td>
-        </tr>       
-    </table>
-    <table class="table">
-        <tr>
-            <td>Kelengkapan Dan Hadiah</td>
-        </tr>
-        <tr> 
-            @foreach($viewData['salesOrder']->salesOrderExtras as $extra)
-            <td>{{$extra->salesExtra['name']}}</td>
-            @endforeach
-        </tr>
-    </table>
-    <table border="1" class="table text-center">
-        <tr>
-            <td>
-                <p>Dibuat Oleh</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <img style="width: auto; max-height: 5em !important;" class="img-responsive" src="{{ $viewData['tenantInfo']->LOGO }}">
+                    </div>
+                    <div class="col-xs-7">
+                        <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
+                        <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
+                        <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
+                    </div>
+                    <div class="col-xs-4 text-right pull-right">
+                        <p><strong>SURAT JALAN</strong> {{ $viewData['salesOrder']->id }}</p>
+                        <img style="max-height: 50%;" class="pull-right" src="{{ $viewData['salesOrder']->retrieve()->barcode() }}" class="img-responsive">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Kepada,</p>
+                        <p>{{ $viewData['salesOrder']->customer['name'] }}</p>
+                        <p>{{ $viewData['salesOrder']->customer['address'] }}</p>
+                        <p>{{ $viewData['salesOrder']->customer['kecamatan'] }}</p>
+                        <p>{{ $viewData['salesOrder']->customer['kelurahan'] }}</p>
+                        <p>{{ $viewData['salesOrder']->customer['kode_pos'] }}</p>
+                        <p>{{ $viewData['salesOrder']->customer['phone_number'] }}</p>
+                        @if($viewData['salesOrder']->payment_type=="credit")
+                            <p>Leasing : {{$viewData['salesOrder']->leasingOrder['mainLeasing']['name']}}</p>
+                        @endif
+                    </div>
+                    <div class="col-xs-6">
+                        <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
+                        <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
+                        <p>Cetakan Ke: {{ $viewData['delivery']->delivery_note_generated_count }}</p>
+                    </div>
+                </div>
                 <br>
+                <table border="1" class="table">
+                    <tr>
+                        <th>Merk</th>
+                        <th>Type</th>
+                        <th>Warna</th>
+                        <th>No Rangka</th>
+                        <th>No Mesin</th>
+                    </tr>
+                    <tr>
+                        <td>{{$viewData['unit']->brand }}</td>
+                        <td>{{$viewData['unit']->type_name}} ({{ $viewData['unit']->type_code }})</td>
+                        <td>{{$viewData['unit']->color_name}}</td>
+                        <td>{{$viewData['unit']->chasis_number}}</td>
+                        <td>{{$viewData['unit']->engine_number}}</td>
+                    </tr>
+                </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <table border="1" class="table">
+                            <tr>
+                                <th>Hadiah</th>
+                            </tr>
+                            @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->all() as $extra)
+                            <tr>
+                                <td>{{$extra->salesExtra['name']}}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="col-xs-6">
+                        <table border="1" class="table">
+                            <tr>
+                                <th>Kelengkapan</th>
+                            </tr>
+                            @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->all() as $extra)
+                            <tr>
+                                <td>{{$extra->salesExtra['name']}}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                <table border="1" class="table text-center">
+                    <tr>
+                        <td>
+                            <p>Dibuat Oleh</p>
+                            <br>
+                            <br>
+                            <p>{{$viewData['jwt']->name}}</p>
+                        </td>
+                        <td>
+                            <p>Supir</p>
+                            <br>
+                            <br>
+                            <p>{{ $viewData['delivery']->get('driver.name') }}</p>
+                        </td>
+                        <td style="vertical-align: text-bottom;">
+                            <p>Disetujui Oleh</p>
+                        </td>
+                        <td style="vertical-align: text-bottom;">
+                            <p>Pembeli/Penerima</p>
+                        </td>
+                    </tr>
+                </table>
+                <p style="text-align: justify;">Periksa Kondisi Kendaraan anda, cek no mesin di kendaraan dengan surat jalan. jika ada kelainan di kendaraan atau beda no mesin dikendaraan dengan surat jalan, jangan tanda tangani surat ini. Klaim setelah ditanda tangani surat ini tidak kami layani. Kecuali yang menyangkut ke garansi HONDA</p>
                 <br>
-                <p>{{$viewData['jwt']->name}}</p>
-            </td>
-            <td>
-                <p>Supir</p>
-                <br>
-                <br>
-                <p>{{ $viewData['delivery']->get('driver.name') }}</p>
-            </td>
-            <td style="vertical-align: text-bottom;">
-                <p>Disetujui Oleh</p>
-            </td>
-            <td style="vertical-align: text-bottom;">
-                <p>Pembeli/Penerima</p>
-            </td>
-        </tr>
-    </table>
-    <p style="text-align: justify;">Periksa Kondisi Kendaraan anda, cek no mesin di kendaraan dengan surat jalan. jika ada kelainan di kendaraan atau beda no mesin dikendaraan dengan surat jalan, jangan tanda tangani surat ini. Klaim setelah ditanda tangani surat ini tidak kami layani. Kecuali yang menyangkut ke garansi HONDA</p>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
     window.print()
     </script>

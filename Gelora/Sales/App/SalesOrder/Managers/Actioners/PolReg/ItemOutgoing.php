@@ -14,17 +14,18 @@ class ItemOutgoing {
     
     public function action($itemName, \Illuminate\Http\Request $request) {
         
-        $incoming = new \Solumax\PhpHelper\App\Mongo\SubDocument;
-        $incoming->name = $itemName;
-        foreach ($request->only('receiver_name', 'receiver_id', 'note') as $key => $value) {
-            $incoming->$key = $value;
-        }
-        $incoming->creator = $this->salesOrder->assignEntityData();
+        $outgoing = [
+            'creator' => $this->salesOrder->assignEntityData(),
+            'receiver_name' => $request->get('receiver_name'),
+            'receiver_id' => $request->get('receiver_id'),
+            'note' => $request->get('note'),
+        ];
         
-        $polReg = $this->salesOrder->subDocument()->polReg();
-        $polReg->set('items.' . $itemName . '.outgoing', $incoming);
+        $item = $this->salesOrder->getAttribute('polReg.items.' . $itemName);
+        $item['name'] = $itemName;
+        $item['outgoing'] = $outgoing;
         
-        $this->salesOrder->polReg = $polReg;
+        $this->salesOrder->setAttribute('polReg.items.' . $itemName, $item);
         $this->salesOrder->save();
     }
 }

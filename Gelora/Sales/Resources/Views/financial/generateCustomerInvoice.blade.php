@@ -67,7 +67,10 @@
                             </table>
                         </td>
                         <td style="width: 30%;" valign="top">
-                            <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
+                            <p>Tanggal SPK: {{$viewData['salesOrder']->created_at->toDateTimeString() }}</p>
+                            @if( $viewData['salesOrder']->validated_at )
+                                <p>Tanggal Validasi: {{$viewData['salesOrder']->validated_at->toDateTimeString() }}</p>
+                            @endif
                             <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
                         </td>
                     </tr>
@@ -75,7 +78,7 @@
                 <br>
                 <p><strong>Petunjuk Pembayaran:</strong></p>
                 <ul>         
-                    <li>Pembayaran via bank transfer harap dilakukan ke rekening {{ $viewData['tenantInfo']->BANK }} nomor account <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NUMBER }}</strong> atas nama <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NAME }}</strong> dengan mencantumkan keterangan <strong>PEL SPK {{ substr($viewData['salesOrder']->id, -5) }}</strong></li>
+                    <li>Pembayaran menggunakan transfer bank harap dilakukan ke rekening <strong>{{ $viewData['tenantInfo']->BANK }}</strong> nomor account <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NUMBER }}</strong> atas nama <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NAME }}</strong> dengan mencantumkan keterangan: <strong>PEL SPK {{ substr($viewData['salesOrder']->id, -5) }}</strong></li>
                 </ul>
                 <br>
                 <table style="width: 100%;" class="table-bordered">

@@ -26,13 +26,13 @@
         </div>
     </div>
 </div>
-<div class="well" ng-if="ctrl.salesOrder && ctrl.salesOrder.validated_at">
+<div class="well">
     <div class="row">
         <div class="col-sm-12">
             <h4>Unit Indent</h4>
             <input type="text" ng-model="ctrl.salesOrder.indent.note">
-            <p ng-show="ctrl.salesOrder.indent.creator">Dibuat oleh: {{ ctrl.salesOrder.indent.creator.name }} ({{ ctrl.salesOrder.indent.creator.timestamp * 1000 | date }})</p>
-            <button ng-hide="ctrl.salesOrder.indent.creator" class="btn btn-block btn-warning" ng-click="ctrl.action.indent(ctrl.salesOrder.indent.note)">Unit Indent</button>
+            <label ng-show="ctrl.salesOrder.indent.creator">Dibuat oleh: {{ ctrl.salesOrder.indent.creator.name }} ({{ ctrl.salesOrder.indent.creator.timestamp * 1000 | date }})</label>
+            <button ng-hide="ctrl.salesOrder.indent.creator.timestamp" class="btn btn-block btn-warning" ng-click="ctrl.action.indent(ctrl.salesOrder.indent.note)">Unit Indent</button>
         </div>
     </div>
 </div>

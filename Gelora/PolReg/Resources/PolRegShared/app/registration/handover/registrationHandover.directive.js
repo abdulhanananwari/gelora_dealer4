@@ -12,6 +12,12 @@ geloraPolRegShared
 
                 scope.modalId = Math.random().toString(36).substring(2, 7)
 
+                scope.addItem = function(name) {
+                    scope.salesOrder.polReg.items[name] = {
+                        name: name
+                    }
+                }
+
                 scope.itemIncomingEntry = function(item) {
                     scope.selectedItem = item
                     $('#item-incoming-entry-' + scope.modalId).modal('show')
