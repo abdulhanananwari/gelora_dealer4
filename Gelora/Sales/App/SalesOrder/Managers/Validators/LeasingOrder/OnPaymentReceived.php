@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnPaymentReceivable {
+class OnPaymentReceived {
 
     protected $salesOrder;
 
@@ -14,6 +14,10 @@ class OnPaymentReceivable {
 
     public function validate() {
         
+        if ($this->salesOrder->getAttribute('leasingOrder.payment_at')) {
+            return ['Pembayaran sudah diinput sebelumnya'];
+        }
+
         return true;
     }
 

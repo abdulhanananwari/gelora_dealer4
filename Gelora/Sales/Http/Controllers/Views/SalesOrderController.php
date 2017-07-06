@@ -2,7 +2,7 @@
 
 namespace Gelora\Sales\Http\Controllers\Views;
 
-use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
+use Solumax\PhpHelper\Http\Controllers\ViewBaseV1Controller as Controller;
 use Illuminate\Http\Request;
 
 class SalesOrderController extends Controller {

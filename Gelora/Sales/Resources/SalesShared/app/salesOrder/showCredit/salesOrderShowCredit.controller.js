@@ -57,8 +57,8 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            paymentReceivable: function(salesOrder){
-                SalesOrderModel.leasingOrder.paymentReceivable(salesOrder.id, salesOrder.leasingOrder)
+            paymentReceived: function(salesOrder){
+                SalesOrderModel.leasingOrder.paymentReceived(salesOrder.id, salesOrder.leasingOrder)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })

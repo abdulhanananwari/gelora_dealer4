@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class LeasingOrderPaymentReceivable {
+class LeasingOrderPaymentReceived {
     
     protected $salesOrder;
     

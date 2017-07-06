@@ -5,7 +5,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\LeasingOrder;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 use Solumax\PhpHelper\App\Mongo\SubDocument;
 
-class OnPaymentReceivable {
+class OnPaymentReceived {
 
     protected $salesOrder;
 
@@ -17,7 +17,7 @@ class OnPaymentReceivable {
 
         $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
 
-        $leasingOrder->payment_at = \Carbon\Carbon::now('UTC')->timestamp;
+        $leasingOrder->setDate('payment_at', \Carbon\Carbon::now());
         $leasingOrder->payment_creator = $this->salesOrder->assignEntityData();
         
         $this->salesOrder->leasingOrder = $leasingOrder;
