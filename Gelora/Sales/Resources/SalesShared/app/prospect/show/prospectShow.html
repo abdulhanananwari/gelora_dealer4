@@ -195,21 +195,42 @@
 </div>
 <div class="well" ng-if="ctrl.prospect.id">
     <h4>Tutup dan Konfirmasi Prospek</h4>
-    <input class="form-not-applied" type="checkbox" ng-model="ctrl.prospect.create_sales_order_request">
-    <label>Request untuk dibuat SPK</label>
     <br>
     <label>Catatan Penutupan</label>
     <input type="text" ng-model="ctrl.closing_note">
-    <button ng-if="!ctrl.prospect.closed_at" class="btn btn-lg btn-block btn-warning" ng-click="ctrl.close(ctrl.prospect)">Tutup & Konfirmasi Prospek</button>
+    <div class="row" ng-show="!ctrl.prospect.closed_at">
+        <div class="col-sm-6">
+            <button class="btn btn-lg btn-block btn-success" ng-click="ctrl.close(ctrl.prospect, true)">Tutup & Request Dibuatkan SPK</button>
+            <br>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-lg btn-block btn-danger" ng-click="ctrl.close(ctrl.prospect, false)">Batalkan Prospek</button>
+        </div>
+    </div>
+    <div ng-show="ctrl.prospect.closed_at">
+        <label>Ditutup Oleh: {{ ctrl.prospect.closer.name }} ({{ ctrl.prospect.closed_at }})</label>
+        <br>
+        <label class="text-danger">{{ ctrl.prospect.create_sales_order_request ? 'Request Dibuat SPK' : 'Prospek Dibatalkan' }}</label>
+    </div>
 </div>
 <div class="well" ng-if="ctrl.prospect.closed_at && ctrl.prospect.create_sales_order_request">
-    <input class="form-not-applied" type="checkbox" ng-model="ctrl.prospect.create_sales_order_response">
-    <label>Request untuk dibuat SPK di approve Admin</label>
-    <br>
     <label>Catatan Penutupan</label>
     <input type="text" ng-model="ctrl.create_sales_order_response_note">
-    <p><small>Dibuat: {{ ctrl.prospect.create_sales_order_responded_at | date }} ({{ ctrl.prospect.create_sales_order_responder.name }})</small></p>
-    <button ng-if="!ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" ng-click="ctrl.respond(ctrl.prospect)">Respon dan Generate Sales Order</button>
-    <a ng-if="ctrl.prospect.sales_order_id" class="btn btn-lg btn-block btn-danger" href="/sales/redirect-app/sales-order/?id={{ ctrl.prospect.sales_order_id }}">Buka Sales Order</a>
+    <div class="row" ng-show="!ctrl.prospect.create_sales_order_responded_at">
+        <div class="col-sm-6">
+            <button class="btn btn-lg btn-block btn-success" ng-click="ctrl.respond(ctrl.prospect, true)">Buat SPK</button>
+            <br>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-lg btn-block btn-danger" ng-click="ctrl.respond(ctrl.prospect, false)">Batalkan Request SPK</button>
+        </div>
+    </div>
+    <div ng-show="ctrl.prospect.create_sales_order_responded_at">
+        <label>Ditutup Oleh: {{ ctrl.prospect.closer.name }} ({{ ctrl.prospect.create_sales_order_responded_at }})</label>
+        <br>
+        <label class="text-danger">{{ ctrl.prospect.create_sales_order_response ? 'Dibuatkan SPK' : 'Batal' }}</label>
+    </div>
+    <br>
+    <a ng-show="ctrl.prospect.sales_order_id" class="btn btn-block btn-danger" href="/sales/redirect-app/sales-order/?id={{ ctrl.prospect.sales_order_id }}">Buka Sales Order</a>
 </div>
 <br>

@@ -1,6 +1,6 @@
 geloraSalesShared
     .controller('ProspectShowController', function(
-        $state, $scope, JwtValidator,
+        $state, $scope, JwtValidator, SolumaxLoading,
         ProspectModel, PersonnelModel) {
 
         var vm = this
@@ -25,7 +25,12 @@ geloraSalesShared
         vm.salesConditions = { 'isi': 'On The Road', 'kosong': 'Off The Road' }
         vm.paymentTypes = { 'credit': 'Kredit', 'cash': 'Kas' }
 
-        $('.date').datepicker({dateFormat: "yy-mm-dd"});
+        $('.date').datepicker({
+            dateFormat: "yy-mm-dd",
+            yearRange: 'c-90:c-10',
+            changeYear: true,
+            changeMonth: true
+        });
 
         vm.copyRegistrationFromCustomer = function() {
             vm.prospect.registration = angular.copy(vm.prospect.customer)
@@ -43,6 +48,9 @@ geloraSalesShared
 
             } else {
 
+
+                SolumaxLoading.start()
+
                 ProspectModel.store(prospect)
                     .then(function(res) {
                         $state.go('prospectShow', { id: res.data.data.id })
@@ -50,7 +58,9 @@ geloraSalesShared
             }
         }
 
-        vm.close = function(prospect) {
+        vm.close = function(prospect, requestCreateSalesOrder) {
+
+            prospect.create_sales_order_request = requestCreateSalesOrder
 
             ProspectModel.action.close(prospect.id, prospect)
                 .then(function(res) {
@@ -59,13 +69,23 @@ geloraSalesShared
                 })
         }
 
-        vm.respond = function(prospect, params) {
+        vm.respond = function(prospect, respond) {
 
-            ProspectModel.action.respond(prospect.id, prospect, params)
+            prospect.create_sales_order_response = respond
+
+            SolumaxLoading.start()
+
+            ProspectModel.action.respond(prospect.id, prospect)
                 .then(function(res) {
+
                     vm.prospect = res.data.data
                     alert('Berhasil merespond prospect');
+                    SolumaxLoading.stop()
+
                 }, function(res) {
+
+                    SolumaxLoading.stop()
+
                     if (res.userResponse) {
                         vm.respond(prospect, res.userResponse)
                     }
