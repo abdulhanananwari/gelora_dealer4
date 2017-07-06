@@ -18,7 +18,7 @@ class OnGenerateStrings {
             return ['String CDDB belum dibuat'];
         }
         $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
-        if ($mdSubmissionBatch->getAttribute('closed_at')) {
+        if ($mdSubmissionBatch['closed_at']) {
             return ['Batch untuk MD sudah ditutup'];
         }
         return true;

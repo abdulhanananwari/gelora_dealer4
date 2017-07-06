@@ -21,7 +21,7 @@ class Cddb {
         $data = [];
         $data['No Mesin 1'] = substr($unit['engine_number'], 0, 5);
         $data['No Mesin 2'] = substr($unit['engine_number'], 6);
-        $data['No Ktp'] = $salesOrder['registration']['name'];
+        $data['No Ktp'] = $salesOrder['registration']['ktp'];
         $data['Kode Kustomer'] = $cddb['customer_code'];
         $data['Jenis Kelamin'] = $cddb['jenis_kelamin'];
         $data['Alamat'] = $cddb['alamat_surat'];
