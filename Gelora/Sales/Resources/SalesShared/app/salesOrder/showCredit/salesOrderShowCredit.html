@@ -59,6 +59,9 @@
             <h5>PO</h5>
             <file-manager-upload path="sales-order/leasing-order" subpath="po" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedPoFile" on-file-uploaded="ctrl.salesOrder.leasingOrder.po_file_uuid=uploadedPoFile.uuid;ctrl.store(ctrl.salesOrder);"></file-manager-upload>
             <file-manager-show ng-if="ctrl.salesOrder.leasingOrder.po_file_uuid" display-type="downloadButton" file-uuid="{{ctrl.salesOrder.leasingOrder.po_file_uuid}}"></file-manager-show>
+
+            <button ng-show="ctrl.salesOrder.leasingOrder.po_file_uuid" class="btn btn-block btn-info" ng-click="ctrl.leasingOrder.poCompleted(ctrl.salesOrder, true)">PO Lengkap</button>
+            
             <h5>Memo</h5>
             <file-manager-upload path="sales-order/leasing-order" subpath="memo" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedMemoFile" on-file-uploaded="ctrl.salesOrder.leasingOrder.memo_file_uuid=uploadedMemoFile.uuid;ctrl.store(ctrl.salesOrder);"></file-manager-upload>
             <file-manager-show ng-if="ctrl.salesOrder.leasingOrder.memo_file_uuid" display-type="downloadButton" file-uuid="{{ctrl.salesOrder.leasingOrder.memo_file_uuid}}"></file-manager-show>
@@ -123,6 +126,7 @@
         <div class="well">
             <h4>Pembayaran Piutang Leasing</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
+
             <transaction-create ng-hide="ctrl.salesOrder.leasingOrder.payment_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po }}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.leasingOrder.paymentReceived(ctrl.salesOrder)"></transaction-create>
             <label ng-show="ctrl.salesOrder.leasingOrder.payment_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name }} ({{ ctrl.salesOrder.leasingOrder.payment_at }})</label>
         </div>
