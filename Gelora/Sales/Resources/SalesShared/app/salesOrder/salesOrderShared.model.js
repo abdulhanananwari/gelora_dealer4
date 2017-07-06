@@ -47,6 +47,9 @@ geloraSalesShared
             updateAfterValidation: function(id, leasingOrder) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/after-validation', leasingOrder)
             },
+            paymentReceivable: function(id, leasingOrder) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/payment-receivable', leasingOrder)
+            },
             assignFromLeasingOrder: function(id, leasingOrderId, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id: leasingOrderId }, { params: params })
             }
