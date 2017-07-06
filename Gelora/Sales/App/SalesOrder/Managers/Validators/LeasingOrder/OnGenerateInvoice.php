@@ -13,15 +13,17 @@ class OnGenerateInvoice {
     }
 
     public function validate() {
-        
+
         if (!request()->has('bypass_handover_validation') &&
                 empty($this->salesOrder->subDocument()->delivery()->get('handover.created_at'))) {
-            
-            return [[
-            'type' => 'confirm',
-            'text' => 'SJ belum serah terima dengan konsumen. Yakin mau buat tagihan?',
-            'if_confirmed' => 'bypass_handover_validation'
-            ]];
+
+            return [
+                    [
+                    'type' => 'confirm',
+                    'text' => 'SJ belum serah terima dengan konsumen. Yakin mau buat tagihan?',
+                    'if_confirmed' => 'bypass_handover_validation'
+                ]
+            ];
         }
 
         return true;

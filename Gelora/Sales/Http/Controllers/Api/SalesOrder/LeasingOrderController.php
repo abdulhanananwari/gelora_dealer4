@@ -73,4 +73,20 @@ class LeasingOrderController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
 
+    public function paymentReceived($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $salesOrder->assign()->specific()->leasingOrderPaymentReceived($request);
+
+        $validation = $salesOrder->validate()->leasingOrder()->onPaymentReceived();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->leasingOrder()->onPaymentReceived();
+
+        return $this->formatItem($salesOrder);
+    }
+
 }
