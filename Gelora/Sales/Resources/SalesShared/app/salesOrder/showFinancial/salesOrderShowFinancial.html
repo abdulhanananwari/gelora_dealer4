@@ -94,7 +94,11 @@
                 <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-warning btn-sm btn-block" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder)">Cetak Invoice</button>
             </div>
         </div>
+        <div class="col-sm-6">
+            <button ng-show="ctrl.paymentUnreceived == 0" class="btn btn-block btn-warning" ng-click="ctrl.financialClose(ctrl.salesOrder)">Tutup Keuangan</button>
+        </div>
     </div>
+    <br>
     <p class="text-center"><strong>Kekurangan: Rp {{ ctrl.paymentUnreceived | number }}</strong></p>
     <p ng-if="ctrl.paymentUnreceived < 0" class="text-danger text-center"><small>Pembayaran Sudah Berlebih</small></p>
     <button class="btn btn-success btn-block hidden-print" ng-click="ctrl.calculatePaymentUnreceived(true)">Hitung Ulang</button>

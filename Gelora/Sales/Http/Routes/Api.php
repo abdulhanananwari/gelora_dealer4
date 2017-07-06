@@ -33,6 +33,9 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::group(['prefix' => 'indent'], function() {
                     Route::post('indent', ['uses' => 'IndentController@indent']);
                 });
+                Route::group(['prefix' => 'financial'], function() {
+                    Route::post('close', ['uses' => 'FinancialController@close']);
+                });
             });
 
             Route::group(['prefix' => '{id}/specific-update'], function() {

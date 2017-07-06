@@ -124,7 +124,7 @@ geloraSalesShared
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, { params: params })
             }
         }
-
+        
         salesOrder.action = {
             lock: {
                 request: function(id) {
@@ -149,6 +149,11 @@ geloraSalesShared
                 indent: function(id, note) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', { note: note })
                 },
+            },
+            financial : {
+                close: function(id, salesOrder) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/financial/close', salesOrder)
+                }
             }
         }
 
