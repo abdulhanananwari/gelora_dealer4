@@ -15,13 +15,12 @@ class OnPoCompleted {
 
     public function action($poComplete) {
 
-        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
-
+        if ($poComplete) {
+            $this->salesOrder->setAttribute('leasingOrder.po_completer', $this->salesOrder->assignEntityData());
+        } else {
+            $this->salesOrder->setAttribute('leasingOrder.po_completer', null);
+        }
         
-        $leasingOrder->po_complete = $poComplete;
-        $leasingOrder->po_completer = $this->salesOrder->assignEntityData();
-        
-        $this->salesOrder->leasingOrder = $leasingOrder;
         $this->salesOrder->save();
     }
 

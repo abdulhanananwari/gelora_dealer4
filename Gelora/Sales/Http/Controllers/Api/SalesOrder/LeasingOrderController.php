@@ -72,7 +72,8 @@ class LeasingOrderController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
-    public function poCompleted($id, Request $request) {
+    
+    public function poComplete($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
 

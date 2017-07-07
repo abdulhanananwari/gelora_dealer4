@@ -67,7 +67,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('after-validation', ['uses' => 'LeasingOrderController@updateAfterValidation']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder']);
                 Route::post('payment-received/', ['uses' => 'LeasingOrderController@paymentReceived']);
-                Route::post('po-completed/', ['uses' => 'LeasingOrderController@poCompleted']);
+                Route::post('po-complete/', ['uses' => 'LeasingOrderController@poComplete']);
             });
 
             Route::group(['prefix' => '{id}/pol-reg'], function() {

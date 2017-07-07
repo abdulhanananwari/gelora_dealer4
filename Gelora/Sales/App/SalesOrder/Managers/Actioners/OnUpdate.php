@@ -14,6 +14,8 @@ class OnUpdate {
     
     public function action() {
         
+        \SolLog::write('SalesOrder', $this->salesOrder->id, 'UPDATE', (array) $this->salesOrder);
+        
         $this->salesOrder->save();
     }
 }

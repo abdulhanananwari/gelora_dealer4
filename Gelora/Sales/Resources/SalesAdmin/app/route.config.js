@@ -83,6 +83,12 @@ geloraSalesAdmin
                         controller: 'SalesOrderShowDocumentationController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Dokumentasi'
                     })
+                    .state('salesOrderShowLog', {
+                        url: '/salesOrder/showLog/:id',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/showLog/salesOrderShowLog.html',
+                        controller: 'SalesOrderShowLogController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Log'
+                    })
                     .state('salesOrderReport', {
                         url: '/salesOrder/report',
                         templateUrl: '/gelora/sales-shared/app/salesOrder/report/salesOrderReport.html',
