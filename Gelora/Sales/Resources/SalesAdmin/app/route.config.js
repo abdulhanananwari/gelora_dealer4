@@ -59,11 +59,11 @@ geloraSalesAdmin
                         controller: 'SalesOrderShowExtraController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Financial'
                     })
-                    .state('salesOrderShowApproval', {
-                        url: '/salesOrder/showApproval/:id',
-                        templateUrl: '/gelora/sales-shared/app/salesOrder/showApproval/salesOrderShowApproval.html',
-                        controller: 'SalesOrderShowApprovalController as ctrl',
-                        pageTitle: 'Dealer | Sales Admin | Sales Order Financial'
+                    .state('salesOrderShowStatus', {
+                        url: '/salesOrder/showStatus/:id',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/showStatus/salesOrderShowStatus.html',
+                        controller: 'SalesOrderShowStatusController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Sales Order Status'
                     })
                     .state('salesOrderShowUnit', {
                         url: '/salesOrder/showUnit/:id',

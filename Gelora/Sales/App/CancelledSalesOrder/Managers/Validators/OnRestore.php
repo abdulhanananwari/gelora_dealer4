@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\CancelledSalesOrder\Managers\Validators;
 
 use Gelora\Sales\App\CancelledSalesOrder\CancelledSalesOrderModel;
 
-class  OnRestoreSalesOrder {
+class OnRestore {
 
     protected $cancelledSalesOrder;
 
@@ -14,11 +14,10 @@ class  OnRestoreSalesOrder {
 
     public function validate() {
 
-        $salesOrer = $this->cancelledSalesOrder->usedSalesOrder;
-        if ($salesOrer) {
-            return ['Data sudah di restore sebelumnya'];
-            
-          }  
+        if ($this->cancelledSalesOrder->restored_at) {
+            return ['Pembatalan sudah direstore sebelumnya'];
+        }
+
         return true;
     }
 

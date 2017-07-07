@@ -38,7 +38,7 @@ class LeasingOrder {
             'invoice_generator' => $leasingOrder->invoice_generator,
 
             'payment_transaction_uuid' => $leasingOrder->payment_transaction_uuid,
-            'payment_at' => $leasingOrder->payment_at ? $leasingOrder->toCarbon('payment_at', true)->toDateTimeString() : null,
+            'payment_at' => $leasingOrder->toCarbon('payment_at') instanceof \Carbon\Carbon ? $leasingOrder->toCarbon('payment_at')->toDateTimeString() : null,
             'payment_creator' => $leasingOrder->payment_creator,    
 
         ];

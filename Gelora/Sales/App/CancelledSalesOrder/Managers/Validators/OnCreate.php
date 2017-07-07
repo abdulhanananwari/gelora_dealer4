@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\CancelledSalesOrder\Managers\Validators;
 
 use Gelora\Sales\App\CancelledSalesOrder\CancelledSalesOrderModel;
 
-class  OnCancelSalesOrder {
+class OnCreate {
 
     protected $cancelledSalesOrder;
 
@@ -14,16 +14,14 @@ class  OnCancelSalesOrder {
 
     public function validate() {
 
-        if ($this->cancelledSalesOrder->usedSalesOrder->validated_at) {
-            return ['SPK tidak dapat dibatalkan , karena sudah validasi'];
+        if ($this->cancelledSalesOrder->getAttribute('salesOrder.delivery.generated_at')) {
+            return ['SPK tidak dapat dibatalkan karena sudah dibuat SJ'];
         }
-        
+
         $attrValidation = $this->validateAttributes();
         if ($attrValidation->fails()) {
             return $attrValidation->errors()->all();
         }
-
-        
 
         return true;
     }
@@ -31,7 +29,7 @@ class  OnCancelSalesOrder {
     protected function validateAttributes() {
 
         return \Validator::make($this->cancelledSalesOrder->toArray(), [
-            'reason' => 'required',
+                    'reason' => 'required',
         ]);
     }
 

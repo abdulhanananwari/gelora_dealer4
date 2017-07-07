@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-8">
         <div class="well">
             <h4>Penerimaan Unit</h4>
             <div ng-if="!ctrl.storageLocation">
@@ -15,6 +15,30 @@
                 <br>
                 <!-- <button class="btn btn-block btn-info" ng-click="ctrl.scan()">Scan QR Code</button><br> -->
                 <dealer-unit-barcode-finder unit="scannedUnit" on-found="ctrl.receive(scannedUnit)" android-scan-url="{{window.location.href + '{CODE}' }}"></dealer-unit-barcode-finder>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="well">
+            <h4>Unit Belum Diterima</h4>
+            <button class="btn btn-block btn-xs" ng-click="ctrl.getUnreceivedUnits()">Tarik</button>
+            <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Warna</th>
+                        <th>No Rangka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="unit in ctrl.units">
+                        <td>{{ unit.type_name }}</td>
+                        <td>{{ unit.color_name }}</td>
+                        <td>{{ unit.chasis_number }}</td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
