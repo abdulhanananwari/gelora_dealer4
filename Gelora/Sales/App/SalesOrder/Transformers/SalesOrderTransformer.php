@@ -26,6 +26,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'sales_condition' => $salesOrder->sales_condition,
             'payment_type' => $salesOrder->payment_type,
             'registration_id' => $salesOrder->registration_id,
+            'notes' => (array) $salesOrder->notes,
             // Time
             'created_at' => $salesOrder->created_at->toDateTimeString(),
             'creator' => $salesOrder->creator,

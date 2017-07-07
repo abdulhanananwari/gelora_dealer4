@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-8">
+        <h4>Chat</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-sm-2">Oleh</th>
+                        <th>Pesan</th>
+                        <th class="col-sm-1">Kirim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="note in ctrl.salesOrder.notes">
+                        <td>
+                            <label>{{ note.creator.name }}</label>
+                            <br>
+                            <label>{{ note.creator.timestamp * 1000 | date }}</label>
+                        </td>
+                        <td>{{ note.text }}</td>
+                        <td>
+                            <label>Sales</label>
+                            <whatsapp-messenger phone="{{ ctrl.salesOrder.salesPersonnel.entity.phone_number }}" text="{{ note.text}}. Link SPK: {{ ctrl.salesOrder.links.redirect_app }}"></whatsapp-messenger>
+                            <hr>
+                            <label>Konsumen</label>
+                            <whatsapp-messenger phone="{{ ctrl.salesOrder.customer.phone_number }}" text="{{ note.text}}. Link SPK: {{ ctrl.salesOrder.links.redirect_app }}"></whatsapp-messenger>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="well">
+            <label>Pesan</label>
+            <textarea rows="5" style="height: 5em;" ng-model="newNote.text"></textarea>
+            <button class="btn btn-block btn-primary" ng-click="ctrl.store(newNote)">Simpan</button>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <file-manager-upload path="sales-order" subpath="{{ ctrl.salesOrder.id }}/misc" fileable-type="SalesOrder" fileable-id="{{ ctrl.salesOrder.id }}" resize-height-width="1300x1300" name-label="Nama"></file-manager-upload>
+        <file-manager-index fileable-type="SalesOrder" fileable-id="{{ ctrl.salesOrder.id }}"></file-manager-index>
+    </div>
+</div>

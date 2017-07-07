@@ -71,6 +71,12 @@ geloraSalesAdmin
                         controller: 'SalesOrderShowUnitController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Unit'
                     })
+                    .state('salesOrderShowNote', {
+                        url: '/salesOrder/showNote/:id',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/showNote/salesOrderShowNote.html',
+                        controller: 'SalesOrderShowNoteController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Sales Order Catatan'
+                    })
                     .state('salesOrderShowRegistration', {
                         url: '/salesOrder/showRegistration/:id',
                         templateUrl: '/gelora/sales-shared/app/salesOrder/showRegistration/salesOrderShowRegistration.html',
