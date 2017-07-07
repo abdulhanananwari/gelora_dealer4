@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+	return view('menu');
     return redirect('/gelora/sales/admin/index.html');
     return view('welcome');
 });
