@@ -39,18 +39,28 @@ class UnitController extends Controller {
         if ($request->has('chasis_number')) {
             $query->where('chasis_number', $request->get('chasis_number'));
         }
-        
+
         if ($request->has('chasis_number_like')) {
             $query->where('chasis_number', 'LIKE', '%' . $request->get('chasis_number') . '%');
         }
-        
-        if ($request->get('pdi') == true) {
+
+        if ($request->get('pdi') == 'true' || $request->get('pdi') == 'done') {
             $query->whereNotNull('pdi_at');
+        } else if ($request->get('pdi') == 'pending') {
+            $query->whereNull('pdi_at');
         }
-        
+
+        // To be deprecated 7 August 2017
         if ($request->get('received') == true) {
             $query->whereNotNull('received_at');
         }
+
+        if ($request->get('receipt') == 'done') {
+            $query->whereNotNull('received_at');
+        } else if ($request->get('receipt') == 'pending') {
+            $query->whereNull('received_at');
+        }
+
 
         if ($request->has('status')) {
             $query->where('current_status', $request->get('status'));
@@ -105,7 +115,6 @@ class UnitController extends Controller {
 
         if ($request->has('transformer')) {
             // Dicheck dulu punya akses ga untuk liat harga check access dulu
-
             $transformer = '\\Gelora\\Base\\App\\Unit\\Transformers\\' . $request->get('transformer');
             $this->transformer = new $transformer;
         }

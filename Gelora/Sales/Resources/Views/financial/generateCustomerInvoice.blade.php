@@ -41,7 +41,7 @@
                         </td>
                     </tr>
                 </table>
-                <h2 class="text-center">INVOICE PENAGIHAN</h2>
+                <h2 class="text-center">INVOICE / TAGIHAN</h2>
                 <hr>
                 <table style="width: 100%">
                     <tr>

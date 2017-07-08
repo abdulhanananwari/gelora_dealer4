@@ -10,19 +10,29 @@
                 <div class="col-sm-4">
                     <label>Status</label>
                     <select ng-options="unitStatus.code as unitStatus.name for unitStatus in ctrl.unitStatuses" ng-model="ctrl.filter.status"></select>
+                    <label>Status Bukan</label>
+                    <select ng-options="unitStatus.code as unitStatus.name for unitStatus in ctrl.unitStatuses" ng-model="ctrl.filter.status_not"></select>
                     <dealer-location-finder location="ctrl.storageLocation" on-location-selected="ctrl.filter.current_location_id=ctrl.storageLocation.id;">
                     </dealer-location-finder>
                 </div>
                 <div class="col-sm-4">
-                    <input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.received">
                     <label>Sudah diterima</label>
-                    <br>
-                    <input class="form-not-applied" type="checkbox" ng-model="ctrl.filter.pdi">
-                    <label>Sudah di PDI</label>
+                    <select ng-model="ctrl.filter.receipt">
+                        <option value="done">Sudah Terima</option>
+                        <option value="pending">Belum Terima</option>
+                        <option value="all">Semua</option>
+                    </select>
+                    <label>PDI</label>
+                    <select ng-model="ctrl.filter.pdi">
+                        <option value="done">Sudah PDI</option>
+                        <option value="pending">Belum PDI</option>
+                        <option value="all">Semua</option>
+                    </select>
                 </div>
             </div>
             <br>
-            <button class="btn btn-block btn-danger" ng-click="ctrl.load(ctrl.filter)">Cari Unit</button>
+            <button class="btn btn-block btn-warning" ng-click="ctrl.load(ctrl.filter)">Cari Unit</button>
+            <button ng-show="ctrl.units.length > 0" class="btn btn-block btn-danger" ng-click="ctrl.download(ctrl.filter)">Download</button>
         </div>
     </div>
 </div>
