@@ -35,6 +35,10 @@ class UnitModel extends Model {
         return new Managers\Retriever($this);
     }
     
+    public function queryBuilder() {
+        return new Managers\QueryBuilder($this);
+    }
+    
     // Relationship
     
     public function currentLocation() {

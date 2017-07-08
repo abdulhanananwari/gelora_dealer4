@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="well">
-            <h4>Unit</h4>
+            <h4>Filter</h4>
             <div class="row">
                 <div class="col-sm-4">
                     <vehicle-model-finder2 selected-model="model" on-change="ctrl.filter.type_code=model.code;ctrl.filter.color_code=model.variant.code;">
@@ -12,6 +12,7 @@
                     <select ng-options="unitStatus.code as unitStatus.name for unitStatus in ctrl.unitStatuses" ng-model="ctrl.filter.status"></select>
                     <label>Status Bukan</label>
                     <select ng-options="unitStatus.code as unitStatus.name for unitStatus in ctrl.unitStatuses" ng-model="ctrl.filter.status_not"></select>
+                    <label>Lokasi</label>
                     <dealer-location-finder location="ctrl.storageLocation" on-location-selected="ctrl.filter.current_location_id=ctrl.storageLocation.id;">
                     </dealer-location-finder>
                 </div>
@@ -26,6 +27,12 @@
                     <select ng-model="ctrl.filter.pdi">
                         <option value="done">Sudah PDI</option>
                         <option value="pending">Belum PDI</option>
+                        <option value="all">Semua</option>
+                    </select>
+                    <label>Penjualan</label>
+                    <select ng-model="ctrl.filter.sales">
+                        <option value="done">Sudah Terjual</option>
+                        <option value="pending">Belum Terjual</option>
                         <option value="all">Semua</option>
                     </select>
                 </div>

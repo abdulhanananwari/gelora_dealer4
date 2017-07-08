@@ -24,7 +24,7 @@ geloraInventoryManagement
         }
 
         vm.getUnreceivedUnits = function() {
-            UnitModel.index({status: 'UNRECEIVED'})
+            UnitModel.index({ receipt: 'pending' })
                 .then(function(res) {
                     vm.units = res.data.data
                 })

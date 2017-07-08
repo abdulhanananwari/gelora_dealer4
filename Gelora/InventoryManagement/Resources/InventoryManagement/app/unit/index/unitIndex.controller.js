@@ -7,7 +7,7 @@ geloraInventoryManagement
 		
 		vm.filter = {
 			paginate: 20,
-			status_not: 'SOLD_COMPLETE',
+			sales: 'pending',
 			with: 'currentLocation'
 		};
 		
