@@ -63,7 +63,6 @@ class SpecificUpdateController extends SalesOrderController {
         $salesOrder->assign()->specific()->insertNote($request);
 
         $salesOrder->save();
-     
     public function registration($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
