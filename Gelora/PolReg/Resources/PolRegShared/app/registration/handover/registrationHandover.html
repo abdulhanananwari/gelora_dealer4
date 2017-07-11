@@ -37,7 +37,10 @@
     <div ng-if="item.incoming">
         <p class="small-info">Diterima oleh: {{ item.incoming.creator.name }}</p>
         <p class="small-info">Catatan: {{ item.incoming.note }}</p>
-        <p class="small-info">{{ item.incoming.creator.timestamp * 1000 | date:"MM/dd/yyyy h:mma" }}</p>
+        <p class="small-info">{{ item.incoming.creator.timestamp * 1000 | date:"M/dd/yyyy h:mma" }}</p>
+        <p class="small-info text-danger" ng-show="item.name=='Faktur'">Nomor Faktur: {{ salesOrder.polReg.faktur_number }}</p>
+        <p class="small-info text-danger" ng-show="item.name=='STNK'">Nomor Polisi: {{ salesOrder.polReg.pol_reg }}</p>
+        <p class="small-info text-danger" ng-show="item.name=='BPKB'">Nomor BPKB: {{ salesOrder.polReg.bpkb_number }}</p>
     </div>
 </script>
 <div class="modal fade" id="item-incoming-entry-{{modalId}}" tabindex="-1" role="dialog">
@@ -50,6 +53,21 @@
             <div class="modal-body">
                 <label>Catatan</label>
                 <input type="text" ng-model="selectedItem.note">
+                <!-- Input nomor faktur kalau Faktur -->
+                <span ng-if="selectedItem.name=='Faktur'">
+                    <label>Nomor Faktur</label>
+                    <input type="text" ng-model="selectedItem.faktur_number">
+                </span>
+                <!-- Input plat nomor kalau STNK -->
+                <span ng-if="selectedItem.name=='STNK'">
+                    <label>Nomor Polisi</label>
+                    <input type="text" ng-model="selectedItem.pol_reg">
+                </span>
+                <!-- Input nomor BPKB -->
+                <span ng-if="selectedItem.name=='BPKB'">
+                    <label>Nomor BPKB</label>
+                    <input type="text" ng-model="selectedItem.bpbk_number">
+                </span>
                 <button class="btn btn-block btn-success" ng-click="itemIncomingStore(selectedItem)">Simpan</button>
             </div>
         </div>

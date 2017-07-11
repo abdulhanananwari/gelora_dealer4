@@ -15,6 +15,10 @@ class PolReg {
         $transformed = [
             'agency_note' => $polReg->agency_note,
             
+            'faktur_number' => $polReg->faktur_number,
+            'pol_reg' => $polReg->pol_reg,
+            'bpkb_number' => $polReg->bpkb_number,
+            
             'items' => (array) $polReg->items,
             'costs' => (array) $polReg->costs,
             
