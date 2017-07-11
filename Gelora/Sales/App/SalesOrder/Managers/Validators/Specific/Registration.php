@@ -1,10 +1,10 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Validators;
+namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Specific;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnUpdateAfterValidation {
+class Registration {
 
     protected $salesOrder;
 
@@ -13,6 +13,7 @@ class OnUpdateAfterValidation {
     }
 
     public function validate() {
+
         $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
         if ($mdSubmissionBatch) {
             if ($mdSubmissionBatch->getAttribute('closed_at')) {
@@ -20,8 +21,7 @@ class OnUpdateAfterValidation {
             }
         }
        
-       
-
         return true;
     }
+
 }
