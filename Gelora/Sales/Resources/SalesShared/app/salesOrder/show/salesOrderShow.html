@@ -156,5 +156,7 @@
         </div>
     </div>
 </div>
-<button class="btn btn-lg btn-block btn-primary" ng-click="ctrl.store(ctrl.salesOrder)">Simpan SPK</button>
+<button ng-show="!ctrl.salesOrder.validated_at" class="btn btn-lg btn-block btn-primary" ng-click="ctrl.store(ctrl.salesOrder)">Simpan SPK</button>
+<button ng-show="ctrl.salesOrder.validated_at" class="btn btn-lg btn-block btn-primary" ng-click="ctrl.updateAfterValidation(ctrl.salesOrder)">Simpan Revisi SPK</button>
+
 <br>
