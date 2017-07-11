@@ -37,6 +37,9 @@ geloraSalesShared
             },
             polReg: function(id, polReg, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/pol-reg/', polReg, { params: params })
+            },
+            insertNote: function(id, note, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/note/', note, { params: params })
             }
         }
 
@@ -47,11 +50,15 @@ geloraSalesShared
             updateAfterValidation: function(id, leasingOrder) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/after-validation', leasingOrder)
             },
+
             paymentReceived: function(id, leasingOrder) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/payment-received', leasingOrder)
             },
             assignFromLeasingOrder: function(id, leasingOrderId, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id: leasingOrderId }, { params: params })
+            },
+            poComplete: function(id, body) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/po-complete/', body)
             }
         }
 
@@ -127,7 +134,7 @@ geloraSalesShared
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/unit/deselect/', {}, { params: params })
             }
         }
-        
+
         salesOrder.action = {
             lock: {
                 request: function(id) {
@@ -153,7 +160,7 @@ geloraSalesShared
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/indent/indent', { note: note })
                 },
             },
-            financial : {
+            financial: {
                 close: function(id, salesOrder) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/action/financial/close', salesOrder)
                 }

@@ -1,16 +1,17 @@
 geloraInventoryManagement
 	.controller('UnitIndexController', function(
-		UnitModel, ConfigModel) {
+		UnitModel,
+		ConfigModel, LinkFactory, JwtValidator) {
 
 		var vm = this
 		
 		vm.filter = {
 			paginate: 20,
-			statuses_not_in: 'SOLD_COMPLETE',
+			sales: 'pending',
 			with: 'currentLocation'
 		};
 		
-		vm.load = function(unit) {
+		vm.load = function() {
 
 			UnitModel.index(vm.filter)
 			.then(function(res){
@@ -20,9 +21,18 @@ geloraInventoryManagement
 		}
 		vm.load();
 
+		vm.download = function() {
+
+			var params = _.omit(vm.filter, ['paginate'])
+			params.jwt = JwtValidator.encodedJwt
+
+			window.open(LinkFactory.dealer.base.unit.report + '?' + $.param(params))
+		}
+
 		ConfigModel.get('gelora.base.unitStatuses')
 		.then(function(res){
 			vm.unitStatuses = res.data.data
+			vm.unitStatuses.push({code: null, name: 'Semua'})
 		})
 
 	})

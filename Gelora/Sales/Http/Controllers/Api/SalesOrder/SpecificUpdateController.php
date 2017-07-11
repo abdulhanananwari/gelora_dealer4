@@ -57,5 +57,15 @@ class SpecificUpdateController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    
+    public function insertNote($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->insertNote($request);
+
+        $salesOrder->save();
+        
+        return $this->formatItem($salesOrder);
+    }
 
 }

@@ -59,17 +59,23 @@ geloraSalesAdmin
                         controller: 'SalesOrderShowExtraController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Financial'
                     })
-                    .state('salesOrderShowApproval', {
-                        url: '/salesOrder/showApproval/:id',
-                        templateUrl: '/gelora/sales-shared/app/salesOrder/showApproval/salesOrderShowApproval.html',
-                        controller: 'SalesOrderShowApprovalController as ctrl',
-                        pageTitle: 'Dealer | Sales Admin | Sales Order Financial'
+                    .state('salesOrderShowStatus', {
+                        url: '/salesOrder/showStatus/:id',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/showStatus/salesOrderShowStatus.html',
+                        controller: 'SalesOrderShowStatusController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Sales Order Status'
                     })
                     .state('salesOrderShowUnit', {
                         url: '/salesOrder/showUnit/:id',
                         templateUrl: '/gelora/sales-shared/app/salesOrder/showUnit/salesOrderShowUnit.html',
                         controller: 'SalesOrderShowUnitController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Unit'
+                    })
+                    .state('salesOrderShowNote', {
+                        url: '/salesOrder/showNote/:id',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/showNote/salesOrderShowNote.html',
+                        controller: 'SalesOrderShowNoteController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Sales Order Catatan'
                     })
                     .state('salesOrderShowRegistration', {
                         url: '/salesOrder/showRegistration/:id',
@@ -82,6 +88,12 @@ geloraSalesAdmin
                         templateUrl: '/gelora/sales-shared/app/salesOrder/showDocumentation/salesOrderShowDocumentation.html',
                         controller: 'SalesOrderShowDocumentationController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Dokumentasi'
+                    })
+                    .state('salesOrderShowLog', {
+                        url: '/salesOrder/showLog/:id',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/showLog/salesOrderShowLog.html',
+                        controller: 'SalesOrderShowLogController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Log'
                     })
                     .state('salesOrderReport', {
                         url: '/salesOrder/report',

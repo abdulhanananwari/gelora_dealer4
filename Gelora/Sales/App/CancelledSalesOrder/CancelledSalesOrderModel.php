@@ -9,6 +9,8 @@ class CancelledSalesOrderModel extends Model {
     protected $connection = 'mongodb';
     protected $collection = 'cancelled_sales_orders';
     protected $guarded = ['created_at', 'updated_at'];
+    
+    public $dates = ['restored_at'];
 
     // Managers
     public function action() {

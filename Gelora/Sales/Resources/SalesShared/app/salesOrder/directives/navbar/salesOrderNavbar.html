@@ -18,9 +18,11 @@
                 <li ng-show="salesOrder.delivery.generated_at"><a ui-sref="salesOrderShowUnit({id:salesOrder.id})">Unit</a></li>
                 <li><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Delivery</a></li>
                 <li><a ui-sref="salesOrderShowCddb({id:salesOrder.id})">CDDB</a></li>
-                <li><a ui-sref="salesOrderShowApproval({id:salesOrder.id})">Kunci & Validasi</a></li>
+                <li><a ui-sref="salesOrderShowStatus({id:salesOrder.id})">Status</a></li>
                 <li ng-show="salesOrder.delivery.handover.created_at"><a ui-sref="salesOrderShowRegistration({id:salesOrder.id})">Pol Reg</a></li>
                 <li><a ui-sref="salesOrderShowDocumentation({id:salesOrder.id})">Dokumen</a></li>
+                <li><a ui-sref="salesOrderShowLog({id:salesOrder.id})">Log</a></li>
+                <li><a ui-sref="salesOrderShowNote({id:salesOrder.id})">Chat</a></li>
             </ul>
         </div>
     </div>

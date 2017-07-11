@@ -7,7 +7,7 @@ var geloraSalesAdmin = angular
         'Solumax.Setting', 'Solumax.FileManager', 'Solumax.TransactionPlugins',
         'Gelora.CreditSalesShared',
         'Gelora.BaseShared', 'Gelora.SalesShared', 'Gelora.PolRegShared','Gelora.HumanResourceShared',
-        'Gelora.Vehicle.Shared', 'Solumax.Entity' 
+        'Gelora.Vehicle.Shared', 'Solumax.Entity', 'Solumax.LoggerPlugins'
     ])
     .factory('AppFactory', function() {
 

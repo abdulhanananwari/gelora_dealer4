@@ -138,7 +138,7 @@ class SalesOrderController extends Controller {
             return $this->formatErrors($validation);
         }
 
-        $salesOrder->save();
+        $salesOrder->action()->onUpdate();
 
         return $this->formatItem($salesOrder);
     }

@@ -48,11 +48,11 @@
     <div class="row">
         <div class="col-sm-12">
             <h4>Batalkan SPK</h4>
-            <input type="checkbox" class="form-not-applied" ng-model="ctrl.cancelledCheck">
-            <div ng-if="ctrl.cancelledCheck">
+            <input type="checkbox" class="form-not-applied" ng-model="cancelSalesOrder">
+            <div ng-if="cancelSalesOrder">
                 <label>Alasan Pembatalan SPK</label>
-                <input type="text" ng-model="ctrl.cancelledSalesOrder.reason">
-                <button class="btn btn-block" ng-click="ctrl.cancel(ctrl.cancelledSalesOrder)">Batalkan SPK</button>
+                <input type="text" ng-model="cancellation.reason">
+                <button class="btn btn-block btn-danger" ng-click="ctrl.action.cancel(cancellation)" ng-disabled="!cancellation.reason">Batalkan SPK</button>
             </div>
         </div>
     </div>

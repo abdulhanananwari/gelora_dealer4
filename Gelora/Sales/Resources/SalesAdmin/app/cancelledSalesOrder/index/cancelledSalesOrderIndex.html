@@ -10,20 +10,28 @@
                         <th>Warna Motor</th>
                         <th>Sales</th>
                         <th>Tanggal SPK</th>
+                        <th>Tanggal Pembatalan</th>
                         <th>Alasan Pembatalan</th>
-                        <th>Restore SPK </th>
+                        <!-- <th>Restore SPK</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="cancelledSalesOrder in ctrl.cancelledSalesOrders">
-                        <td>{{cancelledSalesOrder.sales_order.id}}</td>
-                        <td>{{cancelledSalesOrder.sales_order.customer.name}}</td>
-                        <td>{{cancelledSalesOrder.sales_order.vehicle.name}}</td>
-                        <td>{{cancelledSalesOrder.sales_order.vehicle.variant.name}}</td>
-                        <td>{{cancelledSalesOrder.sales_order.salesPersonnel.entity.name}}</td>
-                        <td>{{cancelledSalesOrder.sales_order.created_at}}</td>
+                        <td>{{cancelledSalesOrder.salesOrder.id}}</td>
+                        <td>{{cancelledSalesOrder.salesOrder.customer.name}}</td>
+                        <td>{{cancelledSalesOrder.salesOrder.vehicle.name}}</td>
+                        <td>{{cancelledSalesOrder.salesOrder.vehicle.variant.name}}</td>
+                        <td>{{cancelledSalesOrder.salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{cancelledSalesOrder.salesOrder.created_at}}</td>
+                        <td>{{cancelledSalesOrder.created_at}}</td>
                         <td>{{cancelledSalesOrder.reason}}</td>
-                        <td><button class="btn btn-xs btn-block btn-warning" ng-click="ctrl.restore(cancelledSalesOrder)">Restore</button></td>
+                        <!-- <td>
+                            <button ng-disabled="cancelledSalesOrder.restored_at" class="btn btn-xs btn-block btn-warning" ng-click="ctrl.restore(cancelledSalesOrder)">Restore</button>
+                            <span ng-show="cancelledSalesOrder.restored_at">
+                                <label>Direstore oleh: {{ cancelledSalesOrder.restorer.name }}</label>
+                                <label>{{ cancelledSalesOrder.restored_at }}</label>
+                            </span>
+                        </td> -->
                     </tr>
                 </tbody>
 			</table>

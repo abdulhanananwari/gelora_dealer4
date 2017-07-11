@@ -42,6 +42,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('price', ['uses' => 'SpecificUpdateController@price']);
                 Route::post('delivery-request', ['uses' => 'SpecificUpdateController@deliveryRequest']);
                 Route::post('plafond', ['uses' => 'SpecificUpdateController@plafond']);
+                Route::post('note', ['uses' => 'SpecificUpdateController@insertNote']);
             });
 
             Route::group(['prefix' => '{id}/delivery'], function() {
@@ -67,6 +68,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('after-validation', ['uses' => 'LeasingOrderController@updateAfterValidation']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder']);
                 Route::post('payment-received/', ['uses' => 'LeasingOrderController@paymentReceived']);
+                Route::post('po-complete/', ['uses' => 'LeasingOrderController@poComplete']);
             });
 
             Route::group(['prefix' => '{id}/pol-reg'], function() {

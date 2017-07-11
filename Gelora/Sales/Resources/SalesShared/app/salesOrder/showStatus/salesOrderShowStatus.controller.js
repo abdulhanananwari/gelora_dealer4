@@ -1,9 +1,8 @@
 geloraSalesShared
-    .controller('SalesOrderShowApprovalController', function(
-        $scope, $state,
-        SalesOrderModel, SalesOrderExtraSharedModel,
-        CancelledSalesOrderSharedModel,
-        LinkFactory) {
+    .controller('SalesOrderShowStatusController', function(
+        $state,
+        LinkFactory,
+        SalesOrderModel, CancelledSalesOrderSharedModel) {
 
         var vm = this
 
@@ -67,25 +66,15 @@ geloraSalesShared
                         alert('Data indent berhasil dibuat')
                         vm.salesOrder = res.data.data
                     })
+            },
+            cancel: function(cancellation) {
+
+                cancellation.sales_order_id = vm.salesOrder.id
+
+                CancelledSalesOrderSharedModel.store(cancellation)
+                    .then(function(res) {
+                        alert('SPK berhasil dibatalkan')
+                    })
             }
         }
-
-
-        vm.unitIndent = function() {
-
-            SalesOrderModel.unit.indent($state.params.id)
-                .then(function(res) {
-                    vm.salesOrder = res.data.data
-                })
-        }
-
-        vm.cancel = function(cancelledSalesOrder) {
-
-            vm.cancelledSalesOrder.sales_order = vm.salesOrder
-            CancelledSalesOrderSharedModel.store(cancelledSalesOrder)
-                .then(function(res) {
-                    alert('SPK berhasil dibatalkan')
-                })
-        }
-
     })

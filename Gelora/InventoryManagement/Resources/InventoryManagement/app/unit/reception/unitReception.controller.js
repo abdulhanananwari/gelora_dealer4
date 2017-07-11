@@ -23,6 +23,13 @@ geloraInventoryManagement
                 })
         }
 
+        vm.getUnreceivedUnits = function() {
+            UnitModel.index({ receipt: 'pending' })
+                .then(function(res) {
+                    vm.units = res.data.data
+                })
+        }
+
         if ($state.params.locationId) {
 
             LocationModel.get($state.params.locationId)
