@@ -39,6 +39,7 @@ geloraSalesShared
             },
             insertNote: function(id, note, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/note/', note, { params: params })
+            },
             registration: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/registration/', salesOrder, {params:params})
             }
