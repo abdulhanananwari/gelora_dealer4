@@ -24,7 +24,6 @@ geloraSalesShared
         salesOrder.calculate = function(id) {
             return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/calculate')
         }
-
         salesOrder.specificUpdate = {
             deliveryRequest: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/delivery-request/', salesOrder, { params: params })
@@ -37,6 +36,9 @@ geloraSalesShared
             },
             polReg: function(id, polReg, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/pol-reg/', polReg, { params: params })
+            },
+            registration: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/registration/', salesOrder, {params:params})
             }
         }
 

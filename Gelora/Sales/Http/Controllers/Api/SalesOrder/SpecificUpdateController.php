@@ -57,5 +57,19 @@ class SpecificUpdateController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    public function registration($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->registration($request);
+
+        $validation = $salesOrder->validate()->onUpdateAfterValidation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->save();
+
+        return $this->formatItem($salesOrder);
+    }
 
 }
