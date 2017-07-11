@@ -1,6 +1,6 @@
 geloraPolRegShared
     .directive('registrationBatches', function(
-        SalesOrderModel,LinkFactory,
+        SalesOrderModel, LinkFactory,
         RegistrationBatchesFactory) {
 
         return {
@@ -21,27 +21,27 @@ geloraPolRegShared
                             scope.innerSalesOrder = res.data.data
                         })
                 }
-                scope.remove = function(salesOrder, type){
+                scope.remove = function(salesOrder, type) {
                     var data = {}
                     data[type] = salesOrder.polReg[type]
-                    SalesOrderModel.polReg.batch.remove(salesOrder.id , data)
+                    SalesOrderModel.polReg.batch.remove(salesOrder.id, data)
                         .then(function(res) {
                             scope.salesOrder = res.data.data
                             scope.innerSalesOrder = res.data.data
                         })
                 }
                 scope.redirect = {
-                    registrationMdBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp  + salesOrder.polReg.md_submission_batch_id)
+                    registrationMdBatch: function(salesOrder) {
+                        window.open(LinkFactory.dealer.polReg.mdSubmissionBatch.redirectApp + salesOrder.polReg.md_submission_batch_id)
                     },
-                    agencySubmissionBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.agencySubmissionBatch.redirectApp  + salesOrder.polReg.agency_submission_batch_id)
+                    agencySubmissionBatch: function(salesOrder) {
+                        window.open(LinkFactory.dealer.polReg.agencySubmissionBatch.redirectApp + salesOrder.polReg.agency_submission_batch_id)
                     },
-                    agencyInvoice: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.agencyInvoice.redirectApp  + salesOrder.polReg.agency_invoice_id)
+                    agencyInvoice: function(salesOrder) {
+                        window.open(LinkFactory.dealer.polReg.agencyInvoice.redirectApp + salesOrder.polReg.agency_invoice_id)
                     },
-                    leasingBpkbSubmissionBatch: function(salesOrder){
-                        window.open(LinkFactory.dealer.polReg.leasingBpkbSubmissionBatch.redirectApp  + salesOrder.polReg.leasing_bpkb_submission_batch_id)
+                    leasingBpkbSubmissionBatch: function(salesOrder) {
+                        window.open(LinkFactory.dealer.polReg.leasingBpkbSubmissionBatch.redirectApp + salesOrder.polReg.leasing_bpkb_submission_batch_id)
                     },
                 }
 
@@ -83,8 +83,10 @@ geloraPolRegShared
                 }
 
                 scope.$watch('innerSalesOrder', function(newValue) {
-                    scope.salesOrder = newValue
-                    loadBatch(newValue.polReg)
+                    if (newValue) {
+                        scope.salesOrder = newValue
+                        loadBatch(newValue.polReg)
+                    }
                 })
             }
         }

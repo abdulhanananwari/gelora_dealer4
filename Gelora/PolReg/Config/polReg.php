@@ -10,6 +10,7 @@ return [
     ],
     
     'defaultItems' => [
+        'Faktur',
         'STCK',
         'Notice Pajak',
         'STNK',

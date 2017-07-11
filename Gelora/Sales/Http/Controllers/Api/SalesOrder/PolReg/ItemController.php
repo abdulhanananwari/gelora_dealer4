@@ -17,12 +17,12 @@ class ItemController extends SalesOrderController {
         
         $salesOrder = $this->salesOrder->find($id);
         
-        $validation = $salesOrder->validate()->polReg()->itemIncoming($request->get('name'));
+        $validation = $salesOrder->validate()->polReg()->itemIncoming($request->get('name'), $request);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
         
-        $salesOrder->action()->polReg()->itemIncoming($request->get('name'), $request->get('note'));
+        $salesOrder->action()->polReg()->itemIncoming($request->get('name'), $request);
         
         return $this->formatItem($salesOrder);
     }
