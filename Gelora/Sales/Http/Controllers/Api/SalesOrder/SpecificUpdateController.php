@@ -13,21 +13,6 @@ class SpecificUpdateController extends SalesOrderController {
         parent::__construct();
     }
 
-    public function deliveryRequest($id, Request $request) {
-
-        $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->deliveryRequest($request);
-
-        $validation = $salesOrder->validate()->specific()->deliveryRequest();
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }
-
-        $salesOrder->save();
-
-        return $this->formatItem($salesOrder);
-    }
-
     public function price($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
@@ -57,8 +42,9 @@ class SpecificUpdateController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+
     public function insertNote($id, Request $request) {
-        
+
         $salesOrder = $this->salesOrder->find($id);
         $salesOrder->assign()->specific()->insertNote($request);
 
@@ -66,6 +52,7 @@ class SpecificUpdateController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+
     public function registration($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
@@ -77,6 +64,21 @@ class SpecificUpdateController extends SalesOrderController {
         }
 
         $salesOrder->save();
+        return $this->formatItem($salesOrder);
+    }
+
+    public function deliveryRequest($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->deliveryRequest($request);
+
+        $validation = $salesOrder->validate()->specific()->deliveryRequest();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->save();
+
         return $this->formatItem($salesOrder);
     }
 

@@ -14,17 +14,16 @@ class OnGenerateStrings {
 
     public function validate() {
 
-        if (empty($this->salesOrder->cddb)) {
+        if (empty($this->salesOrder->getAttribute('cddb'))) {
             return ['String CDDB belum dibuat'];
         }
+
         $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
-        if ($mdSubmissionBatch) {
-            if ($mdSubmissionBatch->getAttribute('closed_at')) {
-                return ['Batch untuk MD sudah ditutup'];
-            }
+        if ($mdSubmissionBatch && $mdSubmissionBatch->getAttribute('closed_at') != null) {
+            return ['Batch untuk MD sudah ditutup'];
         }
-       
-        
+
+
         return true;
     }
 

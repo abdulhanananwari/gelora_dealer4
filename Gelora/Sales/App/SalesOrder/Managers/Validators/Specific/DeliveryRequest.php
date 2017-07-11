@@ -14,10 +14,10 @@ class DeliveryRequest {
 
     public function validate() {
 
-       if ($this->salesOrder->getAttribute('delivery.generated_at')) {
-           return ['Delivery request tidak dapat dirubah karena surat jalan sudah dibuat'];
-       }
-       
+        if ($this->salesOrder->getAttribute('delivery.generated_at')) {
+            return ['Delivery request tidak dapat dirubah karena surat jalan sudah dibuat'];
+        }
+
         return true;
     }
 

@@ -13,16 +13,16 @@ class InsertNote {
     }
 
     public function assign(\Illuminate\Http\Request $request) {
-        
+
         $notes = (array) $this->salesOrder->getAttribute('notes');
-        
+
         $notes[] = [
             'creator' => $this->salesOrder->assignEntityData(),
             'text' => $request->get('text')
         ];
-        
+
         $this->salesOrder->setAttribute('notes', $notes);
-        
+
         return $this->salesOrder;
     }
 

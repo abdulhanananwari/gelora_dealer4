@@ -15,12 +15,10 @@ class Registration {
     public function validate() {
 
         $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
-        if ($mdSubmissionBatch) {
-            if ($mdSubmissionBatch->getAttribute('closed_at')) {
-                return ['Batch untuk MD sudah ditutup , Data tidak dapat di edit lagi'];
-            }
+        if ($mdSubmissionBatch && $mdSubmissionBatch->getAttribute('closed_at') != null) {
+            return ['Batch untuk MD sudah ditutup , Data tidak dapat di edit lagi'];
         }
-       
+
         return true;
     }
 

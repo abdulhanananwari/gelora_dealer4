@@ -62,11 +62,15 @@ class SalesOrderController extends Controller {
         }
         if ($request->has('payment_type')) {
             $query->where('payment_type', $request->get('payment_type'));
-        }      
+        }
+
         if ($request->has('status')) {
             switch ($request->get('status')) {
-                case 'new':
+                case 'unvalidated':
                     $query->whereNull('validated_at');
+                    break;
+                case 'unvalidated_and_indent':
+                    $query->whereNull('validated_at')->whereNotNull('indent');
                     break;
                 case 'validated':
                     $query->whereNotNull('validated_at');

@@ -53,13 +53,16 @@ geloraSalesShared
                     })
             }
         }
-        vm.updateAfterValidation = function(salesOrder) {
 
-            SalesOrderModel.specificUpdate.registration(salesOrder.id, _.pick(salesOrder, ['registration']))
-                .then(function(res){
-                    alert('Berhasil mengupdate SPK')
-                    vm.salesOrder = res.data.data
-                })
+        vm.postValidationUpdate = {
+            registration: function(salesOrder) {
+
+                SalesOrderModel.specificUpdate.registration(salesOrder.id, _.pick(salesOrder, ['registration']))
+                    .then(function(res) {
+                        alert('Berhasil mengupdate SPK')
+                        vm.salesOrder = res.data.data
+                    })
+            }
         }
 
         if ($state.params.id) {
