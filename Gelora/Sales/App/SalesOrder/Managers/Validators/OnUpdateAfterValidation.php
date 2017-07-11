@@ -14,9 +14,12 @@ class OnUpdateAfterValidation {
 
     public function validate() {
         $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
-        if ($mdSubmissionBatch['closed_at']) {
-            return ['Batch untuk MD sudah ditutup , Data tidak dapat di edit lagi'];
+        if ($mdSubmissionBatch) {
+            if ($mdSubmissionBatch->getAttribute('closed_at')) {
+                return ['Batch untuk MD sudah ditutup , Data tidak dapat di edit lagi'];
+            }
         }
+       
        
 
         return true;
