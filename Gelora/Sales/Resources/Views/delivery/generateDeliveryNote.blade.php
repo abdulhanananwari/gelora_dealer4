@@ -98,11 +98,12 @@
                                 <tr>
                                     <th>Hadiah</th>
                                 </tr>
-                                @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->all() as $extra)
                                 <tr>
-                                    <td>{{$extra->salesExtra['name']}}</td>
+                                    <td>
+                                        @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->all() as $extra)
+                                        <span>{{$extra->salesExtra['name']}}, </span> @endforeach
+                                    </td>
                                 </tr>
-                                @endforeach
                             </table>
                         </div>
                         <div class="col-xs-6">
@@ -110,11 +111,12 @@
                                 <tr>
                                     <th>Kelengkapan</th>
                                 </tr>
-                                @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->all() as $extra)
                                 <tr>
-                                    <td>{{$extra->salesExtra['name']}}</td>
+                                    <td>
+                                        @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->all() as $extra)
+                                        <span>{{$extra->salesExtra['name']}}, </span> @endforeach
+                                    </td>
                                 </tr>
-                                @endforeach
                             </table>
                         </div>
                     </div>
