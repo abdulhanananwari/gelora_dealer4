@@ -26,7 +26,7 @@ class SalesOrderController extends Controller {
                 '$lookup' => [
                     'from' => 'units',
                     'localField' => 'unit_id',
-                    'foreignField' => 'id',
+                    'foreignField' => '_id',
                     'as' => 'unit'
                 ]
             ], [
