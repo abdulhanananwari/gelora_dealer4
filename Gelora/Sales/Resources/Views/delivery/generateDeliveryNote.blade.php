@@ -4,6 +4,31 @@
 <head>
     <title>SJ</title>
     <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css"> 
+    <style type="text/css">
+    @media print {
+        html, body {
+            height: 100%;
+            background: #FFF;
+            font-size: 0.8em !important;
+        }
+
+        @page {
+            size: a5 landscape
+        }
+
+        @page :left {
+            margin: 0.5cm;
+        }
+
+        @page :right {
+            margin: 0.5cm;
+        }
+    }
+    
+    p {
+        margin: 0;
+    }
+    </style>
 </head>
 
 <body>
