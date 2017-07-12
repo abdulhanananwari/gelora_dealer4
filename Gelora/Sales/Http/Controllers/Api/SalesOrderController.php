@@ -91,14 +91,13 @@ class SalesOrderController extends Controller {
             }
             
         }
-        //exit(json_encode($request->get('registration_item_outgoing')));
         if ($request->has('registration_item_outgoing')) {
             foreach (json_decode($request->get('registration_item_outgoing'), true) as $key => $value) {
                 if ($value == 'completed') {
-                    $query->whereNotNull('polReg.items'.$key.'.outgoing');
+                    $query->whereNotNull('polReg.items.'.$key.'.outgoing');
                 }
                 else{
-                     $query->whereNull('polReg.items'.$key.'.outgoing');
+                     $query->whereNull('polReg.items.'.$key.'.outgoing');
                 }
             }
             
