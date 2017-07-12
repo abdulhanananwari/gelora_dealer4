@@ -55,8 +55,8 @@ class SalesOrderController extends Controller {
         if ($request->has('registration_name')) {
             $query->where('registration.name', 'LIKE', '%' . $request->get('registration_name') . '%');
         }
-        if ($request->has('salesperson_entity_id')) {
-            $query->where('salesPersonnel.entity.id', (int) $request->get('salesperson_entity_id'));
+        if ($request->has('sales_personnel_entity_id')) {
+            $query->where('salesPersonnel.entity.id', (int) $request->get('sales_personnel_entity_id'));
         }
         if ($request->has('customer_type')) {
             $query->where('customer.type', $request->get('customer_type'));

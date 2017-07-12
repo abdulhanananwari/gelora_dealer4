@@ -4,11 +4,13 @@ geloraSalesShared
 
         var vm = this
 
-        vm.filter = {
+        var presetFilter = {
             paginate: 20,
         }
 
-        vm.load = function(filter) {
+        vm.filter = _.clone(presetFilter)
+
+        vm.load = function(filter, closeModal) {
 
             SalesOrderModel.index(filter)
                 .then(function(res) {
@@ -16,9 +18,15 @@ geloraSalesShared
                     vm.salesOrders = res.data.data
                     vm.meta = res.data.meta
 
-                    $('#spk-filter-modal').modal('hide')
+                    if (closeModal) {
+                        $('#spk-filter-modal').modal('hide')
+                    }
                 })
 
         }
-        vm.load(vm.filter)
+        vm.load(vm.filter, false)
+
+        vm.resetFilter = function() {
+            vm.filter = _.clone(presetFilter)
+        }
     })
