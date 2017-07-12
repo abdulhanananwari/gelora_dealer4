@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-sm-4">
-        <label>Tanggal</label><br>
+        <label>Tanggal</label>
+        <br>
         <label>Jenis Tanggal</label>
         <select ng-options="code as name for (code,name) in dateTypes" ng-model="filter.time_type"></select>
         <div class="row">
@@ -15,6 +16,8 @@
         </div>
         <label>Status SPK</label>
         <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select>
+        <label>Penerimaan Barang</label>
+        <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#registration-items-filter-modal">Barang</button>
     </div>
     <div class="col-sm-4">
         <label>Leasing</label>
@@ -33,8 +36,11 @@
         <vehicle-model-finder2 selected-model="selectedModel" on-change="filter.type_name=selectedModel.name;
             filter.color_name=selectedModel.variant.name">
         </vehicle-model-finder2>
+        <label>Unit</label>
+        <dealer-unit-search selected-unit="selectedUnit" on-unit-selected="filter.unit_id=selectedUnit.id"></dealer-unit-search>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-sm-4">
         <label>Pengurutan Berdasarkan</label>
@@ -50,5 +56,52 @@
     <div class="col-sm-4">
         <label>Hasil Per Halaman</label>
         <input type="text" ng-model="filter.paginate" name="paginate">
+    </div>
+</div>
+<div class="modal fade" id="registration-items-filter-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-toggle="modal" data-target="#registration-items-filter-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Filter Berdasarkan Barang Pol Reg</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Barang</th>
+                                        <th>Diterima</th>
+                                        <th>Belum Diterima</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>STNK</td>
+                                        <td>
+                                            <input type="radio" name="filter-receipt-stnk" value="unreceived" ng-model="filter.registration_items.STNK.status">
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="filter-receipt-stnk" value="received" ng-model="filter.registration_items.STNK.status">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>STCK</td>
+                                        <td>
+                                            <input type="radio" name="filter-receipt-stck" value="unreceived" ng-model="filter.registration_items.STCK.status">
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="filter-receipt-stck" value="received" ng-model="filter.registration_items.STCK.status">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

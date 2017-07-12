@@ -15,7 +15,10 @@ geloraSalesShared
 
                     vm.salesOrders = res.data.data
                     vm.meta = res.data.meta
+
+                    $('#spk-filter-modal').modal('hide')
                 })
+
         }
         vm.load(vm.filter)
     })
