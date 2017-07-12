@@ -80,6 +80,29 @@ class SalesOrderController extends Controller {
         if ($request->has('unit_id')) {
             $query->where('unit_id', new ObjectID($request->get('unit_id')));
         }
+        if ($request->has('registration_item_incoming')) {
+            foreach (json_decode($request->get('registration_item_incoming'), true) as $key => $value) {
+                if ($value == 'completed') {
+                    $query->whereNotNull('polReg.items.'.$key.'.incoming');
+                }
+                else{
+                     $query->whereNull('polReg.items.'.$key.'.incoming');
+                }
+            }
+            
+        }
+        //exit(json_encode($request->get('registration_item_outgoing')));
+        if ($request->has('registration_item_outgoing')) {
+            foreach (json_decode($request->get('registration_item_outgoing'), true) as $key => $value) {
+                if ($value == 'completed') {
+                    $query->whereNotNull('polReg.items'.$key.'.outgoing');
+                }
+                else{
+                     $query->whereNull('polReg.items'.$key.'.outgoing');
+                }
+            }
+            
+        }
 
         if ($request->has('status')) {
             switch ($request->get('status')) {
