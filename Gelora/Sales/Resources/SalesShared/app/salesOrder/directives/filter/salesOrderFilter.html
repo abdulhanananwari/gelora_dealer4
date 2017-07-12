@@ -73,27 +73,26 @@
                                 <thead>
                                     <tr>
                                         <th>Barang</th>
-                                        <th>Diterima</th>
-                                        <th>Belum Diterima</th>
+                                        <th>Diterima Oleh Dealer</th>
+                                        <th>Belum Diterima Oleh Dealer</th>
+                                        <th>Diserahkan ke Konsumen</th>
+                                        <th>Belum Diserahkan ke Konsumen</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>STNK</td>
+                                    <tr ng-repeat=" item in defaultItems">
+                                        <td>{{item}}</td>
                                         <td>
-                                            <input type="radio" name="filter-receipt-stnk" value="unreceived" ng-model="filter.registration_items.STNK.status">
+                                            <input type="radio" name="filter-incoming-receipt-{{item}}" value="completed" ng-model="filter.registration_item_incoming[item]">
                                         </td>
                                         <td>
-                                            <input type="radio" name="filter-receipt-stnk" value="received" ng-model="filter.registration_items.STNK.status">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>STCK</td>
-                                        <td>
-                                            <input type="radio" name="filter-receipt-stck" value="unreceived" ng-model="filter.registration_items.STCK.status">
+                                            <input type="radio" name="filter-incoming-receipt-{{item}}" value="incomplete" ng-model="filter.registration_item_incoming[item]">
                                         </td>
                                         <td>
-                                            <input type="radio" name="filter-receipt-stck" value="received" ng-model="filter.registration_items.STCK.status">
+                                            <input type="radio" name="filter-outgoing-receipt-{{item}}" value="completed" ng-model="filter.registration_item_outgoing[item]">
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="filter-outgoing-receipt-{{item}}" value="incomplete" ng-model="filter.registration_item_outgoing[item]">
                                         </td>
                                     </tr>
                                 </tbody>
