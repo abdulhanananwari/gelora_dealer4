@@ -25,7 +25,7 @@ class QueryBuilder {
         }
 
         if ($request->has('chasis_number')) {
-            $query->where('chasis_number', $request->get('chasis_number'));
+            $query->where('chasis_number', 'LIKE', $request->get('chasis_number') . '%');
         }
 
         if ($request->has('chasis_number_like')) {

@@ -4,6 +4,7 @@ namespace Gelora\Sales\Http\Controllers\Api;
 
 use Solumax\PhpHelper\Http\Controllers\ApiBaseV1Controller as Controller;
 use Illuminate\Http\Request;
+use MongoDB\BSON\ObjectID;
 
 class SalesOrderController extends Controller {
 
@@ -74,6 +75,10 @@ class SalesOrderController extends Controller {
         }
         if ($request->has('color_name')) {
             $query->where('unit.color_name', $request->get('color_name'));
+        }
+
+        if ($request->has('unit_id')) {
+            $query->where('unit_id', new ObjectID($request->get('unit_id')));
         }
 
         if ($request->has('status')) {
