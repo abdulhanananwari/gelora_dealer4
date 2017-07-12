@@ -30,7 +30,7 @@ class Registration {
         
         $validation = \Validator::make($this->salesOrder->toArray(),
                 $validators,
-                [
+                [   
                     'registration.id_file_uuid.required' => 'File KTP harus diupload'
                 ]);
         
