@@ -43,6 +43,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('delivery-request', ['uses' => 'SpecificUpdateController@deliveryRequest']);
                 Route::post('plafond', ['uses' => 'SpecificUpdateController@plafond']);
                 Route::post('note', ['uses' => 'SpecificUpdateController@insertNote']);
+                Route::post('registration', ['uses' => 'SpecificUpdateController@registration']);
             });
 
             Route::group(['prefix' => '{id}/delivery'], function() {

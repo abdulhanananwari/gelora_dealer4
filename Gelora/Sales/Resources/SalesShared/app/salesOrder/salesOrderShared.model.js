@@ -29,6 +29,9 @@ geloraSalesShared
             deliveryRequest: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/delivery-request/', salesOrder, { params: params })
             },
+            registration: function(id, salesOrder, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/registration/', salesOrder, { params: params })
+            },
             price: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/price/', salesOrder, { params: params })
             },
@@ -40,7 +43,7 @@ geloraSalesShared
             },
             insertNote: function(id, note, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/note/', note, { params: params })
-            }
+            },
         }
 
         salesOrder.leasingOrder = {

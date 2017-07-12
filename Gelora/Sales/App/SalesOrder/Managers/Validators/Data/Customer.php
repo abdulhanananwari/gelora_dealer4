@@ -29,7 +29,11 @@ class Customer {
         }
         
         $validation = \Validator::make($this->salesOrder->toArray(),
-                $validators);
+                $validators, [
+                    'customer.type.required' => 'Jenis kustomer harus diisi',
+                    'customer.ktp.required' => 'No KTP kustomer harus diisi',
+                    'customer.id_file_uuid.required' => 'File KTP harus diupload'
+                ]);
         
         return $validation->fails() ? $validation->errors()->all() : true;
     }
