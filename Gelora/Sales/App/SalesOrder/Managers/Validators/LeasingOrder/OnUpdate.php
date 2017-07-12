@@ -18,7 +18,11 @@ class OnUpdate {
         if ($onUpdateValidation !== true) {
             return $onUpdateValidation;
         }
-
+        
+//        if ($this->salesOrder->getAttribute('leasingOrder.po_completer.timestamp')) {
+//            return ['PO sudah lengkap. Tidak bisa dirubah lagi'];
+//        }
+        
         return true;
     }
 
