@@ -26,26 +26,25 @@ class SalesOrderController extends Controller {
                 '$lookup' => [
                     'from' => 'units',
                     'localField' => 'unit_id',
-                    'foreignField' => 'id',
+                    'foreignField' => '_id',
                     'as' => 'unit'
                 ]
             ], [
-                '$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]],
+                '$unwind' => ['path' => '$unit', 'preserveNullAndEmptyArrays' => true]
+            ],
         ];
+        
         if ($request->has('from')) {
             $from = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay()->getTimestamp() * 1000);
             $subquery = ['$match' => [$request->get('time_type') => ['$gte' => $from]]];
             $query[] = $subquery;
         }
 
-
         if ($request->has('until')) {
             $until = new UTCDateTime(\Carbon\Carbon::createFromFormat('Y-m-d', $request->get('until'))->endOfDay()->getTimestamp() * 1000);
             $subquery = ['$match' => [$request->get('time_type') => ['$lte' => $until]]];
             $query[] = $subquery;
         }
-
-     
 
         if ($request->has('type_name')) {
             $subquery = ['$match' => ['unit.type_name' => $request->get('type_name')]];
@@ -88,15 +87,14 @@ class SalesOrderController extends Controller {
         });
 
         if ($request->get('dashboard') == 'true') {
-            
+
             return $this->formatData($this->transformer->transformCollection($salesOrders));
-            
         } else {
 
             if (count($salesOrders) == 0) {
                 return 'Tidak ada data penjualan untuk kriteria diatas';
             }
-           
+
             return $this->createCsv($this->transformer->transformCollection($salesOrders));
         }
     }

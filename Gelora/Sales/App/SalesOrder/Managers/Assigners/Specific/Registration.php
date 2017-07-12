@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class InsertNote {
+class Registration {
 
     protected $salesOrder;
 
@@ -14,14 +14,7 @@ class InsertNote {
 
     public function assign(\Illuminate\Http\Request $request) {
 
-        $notes = (array) $this->salesOrder->getAttribute('notes');
-
-        $notes[] = [
-            'creator' => $this->salesOrder->assignEntityData(),
-            'text' => $request->get('text')
-        ];
-
-        $this->salesOrder->setAttribute('notes', $notes);
+        $this->salesOrder->registration = $request->get('registration');
 
         return $this->salesOrder;
     }
