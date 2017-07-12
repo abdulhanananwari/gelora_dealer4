@@ -47,8 +47,11 @@
 
                 <table class="table" width="100%">
                     <tr>
+                        <th>No BPKB</th>
+                        <th>Plat Nomor</th>
                         <th>Nama Pemohon</th>
                         <th>Nama STNK</th>
+                        <th>Alamat STNK</th>
                         <th>Tipe</th>
                         <th>Kode Tipe</th>
                         <th>Warna</th>
@@ -58,8 +61,11 @@
                     </tr>
                     @foreach($viewData['registrationBatch']->getSalesOrders() as $salesOrder)
                     <tr>
-                        <td>{{ $salesOrder->customer['name'] }}</td>
-                        <td>{{ $salesOrder->registration['name'] }}</td>
+                        <td>{{ $salesOrder->getAttribute('polReg.bpkb_number') }}</td>
+                        <td>{{ $salesOrder->getAttribute('polReg.pol_reg') }}</td>
+                        <td>{{ $salesOrder->getAttribute('customer.name') }}</td>
+                        <td>{{ $salesOrder->getAttribute('registration.name') }}</td>
+                        <td>{{ $salesOrder->getAttribute('registration.address') }}</td>
                         <td>{{ $salesOrder->unit->type_name }}</td>
                         <td>{{ $salesOrder->unit->type_code }}</td>
                         <td>{{ $salesOrder->unit->color_name }}</td>
