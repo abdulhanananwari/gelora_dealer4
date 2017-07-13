@@ -5,6 +5,21 @@
     <title>Tagihan Customer #{{ $viewData['salesOrder']->id }}</title>
     <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <style type="text/css">
+    @media print {
+        html, body {
+            width: 100%;
+        }
+    }
+    @page {
+        size: A4 portrait;
+    }
+
+    .container {
+        width: 100%;
+        font-family: 'Courier New' !important;
+        font-size: 2em !important;
+        letter-spacing: 5px !important;
+    }
     .table {
         border-style: none !important;
         border: 0 !important;
@@ -111,6 +126,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    window.print();
+    </script>
 </body>
 
 </html>
