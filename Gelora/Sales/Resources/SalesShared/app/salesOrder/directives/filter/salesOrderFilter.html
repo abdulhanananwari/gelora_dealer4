@@ -23,9 +23,9 @@
         <label>Leasing</label>
         <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="filter.main_leasing_id=mainLeasing.id;filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
         <label>Sales</label>
-        <personnel-finder selected-personnel="salesPersonnel" on-personnel-selected="filter.sales_personnel_id=salesPersonnel.entity.id"></personnel-finder>
+        <personnel-finder selected-personnel="salesPersonnel" on-personnel-selected="filter.sales_personnel_entity_id=salesPersonnel.entity.id"></personnel-finder>
         <br>
-        <input type="text" ng-model="filter.sales_personnel_id">
+        <input type="text" ng-model="filter.sales_personnel_entity_id">
     </div>
     <div class="col-sm-4">
         <label>Jenis kustomer</label>

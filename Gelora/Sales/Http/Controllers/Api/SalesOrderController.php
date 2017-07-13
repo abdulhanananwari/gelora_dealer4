@@ -55,8 +55,8 @@ class SalesOrderController extends Controller {
         if ($request->has('registration_name')) {
             $query->where('registration.name', 'LIKE', '%' . $request->get('registration_name') . '%');
         }
-        if ($request->has('salesperson_entity_id')) {
-            $query->where('salesPersonnel.entity.id', (int) $request->get('salesperson_entity_id'));
+        if ($request->has('sales_personnel_entity_id')) {
+            $query->where('salesPersonnel.entity.id', (int) $request->get('sales_personnel_entity_id'));
         }
         if ($request->has('customer_type')) {
             $query->where('customer.type', $request->get('customer_type'));
@@ -80,27 +80,25 @@ class SalesOrderController extends Controller {
         if ($request->has('unit_id')) {
             $query->where('unit_id', new ObjectID($request->get('unit_id')));
         }
+        
         if ($request->has('registration_item_incoming')) {
             foreach (json_decode($request->get('registration_item_incoming'), true) as $key => $value) {
                 if ($value == 'completed') {
-                    $query->whereNotNull('polReg.items.'.$key.'.incoming');
-                }
-                else{
-                     $query->whereNull('polReg.items.'.$key.'.incoming');
+                    $query->whereNotNull('polReg.items.' . $key . '.incoming');
+                } else {
+                    $query->whereNull('polReg.items.' . $key . '.incoming');
                 }
             }
-            
         }
+        
         if ($request->has('registration_item_outgoing')) {
             foreach (json_decode($request->get('registration_item_outgoing'), true) as $key => $value) {
                 if ($value == 'completed') {
-                    $query->whereNotNull('polReg.items.'.$key.'.outgoing');
-                }
-                else{
-                     $query->whereNull('polReg.items.'.$key.'.outgoing');
+                    $query->whereNotNull('polReg.items.' . $key . '.outgoing');
+                } else {
+                    $query->whereNull('polReg.items.' . $key . '.outgoing');
                 }
             }
-            
         }
 
         if ($request->has('status')) {

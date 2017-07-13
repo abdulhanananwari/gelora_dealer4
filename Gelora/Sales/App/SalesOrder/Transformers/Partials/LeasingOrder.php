@@ -11,6 +11,7 @@ class LeasingOrder {
         $leasingOrder = $salesOrder->subDocument()->leasingOrder();
         
         $transformed = [
+            'application_number' => $leasingOrder->application_number,
             'po_number' => $leasingOrder->po_number,
             
             'mainLeasing' => (object) $leasingOrder->mainLeasing,

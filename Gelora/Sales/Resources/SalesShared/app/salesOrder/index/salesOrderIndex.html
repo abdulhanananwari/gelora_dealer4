@@ -69,7 +69,8 @@
                 </div>
                 <hr>
                 <sales-order-filter filter="ctrl.filter"></sales-order-filter>
-                <button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter)">Cari</button>
+                <button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter, true)">Cari</button>
+                <button class="btn btn-block btn-danger" ng-click="ctrl.resetFilter()">Reset Filter</button>
             </div>
         </div>
     </div>

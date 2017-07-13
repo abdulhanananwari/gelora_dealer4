@@ -42,8 +42,8 @@ geloraSalesShared
         vm.copyFromSalesOrder = function() {
 
             vm.salesOrder.cddb.no_ktp = vm.salesOrder.registration.ktp;
-            vm.salesOrder.cddb.entity_id = vm.salesOrder.customer.id;
-            vm.salesOrder.cddb.alamat_surat = vm.salesOrder.customer.address;
+            vm.salesOrder.cddb.entity_id = vm.salesOrder.registration.id;
+            vm.salesOrder.cddb.alamat_surat = vm.salesOrder.registration.address;
             vm.salesOrder.cddb.no_hp = vm.salesOrder.customer.phone_number;
 
             var kelurahan = _.invert(vm.areaOptions.kelurahan_surat.options)[vm.salesOrder.registration.kelurahan]
