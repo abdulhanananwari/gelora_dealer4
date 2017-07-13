@@ -15,15 +15,16 @@ class Cddb {
     public function generate() {
 
         $salesOrder = $this->salesOrder;
-        $cddb = $salesOrder['cddb'];
-        $unit = $salesOrder['unit'];
+        $cddb = $salesOrder->getAttribute('cddb');
+        $unit = $salesOrder->unit;
         
         $data = [];
-        $data['No Mesin 1'] = substr($unit['engine_number'], 0, 5);
-        $data['No Mesin 2'] = substr($unit['engine_number'], 6);
+        $data['No Mesin 1'] = substr($unit->engine_number, 0, 5);
+        $data['No Mesin 2'] = substr($unit->engine_number, 6);
         $data['No Ktp'] = $salesOrder['registration']['ktp'];
         $data['Kode Kustomer'] = $cddb['customer_code'];
         $data['Jenis Kelamin'] = $cddb['jenis_kelamin'];
+        $data['Tanggal Lahir'] = $cddb['tanggal_lahir'];
         $data['Alamat'] = $cddb['alamat_surat'];
         $data['Kelurahan'] = $cddb['kelurahan_surat'];
         $data['Kecamatan'] = $cddb['kecamatan_surat'];
@@ -43,10 +44,10 @@ class Cddb {
         $data['Sepeda motor digunakan untuk'] = $cddb['sepeda_motor_digunakan_untuk'];
         $data['Yang menggunkan sepeda motor'] = $cddb['yang_menggunakan_sepeda_motor'];
         
-        if (isset($cddb->salesPersonnel) && isset($cddb['salesPersonnel.registration_code'])) {
-            $data['Kode sales'] = $cddb['salesPersonnel.registration_code'];
+        if (!empty($this->salesOrder->getAttribute('cddb.salesPersonnel.registration_code'))) {
+            $data['Kode sales'] = $this->salesOrder->getAttribute('cddb.salesPersonnel.registration_code');
         } else {
-            $data['Kode sales'] = $salesOrder['salesPersonnel.registration_code'];
+            $data['Kode sales'] = $this->salesOrder->getAttribute('salesPersonnel.registration_code');
         }
         
         $data['Status kepemilikan rumah'] = $cddb['status_kepemilikan_rumah'];
