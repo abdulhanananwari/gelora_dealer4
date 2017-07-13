@@ -9,7 +9,7 @@ class SalesOrderModel extends Model {
     protected $connection = 'mongodb';
     protected $collection = 'sales_orders';
     protected $guarded = ['created_at', 'updated_at'];
-    public $dates = ['locked_at', 'validated_at', 'financial_closed_at'];
+    public $dates = ['locked_at', 'validated_at', 'financial_closed_at', 'delivery.generated_at'];
 
     // Managers
 
@@ -49,6 +49,10 @@ class SalesOrderModel extends Model {
         return new Managers\SubDocument($this);
     }
 
+    public function queryBuilder() {
+        return new Managers\QueryBuilder($this);
+    }
+
     //Relationship
 
     public function price() {
@@ -56,7 +60,7 @@ class SalesOrderModel extends Model {
     }
 
     public function unit() {
-        return $this->belongsTo('\Gelora\Base\App\Unit\UnitModel', 'unit_id');
+        return $this->hasOne('\Gelora\Base\App\Unit\UnitModel', 'unit_id');
     }
 
     public function salesOrderExtras() {

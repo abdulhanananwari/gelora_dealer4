@@ -17,8 +17,8 @@ class SalesOrderDashboardTransformer extends Fractal\TransformerAbstract {
             'main_leasing_name' => $salesOrder->subDocument()->leasingOrder()->get('mainLeasing.name'),
             'sub_leasing_name' => $salesOrder->subDocument()->leasingOrder()->get('subLeasing.name'),
             'payment_type' => $salesOrder->payment_type,
-            'unit_type_name' => $salesOrder->unit->type_name,
-            'unit_type_code' => $salesOrder->unit->type_code,
+            'unit_type_name' => $salesOrder->getAttribute('unit.type_name'),
+            'unit_type_code' => $salesOrder->getAttribute('unit.type_code'),
         ];
 
         return $data;

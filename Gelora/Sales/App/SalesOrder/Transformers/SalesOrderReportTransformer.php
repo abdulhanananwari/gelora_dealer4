@@ -16,54 +16,46 @@ class SalesOrderReportTransformer {
     }
 
     public function transform(SalesOrderModel $salesOrder) {
-        
-        $leasingOrder = $salesOrder->subDocument()->leasingOrder();
 
         $data = [
-            'id' => $salesOrder->_id,
-            '_id' => $salesOrder->_id,
-            
-            'Tanggal SPK' => $salesOrder->created_at->toDateTimeString(),
-            'Tanggal SJ' => $salesOrder->delivery->handover->created_at->toDateTime()->format('Y-m-d'),
-            'Nomor Rangka' => $salesOrder->unit->chasis_number,
-            'Nomor Mesin' => $salesOrder->unit->engine_number,
-            
-            'Pemohon' => $salesOrder->registration['name'],
-            'Nama Konsumen' => $salesOrder->customer['name'],
-            'Alamat Konsumen' => $salesOrder->customer['address'],
-            'No KTP' => $salesOrder->customer['ktp'],
-            'Nomor Telephone' => $salesOrder->customer['phone_number'],
-            
-            'Alamat Kirim' => $salesOrder->deliveryRequest['address'],
-            
-            'Biaya dan Hadiah' => $salesOrder->retrieve()->salesOrderExtraString(),
-            
-            
-            
-            'Nomor PO' =>$leasingOrder->po_number,
-            'Nama Leasing' => $leasingOrder->get('mainLeasing.name'),
-            'Tenor' => $leasingOrder->tenor,
-            'Dp PO' => $leasingOrder->dp_po,
-            'Memo Leasing' => $leasingOrder->note,
-            'Jumlah Pencairan' => $leasingOrder->leasing_payable,
-            
-            'Tgl DO Motor' => $salesOrder->unit->created_at,
-            'Nomor Surat Jalan' => $salesOrder->unit->sj_number,
-            
-            'Kondisi Jual' => $salesOrder->sales_condition,
-            'Jenis Penjualan' => $salesOrder->payment_type,
-            'Harga On TR' => $salesOrder->on_the_road,
-            'Harga Off TR' => $salesOrder->off_the_road,
-            'Diskon' => $salesOrder->discount,
-            
-            'Sales' => $salesOrder->salesPersonnel['entity']['name'],
-            'ID Sales' => $salesOrder->salesPersonnel['entity']['id'],
-            'closed_at' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : '',
-            'closer_name' => $salesOrder->closer['name'],
+            'ID' => $salesOrder->_id,
+            'TANGGAL SPK' => $salesOrder->created_at->toDateString(),
+            'TANGGAL SJ' => $salesOrder->getAttribute('delivery.generated_at') ? $salesOrder->getAttribute('delivery.generated_at')->toDateString() : null,
+            'NAMA PEMOHON' => $salesOrder->getAttribute('customer.name'),
+            'ALAMAT PEMOHON' => $salesOrder->getAttribute('customer.address'),
+            'NOMOR TELEPON PEMOHON' => $salesOrder->getAttribute('customer.phone_number'),
+            'NOMOR KTP PEMOHON' => $salesOrder->getAttribute('customer.ktp'),
+            'NAMA STNK' => $salesOrder->getAttribute('registration.name'),
+            'ALAMAT STNK' => $salesOrder->getAttribute('registration.address'),
+            'NOMOR TELEPON STNK' => $salesOrder->getAttribute('registration.phone_number'),
+            'NOMOR KTP STNK' => $salesOrder->getAttribute('registration.ktp'),
+            'NAMA KIRIM' => $salesOrder->getAttribute('deliveryRequest.name'),
+            'ALAMAT KIRIM' => $salesOrder->getAttribute('deliveryRequest.address'),
+            'NOMOR TELEPON KIRIM' => $salesOrder->getAttribute('deliveryRequest.phone_number'),
+            'EXTRA' => $salesOrder->retrieve()->salesOrderExtraString(),
+            'NOMOR PO' => $salesOrder->getAttribute('leasingOrder.po_number'),
+            'LEASING UTAMA' => $salesOrder->getAttribute('leasingOrder.mainLeasing.name'),
+            'LEASING CABANG' => $salesOrder->getAttribute('leasingOrder.subLeasing.name'),
+            'DP PO' => $salesOrder->getAttribute('leasingOrder.dp_po'),
+            'DP KUSTOMER' => $salesOrder->getAttribute('leasingOrder.dp_bayar'),
+            'TENOR' => $salesOrder->getAttribute('leasingOrder.tenor'),
+            'CICILAN' => $salesOrder->getAttribute('leasingOrder.cicilan'),
+            'KONDISI JUAL' => $salesOrder->getAttribute('sales_condition'),
+            'JENIS PENJUALAN' => $salesOrder->getAttribute('payment_type'),
+            'ON THE ROAD' => $salesOrder->getAttribute('on_the_road'),
+            'OFF THE ROAD' => $salesOrder->getAttribute('off_the_road'),
+            'DISCOUNT' => $salesOrder->getAttribute('discount'),
+            'MEDIATOR' => $salesOrder->getAttribute('mediator_fee'),
+            'ID SALES' => $salesOrder->getAttribute('salesOrder.salesPersonnel.id'),
+            'NAMA SALES' => $salesOrder->getAttribute('salesOrder.salesPersonnel.entity.name'),
+            'TANGGAL TUTUP' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : '',
+            'NOMOR RANGKA' => $salesOrder->getAttribute('unit.chasis_number'),
+            'NOMOR MESIN' => $salesOrder->getAttribute('unit.engine_number'),
+            'TANGGAL DO' => $salesOrder->getAttribute('unit.created_at') ? $salesOrder->getAttribute('unit.created_at')->toDateString() : '',
+            'PENUTUP' => $salesOrder->getAttribute('closer.name'),
         ];
 
         return $data;
-
     }
 
 }
