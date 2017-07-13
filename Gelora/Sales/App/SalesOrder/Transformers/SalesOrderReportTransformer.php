@@ -16,7 +16,7 @@ class SalesOrderReportTransformer {
     }
 
     public function transform(SalesOrderModel $salesOrder) {
-
+        
         $data = [
             'ID' => $salesOrder->_id,
             'TANGGAL SPK' => $salesOrder->created_at->toDateString(),
@@ -49,9 +49,13 @@ class SalesOrderReportTransformer {
             'ID SALES' => $salesOrder->getAttribute('salesOrder.salesPersonnel.id'),
             'NAMA SALES' => $salesOrder->getAttribute('salesOrder.salesPersonnel.entity.name'),
             'TANGGAL TUTUP' => $salesOrder->closed_at ? $salesOrder->closed_at->toDateTimeString() : '',
-            'NOMOR RANGKA' => $salesOrder->getAttribute('unit.chasis_number'),
-            'NOMOR MESIN' => $salesOrder->getAttribute('unit.engine_number'),
-            'TANGGAL DO' => $salesOrder->getAttribute('unit.created_at') ? $salesOrder->getAttribute('unit.created_at')->toDateString() : '',
+            'NAMA TYPE MOTOR' => $salesOrder->getAttribute('delivery.unit.type_name'),
+            'KODE TYPE MOTOR' => $salesOrder->getAttribute('delivery.unit.type_code'),
+            'NAMA WARNA MOTOR' => $salesOrder->getAttribute('delivery.unit.color_name'),
+            'KODE WARNA MOTOR' => $salesOrder->getAttribute('delivery.unit.color_code'),
+            'NOMOR RANGKA' => $salesOrder->getAttribute('delivery.unit.chasis_number'),
+            'NOMOR MESIN' => $salesOrder->getAttribute('delivery.unit.engine_number'),
+            'TANGGAL DO' => $salesOrder->getAttribute('delivery.unit.created_at') ? $salesOrder->getAttribute('delivery.unit.created_at')->toDateString() : '',
             'PENUTUP' => $salesOrder->getAttribute('closer.name'),
         ];
 

@@ -63,7 +63,6 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
         }
 
         $unit = $salesOrder->unit;
-
         return $this->item($unit, new \Gelora\Base\App\Unit\Transformers\UnitTransformer(), 'units');
     }
 

@@ -23,8 +23,6 @@ class SalesOrderController extends Controller {
 
         $query = $this->salesOrder->newQuery();
 
-        $query->with('unit');
-
         $query = $this->salesOrder->queryBuilder()->build($query, $request);
 
         $salesOrders = $query->get();

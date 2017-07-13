@@ -9,7 +9,7 @@ class SalesOrderModel extends Model {
     protected $connection = 'mongodb';
     protected $collection = 'sales_orders';
     protected $guarded = ['created_at', 'updated_at'];
-    public $dates = ['locked_at', 'validated_at', 'financial_closed_at', 'delivery.generated_at'];
+    public $dates = ['locked_at', 'validated_at', 'financial_closed_at', 'delivery.generated_at', 'delivery.unit.created_at'];
 
     // Managers
 
@@ -60,7 +60,7 @@ class SalesOrderModel extends Model {
     }
 
     public function unit() {
-        return $this->hasOne('\Gelora\Base\App\Unit\UnitModel', 'unit_id');
+        return $this->belongsTo('\Gelora\Base\App\Unit\UnitModel', 'unit_id', '_id');
     }
 
     public function salesOrderExtras() {
@@ -87,6 +87,11 @@ class SalesOrderModel extends Model {
     public function getLeasingBpkbSubmissionBatch() {
 
         return \Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel::find($this->subDocument()->polReg()->leasing_bpkb_submission_batch_id);
+    }
+
+    public function getUnit() {
+        
+        return \Gelora\Base\App\Unit\UnitModel::find($this->unit_id);
     }
 
 }
