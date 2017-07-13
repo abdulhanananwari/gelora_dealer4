@@ -1,32 +1,14 @@
-<!DOCTYPE html>
-<html>
+@extends('layout.printing')
 
-<head>
-    <title>Surat Pernyataan Dan Kuasa #{{$viewData['salesOrder']}}</title>
-    <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css">
-    <style type="text/css">
-    @media print {
-        html,
-        body {
-            height: 100%;
-            background: #FFF;
-            font-size: 0.8em !important;
-        }
-    }
-    
-    p {
-        margin: 0;
-    }
-    </style>
-</head>
+@section('title', 'Surat Pernyataan Dan Kuasa')
 
-<body>
-    <div class="container">
+@section('content')
+<div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-xs-1">
-                        <img style="width: auto; max-height: 5em !important;" class="img-responsive" src="{{ $viewData['tenantInfo']->LOGO }}">
+                        <img style="width: 100% !important; height: 5em auto;" class="img-responsive" src="{{ $viewData['tenantInfo']->LOGO }}">
                     </div>
                     <div class="col-xs-7">
                         <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
@@ -128,9 +110,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-    // window.print()
-    </script>
-</body>
-
-</html>
+@endsection

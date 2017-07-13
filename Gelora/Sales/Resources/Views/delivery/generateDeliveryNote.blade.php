@@ -1,38 +1,15 @@
-<!DOCTYPE html>
-<html>
+@extends('layout.printing')
 
-<head>
-    <title>SJ</title>
-    <script type="text/javascript" src="/standard/jquery/jquery-2.2.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css">
-    <style type="text/css">
-    @media print {
-        @page {
-            size: A5 landscape;
-            margin: 0.5cm;
-        }
-    }
-    
-    .container {
-        font-family: 'Courier New' !important;
-        font-size: 13px !important;
-        letter-spacing: 1px !important;
-    }
-    
-    p {
-        margin: 0;
-    }
-    </style>
-</head>
+@section('title', 'SJ')
 
-<body>
-    <div id="printarea">
+@section('content')
+
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-xs-1">
-                            <img style="width: auto; max-height: 5em !important;" class="img-responsive" src="{{ $viewData['tenantInfo']->LOGO }}">
+                            <img style="width: 100% !important; height: auto;" src="{{ $viewData['tenantInfo']->LOGO }}">
                         </div>
                         <div class="col-xs-7">
                             <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
@@ -55,10 +32,13 @@
                             <p>{{ $viewData['salesOrder']->getAttribute('customer.kelurahan') }}</p>
                             <p>{{ $viewData['salesOrder']->getAttribute('customer.kode_pos') }}</p>
                             <p>{{ $viewData['salesOrder']->getAttribute('customer.phone_number') }}</p>
+                            </br>
+
+                            <p>Catatan Pengiriman: {{ $viewData['salesOrder']->getAttribute('deliveryRequest.type') ? collect(config('gelora.delivery.types'))->where('code', $viewData['salesOrder']->getAttribute('deliveryRequest.type'))->first()['name'] : '' }}</p>
+
+
                         </div>
                         <div class="col-xs-4">
-                            <p>Catatan Pengiriman:</p>
-                            <p>{{ $viewData['salesOrder']->getAttribute('deliveryRequest.type') ? collect(config('gelora.delivery.types'))->where('code', $viewData['salesOrder']->getAttribute('deliveryRequest.type'))->first()['name'] : '' }}</p>
                             <p>Penerima:</p>
                             <p>{{ $viewData['salesOrder']->getAttribute('deliveryRequest.name') }}</p>
                             <p>{{ $viewData['salesOrder']->getAttribute('deliveryRequest.address') }}</p>
@@ -76,7 +56,7 @@
                         </div>
                     </div>
                     <br>
-                    <table border="1" class="table">
+                    <table border="1" width="100%">
                         <tr>
                             <th>Merk</th>
                             <th>Type</th>
@@ -92,9 +72,10 @@
                             <td>{{$viewData['unit']->engine_number}}</td>
                         </tr>
                     </table>
+                    </br>
                     <div class="row">
                         <div class="col-xs-6">
-                            <table border="1" class="table">
+                            <table border="1" width="100%">
                                 <tr>
                                     <th>Hadiah</th>
                                 </tr>
@@ -107,7 +88,7 @@
                             </table>
                         </div>
                         <div class="col-xs-6">
-                            <table border="1" class="table">
+                            <table border="1" width="100%">
                                 <tr>
                                     <th>Kelengkapan</th>
                                 </tr>
@@ -120,7 +101,8 @@
                             </table>
                         </div>
                     </div>
-                    <table border="1" class="table text-center">
+                    </br>
+                    <table border="1" width="100%" class="text-center">
                         <tr>
                             <td>
                                 <p>Dibuat Oleh</p>
@@ -147,10 +129,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
-    window.print();
-    </script>
-</body>
 
-</html>
+@endsection

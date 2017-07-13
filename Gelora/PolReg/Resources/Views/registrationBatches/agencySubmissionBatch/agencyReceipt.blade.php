@@ -1,46 +1,26 @@
-<!DOCTYPE html>
-<html>
+@extends('layout.printing')
 
-<head>
-    <title>Bukti Penyerahan Ke Biro Jasa</title>
-    <link rel="stylesheet" type="text/css" href="/standard/bootstrap-3.3.6-dist/css/bootstrap.min.css">
-    <style type="text/css">
-    .table {
-        border-style: none !important;
-        border: 0 !important;
-    }
-    
-    .layout-table > tbody > tr > td {
-        border-top: 0px !important;
-        vertical-align: top;
-    }
-    
-    p {
-        margin: 0;
-    }
-    </style>
-</head>
+@section('title','Bukti Penyerahan Faktur Ke Biro Jasa')
 
-<body>
-    <div class="container">
+@section('content')
+
+<div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <table class="table layout-table" style="width: 100%;margin-bottom: 5px;">
-                    <tr>
-                        <td style="width: 10%; padding-right: 10px;">
-                            <img style="width: auto; max-height: 5em !important;" class="img-responsive" src="{{ $viewData['tenantInfo']->LOGO }}">
-                        </td>
-                        <td style="width: 50%;">
-                            <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
-                            <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
-                            <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
-                        </td>
-                        <td style="width: 40%;">
-                            <p style="float: right;padding-right: 55px;">No Batch : {{$viewData['registrationBatch']->id}}</p>
-                            <img style="width: auto; max-height: 4em !important; float: right;" class="img-responsive" src="{{$viewData['registrationBatch']->retrieve()->barcode() }}">
-                        </td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-xs-1">
+                         <img style="width: 100% !important; height: auto;" src="{{ $viewData['tenantInfo']->LOGO }}">
+                    </div>
+                    <div class="col-xs-7">
+                        <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
+                        <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
+                        <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <p style="float: right;padding-right: 55px;">No Batch : {{$viewData['registrationBatch']->id}}</p>
+                        <img style="width: auto; max-height: 4em !important; float: right;" class="img-responsive" src="{{$viewData['registrationBatch']->retrieve()->barcode() }}">
+                    </div>
+                </div>
                 <hr>
                 <p style="text-align: center;"><strong>Penyerahan Dokumen Ke Biro Jasa</strong></p>
                 <br>
@@ -48,7 +28,7 @@
                 <p>Catatan: {{ $viewData['registrationBatch']->agency_note }}</p>
                 <br>
 
-                <table class="table" width="100%">
+                <table width="100%" border="1">
                     <tr>
                         <th>No Faktur</th>
                         <th>Nama Pemohon</th>
@@ -81,7 +61,7 @@
 
                 <p>Saya yang bertanda tangan dibawah ini perwakilan dari biro jasa {{ $viewData['registrationBatch']['agent']['name'] }} menyatakan bahwa telah menerima lengkap seluruh dokumen untuk melakukan proses PolReg motor-motor diatas.</p><br>
 
-                <table class="table layout-table">
+                <table width="100%">
                     <tr>
                         <td style="width: 50%;">
                             <p>Karyawan Dealer</p>
@@ -96,9 +76,5 @@
             </div>
         </div>
     </div>
-    <!-- <script type="text/javascript">
-    window.print()
-</script> -->
-</body>
-
-</html>
+    
+@endsection
