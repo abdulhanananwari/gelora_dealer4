@@ -4,25 +4,12 @@
 
 @section('content')
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-xs-1">
-                            <img style="width: 100% !important; height: auto;" src="{{ $viewData['tenantInfo']->LOGO }}">
-                        </div>
-                        <div class="col-xs-7">
-                            <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
-                            <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
-                            <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
-                        </div>
-                        <div class="col-xs-4">
-                            <p class="text-right"><strong>SURAT JALAN</strong></p>
-                            <p class="text-right">{{ $viewData['salesOrder']->id }}</p>
-                            <!-- <img style="max-height: 1em !important; width: auto; right: 0;" class="pull-right" src="{{ $viewData['salesOrder']->retrieve()->barcode() }}" class="img-responsive"> -->
-                        </div>
-                    </div>
-                    <hr>
+@component('components.header', ['viewData' => $viewData])
+    @slot('title')
+        Surat jalan
+    @endslot
+@endcomponent
+
                     <div class="row">
                         <div class="col-xs-4">
                             <p><strong>Kepada Yth,</strong></p>
@@ -126,8 +113,5 @@
                     </table>
                     <p style="text-align: justify;">Periksa Kondisi Kendaraan anda, cek no mesin di kendaraan dengan surat jalan. jika ada kelainan di kendaraan atau beda no mesin dikendaraan dengan surat jalan, jangan tanda tangani surat ini. Klaim setelah ditanda tangani surat ini tidak kami layani. Kecuali yang menyangkut ke garansi HONDA</p>
                     <br>
-                </div>
-            </div>
-        </div>
 
 @endsection

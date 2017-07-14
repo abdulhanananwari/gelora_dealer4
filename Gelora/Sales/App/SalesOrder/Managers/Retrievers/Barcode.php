@@ -12,7 +12,11 @@ class Barcode {
         $this->salesOrder = $salesOrder;
     }
 
-    public function retrieve() {
+    public function retrieve($qr = false) {
+
+    	if ($qr) {
+    		return \Solumax\PhpHelper\Helpers\QrCode::link($this->salesOrder->id);
+    	}
 
         return \Solumax\PhpHelper\Helpers\Code128::link($this->salesOrder->id);
     }
