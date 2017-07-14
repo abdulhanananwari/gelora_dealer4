@@ -19,19 +19,16 @@ class SalesOrderController extends Controller {
     public function generateDeliveryNote($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->action()->delivery()->onGenerateDeliveryNote();
         $unit = $salesOrder->unit;
-
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                        ->first()->data_1;
 
         $viewData = [
             'salesOrder' => $salesOrder,
             'delivery' => $salesOrder->subDocument()->delivery(),
             'unit' => $unit,
-            'tenantInfo' => $tenantInfo,
             'jwt' => \ParsedJwt::getJwt(),
         ];
+        
+        $salesOrder->action()->delivery()->onGenerateDeliveryNote();
 
         return view()->make('gelora.sales::delivery.generateDeliveryNote')
                         ->with('viewData', $viewData);
@@ -93,9 +90,6 @@ class SalesOrderController extends Controller {
             return $this->formatErrors($validation);
         }
 
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                        ->first()->data_1;
-
         $leasingOrder = $salesOrder->subDocument()->leasingOrder();
         $unit = $salesOrder->unit;
         $viewData = [
@@ -103,7 +97,6 @@ class SalesOrderController extends Controller {
             'unit' => $unit,
             'leasingOrder' => $leasingOrder,
             'jwt' => \ParsedJwt::getJwt(),
-            'tenantInfo' => $tenantInfo,
             'requestUri' => $request->getURI(),
         ];
 

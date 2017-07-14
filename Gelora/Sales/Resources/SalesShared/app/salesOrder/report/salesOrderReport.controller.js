@@ -4,15 +4,7 @@ geloraSalesShared
 
         var vm = this
 
-        vm.filter = {
-            from: moment().subtract(30, 'days').format("YYYY-MM-DD"),
-            until: moment().format("YYYY-MM-DD"),
-            }
-
-        vm.customerTypes = ['Perorangan', 'Badan Usaha']
-        vm.paymentTypes = { 'credit': 'Kredit', 'cash': 'Kas' }
-
-        $('.date').datepicker({ dateFormat: "yy-mm-dd" });
+        vm.filter = {}
 
         vm.download = function(filter) {
 

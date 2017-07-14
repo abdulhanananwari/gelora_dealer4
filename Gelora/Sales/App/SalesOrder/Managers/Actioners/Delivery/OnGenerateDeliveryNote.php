@@ -18,7 +18,7 @@ class OnGenerateDeliveryNote {
         $delivery = $this->salesOrder->subDocument()->delivery();
 
         $delivery->delivery_note_generator = $this->salesOrder->assignEntityData();
-        $delivery->delivery_note_generated_count = ($delivery->delivery_note_generated_count || 0) + 1;
+        $delivery->delivery_note_generated_count += 1;
 
         $this->salesOrder->delivery = $delivery;
         $this->salesOrder->save();
