@@ -4,23 +4,19 @@
 
 @section('content')
 
-<div class="container">
+
+ @component('components.batchHeader', ['viewData' => $viewData])
+    @slot('title')
+        Penyerahan Faktur Ke Biro Jasa
+    @endslot
+    @slot('batchId')
+        $viewData['registrationBatch']->id
+    @endslot
+@endcomponent
+
+
         <div class="row">
             <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-xs-1">
-                         <img style="width: 100% !important; height: auto;" src="{{ $viewData['tenantInfo']->LOGO }}">
-                    </div>
-                    <div class="col-xs-7">
-                        <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
-                        <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
-                        <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
-                    </div>
-                    <div class="col-xs-4">
-                        <p style="float: right;padding-right: 55px;">No Batch : {{$viewData['registrationBatch']->id}}</p>
-                        <img style="width: auto; max-height: 4em !important; float: right;" class="img-responsive" src="{{$viewData['registrationBatch']->retrieve()->barcode() }}">
-                    </div>
-                </div>
                 <hr>
                 <p style="text-align: center;"><strong>Penyerahan Dokumen Ke Biro Jasa</strong></p>
                 <br>
@@ -75,6 +71,5 @@
 
             </div>
         </div>
-    </div>
     
 @endsection
