@@ -3,23 +3,15 @@
 @section('title', 'Bukti Tagihan Ke Konsumen')
 
 @section('content')
- <div class="container">
+
+@component('components.header', ['viewData' => $viewData ])
+    @slot('title')
+        Tagihan SPK
+    @endslot
+@endcomponent
+
         <div class="row">
             <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-xs-1">
-                        <img style="width: 100% !important; height: auto;" src="{{ $viewData['tenantInfo']->LOGO }}">
-                    </div>
-                    <div class="col-xs-7">
-                        <p><strong>{{ $viewData['tenantInfo']->TENANT }}</strong></p>
-                        <p>{{ $viewData['tenantInfo']->ADDRESS }}</p>
-                        <p>{{ $viewData['tenantInfo']->PHONE_NUMBER }}</p>
-                    </div>
-                    <div class="col-xs-4">
-                        <p class="text-right"><strong>Tagihan SPK {{ $viewData['salesOrder']->id }}</strong></p>
-                        <img style="height: auto; max-width: 20em !important;" class="img-responsive pull-right" src="{{ $viewData['salesOrder']->retrieve()->barcode() }}">
-                    </div>
-                </div>
                 <h2 class="text-center">INVOICE / TAGIHAN</h2>
                 <div class="row">
                     <div class="col-xs-8">
@@ -92,5 +84,4 @@
                 </table>
             </div>
         </div>
-    </div>
 @endsection
