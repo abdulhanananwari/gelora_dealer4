@@ -13,7 +13,6 @@ class UnitTransformer extends Fractal\TransformerAbstract {
         
         return [
             'id' => $unit->_id,
-            '_id' => $unit->_id,
             
             'current_status' => $unit->current_status,
             'current_status_text' => $unit->retrieve()->currentStatusText(),
