@@ -47,7 +47,10 @@
             <tr>
                 <td>Pelunasan</td>
                 <td>:</td>
-                <td>{{ number_format($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po) }}</td>  
+                <td>
+                    <p>{{ number_format($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po) }}</p>
+                    <p>{{ \Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po)) }}</p>
+                </td>  
             </tr>
             <tr style="height: 2em;">
                 <td></td>
