@@ -4,9 +4,13 @@
 
 @section('content')
 
-
-@component('components.header', ['viewData' => $viewData])
-
+@component('components.batchHeader', ['viewData' => $viewData])
+    @slot('title')
+        Penyerahan BPKB Ke Leasing
+    @endslot
+    @slot('batchId')
+       No Batch: {{$viewData['registrationBatch']->id}}
+    @endslot
 @endcomponent
 
 <div class="row">
