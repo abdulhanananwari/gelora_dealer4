@@ -25,7 +25,6 @@ class SalesOrderController extends Controller {
             'salesOrder' => $salesOrder,
             'delivery' => $salesOrder->subDocument()->delivery(),
             'unit' => $unit,
-            'tenantInfo' => $tenantInfo,
             'jwt' => \ParsedJwt::getJwt(),
         ];
         

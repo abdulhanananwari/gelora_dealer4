@@ -49,9 +49,16 @@
                 <td>:</td>
                 <td>{{ number_format($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po) }}</td>  
             </tr>
-            <br>
-            <br>
-            <tr style="height: 8em;">
+            <tr style="height: 2em;">
+                <td></td>
+            </tr>
+            <tr>
+                <td>{{\Carbon\Carbon::now()->toDateString()}}</td>
+            </tr>
+            <tr style="height: 5em;">
+                <td></td>
+            </tr>
+            <tr>
                 <td>{{$viewData['jwt']->name}}</td>
             </tr>
         </table>

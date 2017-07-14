@@ -5,18 +5,21 @@ $headerData = [
 ?>
 
 <div class="row">
-    <div class="col-xs-1">
-        <img style="width: auto; max-height: 5em !important;" class="img-responsive" src="{{ $headerData['tenantInfo']->LOGO }}">
+    <div class="col-xs-2">
+        <img style="height: 80px !important; width: : 80px !important;" src="{{ $headerData['tenantInfo']->LOGO }}">
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-4">
         <p><strong>{{ $headerData['tenantInfo']->TENANT }}</strong></p>
         <p>{{ $headerData['tenantInfo']->ADDRESS }}</p>
         <p>{{ $headerData['tenantInfo']->PHONE_NUMBER }}</p>
     </div>
     <div class="col-xs-4">
         <p class="text-right"><strong>{{ isset($title) ? $title : null }}</strong></p>
-        <p class="text-right">{{$viewData['salesOrder']->id}}</p>
-        <img style="max-height: 20px !important; width: 5000px !important;" class="img-responsive pull-right" src="{{ $viewData['salesOrder']->retrieve()->barcode() }}">
+        <p class="text-right">{{ substr($viewData['salesOrder']->id, 0, 10) }}</p>
+        <p class="text-right">{{ substr($viewData['salesOrder']->id, 10) }}</p>
+    </div>
+    <div class="col-xs-2">
+        <img style="height: 80px !important; width: : 80px !important;" class="pull-right" src="{{ $viewData['salesOrder']->retrieve()->barcode(true) }}">
     </div>
 </div>
 <hr>
