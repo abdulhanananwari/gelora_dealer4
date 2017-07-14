@@ -5,12 +5,12 @@
 @section('content')
 
 
- @component('components.batchHeader', ['viewData' => $viewData])
+@component('components.batchHeader', ['viewData' => $viewData])
     @slot('title')
         Penyerahan Faktur Ke Biro Jasa
     @endslot
     @slot('batchId')
-        $viewData['registrationBatch']->id
+        No Batch: {{$viewData['registrationBatch']->id}}
     @endslot
 @endcomponent
 
