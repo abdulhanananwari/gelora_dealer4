@@ -35,7 +35,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'validated_at' => $salesOrder->validated_at ? $salesOrder->validated_at->toDateTimeString() : null,
             'validator' => $salesOrder->validator,
             'unvalidator' => $salesOrder->unvalidator,
-            'pending_invoice' => $salesOrder->pending_invoice,
+            'customerInvoice' => $salesOrder->customerInvoice,
             
             // Konsumen sudah tidak punya hutang lagi ke dealer
             'financial_closed_at' => $salesOrder->financial_closed_at ? $salesOrder->financial_closed_at->toDateTimeString() : null,

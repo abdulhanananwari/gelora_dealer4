@@ -41,18 +41,26 @@ geloraSalesShared
                 });
         }
 
-        vm.generateCustomerInvoice = function(salesOrder, pendingInvoice) {
+        vm.generateCustomerInvoice = function(salesOrder, customerInvoice) {
 
             var params = {
                 jwt: JwtValidator.encodedJwt,
-                delegate_name: pendingInvoice.delegate.name,
-                delegate_type: pendingInvoice.delegate.type,
-                amount: pendingInvoice.amount
+                delegate_name: customerInvoice.delegate.name,
+                delegate_type: customerInvoice.delegate.type,
+                amount: customerInvoice.amount
             }
 
             window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params));
         }
 
+        vm.deleteCustomerInvoice = function(salesOrder) {
+
+            SalesOrderModel.specificUpdate.deleteCustomerInvoice(salesOrder.id)
+                .then(function(res) {
+                    vm.salesOrder = res.data.data
+                    alert('Invoice customer berhasil dihapus')
+                })
+        }
 
         vm.loadDrivers = function() {
 

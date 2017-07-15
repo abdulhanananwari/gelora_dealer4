@@ -36,7 +36,7 @@
             .container {
                 width: 100%;
                 font-family: 'Courier' !important;
-                font-size: 15px !important;
+                font-size: 13px !important;
                 letter-spacing: 2px !important;
             }
         </style>

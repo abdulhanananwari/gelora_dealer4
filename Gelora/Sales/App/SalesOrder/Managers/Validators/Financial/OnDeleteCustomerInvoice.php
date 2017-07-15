@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\Financial;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnUpdate {
+class OnDeleteCustomerInvoice {
 
     protected $salesOrder;
 
@@ -14,8 +14,9 @@ class OnUpdate {
 
     public function validate() {
         
-        if ($this->salesOrder->financial_closed_at) {
-            return ['Tidak bisa merubah SPK karena finansial sudah ditutup'];
+        $updateValidation = $this->salesOrder->validate()->financial()->onUpdate();
+        if ($updateValidation !== true) {
+            return $updateValidation;
         }
         
         return true;

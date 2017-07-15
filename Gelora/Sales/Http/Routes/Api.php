@@ -33,6 +33,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::group(['prefix' => 'indent'], function() {
                     Route::post('indent', ['uses' => 'IndentController@indent']);
                 });
+
                 Route::group(['prefix' => 'financial'], function() {
                     Route::post('close', ['uses' => 'FinancialController@close']);
                 });
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('plafond', ['uses' => 'SpecificUpdateController@plafond']);
                 Route::post('note', ['uses' => 'SpecificUpdateController@insertNote']);
                 Route::post('registration', ['uses' => 'SpecificUpdateController@registration']);
+                Route::delete('customer-invoice', ['uses' => 'SpecificUpdateController@deleteCustomerInvoice']);
             });
 
             Route::group(['prefix' => '{id}/delivery'], function() {

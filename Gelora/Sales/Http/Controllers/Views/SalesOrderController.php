@@ -27,7 +27,7 @@ class SalesOrderController extends Controller {
             'unit' => $unit,
             'jwt' => \ParsedJwt::getJwt(),
         ];
-        
+
         $salesOrder->action()->delivery()->onGenerateDeliveryNote();
 
         return view()->make('gelora.sales::delivery.generateDeliveryNote')
@@ -55,20 +55,23 @@ class SalesOrderController extends Controller {
 
         $salesOrder = $this->salesOrder->find($id);
 
-        $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request->get('amount'));
+        $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
-        
+
         $salesOrder->action()->financial()->onGenerateCustomerInvoice($request);
+
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
+                        ->first()->data_1;
 
         $viewData = [
             'salesOrder' => $salesOrder,
-            'balance' => $salesOrder->calculate()->salesOrderBalance(),
             'unit' => $salesOrder->unit,
             'jwt' => \ParsedJwt::getJwt(),
+            'tenantInfo' => $tenantInfo,
         ];
-        
+
         return view()->make('gelora.sales::financial.generateCustomerInvoice')
                         ->with('viewData', $viewData);
     }

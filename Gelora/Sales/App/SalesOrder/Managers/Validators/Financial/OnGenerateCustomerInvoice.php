@@ -12,15 +12,24 @@ class OnGenerateCustomerInvoice {
         $this->salesOrder = $salesOrder;
     }
 
-    public function validate($invoiceAmount) {
+    public function validate(\Illuminate\Http\Request $request) {
         
-        if ($this->salesOrder->getAttribute('pending_invoice.creator')) {
+        $updateValidation = $this->salesOrder->validate()->financial()->onUpdate();
+        if ($updateValidation !== true) {
+            return $updateValidation;
+        }
+        
+        if ($this->salesOrder->getAttribute('customerInvoice.creator')) {
             return ['Tidak bisa membuat tagihan. Masih ada tagihan pending untuk SPK ini'];
         }
         
         $balance = $this->salesOrder->calculate()->SalesOrderBalance()['payment_unreceived'];
-        if ($invoiceAmount > $balance) {
+        if ((int) $request->get('amount') > $balance) {
             return ['Jumlah Tagihan Ke Customer Melibihi Sisa Tagihan. Sisa Tagihan Customer Rp. ' . number_format($balance)];
+        }
+        
+        if (!$request->get('delegate_name')) {
+            return ['Nama pengirim tagihan harus diisi'];
         }
         
         return true;

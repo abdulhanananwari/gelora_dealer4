@@ -14,17 +14,17 @@ class OnGenerateCustomerInvoice {
 
     public function action(\Illuminate\Http\Request $request) {
         
-        $pendingInvoice =  [
+        $customerInvoice =  [
             'creator' => $this->salesOrder->assignEntityData(),
-            'total_due' => $salesOrder->calculate()->salesOrderBalance()['payment_unreceived'],
-            'amount' => $request->get('amount'),
+            'total_due' => $this->salesOrder->calculate()->salesOrderBalance()['payment_unreceived'],
+            'amount' => (int) $request->get('amount'),
             'delegate' => [
                 'name' => $request->get('delegate_name'),
                 'type' => $request->get('delegate_type'),
             ],
         ];
                 
-        $this->salesOrder->pending_invoice = $pendingInvoice;
+        $this->salesOrder->customerInvoice = $customerInvoice;
 
         $this->salesOrder->save();
     }
