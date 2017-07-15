@@ -36,11 +36,11 @@
     </div>
     <div ng-if="item.incoming">
         <p class="small-info">Diterima oleh: {{ item.incoming.creator.name }}</p>
-        <p class="small-info">Catatan: {{ item.incoming.note }}</p>
+        <p class="small-info text-danger"><strong>Catatan: {{ item.incoming.note }}</strong></p>
         <p class="small-info">{{ item.incoming.creator.timestamp * 1000 | date:"M/dd/yyyy h:mma" }}</p>
-        <p class="small-info text-danger" ng-show="item.name=='Faktur'">Nomor Faktur: {{ salesOrder.polReg.faktur_number }}</p>
-        <p class="small-info text-danger" ng-show="item.name=='STNK'">Nomor Polisi: {{ salesOrder.polReg.pol_reg }}</p>
-        <p class="small-info text-danger" ng-show="item.name=='BPKB'">Nomor BPKB: {{ salesOrder.polReg.bpkb_number }}</p>
+        <p class="small-info text-primary" ng-show="item.name=='Faktur'"><strong>Nomor Faktur: {{ salesOrder.polReg.faktur_number }}</strong></p>
+        <p class="small-info text-primary" ng-show="item.name=='STNK'"><strong>Nomor Polisi: {{ salesOrder.polReg.pol_reg }}</strong></p>
+        <p class="small-info text-primary" ng-show="item.name=='BPKB'"><strong>Nomor BPKB: {{ salesOrder.polReg.bpkb_number }}</strong></p>
     </div>
 </script>
 <div class="modal fade" id="item-incoming-entry-{{modalId}}" tabindex="-1" role="dialog">

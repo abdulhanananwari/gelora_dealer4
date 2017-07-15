@@ -17,7 +17,7 @@
     <div class="col-sm-12">
         <p class="text-center"><strong>Penyerahan BPKB ke Leasing {{$viewData['registrationBatch']['mainLeasing']['name']}}</strong></p><br>
         
-        <table width="100%" border="1">
+        <table width="100%" border="1" style="font-size: 12px !important;">
             <tr>
                 <th>No BPKB</th>
                 <th>Plat Nomor</th>
@@ -27,7 +27,6 @@
                 <th>Tipe</th>
                 <th>Kode Tipe</th>
                 <th>Warna</th>
-                <th>Kode Warna</th>
                 <th>Nomor Rangka</th>
                 <th>Nomor Mesin</th>
             </tr>
@@ -41,7 +40,6 @@
                 <td>{{ $salesOrder->unit->type_name }}</td>
                 <td>{{ $salesOrder->unit->type_code }}</td>
                 <td>{{ $salesOrder->unit->color_name }}</td>
-                <td>{{ $salesOrder->unit->color_code }}</td>
                 <td>{{ $salesOrder->unit->chasis_number }}</td>
                 <td>{{ $salesOrder->unit->engine_number }}</td>
             </tr>
@@ -51,6 +49,9 @@
         <p>Saya yang bertanda tangan dibawah ini perwakilan dari Leasing {{ $viewData['registrationBatch']['mainLeasing']['name'] }} menyatakan bahwa telah menerima BPKB dengan data motor-motor diatas.</p><br>
 
         <table width="100%">
+			<tr>
+				<td>{{\Carbon\Carbon::now()->toDateString()}}</td>
+			</tr>
             <tr>
                 <td style="width: 50%;">
                     <p>Karyawan Dealer</p>

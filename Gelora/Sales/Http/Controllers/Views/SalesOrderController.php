@@ -75,7 +75,7 @@ class SalesOrderController extends Controller {
             'invoiceAmount' => $request->get('invoice_amount'),
         ];
 
-//        $salesOrder->action()->onGenerateInvoice();
+        $salesOrder->action()->financial()->onGenerateCustomerInvoice();
 
         return view()->make('gelora.sales::financial.generateCustomerInvoice')
                         ->with('viewData', $viewData);

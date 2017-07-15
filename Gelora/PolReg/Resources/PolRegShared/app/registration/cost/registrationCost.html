@@ -33,7 +33,8 @@
         <p>Biaya Dealer: {{ cost.amount | number }}</p>
         <p class="small-info">Diinput: {{ cost.creator.name }}</p>
         <p class="small-info">{{ cost.creator.timestamp * 1000 | date:"MM/dd/yyyy h:mma" }}</p>
-        <p ng-if="cost.charge_to_customer" class="small-info">Dibiayakan Ke Customer: {{ cost.amount_to_charge_to_customer | number }}</p>
+        <p ng-show="cost.charge_to_customer" class="small-info">Dibiayakan Ke Customer: {{ cost.amount_to_charge_to_customer | number }}</p>
+        <button ng-show="cost.amount_to_charge_to_customer" class="btn btn-block btn-success btn-xs" ng-click="generateReceiptRegistrationCost(cost)">Cetak Bukti Pembayaran</button>
     </div>
 </script>
 <div class="modal fade" id="cost-entry-{{modalId}}" tabindex="-1" role="dialog">
