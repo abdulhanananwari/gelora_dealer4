@@ -1,7 +1,6 @@
 geloraPolRegShared
     .directive('registrationCost', function(
-        SalesOrderModel,
-        LinkFactory,JwtValidator) {
+        SalesOrderModel) {
 
         return {
             templateUrl: '/gelora/pol-reg-shared/app/registration/cost/registrationCost.html',
@@ -31,10 +30,6 @@ geloraPolRegShared
                     scope.salesOrder.polReg.costs[name] = {
                         name: name
                     }
-                }
-
-                scope.generateReceiptRegistrationCost = function(cost) {
-                    window.open(LinkFactory.dealer.sales.salesOrder.polReg.views + 'generate-receipt-registration-cost/' + scope.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt, cost_name: cost.name }));
                 }
 
             }
