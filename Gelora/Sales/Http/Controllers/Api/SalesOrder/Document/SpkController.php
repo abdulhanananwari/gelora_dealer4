@@ -5,6 +5,8 @@ namespace Gelora\Sales\Http\Controllers\Api\SalesOrder\Document;
 use Gelora\Sales\Http\Controllers\Api\SalesOrderController;
 use Illuminate\Http\Request;
 
+// Kayanya usdah tidak dipakai. 17 Juli 2017
+
 class SpkController extends SalesOrderController {
 
     public function __construct() {

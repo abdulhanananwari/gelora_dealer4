@@ -2,6 +2,7 @@ geloraSalesShared
     .controller('SalesOrderShowFinancialController', function(
         $state,
         LinkFactory, JwtValidator,
+        SettingModel,
         SalesOrderModel,
         TransactionModel, DueModel) {
 
@@ -40,19 +41,36 @@ geloraSalesShared
                 });
         }
 
-        vm.generateCustomerInvoice = function(salesOrder) {
-            var invoiceAmount = prompt("Jumlah tagihan:", vm.paymentUnreceived)
-            if (invoiceAmount != null) {
-                window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt , invoice_amount: invoiceAmount}));
+        vm.generateCustomerInvoice = function(salesOrder, pendingInvoice) {
+
+            var params = {
+                jwt: JwtValidator.encodedJwt,
+                delegate_name: pendingInvoice.delegate.name,
+                delegate_type: pendingInvoice.delegate.type,
+                amount: pendingInvoice.amount
             }
-            
+
+            window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params));
         }
+
+
+        vm.loadDrivers = function() {
+
+            if (vm.drivers) { return }
+
+            SettingModel.index({ object_type: 'DRIVERS', single: true })
+                .then(function(res) {
+                    vm.drivers = res.data.data.data_1
+                })
+        }
+
         vm.financialClose = function(salesOrder) {
             SalesOrderModel.action.financial.close(salesOrder.id, salesOrder)
-                .then(function(res){
+                .then(function(res) {
                     vm.salesOrder = res.data.data
                 })
         }
+
         vm.calculatePaymentUnreceived = function(onServer) {
 
             if (onServer) {

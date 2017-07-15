@@ -12,12 +12,16 @@ class OnGenerateCustomerInvoice {
         $this->salesOrder = $salesOrder;
     }
 
-    public function action() {
+    public function action(\Illuminate\Http\Request $request) {
         
         $pendingInvoice =  [
             'creator' => $this->salesOrder->assignEntityData(),
-            'amount' => '', // Jumlah invoice dicetak
-            'delegate' => '', // Nama supir / sales / karyawan lain
+            'total_due' => $salesOrder->calculate()->salesOrderBalance()['payment_unreceived'],
+            'amount' => $request->get('amount'),
+            'delegate' => [
+                'name' => $request->get('delegate_name'),
+                'type' => $request->get('delegate_type'),
+            ],
         ];
                 
         $this->salesOrder->pending_invoice = $pendingInvoice;

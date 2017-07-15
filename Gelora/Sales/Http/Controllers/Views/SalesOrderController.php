@@ -38,15 +38,11 @@ class SalesOrderController extends Controller {
 
         $salesOrder = $this->salesOrder->find($id);
 
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                        ->first()->data_1;
-
         $outgoing = $salesOrder->getAttribute('polReg.items.' . $request->get('item_name') . '.outgoing');
         $item = $salesOrder->getAttribute('polReg.items.' . $request->get('item_name'));
 
         $viewData = [
             'salesOrder' => $salesOrder,
-            'tenantInfo' => $tenantInfo,
             'item' => $item,
             'outgoing' => $outgoing,
         ];
@@ -59,24 +55,20 @@ class SalesOrderController extends Controller {
 
         $salesOrder = $this->salesOrder->find($id);
 
-        $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request->get('invoice_amount'));
+        $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request->get('amount'));
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
-
-        $tenantInfo = (object) \Setting::retrieve()->data('TENANT_INFO')->data_1;
         
+        $salesOrder->action()->financial()->onGenerateCustomerInvoice($request);
+
         $viewData = [
             'salesOrder' => $salesOrder,
             'balance' => $salesOrder->calculate()->salesOrderBalance(),
             'unit' => $salesOrder->unit,
             'jwt' => \ParsedJwt::getJwt(),
-            'tenantInfo' => $tenantInfo,
-            'invoiceAmount' => $request->get('invoice_amount'),
         ];
-
-        $salesOrder->action()->financial()->onGenerateCustomerInvoice();
-
+        
         return view()->make('gelora.sales::financial.generateCustomerInvoice')
                         ->with('viewData', $viewData);
     }

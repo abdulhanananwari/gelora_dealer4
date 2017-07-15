@@ -91,7 +91,7 @@
             <div class="hidden-print">
                 <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
                 <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
-                <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-warning btn-sm btn-block" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder)">Cetak Invoice</button>
+                <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-block btn-warning" ng-click="pendingInvoice.amount=ctrl.paymentUnreceived" data-toggle="modal" data-target="#print-invoice-modal">Cetak Invoice / Tagihan</button>
             </div>
         </div>
         <div class="col-sm-6">
@@ -102,4 +102,31 @@
     <p class="text-center"><strong>Kekurangan: Rp {{ ctrl.paymentUnreceived | number }}</strong></p>
     <p ng-if="ctrl.paymentUnreceived < 0" class="text-danger text-center"><small>Pembayaran Sudah Berlebih</small></p>
     <button class="btn btn-success btn-block hidden-print" ng-click="ctrl.calculatePaymentUnreceived(true)">Hitung Ulang</button>
+</div>
+<div class="modal fade" id="print-invoice-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Cetak Invoice / Tagihan</strong></h4>
+            </div>
+            <div class="modal-body">
+                <label>Sales</label>
+                <personnel-finder selected-personnel="personnel" on-personnel-selected="pendingInvoice.delegate.name=personnel.entity.name;pendingInvoice.delegate.type='sales'"></personnel-finder>
+                <br>
+                <button ng-show="ctrl.salesOrder.delivery.driver.name" class="btn btn-block btn-primary btn-xs" ng-click="pendingInvoice.delegate.name=ctrl.salesOrder.delivery.driver.name;pendingInvoice.delegate.type='driver'">Supir SJ: {{ ctrl.salesOrder.delivery.driver.name }}</button>
+                <hr>
+                <fieldset disabled>
+                    <label>Delegasi Tagihan Ke</label>
+                    <input type="text" ng-model="pendingInvoice.delegate.name">
+                    <label>Jenis Delegasi Tagihan Ke</label>
+                    <input type="text" ng-model="pendingInvoice.delegate.type">
+                </fieldset>
+                <label>Jumlah Tagihan</label>
+                <label></label>
+                <input type="text" name="pendingInvoice.amount">
+                <button class="btn btn-block btn-warning" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder, pendingInvoice)">Cetak</button>
+            </div>
+        </div>
+    </div>
 </div>
