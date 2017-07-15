@@ -13,9 +13,15 @@ class OnGenerateCustomerInvoice {
     }
 
     public function action() {
+        
+        $pendingInvoice =  [
+            'creator' => $this->salesOrder->assignEntityData(),
+            'amount' => '', // Jumlah invoice dicetak
+            'delegate' => '', // Nama supir / sales / karyawan lain
+        ];
+                
+        $this->salesOrder->pending_invoice = $pendingInvoice;
 
-        $this->salesOrder->invoice_generated_at = \Carbon\Carbon::now();
-        $this->salesOrder->invoice_generator = $this->salesOrder->assignEntityData();
         $this->salesOrder->save();
     }
 

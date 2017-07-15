@@ -27,7 +27,7 @@
         <br>
         <input type="text" ng-model="filter.sales_personnel_entity_id">
         <label>Supir</label>
-        <input type="text" ng-model="filter.driver_name">
+        <select ng-click="loadDrivers()" ng-options="driver.id as driver.name for driver in drivers" ng-model="filter.driver_id" ></select>
     </div>
     <div class="col-sm-4">
         <label>Jenis kustomer</label>

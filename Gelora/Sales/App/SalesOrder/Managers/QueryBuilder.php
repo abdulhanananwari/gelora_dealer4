@@ -65,9 +65,12 @@ class QueryBuilder {
             $query->where('unit.color_name', $request->get('color_name'));
         }
 
-        if ($request->has('driver_name')) {
+        if ($request->has('driver_id')) {
+            $query->where('delivery.driver.id', $request->get('driver_id'));
+        } else if ($request->has('driver_name')) {
             $query->where('delivery.driver.name', 'LIKE', '%' . ($request->get('driver_name')) . '%');
         }
+
         if ($request->has('unit_id')) {
             $query->where('unit_id', new ObjectID($request->get('unit_id')));
         }

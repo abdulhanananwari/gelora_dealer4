@@ -14,7 +14,13 @@ class OnClose {
 
     public function validate() {
 
-        $registrationsValidation = $this->validates();
+        $salesOrders = $this->registrationBatch->getSalesOrders();
+
+        if (count($salesOrders) == 0) {
+            return ['Tidak bisa menutup batch karena belum ada SPK'];
+        }
+
+        $registrationsValidation = $this->validateSalesOrders($salesOrders);
         if ($registrationsValidation !== true) {
             return $registrationsValidation;
         }
@@ -22,9 +28,9 @@ class OnClose {
         return true;
     }
 
-    protected function validates() {
+    protected function validateSalesOrders($salesOrders) {
 
-        foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
+        foreach ($salesOrders as $salesOrder) {
 
             if (empty($salesOrder->subDocument()->polReg()->strings)) {
                 return ['CDDB ada yg belum diassign'];

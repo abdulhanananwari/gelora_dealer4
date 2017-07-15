@@ -18,6 +18,10 @@ class OnClose {
         if ($attrsValidation->fails()) {
             return $attrsValidation->errors()->all();
         }
+        
+        if (count($this->registrationBatch->getSalesOrders()) == 0) {
+            return ['Tidak bisa menutup batch karena belum ada SPK'];
+        }
 
         return true;
     }
