@@ -2,7 +2,7 @@
     Pengiriman Ke MD
 </td>
 <td>
-    <select ng-hide="salesOrder.polReg.md_submission_batch_id" ng-model="salesOrder.polReg.md_submission_batch_id" ng-change="update(salesOrder, 'md_submission_batch_id')" ng-options="registrationBatch.id as registrationBatch.created_at for registrationBatch in mdSubmissionBatches"></select>
+    <select ng-hide="salesOrder.polReg.md_submission_batch_id" ng-model="salesOrder.polReg.md_submission_batch_id" ng-change="update(salesOrder, 'md_submission_batch_id')" ng-options="registrationBatch.id as registrationBatch.created_at_for_humans for registrationBatch in mdSubmissionBatches"></select>
     <span ng-if="salesOrder.polReg.md_submission_batch_id">
             <p>Batch ID: {{ salesOrder.polReg.md_submission_batch_id }}</p>
         	<button class="btn btn-block btn-info" ng-click="redirect.registrationMdBatch(salesOrder)">Buka</button>

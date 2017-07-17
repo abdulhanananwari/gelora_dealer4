@@ -17,7 +17,8 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
 
         Route::group(['prefix' => '{id}', 'namespace' => 'SalesOrder'], function() {
             Route::group(['prefix' => 'document'], function() {
-                Route::get('spk/download', ['uses' => 'SpkController@download']);
+                Route::get('spk', ['uses' => 'DocumentController@spk']);
+                Route::get('service-book-barcode-label', ['uses' => 'DocumentController@serviceBookBarcodeLabel']);
             });
         });
     });

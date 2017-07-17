@@ -19,6 +19,7 @@ class AgencyInvoiceTransformer extends Fractal\TransformerAbstract {
             'file_uuid' => $registrationAgencyInvoice->file_uuid,
             
             'created_at' => $registrationAgencyInvoice->created_at->toDateTimeString(),
+            'created_at_for_humans' => $registrationAgencyInvoice->created_at->toFormattedDateString(),
             'creator' => (array) $registrationAgencyInvoice->creator,
             
             'closed_at' => $registrationAgencyInvoice->closed_at ? $registrationAgencyInvoice->closed_at->toDateTimeString() : null,

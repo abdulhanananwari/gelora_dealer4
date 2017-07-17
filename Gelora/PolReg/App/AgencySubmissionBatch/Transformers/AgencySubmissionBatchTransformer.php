@@ -15,11 +15,15 @@ class AgencySubmissionBatchTransformer extends Fractal\TransformerAbstract {
             'agency_note' => $registrationAgencySubmissionBatch->agency_note,
             'internal_note' => $registrationAgencySubmissionBatch->internal_note,
             'agent' => $registrationAgencySubmissionBatch->agent,
+            
             'created_at' => $registrationAgencySubmissionBatch->created_at->toDateTimeString(),
+            'created_at_for_humans' => $registrationAgencySubmissionBatch->created_at->toFormattedDateString(),
             'creator' => (array) $registrationAgencySubmissionBatch->creator,
+            
             'closed_at' => $registrationAgencySubmissionBatch->closed_at ?
             $registrationAgencySubmissionBatch->closed_at->toDateTimeString() : null,
             'closer' => $registrationAgencySubmissionBatch->closer,
+            
             'handover_at' => $registrationAgencySubmissionBatch->handover_at ? $registrationAgencySubmissionBatch->handover_at->toDateTimeString() : null,
         ];
     }

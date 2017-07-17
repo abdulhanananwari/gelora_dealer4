@@ -2,7 +2,7 @@
     Pengiriman Data Ke Biro Jasa
 </td>
 <td>
-    <select ng-hide="salesOrder.polReg.agency_submission_batch_id" ng-model="salesOrder.polReg.agency_submission_batch_id" ng-change="update(salesOrder, 'agency_submission_batch_id')" ng-options="registrationBatch.id as (registrationBatch.created_at + ' | ' + registrationBatch.agent.name) for registrationBatch in agencySubmissionBatches"></select>
+    <select ng-hide="salesOrder.polReg.agency_submission_batch_id" ng-model="salesOrder.polReg.agency_submission_batch_id" ng-change="update(salesOrder, 'agency_submission_batch_id')" ng-options="registrationBatch.id as (registrationBatch.created_at_for_humans + ' | ' + registrationBatch.agent.name) for registrationBatch in agencySubmissionBatches"></select>
     <span ng-if="salesOrder.polReg.agency_submission_batch_id">
             <p>Batch ID: {{ salesOrder.polReg.agency_submission_batch_id }}</p>
     		<button ng-if="salesOrder.polReg.agency_submission_batch_id" class="btn btn-block btn-info" ng-click="redirect.agencySubmissionBatch(salesOrder)">Buka</button>
