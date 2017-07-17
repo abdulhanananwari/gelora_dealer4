@@ -128,7 +128,7 @@ class SalesOrderController extends Controller {
             'tenantInfo' => $tenantInfo,
         ];
 
-        return view()->make('gelora.sales::leasingOrder.generateAgreementBPKB')
+        return view()->make('gelora.sales::leasingOrder.generateAgreementBpkb')
                         ->with('viewData', $viewData);
     }
 
