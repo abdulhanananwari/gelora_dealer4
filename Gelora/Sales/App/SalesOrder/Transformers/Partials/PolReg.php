@@ -9,7 +9,6 @@ class PolReg {
     
     public static function transform (SalesOrderModel $salesOrder) {
         
-        $objectID = new ObjectID();
         $polReg = $salesOrder->subDocument()->polReg();
         
         $transformed = [
