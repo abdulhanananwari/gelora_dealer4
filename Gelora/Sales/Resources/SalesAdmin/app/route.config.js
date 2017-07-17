@@ -122,6 +122,13 @@ geloraSalesAdmin
                         pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Invoice Pending'
 
                     })
+                    .state('salesOrderIndexDelivery', {
+                        url: '/salesOrder/indexDelivery',
+                        templateUrl: 'app/salesOrder/index/delivery/salesOrderIndexDelivery.html',
+                        controller: 'SalesOrderIndexDeliveryController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Invoice Pending'
+
+                    })
 
                     .state('prospectIndex', {
                         url: '/prospect/index',

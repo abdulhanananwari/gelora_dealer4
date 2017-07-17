@@ -68,8 +68,9 @@
             </tr>
             <tr>
                 <td>
-                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->all() as $extra)
-                    <span>{{$extra->salesExtra['name']}}, </span> @endforeach
+                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->where('pending_handover', false)->all() as $extra)
+                        <span>{{$extra->salesExtra['name']}}, </span>
+                    @endforeach
                 </td>
             </tr>
         </table>
@@ -81,7 +82,7 @@
             </tr>
             <tr>
                 <td>
-                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->all() as $extra)
+                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->where('pending_handover', false)->all() as $extra)
                     <span>{{$extra->salesExtra['name']}}, </span> @endforeach
                 </td>
             </tr>

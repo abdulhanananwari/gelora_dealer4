@@ -70,7 +70,7 @@ class QueryBuilder {
         }
 
         if ($request->has('driver_id')) {
-            $query->where('delivery.driver.user_id', (int) $request->get('driver_id'));
+            $query->where('delivery.driver.id', (int) $request->get('driver_id'));
         } else if ($request->has('driver_name')) {
             $query->where('delivery.driver.name', 'LIKE', '%' . $request->get('driver_name') . '%');
         }
@@ -126,7 +126,7 @@ class QueryBuilder {
                     $query->whereNotNull('validated_at');
                     break;
                 case 'delivery_generated':
-                    $query->whereNotNull('delivery.generated_at');
+                    $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
                     break;
                 case 'delivery_handover_created':
                     $query->whereNotNull('delivery.handover.created_at');
