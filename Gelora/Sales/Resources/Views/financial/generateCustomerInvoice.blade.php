@@ -30,7 +30,10 @@
                     </tr>
                     <tr style="font-size: 1.2em;">
                         <td>Total Tagihan Ini</td>
-                        <td><strong>Rp {{ number_format($viewData['salesOrder']->getAttribute('customerInvoice.amount')) }}</strong></td>
+                        <td>
+                            <p><strong>Rp {{ number_format($viewData['salesOrder']->getAttribute('customerInvoice.amount')) }}</strong></p>
+                            <p>{{\Solumax\PhpHelperExtended\NumberWords::toBahasa($viewData['salesOrder']->getAttribute('customerInvoice.amount'),true)}}</p>
+                        </td>
                     </tr>
                 </table>
             </div>
