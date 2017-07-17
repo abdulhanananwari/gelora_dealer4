@@ -91,7 +91,7 @@
             <div class="hidden-print">
                 <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
                 <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
-                <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-block btn-primary" data-toggle="modal" data-target="#print-invoice-modal">Invoice / Tagihan</button>
+                <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-block btn-primary" data-toggle="modal" data-target="#print-invoice-modal">Invoice / Tagihan <span ng-show="ctrl.salesOrder.customerInvoice.created_at">Pending: Rp {{ ctrl.salesOrder.customerInvoice.amount }}</span></button>
                 <button ng-show="ctrl.paymentUnreceived == 0" class="btn btn-block btn-warning" ng-click="ctrl.financialClose(ctrl.salesOrder)">Tutup Keuangan</button>
             </div>
         </div>
@@ -122,10 +122,10 @@
                 <input type="text" ng-model="ctrl.salesOrder.customerInvoice.delegate.type" disabled>
                 <label>Jumlah Tagihan</label>
                 <input type="number" ng-model="ctrl.salesOrder.customerInvoice.amount">
-                <button ng-hide="ctrl.salesOrder.customerInvoice.creator" class="btn btn-block btn-warning" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder, ctrl.salesOrder.customerInvoice)">Cetak</button>
+                <button ng-hide="ctrl.salesOrder.customerInvoice.creator" class="btn btn-block btn-warning" ng-click="ctrl.customerInvoice.generate(ctrl.salesOrder, ctrl.salesOrder.customerInvoice)">Cetak</button>
                 <span ng-show="ctrl.salesOrder.customerInvoice.creator">
                     <label>Dibuat: {{ ctrl.salesOrder.customerInvoice.creator.name }} ({{ ctrl.salesOrder.customerInvoice.creator.timestamp * 1000 | fromDateTimeString }})</label>
-                <button class="btn btn-block btn-danger" ng-click="ctrl.deleteCustomerInvoice(ctrl.salesOrder)">Hapus</button>
+                <button class="btn btn-block btn-danger" ng-click="ctrl.customerInvoice.delete(ctrl.salesOrder)">Hapus</button>
                 </span>
             </div>
         </div>

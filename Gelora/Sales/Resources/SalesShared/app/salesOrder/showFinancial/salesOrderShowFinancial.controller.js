@@ -42,29 +42,6 @@ geloraSalesShared
                 });
         }
 
-        vm.generateCustomerInvoice = function(salesOrder, customerInvoice) {
-
-            $timeout(function() { load() }, 5000)
-            
-            var params = {
-                jwt: JwtValidator.encodedJwt,
-                delegate_name: customerInvoice.delegate.name,
-                delegate_type: customerInvoice.delegate.type,
-                amount: customerInvoice.amount
-            }
-
-            window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params))
-        }
-
-        vm.deleteCustomerInvoice = function(salesOrder) {
-
-            SalesOrderModel.specificUpdate.deleteCustomerInvoice(salesOrder.id)
-                .then(function(res) {
-                    vm.salesOrder = res.data.data
-                    alert('Invoice customer berhasil dihapus')
-                })
-        }
-
         vm.loadDrivers = function() {
 
             if (vm.drivers) { return }
@@ -81,6 +58,53 @@ geloraSalesShared
                     vm.salesOrder = res.data.data
                 })
         }
+
+        vm.customerInvoice = {
+            generate: function(salesOrder, customerInvoice) {
+
+                $timeout(function() { load() }, 5000)
+
+                var params = {
+                    jwt: JwtValidator.encodedJwt,
+                    delegate_name: customerInvoice.delegate.name,
+                    delegate_type: customerInvoice.delegate.type,
+                    amount: customerInvoice.amount
+                }
+
+                window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params))
+            },
+            delete: function(salesOrder) {
+
+                SalesOrderModel.specificUpdate.deleteCustomerInvoice(salesOrder.id)
+                    .then(function(res) {
+                        vm.salesOrder = res.data.data
+                        alert('Invoice customer berhasil dihapus')
+                    })
+
+            }
+        }
+
+        vm.onTransactionCreated = {
+            in: function(transaction) {
+
+                if (vm.salesOrder.customerInvoice.created_at) {
+
+                    if (vm.salesOrder.customerInvoice.amount == transaction.amount) {
+
+                        if (confirm('Penerimaan sesuai dengan invoice customer. Mau hapus tagihan?')) {
+                            vm.customerInvoice.delete(vm.salesOrder)
+                        }
+
+                    } else {
+                        alert('Penerimaan uang TIDAK sesuai dengan invoice customer. Invoice customer TIDAK dihapus')
+                    }
+                }
+            },
+            out: function() {
+
+            }
+        }
+
 
         vm.calculatePaymentUnreceived = function(onServer) {
 
