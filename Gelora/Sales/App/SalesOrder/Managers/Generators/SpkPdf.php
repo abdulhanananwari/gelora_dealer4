@@ -20,7 +20,7 @@ class SpkPdf {
 
         $filename = 'SPK-' . $this->salesOrder->id . '-' . \Carbon\Carbon::now()->timestamp . '.pdf';
 
-        $this->pdf->AddPage('P', 'A4');
+        $this->pdf->AddPage('P', 'Legal');
 
         $this->generateHeading();
 
@@ -30,6 +30,7 @@ class SpkPdf {
         $this->generateOrderData();
 
         $this->generateExtras();
+        $this->generatePayments();
 
         if ($this->salesOrder->payment_type == 'credit') {
             $this->generateCreditData();
@@ -272,6 +273,54 @@ class SpkPdf {
         $this->generateLine();
     }
 
+
+    protected function generatePayments() {
+
+        $width = $this->pdf->GetPageWidth();
+
+        $this->pdf->Ln(5);
+        $this->pdf->SetFont('Arial', 'B', 11);
+        $this->pdf->Cell(0, 10, 'PEMBAYARAN', 0, 2);
+
+        $this->pdf->SetFont('Arial', '', 10);
+
+        $this->pdf->SetX(posXX($width, 0));
+        $this->pdf->Cell(0, 5, 'Jenis', 0, 0);
+
+        $this->pdf->SetX(posXX($width, 2));
+        $this->pdf->Cell(0, 5, 'Account', 0, 0);
+
+        $this->pdf->SetX(posXX($width, 4));
+        $this->pdf->Cell(0, 5, 'Tanggal', 0, 0);
+
+        $this->pdf->SetX(posXX($width, 6));
+        $this->pdf->Cell(0, 5, 'Jumlah', 0, 1);
+
+        $this->pdf->Ln(2);
+        $y = $this->pdf->GetY();
+        $this->pdf->Line(0 + 15, $y, $width - 15, $y);
+        $this->pdf->Ln(2);
+        
+        $transaction = $this->salesOrder->calculate()->subBalance()->transaction();
+
+        foreach ($transaction['transactions'] as $transaction) {
+
+            $this->pdf->SetX(posXX($width, 0));
+            $this->pdf->Cell(0, 5, $transaction->account_type, 0, 0);
+
+            $this->pdf->SetX(posXX($width, 2));
+            $this->pdf->Cell(0, 5, $transaction->account_name, 0, 0);
+
+            $this->pdf->SetX(posXX($width, 4));
+            $this->pdf->Cell(0, 5, $transaction->date, 0, 0);
+
+            $this->pdf->SetX(posXX($width, 6));
+            $this->pdf->Cell(0, 5, number_format($transaction->amount), 0, 1);
+        }
+
+        $this->generateLine();
+    }
+
     protected function generateCreditData() {
 
         $width = $this->pdf->GetPageWidth();
@@ -307,8 +356,6 @@ class SpkPdf {
         $this->pdf->Line(0 + 15, $y, $width - 15, $y);
         $this->pdf->Ln(2);
 
-
-
         $this->pdf->SetX(posX($width, 0));
         $this->pdf->Cell(0, 5, $leasingOrder->mainLeasing['name'], 0, 0);
 
@@ -336,9 +383,11 @@ class SpkPdf {
         $width = $this->pdf->GetPageWidth();
         $height = $this->pdf->GetPageHeight();
         $customer = (object) $this->salesOrder->customer;
+        
+        $this->pdf->Ln(2);
 
-        $this->pdf->SetY(-50);
-        $this->pdf->SetAutoPageBreak(true, 5);
+//        $this->pdf->SetY(-50);
+//        $this->pdf->SetAutoPageBreak(true, 5);
 
         $this->pdf->SetFont('Arial', 'B', 10);
         $this->pdf->Cell(0, 5, 'Mengetahui & Menyetujui', 0, 2);
