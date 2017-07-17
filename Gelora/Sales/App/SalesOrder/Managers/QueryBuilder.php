@@ -123,13 +123,16 @@ class QueryBuilder {
                     $query->whereNull('validated_at')->whereNotNull('indent');
                     break;
                 case 'validated':
-                    $query->whereNotNull('validated_at');
+                    $query->whereNotNull('validated_at')->whereNull('delivery.generated_at');
                     break;
                 case 'delivery_generated':
                     $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
                     break;
                 case 'delivery_handover_created':
-                    $query->whereNotNull('delivery.handover.created_at');
+                    $query->whereNotNull('delivery.handover.created_at')->whereNull('delivery.handoverConfirmation.created_at');
+                    break;
+                case 'delivery_handover_confirmation_created':
+                    $query->whereNotNull('delivery.handoverConfirmation.created_at');
                     break;
                 case 'financial_closed':
                     $query->whereNotNull('financial_closed_at');

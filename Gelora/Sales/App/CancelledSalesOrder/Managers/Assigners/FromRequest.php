@@ -18,6 +18,8 @@ class FromRequest {
 
         $salesOrder = \Gelora\Sales\App\SalesOrder\SalesOrderModel::find($request->get('sales_order_id'));
         $this->cancelledSalesOrder->setAttribute('salesOrder', $salesOrder->toArray());
+        
+        $this->cancelledSalesOrder->salesOrderModel = $salesOrder;
 
         return $this->cancelledSalesOrder;
     }

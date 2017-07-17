@@ -14,8 +14,9 @@ class OnCreate {
 
     public function validate() {
 
-        if ($this->cancelledSalesOrder->getAttribute('salesOrder.delivery.generated_at')) {
-            return ['SPK tidak dapat dibatalkan karena sudah dibuat SJ'];
+        $onDelete = $this->cancelledSalesOrder->salesOrderModel->validate()->onDelete();
+        if ($onDelete !== true) {
+            return $onDelete;
         }
 
         $attrValidation = $this->validateAttributes();
