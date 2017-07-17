@@ -61,6 +61,9 @@ geloraSalesShared
             generateDeliveryNote: function() {
                 window.open(LinkFactory.dealer.sales.salesOrder.delivery.views + 'generate-delivery-note/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
+            generateServiceBookBarcodeLabel: function(salesOrder) {
+                window.open(LinkFactory.dealer.sales.salesOrder.views + salesOrder.id + '/document/service-book-barcode-label/?jwt=' + JwtValidator.encodedJwt)
+            },
             scan: function(salesOrder, scannedUnit) {
                 SalesOrderModel.delivery.scan(salesOrder.id, scannedUnit)
                     .then(function(res) {
@@ -81,10 +84,16 @@ geloraSalesShared
                         alert('Penerimaan unit berhasil dikonfirmasi')
                         vm.salesOrder = res.data.data
                     }, function(res) {
-                        console.log(res)
                         if (res.userResponse) {
                             vm.delivery.handover(salesOrder, handover, res.userResponse)
                         }
+                    })
+            },
+            handoverConfirmation: function(salesOrder, handoverConfirmation, params) {
+                SalesOrderModel.delivery.handoverConfirmation(salesOrder.id, handoverConfirmation, params)
+                    .then(function(res) {
+                        alert('Serah terima unit berhasil dikonfirmasi')
+                        vm.salesOrder = res.data.data
                     })
             },
             cancel: function(salesOrder) {

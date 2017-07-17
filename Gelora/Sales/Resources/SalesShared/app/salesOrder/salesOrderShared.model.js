@@ -90,6 +90,9 @@ geloraSalesShared
             handover: function(id, handover, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover/', { handover: handover }, { params: params })
             },
+            handoverConfirmation: function(id, handoverConfirmation, params) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/handover-confirmation/', { handoverConfirmation: handoverConfirmation }, { params: params })
+            },
             cancel: function(id, salesOrder, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/cancel/', salesOrder, { params: params })
             }
