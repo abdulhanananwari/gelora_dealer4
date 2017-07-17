@@ -126,7 +126,7 @@ class QueryBuilder {
                     $query->whereNotNull('validated_at');
                     break;
                 case 'delivery_generated':
-                    $query->whereNotNull('delivery.generated_at');
+                    $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
                     break;
                 case 'delivery_handover_created':
                     $query->whereNotNull('delivery.handover.created_at');
