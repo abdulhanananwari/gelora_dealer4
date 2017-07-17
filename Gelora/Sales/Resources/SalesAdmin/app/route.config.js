@@ -114,6 +114,15 @@ geloraSalesAdmin
                         pageTitle: 'Dealer | Sales Admin | Cancel Sales Order'
                     })
 
+
+                    .state('salesOrderCustomerInvoiceIndex', {
+                        url: '/salesOrder/customerInvoiceIndex/',
+                        templateUrl: 'app/salesOrder/customerInvoiceIndex/salesOrderCustomerInvoiceIndex.html',
+                        controller: 'SalesOrderCustomerInvoiceIndexController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Invoice Pending'
+
+                    })
+
                     .state('prospectIndex', {
                         url: '/prospect/index',
                         templateUrl: '/gelora/sales-shared/app/prospect/index/prospectIndex.html',

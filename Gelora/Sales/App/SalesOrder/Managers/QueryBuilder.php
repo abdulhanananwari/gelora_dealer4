@@ -12,6 +12,10 @@ class QueryBuilder {
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
+    
+    protected function parseDate($dateString) {
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
+    }
 
     public function build($query, \Illuminate\Http\Request $request) {
 
@@ -24,12 +28,12 @@ class QueryBuilder {
         }
 
         if ($request->has('from')) {
-            $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay();
+            $from = $this->parseDate($request->get('from'))->startOfDay();
             $query->where($request->get('time_type', 'created_at'), '>=', $from);
         }
 
         if ($request->has('until')) {
-            $until = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('until'))->endOfDay();
+            $until = $this->parseDate($request->get('until'))->endOfDay();
             $query->where($request->get('time_type', 'created_at'), '<=', $until);
         }
 
@@ -92,6 +96,21 @@ class QueryBuilder {
                 } else {
                     $query->whereNull('polReg.items.' . $key . '.outgoing');
                 }
+            }
+        }
+        
+        if ($request->get('customer_invoice_pending') == 'true') {
+            $query->whereNotNull('customerInvoice');
+            
+            if ($request->has('customer_invoice_delegate_name')) {
+                $query->where('customerInvoice.delegate.name', $request->get('customer_invoice_delegate_name'));
+            }
+            
+            if ($request->has('customer_invoice_created_at')) {
+                $query->whereBetween('customerInvoice.created_at', [
+                    $this->parseDate($request->get('customer_invoice_created_at'))->startOfDay(),
+                    $this->parseDate($request->get('customer_invoice_created_at'))->endOfDay(),
+                ]);
             }
         }
 

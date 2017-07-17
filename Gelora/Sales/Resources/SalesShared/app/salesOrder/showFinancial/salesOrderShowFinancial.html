@@ -92,10 +92,8 @@
                 <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
                 <transaction-create related-entity-id="{{ ctrl.salesOrder.customer.id }}" related-entity-name="{{ ctrl.salesOrder.customer.name }}" related-entity-phone-number="{{ ctrl.salesOrder.customer.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
                 <button ng-show="ctrl.paymentUnreceived > 0" class="btn btn-block btn-primary" data-toggle="modal" data-target="#print-invoice-modal">Invoice / Tagihan</button>
+                <button ng-show="ctrl.paymentUnreceived == 0" class="btn btn-block btn-warning" ng-click="ctrl.financialClose(ctrl.salesOrder)">Tutup Keuangan</button>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <button ng-show="ctrl.paymentUnreceived == 0" class="btn btn-block btn-warning" ng-click="ctrl.financialClose(ctrl.salesOrder)">Tutup Keuangan</button>
         </div>
     </div>
     <br>
@@ -111,11 +109,13 @@
                 <h4 class="modal-title"><strong>Cetak Invoice / Tagihan</strong></h4>
             </div>
             <div class="modal-body">
-                <label>Sales</label>
-                <personnel-finder selected-personnel="personnel" on-personnel-selected="ctrl.salesOrder.customerInvoice.delegate.name=personnel.entity.name;ctrl.salesOrder.customerInvoice.delegate.type='sales'"></personnel-finder>
-                <br>
-                <button ng-show="ctrl.salesOrder.delivery.driver.name" class="btn btn-block btn-primary btn-xs" ng-click="ctrl.salesOrder.customerInvoice.delegate.name=ctrl.salesOrder.delivery.driver.name;ctrl.salesOrder.customerInvoice.delegate.type='driver'">Supir SJ: {{ ctrl.salesOrder.delivery.driver.name }}</button>
-                <hr>
+                <div ng-hide="ctrl.salesOrder.customerInvoice.creator">
+                    <label>Sales</label>
+                    <personnel-finder selected-personnel="personnel" on-personnel-selected="ctrl.salesOrder.customerInvoice.delegate.name=personnel.entity.name;ctrl.salesOrder.customerInvoice.delegate.type='sales'"></personnel-finder>
+                    <br>
+                    <button ng-show="ctrl.salesOrder.delivery.driver.name" class="btn btn-block btn-primary btn-xs" ng-click="ctrl.salesOrder.customerInvoice.delegate.name=ctrl.salesOrder.delivery.driver.name;ctrl.salesOrder.customerInvoice.delegate.type='driver'">Supir SJ: {{ ctrl.salesOrder.delivery.driver.name }}</button>
+                    <hr>
+                </div>
                 <label>Delegasi Tagihan Ke</label>
                 <input type="text" ng-model="ctrl.salesOrder.customerInvoice.delegate.name" ng-change="ctrl.salesOrder.customerInvoice.delegate.type='manual'">
                 <label>Jenis Delegasi Tagihan</label>
@@ -124,7 +124,7 @@
                 <input type="number" ng-model="ctrl.salesOrder.customerInvoice.amount">
                 <button ng-hide="ctrl.salesOrder.customerInvoice.creator" class="btn btn-block btn-warning" ng-click="ctrl.generateCustomerInvoice(ctrl.salesOrder, ctrl.salesOrder.customerInvoice)">Cetak</button>
                 <span ng-show="ctrl.salesOrder.customerInvoice.creator">
-                    <label>Dibuat: {{ ctrl.salesOrder.customerInvoice.creator.name }} ({{ ctrl.salesOrder.customerInvoice.creator.timestamp | fromDateTimeString }})</label>
+                    <label>Dibuat: {{ ctrl.salesOrder.customerInvoice.creator.name }} ({{ ctrl.salesOrder.customerInvoice.creator.timestamp * 1000 | fromDateTimeString }})</label>
                 <button class="btn btn-block btn-danger" ng-click="ctrl.deleteCustomerInvoice(ctrl.salesOrder)">Hapus</button>
                 </span>
             </div>
