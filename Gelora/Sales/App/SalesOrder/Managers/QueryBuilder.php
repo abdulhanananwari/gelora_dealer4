@@ -12,7 +12,7 @@ class QueryBuilder {
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     protected function parseDate($dateString) {
         return \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
     }
@@ -98,14 +98,14 @@ class QueryBuilder {
                 }
             }
         }
-        
+
         if ($request->get('customer_invoice_pending') == 'true') {
             $query->whereNotNull('customerInvoice');
-            
+
             if ($request->has('customer_invoice_delegate_name')) {
                 $query->where('customerInvoice.delegate.name', $request->get('customer_invoice_delegate_name'));
             }
-            
+
             if ($request->has('customer_invoice_created_at')) {
                 $query->whereBetween('customerInvoice.created_at', [
                     $this->parseDate($request->get('customer_invoice_created_at'))->startOfDay(),
@@ -146,6 +146,9 @@ class QueryBuilder {
         }
 
         $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        if ($request->has('order_by')) {
+            $query->whereNotNull($request->get('order_by'));
+        }
 
         return $query;
     }
