@@ -21,6 +21,11 @@ class SalesOrderController extends Controller {
         $salesOrder = $this->salesOrder->find($id);
         $unit = $salesOrder->unit;
 
+        $validation = $salesOrder->validate()->delivery()->onGenerateNote();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+        
         $viewData = [
             'salesOrder' => $salesOrder,
             'delivery' => $salesOrder->subDocument()->delivery(),
