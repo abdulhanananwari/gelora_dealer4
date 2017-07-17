@@ -28,14 +28,15 @@ class SalesOrderBalance {
 
         // Subtract payments made
         $transactions = $this->salesOrder->calculate()->subBalance()->transaction();
-        $balance = $balance - $transactions['total'];
+        $paymentUnreceived = $balance - $transactions['total'];
 
         return [
             'details' => [
                 'salesOrderAndExtras' => $salesOrderAndExtras,
                 'transactions' => $transactions,
             ],
-            'payment_unreceived' => $balance,
+            'grand_total' => $balance,
+            'payment_unreceived' => $paymentUnreceived,
         ];
     }
 

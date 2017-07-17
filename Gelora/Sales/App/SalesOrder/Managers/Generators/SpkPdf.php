@@ -13,6 +13,7 @@ class SpkPdf {
 
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
+        $this->salesOrderBalance = $salesOrder->calculate()->salesOrderBalance();
         $this->pdf = new \FPDF();
     }
 
@@ -172,6 +173,7 @@ class SpkPdf {
     protected function generateOrderData() {
 
         $y = $this->pdf->GetY();
+        $maxY = $y;
         $width = $this->pdf->GetPageWidth();
         $vehicle = (object) $this->salesOrder->vehicle;
 
@@ -188,7 +190,9 @@ class SpkPdf {
             $variant = (object) $vehicle->variant;
             $this->pdf->Cell(0, 5, $variant->name . ' | ' . $variant->code, 0, 2);
         }
-
+        
+        $maxY = $maxY > $this->pdf->GetY() ? $maxY : $this->pdf->GetY();
+        
         $this->pdf->SetY($y);
         $this->pdf->SetX($width / 3);
 
@@ -213,7 +217,26 @@ class SpkPdf {
             $this->pdf->Cell(0, 5, 'Mediator Fee: Rp ' . number_format($this->salesOrder->mediator_fee), 0, 2);
             $this->pdf->Cell(0, 5, 'Mediator: ' . $this->salesOrder->getAttribute('mediator.name'), 0, 2);
         }
+        
+        $maxY = $maxY > $this->pdf->GetY() ? $maxY : $this->pdf->GetY();
+        
+        $this->pdf->SetY($y);
+        $this->pdf->SetX($width / 3 * 2);
+        
+        $this->pdf->SetFont('Arial', 'B', 10);
+        $this->pdf->Cell(0, 10, 'PEMBAYARAN', 0, 2);
+        $this->pdf->SetFont('Arial', '', 10);
 
+        if ($this->salesOrder->payment_type == 'credit') {
+            $this->pdf->Cell(0, 5, 'DP PO: ' . number_format($this->salesOrder->getAttribute('leasingOrder.dp_po')), 0, 2);
+            $this->pdf->Cell(0, 5, 'Total Terhutang: ' . number_format($this->salesOrderBalance['grand_total']), 0, 2);
+            $this->pdf->Cell(0, 5, 'Sisa Terhutang: ' . number_format($this->salesOrderBalance['payment_unreceived']), 0, 2);
+        }
+        
+        
+        $maxY = $maxY > $this->pdf->GetY() ? $maxY : $this->pdf->GetY();
+        $this->pdf->SetY($maxY);
+        
         $this->generateLine();
     }
 
@@ -287,13 +310,13 @@ class SpkPdf {
         $this->pdf->SetX(posXX($width, 0));
         $this->pdf->Cell(0, 5, 'Jenis', 0, 0);
 
-        $this->pdf->SetX(posXX($width, 2));
+        $this->pdf->SetX(posXX($width, 1));
         $this->pdf->Cell(0, 5, 'Account', 0, 0);
 
-        $this->pdf->SetX(posXX($width, 4));
+        $this->pdf->SetX(posXX($width, 2));
         $this->pdf->Cell(0, 5, 'Tanggal', 0, 0);
 
-        $this->pdf->SetX(posXX($width, 6));
+        $this->pdf->SetX(posXX($width, 3));
         $this->pdf->Cell(0, 5, 'Jumlah', 0, 1);
 
         $this->pdf->Ln(2);
@@ -301,20 +324,20 @@ class SpkPdf {
         $this->pdf->Line(0 + 15, $y, $width - 15, $y);
         $this->pdf->Ln(2);
         
-        $transaction = $this->salesOrder->calculate()->subBalance()->transaction();
+        $transaction = $this->salesOrderBalance['details']['transactions'];
 
         foreach ($transaction['transactions'] as $transaction) {
 
             $this->pdf->SetX(posXX($width, 0));
             $this->pdf->Cell(0, 5, $transaction->account_type, 0, 0);
 
-            $this->pdf->SetX(posXX($width, 2));
+            $this->pdf->SetX(posXX($width, 1));
             $this->pdf->Cell(0, 5, $transaction->account_name, 0, 0);
 
-            $this->pdf->SetX(posXX($width, 4));
+            $this->pdf->SetX(posXX($width, 2));
             $this->pdf->Cell(0, 5, $transaction->date, 0, 0);
 
-            $this->pdf->SetX(posXX($width, 6));
+            $this->pdf->SetX(posXX($width, 3));
             $this->pdf->Cell(0, 5, number_format($transaction->amount), 0, 1);
         }
 
@@ -385,9 +408,6 @@ class SpkPdf {
         $customer = (object) $this->salesOrder->customer;
         
         $this->pdf->Ln(2);
-
-//        $this->pdf->SetY(-50);
-//        $this->pdf->SetAutoPageBreak(true, 5);
 
         $this->pdf->SetFont('Arial', 'B', 10);
         $this->pdf->Cell(0, 5, 'Mengetahui & Menyetujui', 0, 2);
