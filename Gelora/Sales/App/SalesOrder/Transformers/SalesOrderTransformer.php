@@ -35,7 +35,6 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
             'validated_at' => $salesOrder->validated_at ? $salesOrder->validated_at->toDateTimeString() : null,
             'validator' => $salesOrder->validator,
             'unvalidator' => $salesOrder->unvalidator,
-            'customerInvoice' => $salesOrder->customerInvoice,
             
             // Konsumen sudah tidak punya hutang lagi ke dealer
             'financial_closed_at' => $salesOrder->financial_closed_at ? $salesOrder->financial_closed_at->toDateTimeString() : null,
@@ -51,6 +50,7 @@ class SalesOrderTransformer extends Fractal\TransformerAbstract {
         $transformed['cddb'] = Partials\Cddb::transform($salesOrder);
         $transformed['polReg'] = Partials\PolReg::transform($salesOrder);
         $transformed['financialBalance'] = Partials\FinancialBalance::transform($salesOrder);
+        $transformed['customerInvoice'] = Partials\CustomerInvoice::transform($salesOrder);
         $transformed['links'] = Partials\Links::transform($salesOrder);
 
         return array_merge(

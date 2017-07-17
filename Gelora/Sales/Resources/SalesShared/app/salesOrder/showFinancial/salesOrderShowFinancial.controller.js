@@ -1,6 +1,6 @@
 geloraSalesShared
     .controller('SalesOrderShowFinancialController', function(
-        $state,
+        $state, $timeout,
         LinkFactory, JwtValidator,
         SettingModel,
         SalesOrderModel,
@@ -25,13 +25,14 @@ geloraSalesShared
             }
         }
 
-
-        SalesOrderModel.get($state.params.id, { with: 'price,salesOrderExtras' })
-            .then(function(res) {
-                vm.salesOrder = res.data.data
-                vm.calculatePaymentUnreceived(false)
-            })
-
+        function load() {
+            SalesOrderModel.get($state.params.id, { with: 'price,salesOrderExtras' })
+                .then(function(res) {
+                    vm.salesOrder = res.data.data
+                    vm.calculatePaymentUnreceived(false)
+                })
+        }
+        load()
 
         vm.updatePrice = function(salesOrder) {
 
@@ -43,6 +44,8 @@ geloraSalesShared
 
         vm.generateCustomerInvoice = function(salesOrder, customerInvoice) {
 
+            $timeout(function() { load() }, 5000)
+            
             var params = {
                 jwt: JwtValidator.encodedJwt,
                 delegate_name: customerInvoice.delegate.name,
@@ -50,7 +53,7 @@ geloraSalesShared
                 amount: customerInvoice.amount
             }
 
-            window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params));
+            window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params))
         }
 
         vm.deleteCustomerInvoice = function(salesOrder) {

@@ -4,6 +4,8 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Financial;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
+use MongoDB\BSON\UTCDateTime;
+
 class OnGenerateCustomerInvoice {
 
     protected $salesOrder;
@@ -16,6 +18,7 @@ class OnGenerateCustomerInvoice {
         
         $customerInvoice =  [
             'creator' => $this->salesOrder->assignEntityData(),
+            'created_at' => new UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
             'total_due' => $this->salesOrder->calculate()->salesOrderBalance()['payment_unreceived'],
             'amount' => (int) $request->get('amount'),
             'delegate' => [
