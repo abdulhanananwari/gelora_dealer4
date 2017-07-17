@@ -2,7 +2,7 @@
     Batch BPKB Ke Leasing
 </td>
 <td>
-    <select ng-hide="salesOrder.polReg.leasing_bpkb_submission_batch_id" ng-model="salesOrder.polReg.leasing_bpkb_submission_batch_id" ng-change="update(salesOrder, 'leasing_bpkb_submission_batch_id')" ng-options="registrationBatch.id as registrationBatch.created_at for registrationBatch in leasingBpkbSubmissionBatches"></select>
+    <select ng-hide="salesOrder.polReg.leasing_bpkb_submission_batch_id" ng-model="salesOrder.polReg.leasing_bpkb_submission_batch_id" ng-change="update(salesOrder, 'leasing_bpkb_submission_batch_id')" ng-options="registrationBatch.id as registrationBatch.created_at_for_humans for registrationBatch in leasingBpkbSubmissionBatches"></select>
     <span ng-if="salesOrder.polReg.leasing_bpkb_submission_batch_id">
             <p>Batch ID: {{ salesOrder.polReg.leasing_bpkb_submission_batch_id }}</p>
     		<button ng-if="salesOrder.polReg.leasing_bpkb_submission_batch_id" class="btn btn-block btn-info" ng-click="redirect.leasingBpkbSubmissionBatch(salesOrder)">Buka</button>

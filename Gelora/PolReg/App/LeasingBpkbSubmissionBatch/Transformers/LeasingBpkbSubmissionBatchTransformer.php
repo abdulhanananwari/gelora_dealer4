@@ -20,6 +20,7 @@ class LeasingBpkbSubmissionBatchTransformer extends Fractal\TransformerAbstract 
             'file_uuid' => $registrationLeasingBpkbSubmissionBatch->file_uuid,
             
             'created_at' => $registrationLeasingBpkbSubmissionBatch->created_at->toDateTimeString(),
+            'created_at_for_humans' => $registrationLeasingBpkbSubmissionBatch->created_at->toFormattedDateString(),
             'creator' => $registrationLeasingBpkbSubmissionBatch->creator,
 
             'closed_at' => $registrationLeasingBpkbSubmissionBatch->closed_at ?

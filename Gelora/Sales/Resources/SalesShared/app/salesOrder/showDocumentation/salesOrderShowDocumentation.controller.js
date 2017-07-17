@@ -29,7 +29,7 @@ geloraSalesShared
         load()
 
         vm.download = function(salesOrder) {
-            window.open(LinkFactory.dealer.sales.salesOrder.views + salesOrder.id + '/document/spk/download?jwt=' + JwtValidator.encodedJwt)
+            window.open(LinkFactory.dealer.sales.salesOrder.views + salesOrder.id + '/document/spk/?jwt=' + JwtValidator.encodedJwt)
         }
 
         vm.generateAndDownload = function(salesOrder) {

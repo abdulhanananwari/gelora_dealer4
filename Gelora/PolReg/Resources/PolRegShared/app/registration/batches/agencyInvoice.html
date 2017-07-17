@@ -3,7 +3,7 @@
     Invoice Dari Biro Jasa
 </td>
 <td>
-    <select ng-hide="salesOrder.polReg.agency_invoice_id" ng-model="salesOrder.polReg.agency_invoice_id" ng-change="update(salesOrder, 'agency_invoice_id')" ng-options="registrationBatch.id as (registrationBatch.created_at + ' | ' + registrationBatch.agent.name) for registrationBatch in agencyInvoices"></select>
+    <select ng-hide="salesOrder.polReg.agency_invoice_id" ng-model="salesOrder.polReg.agency_invoice_id" ng-change="update(salesOrder, 'agency_invoice_id')" ng-options="registrationBatch.id as (registrationBatch.created_at_for_humans + ' | ' + registrationBatch.agent.name) for registrationBatch in agencyInvoices"></select>
     <span ng-if="salesOrder.polReg.agency_invoice_id">
             <p>Batch ID: {{ salesOrder.polReg.agency_invoice_id }}</p>
 
