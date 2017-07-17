@@ -81,5 +81,19 @@ class SpecificUpdateController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    
+    public function deleteCustomerInvoice($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $validation = $salesOrder->validate()->financial()->onDeleteCustomerInvoice();
+        if ($validation !== true) {
+            return $validation;
+        }
+
+        $salesOrder->action()->financial()->onDeleteCustomerInvoice();
+
+        return $this->formatItem($salesOrder);
+    }
 
 }

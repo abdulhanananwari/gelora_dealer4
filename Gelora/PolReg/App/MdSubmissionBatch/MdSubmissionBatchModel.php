@@ -31,8 +31,8 @@ class MdSubmissionBatchModel extends Model {
     public function fileGenerate() {
         return new Managers\FileGenerator($this);
     }
-
-    // Relationship
+    
+    // Related
 
     public function getSalesOrders() {
 

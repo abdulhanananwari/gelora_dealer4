@@ -124,7 +124,7 @@
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
         </div>
     </div>
-    <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.payment_at">
+    <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
         <div class="well">
             <h4>Pembayaran Piutang Leasing</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>

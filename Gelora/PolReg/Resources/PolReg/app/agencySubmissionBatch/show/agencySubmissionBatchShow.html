@@ -24,13 +24,10 @@
                         </tbody>
                     </table>
                 </div>
-
                 <label>Catatan Untuk Biro Jasa</label>
                 <input type="text" ng-model="ctrl.registrationBatch.agency_note">
-
                 <label>Catatan Internal</label>
                 <input type="text" ng-model="ctrl.registrationBatch.internal_note">
-
             </div>
             <div class="col-sm-6">
                 <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
@@ -70,7 +67,7 @@
                         <td>{{salesOrder.unit.data.chasis_number}}</td>
                         <td>{{salesOrder.unit.data.engine_number}}</td>
                         <td>{{salesOrder.delivery.handover.created_at}}</td>
-                        <td><a href="{{'/sales/redirect-app/sales-order/?id=' + salesOrder.id}}"  target="_blank">Buka Penjualan</a></td>
+                        <td><a href="{{'/sales/redirect-app/sales-order/?id=' + salesOrder.id}}" target="_blank">Buka Penjualan</a></td>
                     </tr>
                 </tbody>
             </table>

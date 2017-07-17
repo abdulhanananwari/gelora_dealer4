@@ -32,10 +32,6 @@ geloraPolRegShared
                     }
                 }
 
-                scope.generateReceiptRegistrationCost = function(cost) {
-                    window.open(LinkFactory.dealer.sales.salesOrder.polReg.views + 'generate-receipt-cost/' + scope.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt, cost_name: cost.name }));
-                }
-
             }
         }
 

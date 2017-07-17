@@ -44,6 +44,9 @@ geloraSalesShared
             insertNote: function(id, note, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/note/', note, { params: params })
             },
+            deleteCustomerInvoice: function(id, params) {
+                return $http.delete(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/customer-invoice/', {}, { params: params })
+            }
         }
 
         salesOrder.leasingOrder = {

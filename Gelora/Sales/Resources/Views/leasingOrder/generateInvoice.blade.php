@@ -16,12 +16,17 @@
             <tr>
                 <td>Telah Terima Dari</td>
                 <td>:</td>
-                <td>{{ $viewData['leasingOrder']->mainLeasing['name'] }} | {{$viewData['leasingOrder']->customer['name'] }}</td>
+                <td>{{ $viewData['leasingOrder']->get('mainLeasing.name') }} | {{$viewData['leasingOrder']->get('customer.name') }}</td>
+            </tr>
+            <tr>
+                <td>Uang Sejumlah</td>
+                <td>:</td>
+                <td>{{ \Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po),true) }}</td>
             </tr>
             <tr>
                 <td>Untuk</td>
                 <td>:</td>
-                <td>{{ $viewData['leasingOrder']->vehicle['name'] }}</td>
+                <td>{{ $viewData['leasingOrder']->get('vehicle.name')}} {{$viewData['unit']->assembly_year}} {{$viewData['leasingOrder']->get('vehicle.variant.name')}}</td>
             </tr>
             <tr>
                 <td>No Rangka</td>
@@ -47,10 +52,7 @@
             <tr>
                 <td>Pelunasan</td>
                 <td>:</td>
-                <td>
-                    <p>{{ number_format($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po) }}</p>
-                    <p>{{ \Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po)) }}</p>
-                </td>  
+                <td>{{ number_format($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po) }}</td>  
             </tr>
             <tr style="height: 2em;">
                 <td></td>

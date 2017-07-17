@@ -18,13 +18,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <hr>
-                <p style="text-align: center;"><strong>Penyerahan Dokumen Ke Biro Jasa</strong></p>
+                <p style="text-align: center;"><strong>Penyerahan Dokumen Ke Biro Jasa {{ $viewData['registrationBatch']['agent']['name'] }}</strong></p>
                 <br>
                 
                 <p>Catatan: {{ $viewData['registrationBatch']->agency_note }}</p>
                 <br>
 
-                <table width="100%" border="1">
+                <table width="100%" border="1" style="font-size: 12px !important;">
                     <tr>
                         <th>No Faktur</th>
                         <th>Nama Pemohon</th>
@@ -33,7 +33,6 @@
                         <th>Tipe</th>
                         <th>Kode Tipe</th>
                         <th>Warna</th>
-                        <th>Kode Warna</th>
                         <th>Nomor Rangka</th>
                         <th>Nomor Mesin</th>
                         <th>Catatan</th>
@@ -47,7 +46,6 @@
                         <td>{{ $salesOrder->unit->type_name }}</td>
                         <td>{{ $salesOrder->unit->type_code }}</td>
                         <td>{{ $salesOrder->unit->color_name }}</td>
-                        <td>{{ $salesOrder->unit->color_code }}</td>
                         <td>{{ $salesOrder->unit->chasis_number }}</td>
                         <td>{{ $salesOrder->unit->engine_number }}</td>
                         <td>{{ $salesOrder->getAttribute('polReg.agency_note') }}</td>
