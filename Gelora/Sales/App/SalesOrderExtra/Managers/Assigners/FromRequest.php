@@ -16,9 +16,9 @@ class FromRequest {
         
         $this->salesOrderExtra->fill($request->only(
                 'sales_order_id','sales_program_id','sales_extra_id',
-                'item_name', 'item_code',
-                'price_per_unit', 'quantity', 'vat',
-                'total'));
+                'type', 'item_name', 'item_code',
+                'price_per_unit', 'quantity', 'vat', 'total',
+                'pending_handover'));
         
         return $this->salesOrderExtra;
     }
