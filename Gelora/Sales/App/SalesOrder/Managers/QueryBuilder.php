@@ -12,7 +12,7 @@ class QueryBuilder {
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
+
     protected function parseDate($dateString) {
         return \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
     }
@@ -98,14 +98,14 @@ class QueryBuilder {
                 }
             }
         }
-        
+
         if ($request->get('customer_invoice_pending') == 'true') {
             $query->whereNotNull('customerInvoice');
-            
+
             if ($request->has('customer_invoice_delegate_name')) {
                 $query->where('customerInvoice.delegate.name', $request->get('customer_invoice_delegate_name'));
             }
-            
+
             if ($request->has('customer_invoice_created_at')) {
                 $query->whereBetween('customerInvoice.created_at', [
                     $this->parseDate($request->get('customer_invoice_created_at'))->startOfDay(),
@@ -123,13 +123,16 @@ class QueryBuilder {
                     $query->whereNull('validated_at')->whereNotNull('indent');
                     break;
                 case 'validated':
-                    $query->whereNotNull('validated_at');
+                    $query->whereNotNull('validated_at')->whereNull('delivery.generated_at');
                     break;
                 case 'delivery_generated':
                     $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
                     break;
                 case 'delivery_handover_created':
-                    $query->whereNotNull('delivery.handover.created_at');
+                    $query->whereNotNull('delivery.handover.created_at')->whereNull('delivery.handoverConfirmation.created_at');
+                    break;
+                case 'delivery_handover_confirmation_created':
+                    $query->whereNotNull('delivery.handoverConfirmation.created_at');
                     break;
                 case 'financial_closed':
                     $query->whereNotNull('financial_closed_at');
@@ -143,6 +146,9 @@ class QueryBuilder {
         }
 
         $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        if ($request->has('order_by')) {
+            $query->whereNotNull($request->get('order_by'));
+        }
 
         return $query;
     }

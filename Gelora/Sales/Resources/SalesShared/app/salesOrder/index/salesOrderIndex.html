@@ -13,7 +13,7 @@
                         <th>Warna Motor</th>
                         <th>Sales</th>
                         <th>Tanggal</th>
-                        <th>Kunci</th>
+                        <th>Indent</th>
                         <th>Validasi</th>
                         <th>Pengiriman</th>
                         <th>Tagih Leasing</th>
@@ -31,7 +31,7 @@
                         <td>{{salesOrder.vehicle.variant.name}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
                         <td>{{salesOrder.created_at | fromDateTimeString}}</td>
-                        <td>{{salesOrder.locked_at | fromDateTimeString }}</td>
+                        <td>{{salesOrder.indent.created_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.validated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.leasingOrder.invoice_generated_at.date | fromDateTimeString}}</td>

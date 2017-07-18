@@ -11,6 +11,8 @@ class CancelledSalesOrderModel extends Model {
     protected $guarded = ['created_at', 'updated_at'];
     
     public $dates = ['restored_at'];
+    
+    protected $doNotsave = ['salesOrderModel'];
 
     // Managers
     public function action() {

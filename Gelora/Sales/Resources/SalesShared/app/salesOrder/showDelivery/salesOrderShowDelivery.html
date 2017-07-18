@@ -37,13 +37,12 @@
                 </span>
                 <div ng-hide="ctrl.salesOrder.delivery.handover.created_at">
                     <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
-                    <label ng-show="ctrl.salesOrder.delivery.delivery_note_generator.timestamp">
-                        <br>SJ sudah dicetak {{ ctrl.salesOrder.delivery.delivery_note_generated_count }} kali, terakhir pada {{ ctrl.salesOrder.delivery.delivery_note_generator.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.delivery_note_generator.name }}
-                        <br>
-                        <br>
-                    </label>
+                    <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateServiceBookBarcodeLabel(ctrl.salesOrder)">Cetak Barcode Buku Servis</button>
                     <br>
                 </div>
+                <label ng-show="ctrl.salesOrder.delivery.delivery_note_generated_count">
+                    SJ sudah dicetak {{ ctrl.salesOrder.delivery.delivery_note_generated_count }} kali, terakhir pada {{ ctrl.salesOrder.delivery.delivery_note_generator.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.delivery_note_generator.name }}
+                </label>
                 <div id="scan">
                     <button ng-hide="ctrl.salesOrder.delivery.scanner.timestamp || ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" data-toggle="modal" data-target="#barcode-scan-modal">Scan Barcode</button>
                     <label ng-show="ctrl.salesOrder.delivery.scanner.timestamp">Unit discan {{ ctrl.salesOrder.delivery.scanner.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.scanner.name }}</label>
@@ -99,6 +98,14 @@
                     <div ng-if="!ctrl.salesOrder.delivery.handover.created_at">
                         <button class="btn btn-block btn-success" ng-click="ctrl.delivery.handover(ctrl.salesOrder, ctrl.salesOrder.delivery.handover)">Serah Terima Berhasil</button>
                         <button class="btn btn-block btn-danger" ng-click="ctrl.delivery.cancel(ctrl.salesOrder)">Batalkan SJ</button>
+                    </div>
+                    <div ng-if="ctrl.salesOrder.delivery.handover.created_at">
+                        <label>Serah terima dibuat oleh: {{ ctrl.salesOrder.delivery.handover.creator.name }} ({{ ctrl.salesOrder.delivery.handover.creator.timestamp * 1000 | fromDateTimeString:'YYYY-MM-DD HH:mm' }})</label>
+                        <br>
+                        <!-- <label>Catatan Konfirmasi Serah Terima (BAST)</label>
+                        <input type="note" ng-model="handoverConfirmation.note"> -->
+                        <button ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" class="btn btn-block btn-danger" ng-click="ctrl.delivery.handoverConfirmation(ctrl.salesOrder, handoverConfirmation)">Konfirmasi Serah Terima (BAST)</button>
+                        <label ng-show="ctrl.salesOrder.delivery.handoverConfirmation.created_at">Konfirmasi serah terima dibuat oleh: {{ ctrl.salesOrder.delivery.handoverConfirmation.creator.name }} ({{ ctrl.salesOrder.delivery.handoverConfirmation.creator.timestamp * 1000| fromDateTimeString:'YYYY-MM-DD HH:mm' }})</label>
                     </div>
                 </div>
             </div>

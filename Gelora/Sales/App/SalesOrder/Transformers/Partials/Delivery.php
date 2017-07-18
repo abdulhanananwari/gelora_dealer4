@@ -12,6 +12,9 @@ class Delivery {
 
         $handover = new \Solumax\PhpHelper\App\Mongo\SubDocument($delivery->handover);
         $handover->created_at = $handover->toCarbon('created_at') ? $handover->toCarbon('created_at')->toDateTimeString() : null;
+        
+        $handoverConfirmation = new \Solumax\PhpHelper\App\Mongo\SubDocument($delivery->handoverConfirmation);
+        $handoverConfirmation->created_at = $handoverConfirmation->toCarbon('created_at') ? $handoverConfirmation->toCarbon('created_at')->toDateTimeString() : null;
 
         $transformed = [
             'generated_at' => $delivery->toCarbon('generated_at') ? $delivery->toCarbon('generated_at')->toDateTimeString() : null,
@@ -22,6 +25,7 @@ class Delivery {
             'scanner' => (object) $delivery->scanner,
             'travel_starter' => (object) $delivery->travel_starter,
             'handover' => $handover,
+            'handoverConfirmation' => $handoverConfirmation,
         ];
 
         return $transformed;

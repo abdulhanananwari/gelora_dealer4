@@ -28,7 +28,7 @@ class ServiceBookLabel {
         $this->dealerCode = $tenantInfo->DEALER_CODE;
 
         $this->pdf = new \FPDF('P', 'mm', [165, 200]);
-        $this->pdf->SetFont('Arial', '', 8);
+        $this->pdf->SetFont('Arial', '', 7);
         $this->pdf->AddPage('P');
         $this->pdf->SetMargins(0,0,0);
         $this->pdf->SetAutoPageBreak(false);

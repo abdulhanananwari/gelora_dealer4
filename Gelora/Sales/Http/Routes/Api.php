@@ -54,6 +54,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('scan', ['uses' => 'DeliveryController@scan']);
                 Route::post('travel-start', ['uses' => 'DeliveryController@travelStart']);
                 Route::post('handover', ['uses' => 'DeliveryController@handover']);
+                Route::post('handover-confirmation', ['uses' => 'DeliveryController@handoverConfirmation']);
                 Route::post('cancel', ['uses' => 'DeliveryController@cancel']);
             });
 

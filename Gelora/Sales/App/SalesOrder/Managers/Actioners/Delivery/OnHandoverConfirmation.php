@@ -1,11 +1,11 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Status;
+namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\Delivery;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 use MongoDB\BSON\UTCDateTime;
 
-class OnIndent {
+class OnHandoverConfirmation {
 
     protected $salesOrder;
 
@@ -13,15 +13,13 @@ class OnIndent {
         $this->salesOrder = $salesOrder;
     }
 
-    public function action($note = '') {
-
-        $indent = [
-            'created_at' => new UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
+    public function action() {
+        
+        $this->salesOrder->setAttribute('delivery.handoverConfirmation', [
             'creator' => $this->salesOrder->assignEntityData(),
-            'note' => $note,
-        ];
-
-        $this->salesOrder->indent = $indent;
+            'created_at' => new UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
+        ]);
+        
         $this->salesOrder->save();
     }
 

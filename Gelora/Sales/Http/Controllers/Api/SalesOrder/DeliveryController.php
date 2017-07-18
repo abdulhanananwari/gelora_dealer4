@@ -98,6 +98,19 @@ class DeliveryController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
 
+    public function handoverConfirmation($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+        
+        $validation = $salesOrder->validate()->delivery()->onHandoverConfirmation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+        $salesOrder->action()->delivery()->onHandoverConfirmation();
+
+        return $this->formatItem($salesOrder);
+    }
+
     public function cancel($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
