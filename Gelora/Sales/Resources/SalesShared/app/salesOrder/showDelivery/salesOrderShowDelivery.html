@@ -33,7 +33,7 @@
                 <input type="text" ng-model="ctrl.salesOrder.delivery.driver.name" ng-readonly="ctrl.salesOrder.delivery.driver.id">
                 <span ng-show="!ctrl.salesOrder.delivery.delivery_note_generator.timestamp">
                     <select ng-options="driver as driver.name for driver in ctrl.drivers" ng-model="ctrl.salesOrder.delivery.driver"></select>
-                    <button class="btn btn-block btn-warning" ng-click="ctrl.delivery.update(ctrl.salesOrder)">Update</button>
+                    <button class="btn btn-block btn-warning" ng-click="ctrl.delivery.update(ctrl.salesOrder)">Update</button><br>
                 </span>
                 <div ng-hide="ctrl.salesOrder.delivery.handover.created_at">
                     <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>

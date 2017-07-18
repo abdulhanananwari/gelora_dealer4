@@ -121,7 +121,7 @@
         <div class="well">
             <h4>Pencatatan Piutang</h4>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
-            <button class="btn btn-block btn-warning" ng-click="ctrl.generate.agreementBPKB(ctrl.salesOrder)">Cetak Surat Pernyataan BPKB</button>
+            <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
         </div>
     </div>
     <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
