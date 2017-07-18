@@ -1,24 +1,29 @@
 <div class="row">
     <div class="col-sm-12">
-        <h4>Pejualan</h4>
-        <a class="btn btn-block btn-primary" ui-sref="salesOrderShow">Buat SPK Baru</a>
-        <a class="btn btn-block btn-primary" ui-sref="salesOrderIndex">SPK List</a>
+        <h4>Penjualan</h4>
+        <hr>
+        <a class="btn btn-block btn-success" ui-sref="salesOrderShow">Buat SPK Baru</a>
+        <a class="btn btn-block btn-success" ui-sref="salesOrderIndex">Daftar SPK</a>
         <br>
-        <a class="btn btn-block btn-primary" ui-sref="prospectIndex">Daftar Prospek</a>
-        <br>
-        <a class="btn btn-block btn-primary" ui-sref="cancelledSalesOrderIndex">List Pembatalan SPK</a>
+        <a class="btn btn-block btn-success" ui-sref="prospectIndex">Daftar Prospek</a>
         <br>
         <div class="row">
-            <div class="col-sm-4">
-                <a class="btn btn-block btn-primary" ui-sref="salesOrderCustomerInvoiceIndex">List Customer Invoice Pending</a>
+            <div class="col-sm-6">
+                <a class="btn btn-block btn-warning" ui-sref="salesOrderReport">Report</a>
             </div>
-            <div class="col-sm-4">
-                <a class="btn btn-block btn-primary" ui-sref="salesOrderIndexDelivery">List Pengiriman (Supir)</a>
+            <br class="visible-xs">
+            <div class="col-sm-6">
+                <a class="btn btn-block btn-warning" ui-sref="salesOrderDashboard">Dashboard</a>
             </div>
         </div>
         <br>
-        <a class="btn btn-block btn-warning" ui-sref="salesOrderReport">Report Penjualan</a>
-        <a class="btn btn-block btn-warning" ui-sref="salesOrderDashboard">Dashboard</a>
+        <a class="btn btn-primary btn-block" ng-click="ctrl.showOtherIndexes=!ctrl.showOtherIndexes">Lain - Lain</a>
+        <br>
+        <div ng-show="ctrl.showOtherIndexes">
+            <a class="btn btn-block btn-info" ui-sref="salesOrderCustomerInvoiceIndex">List Customer Invoice Pending</a>
+            <a class="btn btn-block btn-info" ui-sref="salesOrderIndexDelivery">List Pengiriman (Supir)</a>
+            <a class="btn btn-block btn-info" ui-sref="cancelledSalesOrderIndex">List Pembatalan SPK</a>
+        </div>
         <br>
     </div>
 </div>
