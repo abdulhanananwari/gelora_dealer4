@@ -1,10 +1,4 @@
-@extends('layout.printing')
-
-@section('title', 'Surat Pernyataan Dan Kuasa')
-
-@section('content')
-
-@component('components.header', ['viewData' => $viewData])
+@component('components.headerMini', ['viewData' => $viewData])
     @slot('title')
         Surat Pernyataan Dan Kuasa    
     @endslot
@@ -98,4 +92,3 @@
         <br>
         <p>{{$viewData['jwt']->name}}</p>
 </div>
-@endsection

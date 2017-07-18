@@ -75,8 +75,8 @@ geloraSalesShared
                 invoice: function () {
                     window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-invoice/' + vm.salesOrder.id + '?' + $.param({jwt: JwtValidator.encodedJwt}));
                 },
-                agreementBPKB: function () {
-                    window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-agreement-bpkb/' + vm.salesOrder.id + '?' + $.param({jwt: JwtValidator.encodedJwt}));
+                extraDocumentInvoice: function () {
+                    window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-extra-document-invoice/' + vm.salesOrder.id + '?' + $.param({jwt: JwtValidator.encodedJwt}));
                 },
                 leasingOrderReceipt: function () {
                     window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-receipt/' + vm.salesOrder.id + '?' + $.param({jwt: JwtValidator.encodedJwt}));

@@ -8,10 +8,12 @@
 
             @page {
                 size: A4 portrait;
+                margin-top: 1cm;
             }
 
             html, body {
                 width: 100%;
+                margin-top: 0px;
             }
             
             hr {
