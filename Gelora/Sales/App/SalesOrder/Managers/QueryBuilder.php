@@ -119,8 +119,11 @@ class QueryBuilder {
                 case 'unvalidated':
                     $query->whereNull('validated_at');
                     break;
-                case 'unvalidated_and_indent':
-                    $query->whereNull('validated_at')->whereNotNull('indent');
+                case 'unvalidated':
+                    $query->whereNull('validated_at');
+                    break;
+                case 'indent':
+                    $query->whereNotNull('indent.created_at')->whereNull('delivery.generated_at');
                     break;
                 case 'validated':
                     $query->whereNotNull('validated_at')->whereNull('delivery.generated_at');
