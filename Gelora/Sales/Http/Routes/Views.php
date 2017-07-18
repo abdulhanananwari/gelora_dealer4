@@ -13,7 +13,7 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
         Route::get('pol-reg/generate-receipt-item-handover/{id}', ['uses' => 'SalesOrderController@generateReceiptItemHandover']);
         
         Route::get('leasing-order/generate-leasing-order-invoice/{id}', ['uses' => 'SalesOrderController@generateLeasingOrderInvoice']);
-        Route::get('leasing-order/generate-agreement-bpkb/{id}', ['uses' => 'SalesOrderController@generateAgreementBPKB']);
+        Route::get('leasing-order/generate-extra-document-invoice/{id}', ['uses' => 'SalesOrderController@generateExtraDocumentInvoice']);
 
         Route::group(['prefix' => '{id}', 'namespace' => 'SalesOrder'], function() {
             Route::group(['prefix' => 'document'], function() {

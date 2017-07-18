@@ -67,14 +67,10 @@ class SalesOrderController extends Controller {
 
         $salesOrder->action()->financial()->onGenerateCustomerInvoice($request);
 
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                        ->first()->data_1;
-
         $viewData = [
             'salesOrder' => $salesOrder,
             'unit' => $salesOrder->unit,
             'jwt' => \ParsedJwt::getJwt(),
-            'tenantInfo' => $tenantInfo,
         ];
 
         return view()->make('gelora.sales::financial.generateCustomerInvoice')
@@ -106,12 +102,9 @@ class SalesOrderController extends Controller {
                         ->with('viewData', $viewData);
     }
 
-    public function generateAgreementBPKB($id, Request $request) {
+    public function generateExtraDocumentInvoice($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')
-                        ->first()->data_1;
 
         $settingAgreementBpkb = (object) \Setting::where('object_type', 'AGREEMENT_BPKB')
                         ->first()->data_1;
@@ -125,10 +118,9 @@ class SalesOrderController extends Controller {
             'salesOrder' => $salesOrder,
             'leasing' => $leasing,
             'jwt' => \ParsedJwt::getJwt(),
-            'tenantInfo' => $tenantInfo,
         ];
 
-        return view()->make('gelora.sales::leasingOrder.generateAgreementBpkb')
+        return view()->make('gelora.sales::leasingOrder.generateExtraDocumentInvoice')
                         ->with('viewData', $viewData);
     }
 
