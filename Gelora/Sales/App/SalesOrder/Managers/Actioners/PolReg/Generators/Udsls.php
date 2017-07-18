@@ -58,7 +58,7 @@ class Udsls {
         ];
     }
     
-    protected function getLeasingCode($mainLeasingEntityId) {
+    protected function getLeasingCode() {
         
         $leasing = \Gelora\CreditSales\App\Leasing\LeasingModel::
                 where('mainLeasing.id', $this->salesOrder->getAttribute('leasingOrder.mainLeasing.id'))
