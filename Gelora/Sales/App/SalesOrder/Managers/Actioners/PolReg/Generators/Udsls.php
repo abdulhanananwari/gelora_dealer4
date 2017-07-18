@@ -23,7 +23,7 @@ class Udsls {
         $data = [];
         $data['No Mesin'] = $unit->engine_number;
         $data['No Rangka'] = $unit->chasis_number;
-        $data['Kode Leasing'] = ($salesOrder->payment_type == 'credit' ? $leasingOrder->leasing['code'] : "N");
+        $data['Kode Leasing'] = ($salesOrder->payment_type == 'credit' ? $this->getLeasingCode() : "N");
         $data['Kode Kecamatan'] = $cddb->kecamatan_surat;
 
         if ($salesOrder->payment_type == 'credit') {
@@ -56,6 +56,15 @@ class Udsls {
             'data' => $data,
             'string' => $string,
         ];
+    }
+    
+    protected function getLeasingCode() {
+        
+        $leasing = \Gelora\CreditSales\App\Leasing\LeasingModel::
+                where('mainLeasing.id', $this->salesOrder->getAttribute('leasingOrder.mainLeasing.id'))
+                ->first();
+        
+        return $leasing->code;
     }
 
 }
