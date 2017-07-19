@@ -122,6 +122,19 @@
             <h4>Pencatatan Piutang</h4>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
+
+            <hr>
+
+            <div ng-show="ctrl."> </div>
+
+            <label>Pilih Batch Tagihan Ke Leasing</label>
+      
+            <div ng-show="!ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id">
+                <select ng-options="leasingInvoiceBatch.id as ((leasingInvoiceBatch.created_at | fromDateTimeString)  + ' | ' + leasingInvoiceBatch.subLeasing.name) for leasingInvoiceBatch in ctrl.leasingInvoiceBatches" ng-model="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id" ng-click="ctrl.loadLeasingInvoiceBatches()"></select>
+                <button class="btn btn-block btn-info"  ng-click="ctrl.leasingOrder.updateAfterValidation(ctrl.salesOrder)">Pilih</button>
+            </div>
+            
+            <a class="btn btn-block btn-info" href="{{'/credit-sales/redirect-app/leasing-invoice-batch/' + ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id }}" target="_blank">Buka Batch</a>
         </div>
     </div>
     <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">

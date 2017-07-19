@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h4>Batch Tagihan Ke Leasing {{ ctrl.leasingInvoiceBatch.id || 'Baru' }}</h4>
+		<div class="row">
+			<div class="col-sm-4">
+				 <leasing-selector ng-if="!ctrl.leasingInvoiceBatch.closed_at" selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.leasingInvoiceBatch.mainLeasing=mainLeasing;ctrl.leasingInvoiceBatch.subLeasing=subLeasing;"></leasing-selector>
+                <br>
+			</div>
+			<div class="col-sm-4">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<td>Leasing Utama</td>
+							<td>{{ ctrl.leasingInvoiceBatch.mainLeasing.name }}</td>
+						</tr>
+						<tr>
+							<td>Cabang Leasing</td>
+							<td>{{ ctrl.leasingInvoiceBatch.subLeasing.name}}</td>
+						</tr>
+						<tr>
+							<td>Ditutup</td>
+							<td>{{ ctrl.leasingInvoiceBatch.closed_at }}</td>
+						</tr>
+					</table>
+				</div>				
+			</div>
+			<div class="col-sm-4">
+				<button ng-show="!ctrl.leasingInvoiceBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.leasingInvoiceBatch)">Simpan</button>
+				<button ng-show="ctrl.leasingInvoiceBatch.id && !ctrl.leasingInvoiceBatch.closed_at && ctrl.leasingInvoiceBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.leasingInvoiceBatch)">Tutup</button>
+				<button ng-show="ctrl.leasingInvoiceBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.generateLeasingInvoice(ctrl.leasingInvoiceBatch)">Cetak Tagihan Leasing</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<th>Nama</th>
+					<th>Alamat</th>
+					<th>Type Motor</th>
+					<th>No Rangka</th>
+					<th>No Mesin</th>
+					<th>No PO</th>
+					<th>Memo Leasing</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="salesOrder in ctrl.leasingInvoiceBatch.salesOrders">
+						<td>{{ salesOrder.registration.name }}</td>
+						<td>{{ salesOrder.registration.address }}</td>
+						<td>{{ salesOrder.unit.data.type_name }}</td>
+						<td>{{ salesOrder.unit.data.chasis_number }}</td>
+						<td>{{ salesOrder.unit.data.engine_number }}</td>
+						<td>{{ salesOrder.leasingOrder.po_number }}</td>
+						<td>{{ salesOrder.leasingOrder.note }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

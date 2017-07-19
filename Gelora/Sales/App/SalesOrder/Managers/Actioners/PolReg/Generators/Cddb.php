@@ -27,9 +27,9 @@ class Cddb {
         $data['Tanggal Lahir'] = $cddb['tanggal_lahir'];
         $data['Alamat'] = $cddb['alamat_surat'];
         $data['Kelurahan'] = $cddb['kelurahan_surat'];
-        $data['Kecamatan'] = (config('gelora.cdb.area.kecamatan_surat.options') [$cddb['kecamatan_surat']]);
-        $data['kota'] = $cddb['kota_surat'];
-        $data['kode pos'] = $cddb['kode_pos_surat'];
+        $data['Kecamatan'] = config('gelora.cdb.area.kecamatan_surat.options')[$cddb['kecamatan_surat']];
+        $data['Kota'] = $cddb['kota_surat'];
+        $data['Kode Pos'] = $cddb['kode_pos_surat'];
         $data['Provinsi'] = $cddb['propinsi_surat'];
         $data['Agama'] = $cddb['agama'];
         $data['Pekerjaan'] = $cddb['pekerjaan'];
@@ -50,8 +50,8 @@ class Cddb {
             $data['Kode sales'] = $this->salesOrder->getAttribute('salesPersonnel.registration_code');
         }
         
-        $data['Status kepemilikan rumah'] = $cddb['status_kepemilikan_rumah'];
-        $data['status_no_hp'] = $cddb['status_no_hp'];
+        $data['Status Kepemilikan Rumah'] = $cddb['status_kepemilikan_rumah'];
+        $data['Status No HP'] = $cddb['status_no_hp'];
         $data['Akun Facebook'] = $cddb['akun_facebook'];
         $data['Akun Twitter'] = $cddb['akun_twitter'];
         $data['Akun Instagram'] = $cddb['akun_instagram'];
@@ -66,7 +66,7 @@ class Cddb {
         }
         return [
             'data' => $data,
-            'string' => $string,
+            'string' => strtoupper($string),
         ];
     }
 

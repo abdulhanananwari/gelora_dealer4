@@ -34,6 +34,8 @@ class LeasingOrder {
             'po_completer' => $leasingOrder->po_completer,
 
             'due_uuid' => $leasingOrder->due_uuid,
+
+            'leasing_invoice_batch_id' => $leasingOrder->leasing_invoice_batch_id ,
             
             'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->toCarbon('invoice_generated_at', true) : null,
             'invoice_generator' => $leasingOrder->invoice_generator,

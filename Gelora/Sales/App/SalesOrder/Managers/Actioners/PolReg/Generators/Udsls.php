@@ -54,7 +54,7 @@ class Udsls {
         }
         return [
             'data' => $data,
-            'string' => $string,
+            'string' => strtoupper($string),
         ];
     }
     
