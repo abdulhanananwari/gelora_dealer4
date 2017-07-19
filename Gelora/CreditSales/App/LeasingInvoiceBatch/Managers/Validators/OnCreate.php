@@ -14,7 +14,26 @@ class OnCreate {
 
     public function validate() {
 
+<<<<<<< HEAD
         return true;
     }
 
+=======
+    	$attrValidations = $this->validateAttributes();
+        if ($attrValidations->fails()) {
+            return $attrValidations->errors()->all();
+        }
+        
+        return true;
+    }
+
+    protected function validateAttributes() {
+        
+        return \Validator::make($this->leasingInvoiceBatch->toArray(),
+                [
+                    'mainLeasing' => 'required',
+                    'subLeasing' => 'required',
+                ]);
+    }
+>>>>>>>  penmabhan validsi
 }

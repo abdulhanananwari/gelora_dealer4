@@ -20,8 +20,7 @@ class LeasingInvoiceBatchTransformer extends Fractal\TransformerAbstract {
 
             'created_at' => $leasingInvoiceBatch->created_at->toDateTimeString(),
             'creator' => $leasingInvoiceBatch->creator,
-            'sent_at' => $leasingInvoiceBatch->sent_at ? $leasingInvoiceBatch->sent_at->toDateTimeString() : null,
-            
+
             'closed_at' => $leasingInvoiceBatch->closed_at ? $leasingInvoiceBatch->closed_at->toDateTimeString() : null,
             'closer' => $leasingInvoiceBatch->closer,
         ];
