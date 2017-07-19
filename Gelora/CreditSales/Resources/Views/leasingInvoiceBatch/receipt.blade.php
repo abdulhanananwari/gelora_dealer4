@@ -8,6 +8,9 @@
     @slot('title')
         Tagihan Leasing
     @endslot
+    @slot('batchID')
+        {{ $viewData['leasingInvoiceBatch']->id }}
+    @endslot
 @endcomponent
 
 <div class="row">
@@ -52,6 +55,24 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        Bandung, {{ \Carbon\Carbon::now()->toDateString() }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4">
+        <p>Yang Menyerahkan,</p>
+        <br><br><br>
+        <p>{{ \ParsedJwt::getByKey('name') }}</p>
+    </div>
+    <div class="col-xs-4">
+        <p>Yang Menerima,</p>
+        <br><br><br>
     </div>
 </div>
 
