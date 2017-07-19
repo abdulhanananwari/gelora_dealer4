@@ -27,8 +27,8 @@ class Udstk {
         $data['No Mesin 2'] = substr($unit->engine_number, 6);
         $data['Nama Pemohon'] = $salesOrder['registration.name'];
         $data['Alamat Pemohon'] = $salesOrder['registration.address'];
-        $data['kelurahan'] = $cddb['kelurahan_surat'];
-        $data['kecamatan'] = (config('gelora.cdb.area.kecamatan_surat.options') [$cddb['kecamatan_surat']]);
+        $data['Kelurahan'] = $cddb['kelurahan_surat'];
+        $data['Kecamatan'] = config('gelora.cdb.area.kecamatan_surat.options')[$cddb['kecamatan_surat']];
         $data['Kota'] = $cddb['kota_surat'];
         $data['kode Pos'] = $cddb['kode_pos_surat'];
         $data['propinsi_surat'] = $cddb['propinsi_surat'];
@@ -46,7 +46,7 @@ class Udstk {
 
         return [
             'data' => $data,
-            'string' => $string,
+            'string' => strtoupper($string),
         ];
     }
 

@@ -14,17 +14,23 @@ class Cddb {
 
     public function assign($cddb) {
 
-        if ($cddb['customer_code'] == 'I' || $cddb['customer_code'] == 'J' || $cddb['customer_code'] == 'C') {
+        $customerCode = $cddb['customer_code'];
+        
+        if (in_array($customerCode, ['I', 'J', 'C'])) {
             $cddb['nama_penanggung_jawab'] = 'N';
             $cddb['status_kepemilikan_rumah'] = 1;
-            $cddb['status_no_hp'] = 1;
-        } else if ($cddb['customer_code'] == 'G' || $cddb['customer_code'] == 'J') {
+        }
+        
+        if (in_array($customerCode, ['G'])) {
             $cddb['status_kepemilikan_rumah'] = 'N';
+        }
+        
+        if (!$cddb['no_hp']) {
             $cddb['status_no_hp'] = 'N';
         }
-
+        
         $this->salesOrder->cddb = $cddb;
-
+        
         return $this->salesOrder;
     }
 
