@@ -18,9 +18,8 @@ class OnRemoveBatch {
 
         switch ($key) {
             case 'md_submission_batch_id':
-                $mdSubmissionBatch = $this->salesOrder->getMdSubmissionBatch();
-                if ($mdSubmissionBatch->closed_at) {
-                    return ['Tidak bisa menghapus batch karena sudah ditutup'];
+                if ($this->salesOrder->getAttribute('polReg.agency_submission_batch_id')) {
+                    return ['Tidak bisa menghapus batch karena sudah diserahkan ke biro jasa'];
                 }
                 break;
             case 'agency_submission_batch_id':

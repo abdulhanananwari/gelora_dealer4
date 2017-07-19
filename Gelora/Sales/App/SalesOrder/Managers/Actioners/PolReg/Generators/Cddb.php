@@ -27,7 +27,7 @@ class Cddb {
         $data['Tanggal Lahir'] = $cddb['tanggal_lahir'];
         $data['Alamat'] = $cddb['alamat_surat'];
         $data['Kelurahan'] = $cddb['kelurahan_surat'];
-        $data['Kecamatan'] = $cddb['kecamatan_surat'];
+        $data['Kecamatan'] = config('gelora.cdb.area.kecamatan_surat.options')[$cddb['kecamatan_surat']];
         $data['kota'] = $cddb['kota_surat'];
         $data['kode pos'] = $cddb['kode_pos_surat'];
         $data['Provinsi'] = $cddb['propinsi_surat'];
@@ -66,7 +66,7 @@ class Cddb {
         }
         return [
             'data' => $data,
-            'string' => $string,
+            'string' => strtoupper($string),
         ];
     }
 
