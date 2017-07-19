@@ -62,7 +62,7 @@
             <file-manager-upload path="sales-order/leasing-order" subpath="po" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id}}" resize-height-width="1300x1300" uploaded-file="uploadedPoFile" on-file-uploaded="ctrl.salesOrder.leasingOrder.po_file_uuid=uploadedPoFile.uuid;ctrl.store(ctrl.salesOrder);"></file-manager-upload>
             <file-manager-show ng-if="ctrl.salesOrder.leasingOrder.po_file_uuid" display-type="downloadButton" file-uuid="{{ctrl.salesOrder.leasingOrder.po_file_uuid}}"></file-manager-show>
             <br>
-            <button ng-show="ctrl.salesOrder.leasingOrder.po_file_uuid && !ctrl.salesOrder.leasingOrder.po_completer.timestamp" class="btn btn-block btn-success" ng-click="ctrl.leasingOrder.poComplete(ctrl.salesOrder, true)">PO Lengkap</button>
+            <button ng-show="ctrl.salesOrder.leasingOrder.po_file_uuid && !ctrl.salesOrder.leasingOrder.po_completer.timestamp" class="btn btn-block btn-success" ng-click="ctrl.action.poComplete(ctrl.salesOrder, true)">PO Lengkap</button>
             <label ng-show="ctrl.salesOrder.leasingOrder.po_completer.timestamp">PO Lengkap: {{ ctrl.salesOrder.leasingOrder.po_completer.name }} ({{ ctrl.salesOrder.leasingOrder.po_completer.timestamp * 1000 | date }})</label>
             <h5>Memo</h5>
             <file-manager-upload path="sales-order/leasing-order" subpath="memo" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id}}" resize-height-width="1300x1300" uploaded-file="uploadedMemoFile" on-file-uploaded="ctrl.salesOrder.leasingOrder.memo_file_uuid=uploadedMemoFile.uuid;ctrl.store(ctrl.salesOrder);"></file-manager-upload>
@@ -70,8 +70,8 @@
         </div>
     </div>
 </div>
-<button ng-show="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.update(ctrl.salesOrder)">Simpan</button>
-<button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.leasingOrder.updateAfterValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
+<button ng-show="!ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.action.update(ctrl.salesOrder)">Simpan</button>
+<button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.action.updateAfterValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
 <br>
 <div class="row" ng-show="ctrl.appType == 'admin'">
     <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
@@ -122,18 +122,10 @@
             <h4>Pencatatan Piutang</h4>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
-
             <hr>
-
-            <div ng-show="ctrl."> </div>
-
             <label>Pilih Batch Tagihan Ke Leasing</label>
-      
-            <div ng-show="!ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id">
-                <select ng-options="leasingInvoiceBatch.id as ((leasingInvoiceBatch.created_at | fromDateTimeString)  + ' | ' + leasingInvoiceBatch.subLeasing.name) for leasingInvoiceBatch in ctrl.leasingInvoiceBatches" ng-model="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id" ng-click="ctrl.loadLeasingInvoiceBatches()"></select>
-                <button class="btn btn-block btn-info"  ng-click="ctrl.leasingOrder.updateAfterValidation(ctrl.salesOrder)">Pilih</button>
-            </div>
-            
+            <select ng-options="leasingInvoiceBatch.id as ((leasingInvoiceBatch.created_at | fromDateTimeString)  + ' | ' + leasingInvoiceBatch.subLeasing.name) for leasingInvoiceBatch in ctrl.leasingInvoiceBatches" ng-model="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id" ng-click="ctrl.loadLeasingInvoiceBatches()"></select>
+            <button class="btn btn-block btn-info" ng-click="ctrl.action.updateAfterValidation(ctrl.salesOrder)">Pilih</button>
             <a class="btn btn-block btn-info" href="{{'/credit-sales/redirect-app/leasing-invoice-batch/' + ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id }}" target="_blank">Buka Batch</a>
         </div>
     </div>
@@ -141,7 +133,7 @@
         <div class="well">
             <h4>Pembayaran Piutang Leasing</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
-            <transaction-create ng-hide="ctrl.salesOrder.leasingOrder.payment_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.leasingOrder.paymentReceived(ctrl.salesOrder)"></transaction-create>
+            <transaction-create ng-hide="ctrl.salesOrder.leasingOrder.payment_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.paymentReceived(ctrl.salesOrder)"></transaction-create>
             <label ng-show="ctrl.salesOrder.leasingOrder.payment_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_at}})</label>
         </div>
     </div>

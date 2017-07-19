@@ -23,6 +23,7 @@ class LeasingInvoiceBatchController extends Controller {
         ];
 
         return view()->make('gelora.creditSales::leasingInvoiceBatch.receipt')
-            ->with('viewData', $viewData);
+                        ->with('viewData', $viewData);
     }
+
 }
