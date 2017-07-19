@@ -27,8 +27,8 @@ class Udsls {
         $data['Kode Kecamatan'] = $cddb->kecamatan_surat;
 
         if ($salesOrder->payment_type == 'credit') {
-            $data['DP Leasing'] = $leasingOrder->dp_po;
             $data['Tenor'] = $leasingOrder->tenor;
+            $data['DP Leasing'] = $leasingOrder->dp_po;
             
         } else {
             $data['DP Leasing'] = '0';
