@@ -21,15 +21,19 @@ class QueryBuilder {
         }
 
         if ($request->has('engine_number')) {
-            $query->where('engine_number', $request->get('engine_number'));
+            if ($request->get('engine_number_like') == 'true') {
+                $query->where('engine_number', 'LIKE', '%' . $request->get('engine_number') . '%');
+            } else {
+                $query->where('engine_number', $request->get('engine_number'));
+            }
         }
 
         if ($request->has('chasis_number')) {
-            $query->where('chasis_number', 'LIKE', $request->get('chasis_number') . '%');
-        }
-
-        if ($request->has('chasis_number_like')) {
-            $query->where('chasis_number', 'LIKE', '%' . $request->get('chasis_number') . '%');
+            if ($request->get('chasis_number_like') == 'true') {
+                $query->where('chasis_number', 'LIKE', '%' . $request->get('chasis_number') . '%');
+            } else {
+                $query->where('chasis_number', $request->get('chasis_number'));
+            }
         }
 
         if ($request->get('pdi') == 'true' || $request->get('pdi') == 'done') {
