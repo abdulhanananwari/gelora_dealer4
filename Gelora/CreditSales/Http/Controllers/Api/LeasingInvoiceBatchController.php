@@ -66,6 +66,11 @@ class LeasingInvoiceBatchController extends Controller {
 
         $leasingInvoiceBatch = $this->leasingInvoiceBatch->assign()->fromRequest($request);
 
+        $validation = $leasingInvoiceBatch->validate()->onCreate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
         $leasingInvoiceBatch->action()->onCreate();
 
         return $this->formatItem($leasingInvoiceBatch);
@@ -74,15 +79,22 @@ class LeasingInvoiceBatchController extends Controller {
     public function update($id, Request $request) {
 
         $leasingInvoiceBatch = $this->leasingInvoiceBatch->find($id);
-        $leasingInvoiceBatch->assign()->fromRequest($request);
         
+        $validation = $leasingInvoiceBatch->validate()->onCreate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+        $leasingInvoiceBatch->assign()->fromRequest($request);
+
         $leasingInvoiceBatch->save();
 
         return $this->formatItem($leasingInvoiceBatch);
     }
 
     public function close($id, Request $request) {
+
         $leasingInvoiceBatch = $this->leasingInvoiceBatch->find($id);
+
         $leasingInvoiceBatch->action()->onClose();
         return $this->formatItem($leasingInvoiceBatch);
     }
