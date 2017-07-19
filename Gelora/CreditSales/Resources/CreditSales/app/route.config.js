@@ -70,6 +70,18 @@ geloraDealerCreditSales
   			controller: 'LeasingOrderIndexController as ctrl',
   			pageTitle: 'Dealer | Credit Sales | Leasing Order'
 		})
+		.state('leasingInvoiceBatchIndex', {
+			url: '/leasingInvoiceBatch/index/',
+  			templateUrl: 'app/leasingInvoiceBatch/index/leasingInvoiceBatchIndex.html',
+  			controller: 'LeasingInvoiceBatchIndexController as ctrl',
+  			pageTitle: 'Dealer | Credit Sales | Leasing Invoice Batch'
+		})
+		.state('leasingInvoiceBatchShow', {
+			url: '/leasingInvoiceBatch/show/:id',
+  			templateUrl: 'app/leasingInvoiceBatch/show/leasingInvoiceBatchShow.html',
+  			controller: 'LeasingInvoiceBatchShowController as ctrl',
+  			pageTitle: 'Dealer | Credit Sales | Leasing Invoice Batch'
+		})
 		.state('leasingOrderReport', {
 			url: '/leasingOrder/report/',
   			templateUrl: 'app/leasingOrder/report/leasingOrderReport.html',

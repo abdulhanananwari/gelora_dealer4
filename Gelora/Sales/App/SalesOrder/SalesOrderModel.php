@@ -88,7 +88,10 @@ class SalesOrderModel extends Model {
 
         return \Gelora\PolReg\App\LeasingBpkbSubmissionBatch\LeasingBpkbSubmissionBatchModel::find($this->subDocument()->polReg()->leasing_bpkb_submission_batch_id);
     }
+    public function getLeasingInvoiceBatch() {
 
+        return \Gelora\CreditSales\App\LeasingInvoiceBatch\LeasingInvoiceBatchModel::find($this->subDocument()->leasingOrder()->leasing_invoice_batch_id);
+    }
     public function getUnit() {
         
         return \Gelora\Base\App\Unit\UnitModel::find($this->unit_id);

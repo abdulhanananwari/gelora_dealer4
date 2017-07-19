@@ -1,13 +1,13 @@
 <?php
 
-namespace Gelora\CreditSales\App\LeasingInvoice;
+namespace Gelora\CreditSales\App\LeasingInvoiceBatch;
 
 use Solumax\PhpHelper\App\BaseModelMongo as Model;
 
-class LeasingInvoiceModel extends Model {
+class LeasingInvoiceBatchModel extends Model {
 
     protected $connection = 'mongodb';
-    protected $collection = 'leasing_invoices';
+    protected $collection = 'leasing_invoice_batches';
     protected $guarded = ['created_at', 'updated_at'];
     public $dates = ['closed_at'];
 
@@ -29,7 +29,7 @@ class LeasingInvoiceModel extends Model {
     public function getSalesOrders() {
 
         return \Gelora\Sales\App\SalesOrder\SalesOrderModel::
-                        where('leasingOrder.leasing_invoice_id', new \MongoDB\BSON\ObjectID($this->id))
+                        where('leasingOrder.leasing_invoice_batch_id', $this->id)
                         ->get();
     }
 

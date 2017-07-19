@@ -21,6 +21,7 @@ class LeasingOrderAfterValidation {
             'registration' => $request->get('registration'),
             'po_number' => $request->get('po_number'),
             'po_file_uuid' => $request->get('po_file_uuid'),
+            'leasing_invoice_batch_id' => $request->get('leasing_invoice_batch_id'),
             'note' => $request->get('note'),
         ]);
 
