@@ -76,4 +76,13 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
         Route::delete('{id}', ['uses' => 'LeasingPersonnelController@delete']);
     });
+
+    Route::group(['prefix' => 'leasing-invoice-batch'], function() {
+        Route::get('/', ['uses' => 'LeasingInvoiceBatchController@index']);
+        Route::get('{id}', ['uses' => 'LeasingInvoiceBatchController@get']);
+
+        Route::post('/', ['uses' => 'LeasingInvoiceBatchController@store']);
+        Route::post('{id}', ['uses' => 'LeasingInvoiceBatchController@update']);
+        Route::post('{id}/close', ['uses' => 'LeasingInvoiceBatchController@close']);
+    });
 });

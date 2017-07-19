@@ -13,4 +13,9 @@ Route::group(['prefix' => 'redirect-app'], function() {
             'Location' => $link
         ]);
     });
+    Route::group(['prefix' => 'leasing-invoice-batch'], function(){
+		Route::get('{id}', function($id){
+			return redirect('gelora/credit-sales/index.html#/leasingInvoiceBatch/show/' . $id);
+		});
+	});
 });

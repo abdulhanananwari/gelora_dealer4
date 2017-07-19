@@ -98,6 +98,10 @@ geloraBaseShared
                         redirectApp: apps.dealer.creditSales + 'redirect-app/leasing-order/',
                         views: apps.dealer.creditSales + 'views/leasing-order/',
                         report: apps.dealer.creditSales + 'report/leasing-order'
+                    },
+                    leasingInvoiceBatch: {
+                        base: apps.dealer.creditSales + 'api/leasing-invoice-batch/',
+                        views: apps.dealer.creditSales + 'views/leasing-invoice-batch/'
                     }
                 },
                 delivery: {
