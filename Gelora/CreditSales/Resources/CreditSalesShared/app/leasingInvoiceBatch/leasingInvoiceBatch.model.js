@@ -20,8 +20,10 @@ GeloraCreditSalesShared
 		leasingInvoiceBatchModel.update = function(id, leasingInvoiceBatch, params) {
 			return $http.post(LinkFactory.dealer.creditSales.leasingInvoiceBatch.base + id, leasingInvoiceBatch, {params: params})
 		}
+
 		leasingInvoiceBatchModel.close = function(id, leasingInvoiceBatch, params) {
 			return $http.post(LinkFactory.dealer.creditSales.leasingInvoiceBatch.base + id + '/close/', leasingInvoiceBatch, {params: params})
 		}
+		
 		return leasingInvoiceBatchModel
 	})

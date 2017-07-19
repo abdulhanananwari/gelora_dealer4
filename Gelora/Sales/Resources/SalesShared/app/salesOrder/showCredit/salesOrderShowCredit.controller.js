@@ -55,7 +55,7 @@ geloraSalesShared
             }
         }
 
-        vm.leasingOrder = {
+        vm.action = {
             update: function(salesOrder) {
                 SalesOrderModel.leasingOrder.update(salesOrder.id, salesOrder.leasingOrder)
                     .then(function(res) {
@@ -70,7 +70,6 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-
             paymentReceived: function(salesOrder) {
                 SalesOrderModel.leasingOrder.paymentReceived(salesOrder.id, salesOrder.leasingOrder)
                     .then(function(res) {
@@ -84,6 +83,7 @@ geloraSalesShared
                     })
             }
         }
+
         vm.generate = {
             invoice: function() {
                 window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-invoice/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));

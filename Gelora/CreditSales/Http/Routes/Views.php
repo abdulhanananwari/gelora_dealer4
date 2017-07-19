@@ -12,7 +12,8 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
             Route::get('bpkb-agreement', ['uses' => 'LeasingOrderController@generateBpkbAgreement']);
         });
     });
+    
     Route::group(['prefix' => 'leasing-invoice-batch'], function() {
-    	Route::get('{id}/generate-leasing-invoice-batch', ['uses' => 'LeasingInvoiceBatchController@generateLeasingInvoice']);
+        Route::get('{id}/generate-leasing-invoice-batch', ['uses' => 'LeasingInvoiceBatchController@generateLeasingInvoice']);
     });
 });
