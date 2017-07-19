@@ -50,8 +50,8 @@ class Cddb {
             $data['Kode sales'] = $this->salesOrder->getAttribute('salesPersonnel.registration_code');
         }
         
-        $data['Status kepemilikan rumah'] = $cddb['status_kepemilikan_rumah'];
-        $data['status_no_hp'] = $cddb['status_no_hp'];
+        $data['Status Kepemilikan Rumah'] = $cddb['status_kepemilikan_rumah'];
+        $data['Status No HP'] = $cddb['status_no_hp'];
         $data['Akun Facebook'] = $cddb['akun_facebook'];
         $data['Akun Twitter'] = $cddb['akun_twitter'];
         $data['Akun Instagram'] = $cddb['akun_instagram'];
