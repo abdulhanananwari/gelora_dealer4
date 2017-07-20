@@ -12,7 +12,7 @@
 	
 </style>
 
-@if(is_array($viewData['salesOrder']->getAttribute('leasingOrder.joinPromos')))
+@if(isset($viewData['leasingOrder']->joinPromos )&& !empty($viewData['leasingOrder']->joinPromos ))
 @component('gelora.sales::leasingOrder.partials.generateInvoiceJoinPromo' ,  ['viewData' => $viewData])
 @endcomponent
 @endif

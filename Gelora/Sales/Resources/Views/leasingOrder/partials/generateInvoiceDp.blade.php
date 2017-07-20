@@ -16,7 +16,7 @@
                 <td>:</td>
                 <td>
                     <p>{{ number_format($viewData['leasingOrder']->dp_po)}}</p>
-                    <p>{{ \Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->dp_po),true) }}</p>
+                    <p>{{ strtoupper(\Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->dp_po),true)) }}</p>
                 </td>
             </tr>
             <tr>
