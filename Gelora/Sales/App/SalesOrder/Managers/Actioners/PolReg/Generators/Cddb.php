@@ -28,8 +28,8 @@ class Cddb {
         $data['Alamat'] = $cddb['alamat_surat'];
         $data['Kelurahan'] = $cddb['kelurahan_surat'];
         $data['Kecamatan'] = config('gelora.cdb.area.kecamatan_surat.options')[$cddb['kecamatan_surat']];
-        $data['kota'] = $cddb['kota_surat'];
-        $data['kode pos'] = $cddb['kode_pos_surat'];
+        $data['Kota'] = $cddb['kota_surat'];
+        $data['Kode Pos'] = $cddb['kode_pos_surat'];
         $data['Provinsi'] = $cddb['propinsi_surat'];
         $data['Agama'] = $cddb['agama'];
         $data['Pekerjaan'] = $cddb['pekerjaan'];
