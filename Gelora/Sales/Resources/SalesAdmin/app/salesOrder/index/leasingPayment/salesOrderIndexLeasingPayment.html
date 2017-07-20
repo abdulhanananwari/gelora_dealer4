@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Monitoring Pencairan Leasing</h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <button class="btn btn-block btn-warning" ng-click="ctrl.load.notCreated()">SJ Belum Buat Tagihan</button>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-block btn-warning" ng-click="ctrl.load.notSent()">Tagihan Belum Dikirim</button>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-block btn-warning" ng-click="ctrl.load.notPaid()">Tagihan Belum Cari</button>
+            </div>
+        </div>
+        <hr>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Type Motor</th>
+                        <th>Sales</th>
+                        <th>Tanggal SPK</th>
+                        <th>Tanggal SJ</th>
+                        <th>Tanggal Tagih Leasing</th>
+                        <th>Tanggal Kirim Tagihan Leasing</th>
+                        <th>Tanggal Pencairan Leasing</th>
+                        <th>Buka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="salesOrder in ctrl.salesOrders">
+                        <td>{{ salesOrder.customer.name }}</td>
+                        <td>{{ salesOrder.delivery.unit.type_name }}</td>
+                        <td>{{ salesOrder.salesPersonnel.entity.name }}</td>
+                        <td>{{ salesOrder.created_at | fromDateTimeString }}</td>
+                        <td>{{ salesOrder.delivery.generated_at | fromDateTimeString }}</td>
+                        <td>{{ salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</td>
+                        <td>{{ salesOrder.leasingOrder.leasingInvoiceBatch.closed_at | fromDateTimeString }}</td>
+                        <td>{{ salesOrder.indent.created_at | fromDateTimeString }}</td>
+                        <td><a class='btn btn-block btn-xs btn-primary' target="_blank" ui-sref="salesOrderShowCredit({id:salesOrder.id})">Buka</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination pagination="ctrl.meta.pagination" page="ctrl.filter.page" on-load-page="ctrl.load(ctrl.filter)"></pagination>
+    </div>
+</div>

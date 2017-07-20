@@ -37,14 +37,17 @@ class LeasingOrder {
 
             'leasing_invoice_batch_id' => $leasingOrder->leasing_invoice_batch_id ,
             
-            'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->toCarbon('invoice_generated_at', true) : null,
+            'invoice_generated_at' => $leasingOrder->invoice_generated_at ? $leasingOrder->toCarbon('invoice_generated_at', true)->toDateTimeString() : null,
             'invoice_generator' => $leasingOrder->invoice_generator,
 
             'payment_transaction_uuid' => $leasingOrder->payment_transaction_uuid,
             'payment_at' => $leasingOrder->toCarbon('payment_at') instanceof \Carbon\Carbon ? $leasingOrder->toCarbon('payment_at')->toDateTimeString() : null,
-            'payment_creator' => $leasingOrder->payment_creator,    
-
+            'payment_creator' => $leasingOrder->payment_creator,
         ];
+        
+        if ($leasingOrder->leasing_invoice_batch_id) {
+            $transformed['leasingInvoiceBatch'] = LeasingOrder\LeasingInvoiceBatch::transform($salesOrder);
+        }
         
         if (\SolAuthClient::hasAccess('VIEW_LEASING_ORDER_JOIN_PROMOS')) {
             $transformed['joinPromos'] = (array) $leasingOrder->joinPromos;

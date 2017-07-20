@@ -17,13 +17,22 @@
             </div>
         </div>
         <br>
-        <a class="btn btn-primary btn-block" ng-click="ctrl.showOtherIndexes=!ctrl.showOtherIndexes">Lain - Lain</a>
+        <a class="btn btn-danger btn-block" ng-click="ctrl.showOtherIndexes=!ctrl.showOtherIndexes">Lain - Lain</a>
         <br>
-        <div ng-show="ctrl.showOtherIndexes">
-            <a class="btn btn-block btn-info" ui-sref="salesOrderCustomerInvoiceIndex">List Customer Invoice Pending</a>
-            <a class="btn btn-block btn-info" ui-sref="salesOrderIndexDelivery">List Pengiriman (Supir)</a>
-            <a class="btn btn-block btn-info" ui-sref="salesOrderIndexIndent">List Indent</a>
-            <a class="btn btn-block btn-info" ui-sref="cancelledSalesOrderIndex">List Pembatalan SPK</a>
+        <div class="panel panel-warning" ng-show="ctrl.showOtherIndexes">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a class="btn btn-block btn-primary" ui-sref="salesOrderCustomerInvoiceIndex">List Customer Invoice Pending</a>
+                        <a class="btn btn-block btn-primary" ui-sref="salesOrderIndexDelivery">List Pengiriman (Supir)</a>
+                        <a class="btn btn-block btn-primary" ui-sref="SalesOrderIndexLeasingPayment">List Penagihan Leasing</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-block btn-primary" ui-sref="salesOrderIndexIndent">List Indent</a>
+                        <a class="btn btn-block btn-primary" ui-sref="cancelledSalesOrderIndex">List Pembatalan SPK</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
     </div>

@@ -13,7 +13,6 @@ class LeasingInvoiceBatchTransformer extends Fractal\TransformerAbstract {
 
         return [
             'id' => $leasingInvoiceBatch->_id,
-            '_id' => $leasingInvoiceBatch->_id,
             
             'mainLeasing' => $leasingInvoiceBatch->mainLeasing,
             'subLeasing' => $leasingInvoiceBatch->subLeasing,

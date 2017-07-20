@@ -136,6 +136,13 @@ geloraSalesAdmin
                         pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Indent'
 
                     })
+                    .state('SalesOrderIndexLeasingPayment', {
+                        url: '/salesOrder/indexLeasingPayment',
+                        templateUrl: 'app/salesOrder/index/leasingPayment/salesOrderIndexLeasingPayment.html',
+                        controller: 'SalesOrderIndexLeasingPaymentController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Indent'
+
+                    })
 
                     .state('prospectIndex', {
                         url: '/prospect/index',

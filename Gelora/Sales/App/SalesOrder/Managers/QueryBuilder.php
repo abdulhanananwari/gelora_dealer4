@@ -143,6 +143,15 @@ class QueryBuilder {
                 case 'financial_unclosed':
                     $query->whereNull('financial_closed_at');
                     break;
+                case 'delivery_generated_and_not_invoiced':
+                    $query->whereNotNull('delivery.generated_at')->whereNull('leasingOrder.invoice_generated_at');
+                    break;
+                case 'invoice_generated_and_not_batched':
+                    $query->whereNotNull('leasingOrder.invoice_generated_at')->whereNull('leasingOrder.leasing_invoice_batch_id');
+                    break;
+                case 'invoice_batched_and_not_paid':
+                    $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
+                    break;
                 default;
                     break;
             }
