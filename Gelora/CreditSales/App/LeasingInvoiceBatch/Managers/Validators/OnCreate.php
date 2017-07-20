@@ -14,12 +14,7 @@ class OnCreate {
 
     public function validate() {
 
-<<<<<<< HEAD
-        return true;
-    }
-
-=======
-    	$attrValidations = $this->validateAttributes();
+        $attrValidations = $this->validateAttributes();
         if ($attrValidations->fails()) {
             return $attrValidations->errors()->all();
         }
@@ -35,5 +30,4 @@ class OnCreate {
                     'subLeasing' => 'required',
                 ]);
     }
->>>>>>>  penmabhan validsi
 }
