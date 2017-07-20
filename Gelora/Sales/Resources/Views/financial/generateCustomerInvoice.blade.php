@@ -45,7 +45,7 @@
                 </table>
                 <br>
         <table style="width: 100%;" class="table-bordered">
-            <tr style="height: 100px;" class="text-center">
+            <tr style="height: 80px;" class="text-center">
                 <td style="width: 25%;" valign="top">
                     <p >Pembuat</p>
                 </td>
