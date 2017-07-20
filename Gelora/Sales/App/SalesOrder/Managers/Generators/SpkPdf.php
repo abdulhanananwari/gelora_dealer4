@@ -31,7 +31,7 @@ class SpkPdf {
         $this->generateOrderData();
 
         $this->generateExtras();
-        $this->generatePayments();
+//        $this->generatePayments();
 
         if ($this->salesOrder->payment_type == 'credit') {
             $this->generateCreditData();
