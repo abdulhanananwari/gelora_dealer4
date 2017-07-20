@@ -6,6 +6,11 @@
 
 <style type="text/css">
 
+    @page {
+        size: Legal portrait !important;
+        margin-top: 1cm;
+    }
+
 	.container {
 		font-size: 10px !important;
 	}
