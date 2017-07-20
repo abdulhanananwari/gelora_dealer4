@@ -1,7 +1,8 @@
 <?php
 
 Route::group(['prefix' => 'redirect-app'], function() {
-
+    
+    /* 
     Route::get('sales-order/', function() {
 
         $viewData = [
@@ -23,6 +24,7 @@ Route::group(['prefix' => 'redirect-app'], function() {
         return view('gelora.sales::redirect')
                         ->with('viewData', $viewData);
     });
+     */
 
     $middlewares = ['wala.jwt.autoParse.parser', 'wala.jwt.autoParse.validation', 'auth.db.overwrite', 'salesPersonnelAccess'];
 

@@ -13,7 +13,7 @@ class SalesPersonnelAccess {
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next) {
+    public function handle($request, Closure $next, $strict = false) {
 
         $cacheName = \ParsedJwt::getByKey('selected_tenant_id') . '_' . \ParsedJwt::getByKey('sub') . '_sales_data';
 
@@ -31,7 +31,7 @@ class SalesPersonnelAccess {
                     ];
                 });
 
-        if (is_null($salesPersonnel['personnel'])) {
+        if ($strict && is_null($salesPersonnel['personnel'])) {
             return response('Data sales tidak ditemukan', 403);
         }
         
