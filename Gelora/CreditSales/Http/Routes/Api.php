@@ -59,11 +59,6 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
         });
 
         Route::post('/', ['uses' => 'LeasingOrderController@store']);
-
-
-
-
-
         Route::post('{id}', ['uses' => 'LeasingOrderController@update']);
     });
 
@@ -82,7 +77,6 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
         Route::get('{id}', ['uses' => 'LeasingInvoiceBatchController@get']);
 
         Route::post('/', ['uses' => 'LeasingInvoiceBatchController@store']);
-        Route::post('{id}', ['uses' => 'LeasingInvoiceBatchController@update']);
         Route::post('{id}/close', ['uses' => 'LeasingInvoiceBatchController@close']);
     });
 });

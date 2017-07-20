@@ -15,13 +15,21 @@ class OnClose {
     public function validate() {
 
         foreach ($this->leasingInvoiceBatch->getSalesOrders() as $salesOrder) {
-                if (is_null((collect($salesOrder->leasingOrder)->get('po_number')))) {
-                    return ['Batch tidak dapat ditutup karena masih ada Nomor PO yang kosong'];
-                }
+
+            if (!$salesOrder->getAttribute('leasingOrder.po_number')) {
+                return ['Batch tidak dapat ditutup karena nomor PO untuk SPK ' . $salesOrder->id . ' masih kosong'];
             }
-        
+
+            if (!$salesOrder->getAttribute('leasingOrder.invoice_generated_at')) {
+                return ['Batch tidak dapat ditutup karena invoice untuk SPK ' . $salesOrder->id . ' belum dibuat'];
+            }
+
+            if ($salesOrder->getAttribute('leasingOrder.payment_at')) {
+                return ['Batch tidak dapat ditutup karena pembayaran leasing untuk SPK ' . $salesOrder->id . ' sudah terisi'];
+            }
+        }
+
         return true;
     }
 
-   
 }

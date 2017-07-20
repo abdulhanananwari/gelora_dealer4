@@ -18,16 +18,16 @@ class OnCreate {
         if ($attrValidations->fails()) {
             return $attrValidations->errors()->all();
         }
-        
+
         return true;
     }
 
     protected function validateAttributes() {
-        
-        return \Validator::make($this->leasingInvoiceBatch->toArray(),
-                [
+
+        return \Validator::make($this->leasingInvoiceBatch->toArray(), [
                     'mainLeasing' => 'required',
                     'subLeasing' => 'required',
-                ]);
+        ]);
     }
+
 }

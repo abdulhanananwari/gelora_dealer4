@@ -12,8 +12,10 @@
 	
 </style>
 
+@if(is_array($viewData['salesOrder']->getAttribute('leasingOrder.joinPromos')))
 @component('gelora.sales::leasingOrder.partials.generateInvoiceJoinPromo' ,  ['viewData' => $viewData])
 @endcomponent
+@endif
 <hr><br>
 @component('gelora.sales::leasingOrder.partials.generateInvoiceDp' ,  ['viewData' => $viewData])
 @endcomponent
