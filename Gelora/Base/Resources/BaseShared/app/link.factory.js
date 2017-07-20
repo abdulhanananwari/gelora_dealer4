@@ -138,7 +138,8 @@ geloraBaseShared
                         base: apps.dealer.sales + 'api/prospect/',
                     },
                     salesOrderExtra: {
-                        base: apps.dealer.sales + 'api/sales-order-extra/'
+                        base: apps.dealer.sales + 'api/sales-order-extra/',
+                        views: apps.dealer.sales + 'views/sales-order-extra/',
                     },
                     cancelledSalesOrder: {
                         base: apps.dealer.sales + 'api/cancelled-sales-order/'

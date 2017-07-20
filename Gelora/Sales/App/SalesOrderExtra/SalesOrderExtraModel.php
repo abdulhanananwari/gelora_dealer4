@@ -9,8 +9,8 @@ class SalesOrderExtraModel extends Model {
     protected $connection = 'mongodb';
     protected $collection = 'sales_order_extras';
 
-    /* protected $table = 'sales_order_extras'; */
     protected $guarded = ['created_at', 'updated_at'];
+    protected $dates = ['handover.created_at'];
 
     // Managers
 
