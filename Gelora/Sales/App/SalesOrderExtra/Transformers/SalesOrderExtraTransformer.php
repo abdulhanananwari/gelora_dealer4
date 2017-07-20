@@ -9,7 +9,7 @@ class SalesOrderExtraTransformer extends Fractal\TransformerAbstract {
 
     public function transform(SalesOrderExtraModel $salesOrderExtra) {
 
-        return [
+        $data = [
             'id' => $salesOrderExtra->_id,
             
             'type' => $salesOrderExtra->type,
@@ -25,8 +25,10 @@ class SalesOrderExtraTransformer extends Fractal\TransformerAbstract {
             'sales_extra_id' => $salesOrderExtra->sales_extra_id,
             
             'pending_handover' => (bool) $salesOrderExtra->pending_handover,
-            'handover' => (object) $salesOrderExtra->handover,
+            'handover' => (object) Partials\Handover::transform($salesOrderExtra),
         ];
+        
+        return $data;
     }
     
 }

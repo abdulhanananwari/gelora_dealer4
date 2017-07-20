@@ -1,57 +1,73 @@
 geloraSalesShared
-        .controller('SalesOrderShowExtraController', function (
-                $scope, $state,
-                SalesOrderModel, SalesOrderExtraSharedModel, SalesProgramModel,SalesExtraModel,
-                LinkFactory) {
+    .controller('SalesOrderShowExtraController', function(
+        $scope, $state,
+        SalesOrderModel, SalesOrderExtraSharedModel, SalesProgramModel, SalesExtraModel,
+        LinkFactory, JwtValidator) {
 
-            var vm = this
+        var vm = this
 
-            function load() {
+        function load() {
 
-                vm.focused = null
+            vm.focused = null
 
-                SalesOrderModel.get($state.params.id, {include: 'salesOrderExtras'})
-                        .then(function (res) {
+            SalesOrderModel.get($state.params.id, { include: 'salesOrderExtras' })
+                .then(function(res) {
 
-                            vm.salesOrder = res.data.data
-                            vm.salesOrder.salesOrderExtras = res.data.data.salesOrderExtras.data
+                    vm.salesOrder = res.data.data
+                    vm.salesOrder.salesOrderExtras = res.data.data.salesOrderExtras.data
 
-                        })
+                })
+        }
+        load()
+
+        vm.storeFocused = function(salesOrderExtra) {
+
+            salesOrderExtra.sales_order_id = vm.salesOrder.id
+
+            if (salesOrderExtra.id) {
+
+                SalesOrderExtraSharedModel.update(salesOrderExtra.id, salesOrderExtra)
+                    .then(function() {
+                        load()
+                    })
+
+            } else {
+
+                SalesOrderExtraSharedModel.store(salesOrderExtra)
+                    .then(function() {
+                        load()
+                    })
             }
-            load()
+        }
 
-            vm.storeFocused = function (salesOrderExtra) {
+        vm.deleteFocused = function(salesOrderExtra) {
 
-                salesOrderExtra.sales_order_id = vm.salesOrder.id
+        }
 
-                if (salesOrderExtra.id) {
+        vm.createHandover = function(salesOrderExtra) {
 
-                    SalesOrderExtraSharedModel.update(salesOrderExtra.id, salesOrderExtra)
-                            .then(function () {
-                                load()
-                            })
+            if (confirm('Mau buat serah terima untuk ' + salesOrderExtra.item_name)) {
 
-                } else {
+                var receiverName = prompt('Nama penerima')
 
-                    SalesOrderExtraSharedModel.store(salesOrderExtra)
-                            .then(function () {
-                                load()
-                            })
+                var params = {
+                    jwt: JwtValidator.encodedJwt,
+                    receiver_name: receiverName
                 }
+
+                window.open(LinkFactory.dealer.sales.salesOrderExtra.views + salesOrderExtra.id + '/generate-receipt-handover/?' + $.param(params))
             }
 
-            vm.deleteFocused = function(salesOrderExtra) {
-                
-            }
+        }
 
-            SalesProgramModel.index({active: true})
-            .then(function (res) {
+        SalesProgramModel.index({ active: true })
+            .then(function(res) {
                 vm.salesPrograms = res.data.data
             })
-            
-            SalesExtraModel.index()
-            .then(function(res){
+
+        SalesExtraModel.index()
+            .then(function(res) {
                 vm.salesExtras = res.data.data
             })
 
-        })
+    })

@@ -22,6 +22,10 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
             });
         });
     });
+    
+    Route::group(['prefix' => 'sales-order-extra'], function() {
+        Route::get('{id}/generate-receipt-handover', ['uses' => 'SalesOrderExtraController@generateReceiptHandover']);
+    });
 });
 
 Route::get('/gelora/sales/admin/index.html', function() {

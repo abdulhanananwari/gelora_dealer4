@@ -112,7 +112,11 @@
                                 <a ng-href="{{'/base/redirect-app/sales-program/' + extra.sales_program_id}}" target="_blank">{{extra.sales_program_id}}</a>
                                 <a ng-href="{{'/base/redirect-app/sales-extra/' + extra.sales_extra_id}}" target="_blank">{{extra.sales_extra_id}}</a>
                             </td>
-                            <td>{{ extra.pending_handover ? 'Ya' : 'Tidak' }}</td>
+                            <td>
+                                {{ extra.pending_handover && !extra.handover.created_at ? 'Ya' : 'Tidak' }}
+                                <button ng-show="extra.pending_handover && !extra.handover.created_at" class="btn btn-block btn-xs btn-info" ng-click="ctrl.createHandover(extra)">Buat Serah Terima</button>
+                                <p ng-show="extra.handover.created_at">Serah terima dibuat oleh: {{ extra.handover.creator.name }} ({{ extra.handover.created_at | fromDateTimeString }}) kepada {{ extra.handover.receiver_name }}</p>
+                            </td>
                             <td><button ng-disabled="ctrl.salesOrder.validated_at" class="btn btn-xs btn-success" ng-click="ctrl.focused=extra">Edit</button></td>
                         </tr>
                     </tbody>
