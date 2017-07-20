@@ -59,7 +59,7 @@ class SalesOrderController extends Controller {
     public function generateCustomerInvoice($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')->first()->data_1;
         $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request);
         if ($validation !== true) {
             return $this->formatErrors($validation);
@@ -69,6 +69,7 @@ class SalesOrderController extends Controller {
 
         $viewData = [
             'salesOrder' => $salesOrder,
+            'tenantInfo' => $tenantInfo,
             'unit' => $salesOrder->unit,
             'jwt' => \ParsedJwt::getJwt(),
         ];
