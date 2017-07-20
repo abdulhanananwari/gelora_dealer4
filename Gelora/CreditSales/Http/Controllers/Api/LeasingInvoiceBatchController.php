@@ -95,6 +95,10 @@ class LeasingInvoiceBatchController extends Controller {
 
         $leasingInvoiceBatch = $this->leasingInvoiceBatch->find($id);
 
+        $validation = $leasingInvoiceBatch->validate()->onClose();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
         $leasingInvoiceBatch->action()->onClose();
         return $this->formatItem($leasingInvoiceBatch);
     }
