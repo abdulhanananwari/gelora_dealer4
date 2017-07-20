@@ -42,19 +42,22 @@ class OnCreateOrUpdate {
         $entityCount = $this->personnel
                 ->where('entity.id', $this->personnel->entity['id'])
                 ->count();
-        
+
         if ($entityCount != 0) {
             return ['Data person duplicate'];
         }
-        
-        $userCount = $this->personnel
-                ->where('user.id', $this->personnel->user['id'])
-                ->count();
-        
-        if ($userCount != 0) {
-            return ['Data user duplicate'];
+
+        if ($this->personnel->user['id']) {
+
+            $userCount = $this->personnel
+                    ->where('user.id', $this->personnel->user['id'])
+                    ->count();
+
+            if ($userCount != 0) {
+                return ['Data user duplicate'];
+            }
         }
-        
+
         return true;
     }
 
