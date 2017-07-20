@@ -21,6 +21,7 @@ class OnGenerateCustomerInvoice {
             'created_at' => new UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
             'total_due' => $this->salesOrder->calculate()->salesOrderBalance()['payment_unreceived'],
             'amount' => (int) $request->get('amount'),
+            'note' => $request->get('note'),
             'delegate' => [
                 'name' => $request->get('delegate_name'),
                 'type' => $request->get('delegate_type'),
