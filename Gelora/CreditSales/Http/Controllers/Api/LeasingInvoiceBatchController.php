@@ -46,7 +46,7 @@ class LeasingInvoiceBatchController extends Controller {
 
         if ($request->has('paginate')) {
 
-            $leasingInvoiceBatches =  $query->paginate( (int) $request->get('paginate', 20));
+            $leasingInvoiceBatches = $query->paginate((int) $request->get('paginate', 20));
             return $this->formatCollection($leasingInvoiceBatches, [], $leasingInvoiceBatches);
         } else {
 
@@ -66,23 +66,24 @@ class LeasingInvoiceBatchController extends Controller {
 
         $leasingInvoiceBatch = $this->leasingInvoiceBatch->assign()->fromRequest($request);
 
+        $validation = $leasingInvoiceBatch->validate()->onCreate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
         $leasingInvoiceBatch->action()->onCreate();
 
         return $this->formatItem($leasingInvoiceBatch);
     }
 
-    public function update($id, Request $request) {
-
-        $leasingInvoiceBatch = $this->leasingInvoiceBatch->find($id);
-        $leasingInvoiceBatch->assign()->fromRequest($request);
-        
-        $leasingInvoiceBatch->save();
-
-        return $this->formatItem($leasingInvoiceBatch);
-    }
-
     public function close($id, Request $request) {
+
         $leasingInvoiceBatch = $this->leasingInvoiceBatch->find($id);
+
+        $validation = $leasingInvoiceBatch->validate()->onClose();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
         $leasingInvoiceBatch->action()->onClose();
         return $this->formatItem($leasingInvoiceBatch);
     }

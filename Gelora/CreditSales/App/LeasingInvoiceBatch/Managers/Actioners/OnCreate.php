@@ -4,7 +4,7 @@ namespace Gelora\CreditSales\App\LeasingInvoiceBatch\Managers\Actioners;
 
 use Gelora\CreditSales\App\LeasingInvoiceBatch\LeasingInvoiceBatchModel;
 
-class OnClose {
+class OnCreate {
 
     protected $leasingInvoiceBatch;
 
