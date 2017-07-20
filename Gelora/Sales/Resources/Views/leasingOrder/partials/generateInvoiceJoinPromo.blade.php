@@ -17,7 +17,7 @@
                 <td>:</td>
                 <td>
                     <p>{{ number_format($viewData['leasingOrder']->joinPromos[0]['transfer_amount']) }}</p>
-                    <p>{{ \Solumax\PhpHelperExtended\NumberWords::toBahasa( $viewData['leasingOrder']->joinPromos[0]['transfer_amount'],true) }}</p>
+                    <p>{{ strtoupper(\Solumax\PhpHelperExtended\NumberWords::toBahasa( $viewData['leasingOrder']->joinPromos[0]['transfer_amount'],true)) }}</p>
                 </td>
             </tr>
             <tr>
