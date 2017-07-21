@@ -38,6 +38,10 @@ class SpkPdf {
         }
 
         $this->generateFooter();
+        
+        if ($this->salesOrderBalance['payment_unreceived'] !== 0) {    
+            $this->generateInfo();
+        }
 
         if ($download) {
 
@@ -422,10 +426,32 @@ class SpkPdf {
 
         $this->pdf->SetX($width / 3 * 2);
         $this->pdf->Cell(0, 5, 'ADMIN', 0, 0);
+        $this->generateLine();
 
         $this->pdf->SetY($y);
     }
+    protected function generateInfo() {
 
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')->first()->data_1;
+        $content = $tenantInfo->PAYMENT_INSTRUCTION;
+
+        $content = str_replace('**BANK**', $tenantInfo->BANK, $content);
+        $content = str_replace('**BANK_ACCOUNT_NUMBER**', $tenantInfo->BANK_ACCOUNT_NUMBER, $content);
+        $content = str_replace('**BANK_ACCOUNT_NAME**', $tenantInfo->BANK_ACCOUNT_NAME, $content);
+        $content = str_replace('**SPK_ID**', substr($this->salesOrder->id, -5), $content);
+
+        $width = $this->pdf->GetPageWidth();
+        $y = $this->pdf->GetY();
+        $this->pdf->SetY($y);
+
+        $this->pdf->Ln(40);
+
+        $this->pdf->SetFont('Arial', 'B', 10);
+        $this->pdf->Cell(0, 10, 'Petunjuk Pembayaran :', 0, 2);
+        $this->pdf->SetFont('Arial', '', 10);
+        $this->pdf->MultiCell(0, 5, $content);
+        $this->generateLine();
+    }
     protected function upload($content) {
 
         $data = [

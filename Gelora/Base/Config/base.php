@@ -82,6 +82,11 @@ return [
                 'name' => 'Nama Bank Account',
                 'code' => 'BANK_ACCOUNT_NAME',
                 'type' => 'unique'
+            ],
+                [
+                'name' => 'Petunjuk Pembayaran',
+                'code' => 'PAYMENT_INSTRUCTION',
+                'type' => 'unique'
             ]
         ],
         'businessProcedure' => [
