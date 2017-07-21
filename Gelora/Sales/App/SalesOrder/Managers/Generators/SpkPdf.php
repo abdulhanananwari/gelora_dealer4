@@ -40,7 +40,7 @@ class SpkPdf {
         $this->generateFooter();
         
         if ($this->salesOrderBalance['payment_unreceived'] !== 0) {    
-            $this->generateInfo();
+            $this->generatePaymentInstruction();
         }
 
         if ($download) {
@@ -430,7 +430,7 @@ class SpkPdf {
 
         $this->pdf->SetY($y);
     }
-    protected function generateInfo() {
+    protected function generatePaymentInstruction() {
 
         $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')->first()->data_1;
         $content = $tenantInfo->PAYMENT_INSTRUCTION;
