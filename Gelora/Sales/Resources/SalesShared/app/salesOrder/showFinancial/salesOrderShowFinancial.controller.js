@@ -68,7 +68,8 @@ geloraSalesShared
                     jwt: JwtValidator.encodedJwt,
                     delegate_name: customerInvoice.delegate.name,
                     delegate_type: customerInvoice.delegate.type,
-                    amount: customerInvoice.amount
+                    amount: customerInvoice.amount,
+                    note: customerInvoice.note
                 }
 
                 window.open(LinkFactory.dealer.sales.salesOrder.financial.views + 'generate-customer-invoice/' + salesOrder.id + '?' + $.param(params))

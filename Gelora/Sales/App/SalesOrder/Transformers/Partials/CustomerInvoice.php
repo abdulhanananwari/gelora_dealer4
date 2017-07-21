@@ -14,6 +14,7 @@ class CustomerInvoice extends Fractal\TransformerAbstract {
             'creator' => (object) $salesOrder->getAttribute('customerInvoice.creator'),
             'delegate' => (object) $salesOrder->getAttribute('customerInvoice.delegate'),
             'amount' => (int) $salesOrder->getAttribute('customerInvoice.amount'),
+            'note' => $salesOrder->getAttribute('customerInvoice.note'),
             'total_due' => (int) $salesOrder->getAttribute('customerInvoice.total_due'),
         ];
 

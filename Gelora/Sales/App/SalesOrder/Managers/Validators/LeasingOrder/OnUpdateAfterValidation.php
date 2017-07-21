@@ -18,6 +18,10 @@ class OnUpdateAfterValidation {
             return ['PO tidak dapat di edit karena status financial SPK sudah ditutup'];
         }
 
+        if ($this->salesOrder->getAttribute('leasingOrder.payment_at')) {
+            return ['PO tidak bisa dirubah karena pembayaran PO sudah dibuat'];
+        }
+
         return true;
     }
 

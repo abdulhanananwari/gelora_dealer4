@@ -122,6 +122,8 @@
                 <input type="text" ng-model="ctrl.salesOrder.customerInvoice.delegate.type" disabled>
                 <label>Jumlah Tagihan <button ng-hide="ctrl.salesOrder.customerInvoice.created_at" class="btn btn-xs" ng-click="ctrl.salesOrder.customerInvoice.amount=ctrl.paymentUnreceived">Terhutang {{ ctrl.paymentUnreceived | number }}</button></label>
                 <input type="number" ng-model="ctrl.salesOrder.customerInvoice.amount">
+                <label>Redaksi Invoice</label>
+                <input type="text" ng-model="ctrl.salesOrder.customerInvoice.note">
                 <button ng-hide="ctrl.salesOrder.customerInvoice.created_at" class="btn btn-block btn-warning" ng-click="ctrl.customerInvoice.generate(ctrl.salesOrder, ctrl.salesOrder.customerInvoice)">Cetak</button>
                 <span ng-show="ctrl.salesOrder.customerInvoice.created_at">
                     <label>Dibuat: {{ ctrl.salesOrder.customerInvoice.creator.name }} ({{ ctrl.salesOrder.customerInvoice.creator.timestamp * 1000 | fromDateTimeString }})</label>

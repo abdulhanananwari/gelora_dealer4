@@ -11,21 +11,15 @@
 @endcomponent
 
 <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-3">
         <p><strong>Kepada Yth,</strong></p>
         <p>{{ $viewData['salesOrder']->getAttribute('customer.name') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('customer.address') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.kecamatan') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.kelurahan') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('customer.kecamatan') }} / {{ $viewData['salesOrder']->getAttribute('customer.kelurahan') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('customer.kode_pos') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('customer.phone_number') }}</p>
-        </br>
-
-        <p>Catatan Pengiriman: {{ $viewData['salesOrder']->getAttribute('deliveryRequest.type') ? collect(config('gelora.delivery.types'))->where('code', $viewData['salesOrder']->getAttribute('deliveryRequest.type'))->first()['name'] : '' }}</p>
-
-
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
         <p>Penerima:</p>
         <p>{{ $viewData['salesOrder']->getAttribute('deliveryRequest.name') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('deliveryRequest.address') }}</p>
@@ -33,16 +27,41 @@
         <p>Catatan:</p>
         <p>{{ $viewData['salesOrder']->getAttribute('deliveryRequest.request') }}</p>
     </div>
-    <div class="col-xs-4">
-        <p>Tanggal SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
-        <p>Tanggal Cetak SJ: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
+    <div class="col-xs-3">
+        <p>SPK: {{$viewData['salesOrder']->validated_at->toDateString() }}</p>
+        <p>SJ: {{ \Carbon\Carbon::now()->toDateString() }}</p>
         <p>Cetakan Ke: {{ $viewData['delivery']->delivery_note_generated_count }}</p>
         @if($viewData['salesOrder']->payment_type=="credit")
         <p>Leasing : {{$viewData['salesOrder']->getAttribute('leasingOrder.mainLeasing.name') }} ({{$viewData['salesOrder']->getAttribute('leasingOrder.subLeasing.name') }})</p>
         @endif
     </div>
+    <div class="col-xs-3">  
+        <table border="1" width="100%">
+            <tr>
+                <th>Hadiah</th>
+            </tr>
+            <tr>
+                <td>
+                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->where('pending_handover', false)->all() as $extra)
+                        <span>{{$extra->salesExtra['name']}}, </span>
+                    @endforeach
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table border="1" width="100%">
+            <tr>
+                <th>Kelengkapan</th>
+            </tr>
+            <tr>
+                <td>
+                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->where('pending_handover', false)->all() as $extra)
+                    <span>{{$extra->salesExtra['name']}}, </span> @endforeach
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
-<br>
 <table border="1" width="100%">
     <tr>
         <th>Merk</th>
@@ -59,36 +78,6 @@
         <td>{{$viewData['unit']->engine_number}}</td>
     </tr>
 </table>
-</br>
-<div class="row">
-    <div class="col-xs-6">
-        <table border="1" width="100%">
-            <tr>
-                <th>Hadiah</th>
-            </tr>
-            <tr>
-                <td>
-                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Hadiah')->where('pending_handover', false)->all() as $extra)
-                        <span>{{$extra->salesExtra['name']}}, </span>
-                    @endforeach
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="col-xs-6">
-        <table border="1" width="100%">
-            <tr>
-                <th>Kelengkapan</th>
-            </tr>
-            <tr>
-                <td>
-                    @foreach($viewData['salesOrder']->salesOrderExtras->where('item_code', 'Kelengkapan')->where('pending_handover', false)->all() as $extra)
-                    <span>{{$extra->salesExtra['name']}}, </span> @endforeach
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
 </br>
 <table border="1" width="100%" class="text-center">
     <tr>

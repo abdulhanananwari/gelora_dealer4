@@ -13,45 +13,39 @@
 <div class="row">
     <div class="col-sm-12">
         <h2 class="text-center" style="font-size: 18px;">INVOICE / TAGIHAN</h2>
-        <div class="row">
-            <div class="col-xs-8">
+
                 <table width="100%">
                     <tr>
-                        <td style="width: 50%;">Nama Customer</td>
-                        <td style="width: 50%; padding-left: 5px;">{{ $viewData['salesOrder']->customer['name'] }}</td>
+                        <td style="width: 30%;">Nama Customer</td>
+                        <td style="width: 70%; padding-left: 5px;">{{ $viewData['salesOrder']->customer['name'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Penjualan</td>
+                        <td>{{ $viewData['salesOrder']->id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cetak</td>
+                        <td>{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
                     </tr>
                     <tr>
                         <td>Untuk</td>
-                        <td>Pembayaran SPK {{ $viewData['salesOrder']->id }}</td>
+                        <td>{{ $viewData['salesOrder']->getAttribute('customerInvoice.note') }}</td>
                     </tr>
                     <tr>
-                        <td>Total Terhutang</td>
-                        <td>Rp {{ number_format($viewData['salesOrder']->getAttribute('customerInvoice.total_due')) }}</td>
-                    </tr>
-                    <tr style="font-size: 1.2em;">
-                        <td>Total Tagihan Ini</td>
-                        <td>
-                            <p><strong>Rp {{ number_format($viewData['salesOrder']->getAttribute('customerInvoice.amount')) }}</strong></p>
-                            <p>{{\Solumax\PhpHelperExtended\NumberWords::toBahasa($viewData['salesOrder']->getAttribute('customerInvoice.amount'),true)}}</p>
+                        <td>Sejumlah</td>
+                        <td><strong>Rp {{ number_format($viewData['salesOrder']->getAttribute('customerInvoice.amount')) }}</strong>
+                            <p></p>
+                            <p></p>
                         </td>
                     </tr>
-                </table>
-            </div>
-            <div class="col-xs-4">
-                <table width="100%">
                     <tr>
-                        <td><p>Tanggal SPK: {{$viewData['salesOrder']->created_at->toDateTimeString() }}</p>
-                            @if( $viewData['salesOrder']->validated_at )
-                            <p>Tanggal Validasi: {{$viewData['salesOrder']->validated_at->toDateTimeString() }}</p>
-                            @endif
-                            <p>Tanggal Cetak: {{ \Carbon\Carbon::now()->toDateTimeString() }}</p>
-                        </td>
+                        <td></td>
+                        <td>{{ strtoupper(\Solumax\PhpHelperExtended\NumberWords::toBahasa($viewData['salesOrder']->getAttribute('customerInvoice.amount'),true)) }}</td>
                     </tr>
                 </table>
-            </div>
-        </div>
+                <br>
         <table style="width: 100%;" class="table-bordered">
-            <tr style="height: 100px;" class="text-center">
+            <tr style="height: 80px;" class="text-center">
                 <td style="width: 25%;" valign="top">
                     <p >Pembuat</p>
                 </td>

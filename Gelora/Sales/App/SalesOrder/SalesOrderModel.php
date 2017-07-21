@@ -63,6 +63,11 @@ class SalesOrderModel extends Model {
         return $this->belongsTo('\Gelora\Base\App\Unit\UnitModel', 'unit_id', '_id');
     }
 
+    public function leasingInvoiceBatch() {
+        return $this->belongsTo('\Gelora\CreditSales\App\LeasingInvoiceBatch\LeasingInvoiceBatchModel',
+                'leasingOrder.leasing_invoice_batch_id', '_id');
+    }
+
     public function salesOrderExtras() {
         return $this->hasMany('\Gelora\Sales\App\SalesOrderExtra\SalesOrderExtraModel', 'sales_order_id');
     }

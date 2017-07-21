@@ -59,13 +59,15 @@ class SalesOrderController extends Controller {
     public function generateCustomerInvoice($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')->first()->data_1;
+        
         $validation = $salesOrder->validate()->financial()->onGenerateCustomerInvoice($request);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
 
         $salesOrder->action()->financial()->onGenerateCustomerInvoice($request);
+
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')->first()->data_1;
 
         $viewData = [
             'salesOrder' => $salesOrder,
