@@ -12,15 +12,13 @@
                         <th>Type Motor</th>
                         <th>Warna Motor</th>
                         <th>Sales</th>
+                        <th>Leasing</th>
                         <th>Tanggal</th>
                         <th>Indent</th>
                         <th>Validasi</th>
                         <th>Pengiriman</th>
                         <th>Tagih Leasing</th>
-                        <th>Laporan ke MD</th>
-                        <th>Serah Ke Biro Jasa</th>
-                        <th>Terima Dari Biro Jasa</th>
-                        <th>Penyerahan BPKB ke leasing</th>
+                        <th>Batch Pol Reg</th>
                         <th>Buka</th>
                     </tr>
                 </thead>
@@ -30,16 +28,18 @@
                         <td>{{salesOrder.vehicle.name}}</td>
                         <td>{{salesOrder.vehicle.variant.name}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
+                        <td>{{salesOrder.leasingOrder.mainLeasing.name}}</td>
                         <td>{{salesOrder.created_at | fromDateTimeString}}</td>
                         <td>{{salesOrder.indent.created_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.validated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.leasingOrder.invoice_generated_at.date | fromDateTimeString}}</td>
-                        <td><a ng-if="salesOrder.polReg.md_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-md-submission-batch/' + salesOrder.polReg.md_submission_batch_id}}">Buka</a></td>
-                        <td><a ng-if="salesOrder.polReg.agency_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-agency-submission-batch/' + salesOrder.polReg.agency_submission_batch_id}}">Buka</a></td>
-                        <td><a ng-if="salesOrder.polReg.agency_invoice_id" href="{{'/pol-reg/redirect-app/registration-agency-invoice/' + salesOrder.polReg.agency_invoice_id}}">Buka</a></td>
-                        <td><a ng-if="salesOrder.polReg.leasing_bpkb_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-leasing-bpkb-submission-batch/' + salesOrder.polReg.leasing_bpkb_submission_batch_id}}">Buka</a></td>
-                        <td><a ui-sref="salesOrderShow({id:salesOrder.id})">Buka</a></td>
+                        <td><span><a ng-if="salesOrder.polReg.md_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-md-submission-batch/' + salesOrder.polReg.md_submission_batch_id}}">MD</a></span><br>
+                        <span><a ng-if="salesOrder.polReg.agency_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-agency-submission-batch/' + salesOrder.polReg.agency_submission_batch_id}}">Ke Biro Jasa</a></span><br>
+                        <span><a ng-if="salesOrder.polReg.agency_invoice_id" href="{{'/pol-reg/redirect-app/registration-agency-invoice/' + salesOrder.polReg.agency_invoice_id}}">Dari Biro Jasa</a></span><br>
+                        <span ng-if="salesOrder.polReg.leasing_bpkb_submission_batch_id"><a href="{{'/pol-reg/redirect-app/registration-leasing-bpkb-submission-batch/' + salesOrder.polReg.leasing_bpkb_submission_batch_id}}">BPKB Ke Leasing</a><br></span>
+                        </td>
+                        <td><a class="btn btn-block btn-xs btn-primary" ui-sref="salesOrderShow({id:salesOrder.id})">Buka</a></td>
                     </tr>
                 </tbody>
             </table>
