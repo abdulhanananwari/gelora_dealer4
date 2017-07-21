@@ -75,8 +75,16 @@
         </table>
         <br>
         <p><strong>Petunjuk Pembayaran:</strong></p>
+        <?php
+
+            $content = $viewData['tenantInfo']->PAYMENT_INSTRUCTION;
+            $content = str_replace('**BANK**', $viewData['tenantInfo']->BANK, $content);
+            $content = str_replace('**BANK_ACCOUNT_NUMBER**', $viewData['tenantInfo']->BANK_ACCOUNT_NUMBER, $content);
+            $content = str_replace('**BANK_ACCOUNT_NAME**', $viewData['tenantInfo']->BANK_ACCOUNT_NAME, $content);
+            $content = str_replace('**SPK_ID**', substr($viewData['salesOrder']->id, -5), $content);
+        ?>
         <ul style="font-size: 12px;">         
-            <li>Pembayaran menggunakan transfer bank harap dilakukan ke rekening <strong>{{ $viewData['tenantInfo']->BANK }}</strong> nomor account <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NUMBER }}</strong> atas nama <strong>{{ $viewData['tenantInfo']->BANK_ACCOUNT_NAME }}</strong> dengan mencantumkan keterangan: <strong>PEL SPK {{ substr($viewData['salesOrder']->id, -5) }}</strong></li>
+            <li>{{$content}}</li>
         </ul>
     </div>
 </div>

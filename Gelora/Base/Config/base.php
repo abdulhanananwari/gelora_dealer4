@@ -84,6 +84,11 @@ return [
                 'type' => 'unique'
             ],
                 [
+                'name' => 'Catatan SPK',
+                'code' => 'SPK_NOTE',
+                'type' => 'unique'
+            ],
+                [
                 'name' => 'Petunjuk Pembayaran',
                 'code' => 'PAYMENT_INSTRUCTION',
                 'type' => 'unique'
