@@ -2,7 +2,7 @@ geloraSalesShared
     .controller('SalesOrderShowCreditController', function(
         $state,
         LinkFactory, JwtValidator, ConfigModel, AppFactory,
-        LeasingInvoiceBatchModel,
+        LeasingInvoiceBatchModel, LeasingModel,
         SalesOrderModel) {
 
         var vm = this
@@ -12,6 +12,15 @@ geloraSalesShared
         SalesOrderModel.get($state.params.id)
             .then(function(res) {
                 vm.salesOrder = res.data.data
+
+                if (_.has(vm.salesOrder, 'leasingOrder.mainLeasing.id')) {
+                    LeasingModel.get(_.get(vm.salesOrder, 'leasingOrder.mainLeasing.id'))
+                        .then(function(res) {
+                            vm.leasing = res.data.data
+                            vm.mbdTransferFormula = vm.leasing.mbd_transfer_formula
+                            vm.recalculateJoinPromos()
+                        })
+                }
             })
 
         ConfigModel.get('gelora.creditSales.dueDateTypes')
@@ -19,13 +28,6 @@ geloraSalesShared
                 vm.dueDayTypes = res.data.data
             })
 
-        vm.copyLeasingOrderFromSalesOrder = function() {
-
-            vm.salesOrder.leasingOrder.customer = _.pick(vm.salesOrder.customer, ['name', 'address', 'ktp'])
-            vm.salesOrder.leasingOrder.registration = _.pick(vm.salesOrder.registration, ['name', 'address', 'ktp'])
-            vm.salesOrder.leasingOrder.vehicle = vm.salesOrder.vehicle;
-            vm.salesOrder.leasingOrder.on_the_road = vm.salesOrder.on_the_road
-        }
 
         vm.store = function(salesOrder) {
             SalesOrderModel.leasingOrder.update(salesOrder.id, salesOrder.leasingOrder)
@@ -44,9 +46,28 @@ geloraSalesShared
                 })
         }
 
+        vm.copyDataFromSalesOrder = function() {
+            vm.salesOrder.leasingOrder.customer = _.pick(vm.salesOrder.customer, ['name', 'address', 'ktp'])
+            vm.salesOrder.leasingOrder.registration = _.pick(vm.salesOrder.registration, ['name', 'address', 'ktp'])
+            vm.salesOrder.leasingOrder.vehicle = vm.salesOrder.vehicle;
+            vm.salesOrder.leasingOrder.on_the_road = vm.salesOrder.on_the_road
+        }
+
+        vm.recalculateJoinPromos = function() {
+
+            _.forEach(vm.salesOrder.leasingOrder.joinPromos, function(joinPromo) {
+                if (_.isNumber(joinPromo.amount)) {
+
+                    var string = _.replace(vm.mbdTransferFormula, /amount/g, _.toString(joinPromo.amount))
+                    joinPromo.transfer_amount = _.round(eval(string), 0)
+                    joinPromo.transfer_amount_calculated = _.round(eval(string), 0)
+                }
+            })
+        }
+
         vm.loadLeasingInvoiceBatches = function() {
 
-            if (!vm.leasingInvoiceBatche) {
+            if (!vm.leasingInvoiceBatches) {
 
                 LeasingInvoiceBatchModel.index({ status: 'active', 'sub_leasing_id': vm.salesOrder.leasingOrder.subLeasing.id })
                     .then(function(res) {
@@ -76,6 +97,12 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
+            joinPromoPayment: function(salesOrder, joinPromo, transaction) {
+                SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id, joinPromo,transaction)
+                    .then(function(res) {
+                        vm.salesOrder = res.data.data
+                    })
+            },
             poComplete: function(salesOrder, po_complete) {
                 SalesOrderModel.leasingOrder.poComplete(salesOrder.id, { po_complete: po_complete })
                     .then(function(res) {
@@ -95,4 +122,12 @@ geloraSalesShared
                 window.open(LinkFactory.dealer.sales.salesOrder.leasingOrder.views + 'generate-leasing-order-receipt/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
         }
+
+        vm.transactionCreatorModal = {
+            setting: [
+                { property: 'amount', readonly: true, shown: true }
+            ]
+        }
+
+
     })
