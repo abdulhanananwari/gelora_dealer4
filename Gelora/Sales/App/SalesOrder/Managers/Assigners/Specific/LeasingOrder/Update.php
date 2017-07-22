@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnUpdate {
+class Update {
     
     protected $salesOrder;
     

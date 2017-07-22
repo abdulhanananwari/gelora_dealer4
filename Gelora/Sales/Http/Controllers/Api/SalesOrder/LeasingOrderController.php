@@ -16,7 +16,7 @@ class LeasingOrderController extends SalesOrderController {
     public function update($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->leasingOrder()->onUpdate($request->get('leasingOrder'));
+        $salesOrder->assign()->specific()->leasingOrder()->update($request->get('leasingOrder'));
 
         $validation = $salesOrder->validate()->leasingOrder()->onUpdate();
         if ($validation !== true) {
@@ -92,7 +92,7 @@ class LeasingOrderController extends SalesOrderController {
 
         $salesOrder = $this->salesOrder->find($id);
 
-        $validation = $salesOrder->validate()->leasingOrder()->updateAfterValidation();
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }
