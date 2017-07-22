@@ -78,10 +78,10 @@ class LeasingOrderController extends SalesOrderController {
 
         $salesOrder->assign()->specific()->leasingOrder()->joinPromoPayment($request->get('transaction'));
 
-        // $validation = $salesOrder->validate()->leasingOrder()->onPaymentJoinPromo();
-        // if ($validation !== true) {
-        //     return $this->formatErrors($validation);
-        // }
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
 
         $salesOrder->save();
 
