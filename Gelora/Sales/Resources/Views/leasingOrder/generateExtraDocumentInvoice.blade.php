@@ -16,16 +16,18 @@
 	}
 	
 </style>
-
-@if(isset($viewData['leasingOrder']->joinPromos )&& !empty($viewData['leasingOrder']->joinPromos ))
+@if($viewData['leasing']->getAttribute('generateDocuments.invoice_jp') && isset($viewData['leasingOrder']->joinPromos)&& !empty($viewData['leasingOrder']->joinPromos))
 @component('gelora.sales::leasingOrder.partials.generateInvoiceJoinPromo' ,  ['viewData' => $viewData])
 @endcomponent
 @endif
 <hr><br>
+@if($viewData['leasing']->getAttribute('generateDocuments.invoice_dp'))
 @component('gelora.sales::leasingOrder.partials.generateInvoiceDp' ,  ['viewData' => $viewData])
 @endcomponent
+@endif
 <hr><br>
+@if($viewData['leasing']->getAttribute('generateDocuments.agreement_bpkb'))
 @component('gelora.sales::leasingOrder.partials.generateAgreementBpkb' ,  ['viewData' => $viewData])
 @endcomponent
-
+@endif
 @endsection
