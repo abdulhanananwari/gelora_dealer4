@@ -9,7 +9,7 @@
                 <button class="btn btn-block btn-warning" ng-click="ctrl.load.notSent()">Tagihan Belum Dikirim</button>
             </div>
             <div class="col-sm-4">
-                <button class="btn btn-block btn-warning" ng-click="ctrl.load.notPaid()">Tagihan Belum Cari</button>
+                <button class="btn btn-block btn-warning" ng-click="ctrl.load.notPaid()">Tagihan Belum Cair</button>
             </div>
         </div>
         <hr>
@@ -37,7 +37,7 @@
                         <td>{{ salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>{{ salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</td>
                         <td>{{ salesOrder.leasingOrder.leasingInvoiceBatch.closed_at | fromDateTimeString }}</td>
-                        <td>{{ salesOrder.indent.created_at | fromDateTimeString }}</td>
+                        <td>{{ salesOrder.leasingOrder.payment_at | fromDateTimeString }}</td>
                         <td><a class='btn btn-block btn-xs btn-primary' target="_blank" ui-sref="salesOrderShowCredit({id:salesOrder.id})">Buka</a></td>
                     </tr>
                 </tbody>

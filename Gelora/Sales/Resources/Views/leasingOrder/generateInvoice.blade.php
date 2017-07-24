@@ -16,12 +16,12 @@
             <tr>
                 <td>Telah Terima Dari</td>
                 <td>:</td>
-                <td>{{ $viewData['leasingOrder']->get('mainLeasing.name') }} | {{$viewData['leasingOrder']->get('customer.name') }}</td>
+                <td>{{ $viewData['leasingOrder']->get('mainLeasing.name') }} QQ {{$viewData['leasingOrder']->get('customer.name') }}</td>
             </tr>
             <tr>
                 <td>Uang Sejumlah</td>
                 <td>:</td>
-                <td>{{ \Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po),true) }}</td>
+                <td>{{ strtoupper( \Solumax\PhpHelperExtended\NumberWords::toBahasa(($viewData['leasingOrder']->on_the_road - $viewData['leasingOrder']->dp_po),true))}}</td>
             </tr>
             <tr>
                 <td>Untuk</td>

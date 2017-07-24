@@ -5,7 +5,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Actioners\LeasingOrder;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 use Solumax\PhpHelper\App\Mongo\SubDocument;
 
-class OnPaymentReceived {
+class OnMainReceivablePayment {
 
     protected $salesOrder;
 

@@ -60,7 +60,7 @@ geloraSalesShared
 
                     var string = _.replace(vm.mbdTransferFormula, /amount/g, _.toString(joinPromo.amount))
                     joinPromo.transfer_amount = _.round(eval(string), 0)
-                    joinPromo.transfer_amount_calculated = _.round(eval(string), 0)
+                    joinPromo.calculated_transfer_amount = _.round(eval(string), 0)
                 }
             })
         }
@@ -91,8 +91,8 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            paymentReceived: function(salesOrder) {
-                SalesOrderModel.leasingOrder.paymentReceived(salesOrder.id, salesOrder.leasingOrder)
+            mainReceivablePayment: function(salesOrder) {
+                SalesOrderModel.leasingOrder.mainReceivablePayment(salesOrder.id, salesOrder.leasingOrder)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })
@@ -101,6 +101,7 @@ geloraSalesShared
                 SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id,joinPromos,transaction)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
+                        $state.reload()
                     })
             },
             poComplete: function(salesOrder, po_complete) {
