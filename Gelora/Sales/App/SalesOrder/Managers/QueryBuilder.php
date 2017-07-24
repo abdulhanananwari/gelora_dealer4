@@ -152,6 +152,9 @@ class QueryBuilder {
                 case 'invoice_batched_and_not_paid':
                     $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
                     break;
+                case 'main_receivable_paid':
+                    $query->whereNotNull('leasingOrder.payment_at');
+                    break;
                 default;
                     break;
             }

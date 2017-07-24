@@ -19,7 +19,7 @@ class LeasingOrder {
             'registration' => (object) $leasingOrder->registration,
             'vehicle' => (object) $leasingOrder->vehicle,
             'on_the_road' => (int) $leasingOrder->on_the_road,
-            'leasing_payable' => (int) $leasingOrder->leasing_payable,
+            'leasing_payable' => (int) $leasingOrder->on_the_road - $leasingOrder->dp_po,
             'dp_po' => (int) $leasingOrder->dp_po,
             'dp_bayar' => (int) $leasingOrder->dp_bayar,
             'tenor' => (int) $leasingOrder->tenor,
