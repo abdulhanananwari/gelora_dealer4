@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-sm-3">
         <h5>Leasing</h5>
-        <leasing-selector selected-main-leasing="ctrl.salesOrder.leasingOrder.mainLeasing" selected-sub-leasing="ctrl.salesOrder.leasingOrder.subLeasing"></leasing-selector>
+        <leasing-selector ng-if="ctrl.salesOrder.id && !ctrl.salesOrder.validated_at" selected-main-leasing="ctrl.salesOrder.leasingOrder.mainLeasing" selected-sub-leasing="ctrl.salesOrder.leasingOrder.subLeasing"></leasing-selector>
         <br>
         <label>Leasing ID</label>
         <input type="text" ng-model="ctrl.salesOrder.leasingOrder.mainLeasing.id" readonly>
@@ -25,7 +25,7 @@
     </div>
     <div class="col-sm-3">
         <h5>Detail PO</h5>
-        <button class="btn btn-block btn-info btn-xs" ng-click="ctrl.copyLeasingOrderFromSalesOrder()">Copy data dari SPK</button>
+        <button ng-show="!ctrl.salesOrder.validated_at" class="btn btn-block btn-info btn-xs" ng-click="ctrl.copyDataFromSalesOrder()">Copy data dari SPK</button>
         <label>Nama Kustomer</label>
         <input type="text" ng-model="ctrl.salesOrder.leasingOrder.customer.name">
         <label>Alamat Kustomer</label>
@@ -74,7 +74,7 @@
 <button ng-show="ctrl.salesOrder.leasingOrder.validated_at" class="btn btn-block btn-warning" ng-click="ctrl.action.updateAfterValidation(ctrl.salesOrder)">Simpan (Non Data Financial)</button>
 <br>
 <div class="row" ng-show="ctrl.appType == 'admin'">
-    <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
+    <div class="col-sm-12" ng-show="ctrl.salesOrder.leasingOrder.joinPromos">
         <div class="well">
             <h4>Join Promo</h4>
             <button class="btn btn-block btn-info" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.push({})">Tambah Join Promo</button>
@@ -85,15 +85,19 @@
                         <tr>
                             <th>Nama</th>
                             <th>Jumlah Piutang Leasing</th>
+                            <th>Jumlah Pencairan Leasing</th>
                             <th>Jenis Tanggal Jatuh Tempo</th>
                             <th>Adjustment Tanggal Jatuh Tempo</th>
-                            <th>Hutang ID</th>
+                            <th>Pencairan</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="joinPromo in ctrl.salesOrder.leasingOrder.joinPromos">
                             <td>
                                 <input type="text" ng-model="joinPromo.name">
+                            </td>
+                            <td>
+                                <input type="number" ng-model="joinPromo.amount" ng-change="ctrl.recalculateJoinPromos()">
                             </td>
                             <td>
                                 <input type="number" ng-model="joinPromo.transfer_amount">
@@ -105,7 +109,12 @@
                                 <input type="text" ng-model="joinPromo.due_day_count">
                             </td>
                             <td>
-                                <due-show ng-if="joinPromo.due_uuid" uuid="{{joinPromo.due_uuid}}"></due-show>
+                                <transaction-create ng-show="!joinPromo.transaction.created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="transaction" on-created="joinPromo.transaction=transaction;ctrl.action.joinPromoPayment(ctrl.salesOrder ,joinPromo , transaction)" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+                                <span ng-show="joinPromo.transaction.created_at">
+                                    <p class="small-info">Dibuat oleh : {{joinPromo.transaction.creator.name}}</p>
+                                    <p class="small-info">{{joinPromo.transaction.created_at}}</p>
+                                    <p class="small-info">Transaction ID : {{joinPromo.transaction.id}}</p>
+                                </span>
                             </td>
                         </tr>
                         <tr class="warning">

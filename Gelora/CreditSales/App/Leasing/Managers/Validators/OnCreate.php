@@ -19,6 +19,11 @@ class OnCreate{
         if ($attrValidations->fails()) {
             return $attrValidations->errors()->all();
         }
+
+        $updateValidation = $this->leasing->validate()->onUpdate();
+        if ($updateValidation !== true) {
+            return $updateValidation;
+        }
         
         return true;
     }

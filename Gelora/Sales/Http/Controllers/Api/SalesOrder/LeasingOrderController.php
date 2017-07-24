@@ -16,7 +16,7 @@ class LeasingOrderController extends SalesOrderController {
     public function update($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->leasingOrder($request->get('leasingOrder'));
+        $salesOrder->assign()->specific()->leasingOrder()->update($request->get('leasingOrder'));
 
         $validation = $salesOrder->validate()->leasingOrder()->onUpdate();
         if ($validation !== true) {
@@ -31,7 +31,7 @@ class LeasingOrderController extends SalesOrderController {
     public function updateAfterValidation($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->leasingOrderAfterValidation($request);
+        $salesOrder->assign()->specific()->leasingOrder()->updateAfterValidation($request);
 
         $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
         if ($validation !== true) {
@@ -61,7 +61,7 @@ class LeasingOrderController extends SalesOrderController {
 
         $salesOrder = $this->salesOrder->find($id);
 
-        $salesOrder->assign()->specific()->leasingOrderPaymentReceived($request);
+        $salesOrder->assign()->specific()->leasingOrder()->paymentReceived($request);
 
         $validation = $salesOrder->validate()->leasingOrder()->onPaymentReceived();
         if ($validation !== true) {
@@ -69,6 +69,21 @@ class LeasingOrderController extends SalesOrderController {
         }
 
         $salesOrder->action()->leasingOrder()->onPaymentReceived();
+
+        return $this->formatItem($salesOrder);
+    }
+    public function joinPromoPayment($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $salesOrder->assign()->specific()->leasingOrder()->joinPromoPayment($request->get('transaction'));
+
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->save();
 
         return $this->formatItem($salesOrder);
     }

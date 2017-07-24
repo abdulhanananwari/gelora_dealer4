@@ -2,9 +2,10 @@
 
 namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
 
+use Solumax\PhpHelper\App\ManagerBase as Manager;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class LeasingOrder {
+class LeasingOrder extends Manager  {
     
     protected $salesOrder;
     
@@ -12,18 +13,11 @@ class LeasingOrder {
         $this->salesOrder = $salesOrder;
     }
     
-    public function assign($leasingOrder) {
-        
-        // Copy dulu data JP
-        $joinPromos = $this->salesOrder->getAttribute('leasingOrder.joinPromos');
-        
-        $this->salesOrder->leasingOrder = $leasingOrder;
-        
-        // Kalau user ga punya akses liat JP, balikin data JP dengan yang lama
-        if (!\SolAuthClient::hasAccess('VIEW_LEASING_ORDER_JOIN_PROMOS')) {
-            $this->salesOrder->setAttribute('leasingOrder.joinPromos', $joinPromos);
-        }
-        
-        return $this->salesOrder;
+    public function assign() {      
+        return $this;
+    }
+     public function __call($name, $arguments) {
+        return $this->managerCaller($name, $arguments, $this->salesOrder,
+                __NAMESPACE__, 'LeasingOrder', 'assign');
     }
 }
