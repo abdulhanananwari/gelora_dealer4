@@ -65,21 +65,21 @@
                             <input type="text" ng-model="ctrl.salesOrder.delivery.handover.note">
                             <label>Waktu</label>
                             <input type="text" ng-model="ctrl.salesOrder.delivery.handover.created_at" readonly>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label>Lat</label>
-                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover.lat" readonly>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Lat</label>
-                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover.lon" readonly>
-                                </div>
-                            </div>
                         </div>
                         <div class="col-sm-6">
-                            <img ng-show="ctrl.salesOrder.delivery.handover.lat && ctrl.salesOrder.delivery.handover.lon" class="img-responsive" ng-src="{{ 'https://maps.googleapis.com/maps/api/staticmap?center=' + ctrl.salesOrder.delivery.handover.lat + ',' + ctrl.salesOrder.delivery.handover.lon + '&markers='  + ctrl.salesOrder.delivery.handover.lat + ',' + ctrl.salesOrder.delivery.handover.lon + '&zoom=16&size=600x300&key=' + ctrl.googleApiKey }}">
-                            <br>
                             <button ng-hide="ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-primary" ng-click="ctrl.delivery.setHandoverLocation()">Set Sebagai Lokasi Penerimaan</button>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Lng</label>
+                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover.location.lng" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Lat</label>
+                                    <input type="text" ng-model="ctrl.salesOrder.delivery.handover.location.lat" readonly>
+                                </div>
+                            </div>
+                            <img ng-if="ctrl.salesOrder.delivery.handover.location" class="img-responsive" ng-src="{{ 'https://maps.googleapis.com/maps/api/staticmap?center=' + ctrl.salesOrder.delivery.handover.location.lat + ',' + ctrl.salesOrder.delivery.handover.location.lng + '&markers='  + ctrl.salesOrder.delivery.handover.location.lat + ',' + ctrl.salesOrder.delivery.handover.location.lng + '&zoom=16&size=600x300&key=' + ctrl.googleApiKey }}">
                         </div>
                     </div>
                     <br>

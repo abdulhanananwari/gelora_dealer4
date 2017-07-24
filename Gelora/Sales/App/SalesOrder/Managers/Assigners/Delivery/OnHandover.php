@@ -4,6 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Delivery;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 use Solumax\PhpHelper\App\Mongo\SubDocument;
+use MongoDB\BSON\UTCDateTime;
 
 class OnHandover {
 
@@ -15,31 +16,21 @@ class OnHandover {
 
     public function assign(Array $handover) {
 
-        $_handover = $this->fillDefaultAttributes($handover);
-        $_handover->creator = $this->salesOrder->assignEntityData();
+        $handover = new SubDocument($handover);
 
-        $delivery = $this->salesOrder->subDocument()->delivery();
-        $delivery->handover = $_handover;
-        $this->salesOrder->delivery = $delivery;
+        $_handover = [
+            'receiver' => $handover->get('receiver'),
+            'id_file_uuid' => $handover->get('id_file_uuid'),
+            'file_uuid' => $handover->get('file_uuid'),
+            'location' => $handover->get('location'),
+            'note' => $handover->get('note'),
+            'created_at' => new UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
+            'creator' => $this->salesOrder->assignEntityData()
+        ];
+
+        $this->salesOrder->setAttribute('delivery.handover', $_handover);
 
         return $this->salesOrder;
-    }
-
-    protected function fillDefaultAttributes(Array $handover) {
-
-        $_handover = new SubDocument();
-
-        $keys = ['receiver', 'id_file_uuid', 'file_uuid', 'lat', 'lon', 'note'];
-
-        $avaiableAttributes = array_filter($handover, function($key) use ($keys) {
-            return in_array($key, $keys);
-        }, ARRAY_FILTER_USE_KEY);
-
-        foreach ($avaiableAttributes as $key => $value) {
-            $_handover->$key = $value;
-        }
-        
-        return $_handover;
     }
 
 }

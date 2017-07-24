@@ -29,11 +29,11 @@ class OnHandover {
 
     protected function validateDefaultAttributes() {
 
-        if (!isset($this->salesOrder->subDocument()->delivery()->handover->receiver['name'])) {
+        if (empty($this->salesOrder->getAttribute('delivery.handover.receiver.name'))) {
             return ['Nama penerima harus diisi'];
         }
 
-        if (!isset($this->salesOrder->subDocument()->delivery()->handover->receiver['phone_number'])) {
+        if (empty($this->salesOrder->getAttribute('delivery.handover.receiver.phone_number'))) {
             return ['Nomor telepon penerima harus diisi'];
         }
 

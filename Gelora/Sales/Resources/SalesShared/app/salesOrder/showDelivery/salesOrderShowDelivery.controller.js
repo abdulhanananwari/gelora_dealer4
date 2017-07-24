@@ -107,9 +107,16 @@ geloraSalesShared
 
                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                    if (typeof vm.salesOrder.delivery.handover == 'undefined') { vm.salesOrder.delivery.handover = {} }
-                    vm.salesOrder.delivery.handover.lat = position.coords.latitude
-                    vm.salesOrder.delivery.handover.lon = position.coords.longitude
+                    if (typeof vm.salesOrder.delivery.handover == 'undefined') {
+                        vm.salesOrder.delivery.handover = {}
+                    }
+
+                    vm.salesOrder.delivery.handover.location = {
+                        lng: position.coords.longitude,
+                        lat: position.coords.latitude
+                    }
+
+                    console.log(vm.salesOrder.delivery.handover)
 
                     $scope.$apply()
                 })

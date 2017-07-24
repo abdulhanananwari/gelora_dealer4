@@ -14,7 +14,7 @@ class OnHandoverPreAssign {
 
     public function validate() {
         
-        if (!is_null($this->salesOrder->subDocument()->delivery()->handover['created_at'])) {
+        if ($this->salesOrder->getAttribute('delivery.handover.created_at')) {
             return ['Penerimaan sudah dibuat sebelumnya'];
         }
 

@@ -11,7 +11,7 @@ class SalesOrderModel extends Model {
     protected $guarded = ['created_at', 'updated_at'];
     public $dates = ['locked_at', 'validated_at', 'financial_closed_at',
         'leasingOrder.invoice_generated_at',
-        'delivery.generated_at', 'delivery.unit.created_at',
+        'delivery.generated_at', 'delivery.unit.created_at', 'delivery.handover.created_at',
         'customerInvoice.created_at'];
 
     // Managers

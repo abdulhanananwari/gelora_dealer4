@@ -3,6 +3,7 @@
 namespace Gelora\Sales\App\SalesOrder\Transformers\Partials;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
+use Solumax\PhpHelper\App\Mongo\SubDocument;
 
 class Delivery {
 
@@ -10,9 +11,6 @@ class Delivery {
 
         $delivery = $salesOrder->subDocument()->delivery();
 
-        $handover = new \Solumax\PhpHelper\App\Mongo\SubDocument($delivery->handover);
-        $handover->created_at = $handover->toCarbon('created_at') ? $handover->toCarbon('created_at')->toDateTimeString() : null;
-        
         $handoverConfirmation = new \Solumax\PhpHelper\App\Mongo\SubDocument($delivery->handoverConfirmation);
         $handoverConfirmation->created_at = $handoverConfirmation->toCarbon('created_at') ? $handoverConfirmation->toCarbon('created_at')->toDateTimeString() : null;
 
@@ -24,12 +22,14 @@ class Delivery {
             'delivery_note_generated_count' => $delivery->delivery_note_generated_count,
             'scanner' => (object) $delivery->scanner,
             'travel_starter' => (object) $delivery->travel_starter,
-            'handover' => $handover,
             'handoverConfirmation' => $handoverConfirmation,
         ];
+        
+        if ($salesOrder->getAttribute('delivery.handover.created_at')) {
+            $transformed['handover'] = Delivery\Handover::transform(new SubDocument($salesOrder->getAttribute('delivery.handover')));
+        }
 
         return $transformed;
     }
-    
 
 }
