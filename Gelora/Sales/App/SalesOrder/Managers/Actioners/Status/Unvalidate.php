@@ -14,7 +14,7 @@ class Unvalidate {
     
     public function action() {
         
-        $this->salesOrder->validated_at = null;
+        $this->salesOrder->unset('validated_at');
         $this->salesOrder->assignEntityData('unvalidator');
         
         $this->salesOrder->save();

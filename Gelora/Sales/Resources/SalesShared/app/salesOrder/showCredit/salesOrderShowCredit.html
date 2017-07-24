@@ -94,22 +94,24 @@
                     <tbody>
                         <tr ng-repeat="joinPromo in ctrl.salesOrder.leasingOrder.joinPromos">
                             <td>
-                                <input type="text" ng-model="joinPromo.name">
+                                <input ng-disabled="ctrl.salesOrder.leasingOrder.invoice_generated_at" type="text" ng-model="joinPromo.name">
                             </td>
                             <td>
-                                <input type="number" ng-model="joinPromo.amount" ng-change="ctrl.recalculateJoinPromos()">
+                                <input ng-disabled="ctrl.salesOrder.leasingOrder.invoice_generated_at"  type="number" ng-model="joinPromo.amount" ng-change="ctrl.recalculateJoinPromos()">
                             </td>
                             <td>
-                                <input type="number" ng-model="joinPromo.transfer_amount">
+                                <input ng-disabled="ctrl.salesOrder.leasingOrder.invoice_generated_at"  type="number" ng-model="joinPromo.transfer_amount">
                             </td>
                             <td>
-                                <select ng-options="key as value for (key,value) in ctrl.dueDayTypes" ng-model="joinPromo.due_day_type"></select>
+                                <select ng-disabled="ctrl.salesOrder.leasingOrder.invoice_generated_at" ng-options="key as value for (key,value) in ctrl.dueDayTypes" ng-model="joinPromo.due_day_type"></select>
                             </td>
                             <td>
-                                <input type="text" ng-model="joinPromo.due_day_count">
+                                <input ng-disabled="ctrl.salesOrder.leasingOrder.invoice_generated_at" type="text" ng-model="joinPromo.due_day_count">
                             </td>
                             <td>
-                                <transaction-create ng-show="!joinPromo.transaction.created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="transaction" on-created="joinPromo.transaction=transaction;ctrl.action.joinPromoPayment(ctrl.salesOrder ,joinPromo , transaction)" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+                            <!-- di ng show tambahin ctrl.salesOrder.leasingOrder.invoice_generated_at -->
+                                <transaction-create ng-show="!joinPromo.transaction.created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
+                                joinPromo.transaction.uuid=createdTransaction.uuid;ctrl.action.joinPromoPayment(ctrl.salesOrder,ctrl.salesOrder.leasingOrder.joinPromos,createdTransaction)" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
                                 <span ng-show="joinPromo.transaction.created_at">
                                     <p class="small-info">Dibuat oleh : {{joinPromo.transaction.creator.name}}</p>
                                     <p class="small-info">{{joinPromo.transaction.created_at}}</p>

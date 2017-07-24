@@ -9,7 +9,10 @@ class SalesOrderModel extends Model {
     protected $connection = 'mongodb';
     protected $collection = 'sales_orders';
     protected $guarded = ['created_at', 'updated_at'];
-    public $dates = ['locked_at', 'validated_at', 'financial_closed_at', 'invoice_generated_at','delivery.generated_at', 'delivery.unit.created_at', 'customerInvoice.created_at'];
+    public $dates = ['locked_at', 'validated_at', 'financial_closed_at',
+        'leasingOrder.invoice_generated_at',
+        'delivery.generated_at', 'delivery.unit.created_at',
+        'customerInvoice.created_at'];
 
     // Managers
 
