@@ -5,9 +5,11 @@ geloraSalesAdmin
 
         var vm = this
 
-        var load = function(filter) {
+        var load = function(leasingOrderFilter) {
 
-            SalesOrderModel.index(filter)
+            vm.filter = _.assignWith(vm.filter, leasingOrderFilter)
+
+            return SalesOrderModel.index(vm.filter)
                 .then(function(res) {
 
                     vm.salesOrders = res.data.data
@@ -33,6 +35,20 @@ geloraSalesAdmin
                     payment_type: 'credit',
                     status: 'invoice_batched_and_not_paid',
                 })
+            },
+            mainReceivablePaid: function() {
+                load({
+                    payment_type: 'credit',
+                    status: 'main_receivable_paid',
+                })
+            },
+            fromFilter: function() {
+                load({
+                        payment_type: 'credit'
+                    })
+                    .then(function() {
+                        $('#spk-filter-modal').modal('hide')
+                    })
             },
         }
 
