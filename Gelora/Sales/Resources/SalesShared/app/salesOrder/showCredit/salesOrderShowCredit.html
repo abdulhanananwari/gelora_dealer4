@@ -110,8 +110,9 @@
                             </td>
                             <td>
                             <!-- di ng show tambahin ctrl.salesOrder.leasingOrder.invoice_generated_at -->
-                                <transaction-create ng-show="!joinPromo.transaction.created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
+                                <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !joinPromo.transaction.created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
                                 joinPromo.transaction.uuid=createdTransaction.uuid;ctrl.action.joinPromoPayment(ctrl.salesOrder,ctrl.salesOrder.leasingOrder.joinPromos,createdTransaction)" setting="ctrl.transactionCreatorModal.setting"></transaction-create>
+                                
                                 <span ng-show="joinPromo.transaction.created_at">
                                     <p class="small-info">Dibuat oleh : {{joinPromo.transaction.creator.name}}</p>
                                     <p class="small-info">{{joinPromo.transaction.created_at}}</p>
@@ -131,6 +132,11 @@
     <div class="col-sm-6" ng-show="ctrl.salesOrder.validated_at && !ctrl.salesOrder.leasingOrder.payment_at">
         <div class="well">
             <h4>Pencatatan Piutang</h4>
+            <span ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
+                <p>
+                    Dibuat Oleh : {{ ctrl.salesOrder.leasingOrder.invoice_generator.name }}( {{ ctrl.salesOrder.leasingOrder.invoice_generated_at }} )
+                </p>
+            </span>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
             <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
             <hr>

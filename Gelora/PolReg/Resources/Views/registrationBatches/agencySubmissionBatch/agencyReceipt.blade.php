@@ -27,7 +27,6 @@
                 <table width="100%" border="1" style="font-size: 12px !important;">
                     <tr>
                         <th>No Faktur</th>
-                        <th>Nama Pemohon</th>
                         <th>Nama STNK</th>
                         <th>Alamat STNK</th>
                         <th>Tipe</th>
@@ -40,7 +39,6 @@
                     @foreach($viewData['registrationBatch']->getSalesOrders() as $salesOrder)
                     <tr>
                         <td>{{ $salesOrder->getAttribute('polReg.faktur_number')}}</td>
-                        <td>{{ $salesOrder->getAttribute('customer.name') }}</td>
                         <td>{{ $salesOrder->getAttribute('registration.name') }}</td>
                         <td>{{ $salesOrder->getAttribute('registration.address') }}</td>
                         <td>{{ $salesOrder->unit->type_name }}</td>
@@ -59,7 +57,7 @@
                     <tr>
                         <td style="width: 50%;">
                             <p>Karyawan Dealer</p>
-                            <p style="padding-top: 4em;">{{ \ParsedJwt::getByKey('name') }}</p>
+                            <p style="padding-top: 4em !important;">{{ \ParsedJwt::getByKey('name') }}</p>
                         </td>
                         <td style="width: 50%;">
                             <p>Perwakilan Biro Jasa</p>

@@ -60,7 +60,7 @@ geloraSalesShared
 
                     var string = _.replace(vm.mbdTransferFormula, /amount/g, _.toString(joinPromo.amount))
                     joinPromo.transfer_amount = _.round(eval(string), 0)
-                    joinPromo.transfer_amount_calculated = _.round(eval(string), 0)
+                    joinPromo.calculated_transfer_amount = _.round(eval(string), 0)
                 }
             })
         }
