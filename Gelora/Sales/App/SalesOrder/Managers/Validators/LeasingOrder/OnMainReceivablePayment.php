@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnPaymentReceived {
+class OnMainReceivablePayment {
 
     protected $salesOrder;
 
