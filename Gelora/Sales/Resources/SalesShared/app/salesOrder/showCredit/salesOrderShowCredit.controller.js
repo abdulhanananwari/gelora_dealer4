@@ -91,8 +91,8 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            paymentReceived: function(salesOrder) {
-                SalesOrderModel.leasingOrder.paymentReceived(salesOrder.id, salesOrder.leasingOrder)
+            mainReceivablePayment: function(salesOrder) {
+                SalesOrderModel.leasingOrder.mainReceivablePayment(salesOrder.id, salesOrder.leasingOrder)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })
@@ -101,6 +101,7 @@ geloraSalesShared
                 SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id,joinPromos,transaction)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
+                        $state.reload()
                     })
             },
             poComplete: function(salesOrder, po_complete) {
