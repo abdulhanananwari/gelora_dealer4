@@ -57,8 +57,8 @@ geloraSalesShared
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/after-validation', leasingOrder)
             },
 
-            paymentReceived: function(id, leasingOrder) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/payment-received', leasingOrder)
+            mainReceivablePayment: function(id, leasingOrder) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/main-receivable-payment', leasingOrder)
             },
             joinPromoPayment: function(id, joinPromos, transaction) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/join-promo-payment', {joinPromos: joinPromos, transaction: transaction})
