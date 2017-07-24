@@ -24,7 +24,7 @@ trait Action {
 
         $unit = $this->unit->find($id);
 
-        $validation = $unit->validate()->onPdi();
+        $validation = $unit->validate()->onPdi($request);
         if ($validation !== true) {
             return $this->formatErrors($validation);
         }

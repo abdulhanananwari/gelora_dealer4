@@ -24,7 +24,7 @@
                 <td>Keterangan</td>
                 <td>:</td>
                 <td>
-                    <p>Subsidi Leasing</p>
+                    <p>{{$viewData['leasing']->getAttribute('generateDocuments.invoice_jp_text')}}</p>
                     <p>No Rangka : {{ $viewData['salesOrder']->unit['chasis_number'] }}</p>
                     <p>No Mesin  : {{ $viewData['salesOrder']->unit['engine_number'] }}</p>
                 </td>

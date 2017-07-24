@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <h4>Utama</h4>
                 <div ng-if="!ctrl.leasing.created_at">
                     <entity-finder-modal selected-entity="ctrl.leasing.mainLeasing"></entity-finder-modal>
@@ -11,7 +11,7 @@
                 <label>Kode Leasing</label>
                 <input type="text" ng-model="ctrl.leasing.code">
             </div>
-            <div class="col-sm-6 well" ng-if="ctrl.leasing.mainLeasing">
+            <div class="col-sm-5 well" ng-if="ctrl.leasing.mainLeasing">
                 <h4>Cabang</h4>
                 <entity-finder-modal selected-entity="subEntity"></entity-finder-modal>
                 <label>Name</label>
@@ -35,6 +35,17 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="col-sm-2">
+                <h4>Cetak Document Tagihan Leasing</h4>
+                <input type="checkbox" class="form-not-applied" ng-model="ctrl.leasing.generateDocuments.invoice_dp">
+                <label>Invoice DP</label><br>
+                <input type="checkbox" class="form-not-applied" ng-model="ctrl.leasing.generateDocuments.invoice_jp">
+                <label>Invoice JP</label><br>
+                <input type="textbox" ng-show="ctrl.leasing.generateDocuments.invoice_jp" ng-model="ctrl.leasing.generateDocuments.invoice_jp_text">
+                
+                <input type="checkbox" class="form-not-applied" ng-model="ctrl.leasing.generateDocuments.agreement_bpkb">
+                <label>Agreement BPKB</label>
             </div>
         </div>
         <button class="btn btn-block btn-warning" ng-click="ctrl.store(ctrl.leasing)">Simpan</button>

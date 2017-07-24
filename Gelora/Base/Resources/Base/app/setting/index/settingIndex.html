@@ -15,6 +15,17 @@
                             <td>{{ tenantInfo.name}}</td>
                             <td><textarea style="height: 4em;" ng-model="ctrl.settings.tenantInfoSetting[tenantInfo.code]"></textarea></td>
                         </tr>
+                        <tr>
+                           <td colspan="2">
+                               <p><strong>Keterangan :</strong></p>
+                               <p>**BANK** adalah nama Bank yang terisi otomatis oleh sistem</p>
+                               <p>**BANK_ACCOUNT_NUMBER** adalah nomor account Bank yang terisi otomatis oleh sistem</p>
+                               <p>**BANK_ACCOUNT_NAME** adalah nama account Bank yang terisi otomatis oleh sistem</p>
+                               <p>**SPK_ID** adalah ID SPK yang terisi otomatis oleh sistem</p>
+                               <p class="text-danger"> Perhatian :
+                               Diharapkan user untuk tidak menghapus atau merubah penulisan **BANK** , **BANK_ACCOUNT_NAME** , **BANK_ACCOUNT_NUMBER** dan **SPK_ID** </p>
+                           </td> 
+                        </tr>
                     </tbody>
                 </table>
                 <button class="btn btn-block" ng-click="ctrl.update('TENANT_INFO', ctrl.settings.tenantInfoSetting)">Update</button>

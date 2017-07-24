@@ -12,14 +12,14 @@ class OnPdi {
         $this->unit = $unit;
     }
 
-    public function validate() {
+    public function validate($request) {
         
         $isInStock = $this->unit->validate()->subValidator()->isInStock();
         if ($isInStock !== true) {
             return $isInStock;
         }
         
-        if ($this->unit->pdi_at) {
+        if ($request->get('pdi_success') == 'true' && $this->unit->current_status == 'IN_STOCK_SELLABLE') {
             return ['Unit sudah di PDI pada ' . $this->unit->pdi_at->toDateTimeString()];
         }
 

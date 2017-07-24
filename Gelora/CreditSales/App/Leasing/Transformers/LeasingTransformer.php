@@ -16,7 +16,9 @@ class LeasingTransformer extends Fractal\TransformerAbstract {
             
             'mainLeasing' => $leasing->mainLeasing,
             'subLeasings' => $leasing->subLeasings,
-            
+
+            'generateDocuments' => $leasing->generateDocuments,
+
             'created_at' => $leasing->created_at->toDateTimeString(),
         ];
     }

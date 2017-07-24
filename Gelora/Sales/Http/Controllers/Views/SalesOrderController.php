@@ -113,7 +113,9 @@ class SalesOrderController extends Controller {
                         ->first()->data_1;
 
         $leasingOrder = $salesOrder->subDocument()->leasingOrder();
-        $leasing = $leasingOrder->mainLeasing;
+
+        $leasing = \Gelora\CreditSales\App\Leasing\LeasingModel::where('mainLeasing.id', 
+                    $salesOrder->getAttribute('leasingOrder.mainLeasing.id'))->first();
 
         $viewData = [
             'leasingOrder' => $leasingOrder,
