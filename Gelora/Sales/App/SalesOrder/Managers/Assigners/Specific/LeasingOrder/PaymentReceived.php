@@ -1,10 +1,10 @@
 <?php
 
-namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
+namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class LeasingOrderPaymentReceived {
+class PaymentReceived {
     
     protected $salesOrder;
     

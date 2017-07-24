@@ -16,7 +16,7 @@
                 <td>Uang Sejumlah</td>
                 <td>:</td>
                 <td>
-                    <p>{{ number_format($viewData['leasingOrder']->joinPromos[0]['transfer_amount']) }}</p>
+                    <p>{{ number_format($viewData['leasingOrder']->joinPromos[0]['amount']) }}</p>
                     <p>{{ strtoupper(\Solumax\PhpHelperExtended\NumberWords::toBahasa( $viewData['leasingOrder']->joinPromos[0]['transfer_amount'],true)) }}</p>
                 </td>
             </tr>

@@ -14,7 +14,7 @@ class FromRequest {
     
     public function assign(\Illuminate\Http\Request $request) {
         
-        $this->leasing->fill($request->only('mainLeasing', 'subLeasings','generateDocuments', 'code'));
+        $this->leasing->fill($request->only('mainLeasing', 'subLeasings','generateDocuments', 'code', 'mbd_transfer_formula'));
         
         return $this->leasing;
     }
