@@ -1,6 +1,6 @@
 geloraSalesShared
     .controller('SalesOrderShowCreditController', function(
-        $state,
+        $state, $timeout,
         LinkFactory, JwtValidator, ConfigModel, AppFactory,
         LeasingInvoiceBatchModel, LeasingModel,
         SalesOrderModel) {
@@ -56,7 +56,7 @@ geloraSalesShared
         vm.recalculateJoinPromos = function() {
 
             _.forEach(vm.salesOrder.leasingOrder.joinPromos, function(joinPromo) {
-                if (_.isNumber(joinPromo.amount)) {
+                if (_.isNumber(joinPromo.amount) && vm.mbdTransferFormula) {
 
                     var string = _.replace(vm.mbdTransferFormula, /amount/g, _.toString(joinPromo.amount))
                     joinPromo.transfer_amount = _.round(eval(string), 0)
@@ -97,8 +97,8 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            joinPromoPayment: function(salesOrder, joinPromo, transaction) {
-                SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id, joinPromo,transaction)
+            joinPromoPayment: function(salesOrder,joinPromos,transaction) {
+                SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id,joinPromos,transaction)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })

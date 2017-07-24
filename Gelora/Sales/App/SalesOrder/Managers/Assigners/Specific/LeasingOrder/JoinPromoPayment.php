@@ -5,36 +5,35 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific\LeasingOrder;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class JoinPromoPayment {
-    
+
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
-    public function assign($transaction) {
 
-        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
+    public function assign($joinPromos, $transaction) {
         
-        $joinPromos = [];
+        $joinPromoSubdocuments = [];
+        foreach ($joinPromos as $joinPromo) {
 
-        foreach ($leasingOrder->joinPromos as $joinPromo) {
-           
-           $joinPromo['transaction'] = [
-                'id' => $transaction['id'],
-                'uuid' => $transaction['uuid'],
-                'created_at' => $transaction['created_at'],
-                'creator' => $this->salesOrder->assignEntityData(),
-           ];
+            $joinPromoSubdocument = new \Solumax\PhpHelper\App\Mongo\SubDocument($joinPromo);
+
+            if ($joinPromoSubdocument->get('transaction.uuid') == $transaction['uuid']) {
+
+                $joinPromoSubdocument->set('transaction', [
+                    'id' => $transaction['id'],
+                    'uuid' => $transaction['uuid'],
+                    'created_at' => new \MongoDB\BSON\UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
+                    'creator' => $this->salesOrder->assignEntityData(),
+                ]);
+            }
+
+            $joinPromoSubdocuments[] = (array) $joinPromoSubdocument;
         }
-        
-        $joinPromos[] = $joinPromo;
 
-        $leasingOrder->joinPromos = $joinPromos;
-        $this->salesOrder->leasingOrder = $leasingOrder;
+        $this->salesOrder->setAttribute('leasingOrder.joinPromos', $joinPromoSubdocuments);
         return $this->salesOrder;
-        
     }
-
 
 }
