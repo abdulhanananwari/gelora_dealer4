@@ -2,17 +2,19 @@
 <div class="well">
     <div class="row">
         <div class="col-sm-6">
-            <h5>Kustomer ({{ctrl.salesOrder.customer.id || 'Belum Terdaftar'}})</h5>
-            <entity-finder-modal search-only="true" selected-entity="ctrl.salesOrder.customer"></entity-finder-modal>
-            <br>
+            <h5>Kustomer  <entity-redirect entity-id="{{ctrl.salesOrder.customer.id}}"></entity-redirect>
+            <entity-retriever entity-id="{{ ctrl.salesOrder.customer.id }}" entity="retrievedCustomerEntity" on-entity-retrieved="ctrl.salesOrder.customer=retrievedCustomerEntity"></entity-retriever></h5>
+            <entity-finder-modal search-only="true" selected-entity="ctrl.salesOrder.customer"></entity-finder-modal><br>
             <fieldset ng-readonly="true">
                 <label>Jenis</label>
                 <select ng-options="customerType as customerType for customerType in ctrl.customerTypes" ng-model="ctrl.salesOrder.customer.type"></select>
                 <label>Nama</label>
                 <input type="text" ng-model="ctrl.salesOrder.customer.name">
-                <label>Nomor Telepon <small>(hanya isi nomor, jangan gunakan spasi atau tanda baca)</small></label>
+                <label>Nomor Telepon <small>(nomor HP, jangan gunakan spasi atau tanda baca)</small></label>
                 <input type="text" ng-model="ctrl.salesOrder.customer.phone_number">
                 <whatsapp-messenger phone="{{ ctrl.salesOrder.customer.phone_number }}"></whatsapp-messenger>
+                <label>Nomor Telepon 2</label>
+                <input type="text" ng-model="ctrl.salesOrder.customer.phone_number_2">
                 <label>Email</label>
                 <input type="email" ng-model="ctrl.salesOrder.customer.email">
                 <label>Alamat</label>
@@ -25,7 +27,7 @@
                 <label>NPWP</label>
                 <input type="text" ng-model="ctrl.salesOrder.customer.npwp">
             </fieldset>
-            <entity-updater-modal ng-if="ctrl.salesOrder.customer.id" entity-id="{{ctrl.salesOrder.customer.id}}" new-entity-data="ctrl.salesOrder.customer">
+            <entity-updater-modal entity="ctrl.salesOrder.customer" new-entity-data="ctrl.salesOrder.customer">
             </entity-updater-modal>
             <br>
             <file-manager-upload file-url="{{ ctrl.salesOrder.customer.ktp_file_url }}" path="sales-order" subpath="customer" fileable-type="SalesOrder" fileable-id="{{ ctrl.salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedCustomerId" on-file-uploaded="ctrl.salesOrder.customer.id_file_uuid=uploadedCustomerId.uuid"></file-manager-upload>
