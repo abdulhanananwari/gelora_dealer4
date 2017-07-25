@@ -35,9 +35,9 @@ class LeasingOrder {
             'payment_creator' => $leasingOrder->payment_creator,
         ];
 
-//        if ($leasingOrder->leasing_invoice_batch_id) {
-//            $transformed['leasingInvoiceBatch'] = LeasingOrder\LeasingInvoiceBatch::transform($salesOrder);
-//        }
+        if ($leasingOrder->leasing_invoice_batch_id) {
+            $transformed['leasingInvoiceBatch'] = LeasingOrder\LeasingInvoiceBatch::transform($salesOrder);
+        }
 
         if ($leasingOrder->invoice_generated_at) {
             $transformed['invoice_generated_at'] = $salesOrder->getAttribute('leasingOrder.invoice_generated_at') ? $salesOrder->getAttribute('leasingOrder.invoice_generated_at')->toDateTimeString() : null;
