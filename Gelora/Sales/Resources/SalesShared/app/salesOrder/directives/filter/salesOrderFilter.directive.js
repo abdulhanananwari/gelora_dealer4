@@ -20,8 +20,22 @@ geloraSalesShared
                 $('.date').datepicker({ dateFormat: "yy-mm-dd" });
 
                 scope.customerTypes = ['Perorangan', 'Badan Usaha']
+
                 scope.paymentTypes = { 'credit': 'Kredit', 'cash': 'Kas' }
-                scope.statuses = { 'unvalidated_and_indent': 'Belum Validasi & Indent Unit', 'unvalidated': 'Belum Validasi', 'validated': 'Validasi', 'delivery_generated': 'Sudah Buat Surat Jalan', 'delivery_handover_created': 'Sudah serah terima kendaraan', 'financial_unclosed': 'Konsumen yang belum lunas', 'financial_closed': 'Konsumen yang sudah lunas' }
+
+                scope.statuses = {
+                    'unvalidated_and_indent': 'Belum Validasi & Indent Unit',
+                    'unvalidated': 'Belum Validasi',
+                    'validated': 'Validasi',
+                    'delivery_generated': 'Sudah Buat Surat Jalan',
+                    'delivery_handover_created': 'Sudah Serah Terima Kendaraan',
+                    'delivery_handover_confirmed': 'Sudah Serah Terima Kendaraan',
+                    'financial_unclosed': 'Konsumen Yang Belum Lunas (financial_closed kosong)',
+                    'financial_closed': 'Konsumen Yang Sudah Lunas (financial_closed isi)',
+                    'leasing_order_invoice_batched': 'Sudah Kirim Leasing',
+                    'polreg_cddb_string_generated': 'Sudah Generate CDDB',
+                }
+
                 scope.dateTypes = { 'created_at': 'Tanggal SPK', 'indent.created_at': 'Tanggal Indent', 'validated_at': 'Tanggal Validasi', 'delivery.generated_at': 'Tanggal Buat Surat Jalan', 'delivery.handover.created_at': 'Tanggal Serah terima kendaraan', 'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing', 'customerInvoice.created_at': 'Tanggal Tagih Customer' }
 
                 ConfigModel.get('gelora.polReg.defaultItems')
@@ -29,6 +43,23 @@ geloraSalesShared
                         scope.defaultItems = res.data.data
                     })
 
+
+                scope.checkedStatusCodes = {}
+                scope.checkStatus = function(code) {
+                    if (!_.get(scope.checkedStatusCodes[code], 'checked')) {
+                        scope.checkedStatusCodes[code] = {
+                            status_code: code,
+                            checked: true
+                        }
+                    } else {
+                        scope.checkedStatusCodes[code] = {
+                            status_code: code,
+                            checked: false
+                        }
+                    }
+
+                    scope.filter.statuses = _.flatMap(_.filter(scope.checkedStatusCodes, { checked: true }), 'status_code').join(',')
+                }
 
                 scope.loadDrivers = function() {
 
