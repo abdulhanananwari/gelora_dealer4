@@ -19,7 +19,7 @@ class OnPdi {
             return $isInStock;
         }
         
-        if ($request->get('pdi_success') == 'true' && $this->unit->current_status == 'IN_STOCK_SELLABLE') {
+        if ($request->get('pdi_success') == 'true' && $this->unit->pdi_at) {
             return ['Unit sudah di PDI pada ' . $this->unit->pdi_at->toDateTimeString()];
         }
 
