@@ -147,7 +147,7 @@
             </span>
             <span ng-show="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id">
                 <a class="btn btn-block btn-info" href="{{'/credit-sales/redirect-app/leasing-invoice-batch/' + ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id }}" target="_blank">Buka Batch</a>
-                <button ng-hide="ctrl.salesOrder.leasingOrder.payment_at" class="btn btn-block btn-danger" ng-click="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id=null;ctrl.action.updateAfterValidation(ctrl.salesOrder)">Hapus Batch</button>
+                <button ng-hide="ctrl.salesOrder.leasingOrder.payment_at || ctrl.salesOrder.leasingOrder.leasingInvoiceBatch.closed_at" class="btn btn-block btn-danger" ng-click="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id=null;ctrl.action.updateAfterValidation(ctrl.salesOrder)">Hapus Batch</button>
             </span>
         </div>
     </div>

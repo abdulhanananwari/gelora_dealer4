@@ -50,7 +50,7 @@
                     <td>{{ $salesOrder->getAttribute('leasingOrder.application_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.po_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.tenor') }}</td>
-                    <td>{{ $salesOrder->getAttribute('leasingOrder.dp_po') }}</td>
+                    <td>{{ number_format($salesOrder->getAttribute('leasingOrder.dp_po')) }}</td>
                 </tr>
                 @endforeach
             </tbody>
