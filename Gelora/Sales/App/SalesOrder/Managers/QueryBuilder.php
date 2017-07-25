@@ -175,7 +175,15 @@ class QueryBuilder {
             $statuses = explode(',', $request->get('statuses'));
             
             if (in_array('validated', $statuses)) {
-                $query->where('validated_at');
+                $query->whereNotNull('validated_at');
+            }
+            
+            if (in_array('unvalidated', $statuses)) {
+                $query->whereNull('validated_at');
+            }
+            
+            if (in_array('leasing_order_invoice_batched', $statuses)) {
+                $query->whereNotNull('leasingOrder.invoice_batch_id');
             }
             
             if (in_array('unvalidated', $statuses)) {
