@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'redirect-app'], function() {
     
-    /* 
+    // Lewat sini untuk dilempar ke redirected, redirection dengan jwt
     Route::get('sales-order/', function() {
 
         $viewData = [
@@ -24,8 +24,8 @@ Route::group(['prefix' => 'redirect-app'], function() {
         return view('gelora.sales::redirect')
                         ->with('viewData', $viewData);
     });
-     */
 
+    // Terima redirection dengan jwt
     $middlewares = ['wala.jwt.autoParse.parser', 'wala.jwt.autoParse.validation', 'auth.db.overwrite', 'salesPersonnelAccess'];
 
     Route::middleware($middlewares)->get('sales-order/redirected', function() {

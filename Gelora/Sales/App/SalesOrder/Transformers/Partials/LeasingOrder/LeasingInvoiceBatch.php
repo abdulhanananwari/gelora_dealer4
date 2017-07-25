@@ -8,7 +8,7 @@ class LeasingInvoiceBatch {
     
     public static function transform(SalesOrderModel $salesOrderModel) {
         
-        $leasingInvoiceBatch = $salesOrderModel->leasingInvoiceBatch;
+        $leasingInvoiceBatch = $salesOrderModel->getLeasingInvoiceBatch();
         
         $transformer = new \Gelora\CreditSales\App\LeasingInvoiceBatch\Transformers\LeasingInvoiceBatchTransformer();
         return $transformer->transform($leasingInvoiceBatch);
