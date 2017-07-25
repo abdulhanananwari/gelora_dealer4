@@ -159,7 +159,7 @@ class QueryBuilder {
                     break;
             }
         }
-
+        
         $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
         if ($request->has('order_by')) {
             $query->whereNotNull($request->get('order_by'));
@@ -168,4 +168,21 @@ class QueryBuilder {
         return $query;
     }
 
+    protected function queryStatuses($query) {
+        
+        if ($request->has('statuses')) {
+            
+            $statuses = explode(',', $request->get('statuses'));
+            
+            if (in_array('validated', $statuses)) {
+                $query->where('validated_at');
+            }
+            
+            if (in_array('unvalidated', $statuses)) {
+                $query->whereNull('validated_at');
+            }
+        }
+        
+        return $query;
+    }
 }
