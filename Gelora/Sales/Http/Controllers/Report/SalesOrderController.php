@@ -36,7 +36,6 @@ class SalesOrderController extends Controller {
             if (count($salesOrders) == 0) {
                 return 'Tidak ada data penjualan untuk kriteria diatas';
             }
-
             return $this->createCsv($this->transformer->transformCollection($salesOrders));
         }
     }

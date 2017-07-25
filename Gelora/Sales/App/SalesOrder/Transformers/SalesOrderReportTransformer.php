@@ -37,9 +37,10 @@ class SalesOrderReportTransformer {
             'LEASING UTAMA' => $salesOrder->getAttribute('leasingOrder.mainLeasing.name'),
             'LEASING CABANG' => $salesOrder->getAttribute('leasingOrder.subLeasing.name'),
             'TANGGAL CETAK TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.invoice_generated_at') ? $salesOrder->getAttribute('leasingOrder.invoice_generated_at')->toDateString() : null,
-            'TANGGAL KIRIM TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.leasingInvoiceBatch.closed_at') ? $salesOrder->getAttribute('leasingOrder.leasingInvoiceBatch.closed_at')->toDateString() : null,
-            'PIUTANG LEASING' => $salesOrder->getAttribute('leasingOrder.leasing_payable'), 
-
+            'TANGGAL KIRIM TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.leasingInvoiceBatch.closed_at'),
+            'PIUTANG LEASING' => $salesOrder->getAttribute('leasingOrder.leasing_payable'),
+            'SUBSIDI LEASING' => $salesOrder->retrieve()->leasingOrder()->firstJoinPromoString(),
+            'JOIN PROMO' => $salesOrder->retrieve()->leasingOrder()->joinPromosString(),
             'DP PO' => $salesOrder->getAttribute('leasingOrder.dp_po'),
             'DP KUSTOMER' => $salesOrder->getAttribute('leasingOrder.dp_bayar'),
             'TENOR' => $salesOrder->getAttribute('leasingOrder.tenor'),
