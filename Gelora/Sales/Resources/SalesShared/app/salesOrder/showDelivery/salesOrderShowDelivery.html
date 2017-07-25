@@ -79,7 +79,7 @@
                                     <input type="text" ng-model="ctrl.salesOrder.delivery.handover.location.lat" readonly>
                                 </div>
                             </div>
-                            <img ng-if="ctrl.salesOrder.delivery.handover.location" class="img-responsive" ng-src="{{ 'https://maps.googleapis.com/maps/api/staticmap?center=' + ctrl.salesOrder.delivery.handover.location.lat + ',' + ctrl.salesOrder.delivery.handover.location.lng + '&markers='  + ctrl.salesOrder.delivery.handover.location.lat + ',' + ctrl.salesOrder.delivery.handover.location.lng + '&zoom=16&size=600x300&key=' + ctrl.googleApiKey }}">
+                            <img ng-if="ctrl.salesOrder.delivery.handover.location.lat" class="img-responsive" ng-src="{{ 'https://maps.googleapis.com/maps/api/staticmap?center=' + ctrl.salesOrder.delivery.handover.location.lat + ',' + ctrl.salesOrder.delivery.handover.location.lng + '&markers='  + ctrl.salesOrder.delivery.handover.location.lat + ',' + ctrl.salesOrder.delivery.handover.location.lng + '&zoom=16&size=600x300&key=' + ctrl.googleApiKey }}">
                         </div>
                     </div>
                     <br>
