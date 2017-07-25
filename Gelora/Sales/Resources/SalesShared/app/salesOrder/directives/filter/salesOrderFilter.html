@@ -14,8 +14,20 @@
                 <input type="text" ng-model="filter.until" class="date">
             </div>
         </div>
-        <label>Status SPK</label>
-        <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select>
+        <!-- <label>Status SPK</label>
+        <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select> -->
+        <label>Status</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">Status <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat='(code, name) in statuses'>
+                    <a ng-click="checkStatus(code)">
+                        <input ng-click="checkStatus(code)" type="checkbox" class="form-not-applied" ng-model="checkedStatusCodes[code].checked">{{ name }}
+                    </a>
+                </li>
+            </ul>
+        </div>
         <label>Penerimaan Barang</label>
         <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#registration-items-filter-modal">Barang</button>
     </div>
@@ -27,7 +39,7 @@
         <br>
         <input type="text" ng-model="filter.sales_personnel_entity_id">
         <label>Supir</label>
-        <select ng-click="loadDrivers()" ng-options="driver.user_id as driver.name for driver in drivers" ng-model="filter.driver_id" ></select>
+        <select ng-click="loadDrivers()" ng-options="driver.user_id as driver.name for driver in drivers" ng-model="filter.driver_id"></select>
     </div>
     <div class="col-sm-4">
         <label>Jenis kustomer</label>
