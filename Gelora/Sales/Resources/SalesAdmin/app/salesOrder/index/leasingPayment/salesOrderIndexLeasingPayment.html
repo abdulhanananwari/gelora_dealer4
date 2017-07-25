@@ -35,6 +35,7 @@
                         <th>Alamat</th>
                         <th>Type Motor</th>
                         <th>Sales</th>
+                        <th>Leasing</th>
                         <th>Piutang Leasing</th>
                         <th>Tanggal SJ</th>
                         <th>Tanggal Cetak Tagihan</th>
@@ -49,6 +50,7 @@
                         <td>{{ salesOrder.registration.address}}</td>
                         <td>{{ salesOrder.unit.data.type_name }}</td>
                         <td>{{ salesOrder.salesPersonnel.entity.name }}</td>
+                        <td>{{ salesOrder.leasingOrder.mainLeasing.name }}</td>
                         <td>{{ salesOrder.leasingOrder.leasing_payable | number }}</td>
                         <td>{{ salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>{{ salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</td>

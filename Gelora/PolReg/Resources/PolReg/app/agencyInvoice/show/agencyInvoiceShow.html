@@ -79,7 +79,7 @@
                             <button class="btn btn-xs btn-block btn-primary" ng-click="salesOrder.showPolRegCost=!salesOrder.showPolRegCost">Biaya</button>
                             <registration-cost ng-show="salesOrder.showPolRegCost" sales-order="salesOrder"></registration-cost>
                         </td>
-                        <td><a href="{{'/sales/redirect-app/sales-order/?id=' + salesOrder.id}}"  target="_blank">Buka Penjualan</a></td>
+                        <td><a href="{{'/sales/redirect-app/sales-order/redirected/?id=' + salesOrder.id}}"  target="_blank">Buka Penjualan</a></td>
                     </tr>
                 </tbody>
             </table>
