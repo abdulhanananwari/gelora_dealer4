@@ -47,7 +47,7 @@ class LeasingOrder {
         if (\SolAuthClient::hasAccess('VIEW_LEASING_ORDER_JOIN_PROMOS')) {
 
             $joinPromos = [];
-            foreach ($salesOrder->getAttribute('leasingOrder.joinPromos') as $joinPromo) {
+            foreach ((array)$salesOrder->getAttribute('leasingOrder.joinPromos') as $joinPromo) {
                 $joinPromos[] = LeasingOrder\JoinPromo::transform(new \Solumax\PhpHelper\App\Mongo\SubDocument($joinPromo));
             }
 
