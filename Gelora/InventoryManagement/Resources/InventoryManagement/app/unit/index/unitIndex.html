@@ -6,6 +6,7 @@
                 <div class="col-sm-4">
                     <vehicle-model-finder2 selected-model="model" on-change="ctrl.filter.type_code=model.code;ctrl.filter.color_code=model.variant.code;">
                     </vehicle-model-finder2>
+                    <dealer-unit-search selected-unit="selectedUnit" on-unit-selected="ctrl.filter.chasis_number=selectedUnit.chasis_number;ctrl.filter.engine_number=selectedUnit.engine_number;"></dealer-unit-search>
                 </div>
                 <div class="col-sm-4">
                     <label>Status</label>
