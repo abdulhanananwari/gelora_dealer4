@@ -32,6 +32,8 @@ geloraSalesShared
                     'delivery_handover_confirmed': 'Sudah Serah Terima Kendaraan',
                     'financial_unclosed': 'Konsumen Yang Belum Lunas (financial_closed kosong)',
                     'financial_closed': 'Konsumen Yang Sudah Lunas (financial_closed isi)',
+                    'delivery_generated_and_not_invoiced' : 'Sudah Buat Surat Jalan & Belum Cetak Tagihan Leasing',
+                    'invoice_generated_and_not_batched' : 'Sudah Cetak Tagihan Leasing & Belum Kirim Leasing',
                     'leasing_order_invoice_batched': 'Sudah Kirim Leasing',
                     'polreg_cddb_string_generated': 'Sudah Generate CDDB',
                 }

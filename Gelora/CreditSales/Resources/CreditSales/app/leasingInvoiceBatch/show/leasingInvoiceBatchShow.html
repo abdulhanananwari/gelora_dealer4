@@ -28,6 +28,7 @@
                 <button ng-show="!ctrl.leasingInvoiceBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.leasingInvoiceBatch)">Simpan</button>
                 <button ng-show="ctrl.leasingInvoiceBatch.id && !ctrl.leasingInvoiceBatch.closed_at && ctrl.leasingInvoiceBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.leasingInvoiceBatch)">Tutup</button>
                 <button ng-show="ctrl.leasingInvoiceBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.generateLeasingInvoice(ctrl.leasingInvoiceBatch)">Cetak Tagihan Leasing</button>
+                <br class="visible-xs">
             </div>
         </div>
     </div>
