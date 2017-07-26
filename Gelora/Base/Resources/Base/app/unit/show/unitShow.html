@@ -43,6 +43,16 @@
                     <input type="text" ng-model="ctrl.unit.currentLocation.data.name">
                 </div>
             </div>
+            <div class="row" ng-show="ctrl.unit.cost_of_good!==undefined">
+                <div class="col-sm-6">
+                    <label>HPP</label>
+                    <input type="text" ng-model="ctrl.unit.cost_of_good" readonly>
+                </div>
+                <div class="col-sm-6">
+                    <label>Waktu Input HPP</label>
+                    <input type="text" ng-model="ctrl.unit.cost_of_good_entered_at" readonly>
+                </div>
+            </div>
         </div>
         <div class="well">
             <div class="row">
