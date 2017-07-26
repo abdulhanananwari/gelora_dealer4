@@ -29,7 +29,7 @@ geloraSalesShared
                     'validated': 'Validasi',
                     'delivery_generated': 'Sudah Buat Surat Jalan',
                     'delivery_handover_created': 'Sudah Serah Terima Kendaraan',
-                    'delivery_handover_confirmed': 'Sudah Serah Terima Kendaraan',
+                    'delivery_handover_confirmed': 'Sudah BAST Serah Terima Kendaraan',
                     'financial_unclosed': 'Konsumen Yang Belum Lunas (financial_closed kosong)',
                     'financial_closed': 'Konsumen Yang Sudah Lunas (financial_closed isi)',
                     'delivery_generated_and_not_invoiced' : 'Sudah Buat Surat Jalan & Belum Cetak Tagihan Leasing',
@@ -38,7 +38,16 @@ geloraSalesShared
                     'polreg_cddb_string_generated': 'Sudah Generate CDDB',
                 }
 
-                scope.dateTypes = { 'created_at': 'Tanggal SPK', 'indent.created_at': 'Tanggal Indent', 'validated_at': 'Tanggal Validasi', 'delivery.generated_at': 'Tanggal Buat Surat Jalan', 'delivery.handover.created_at': 'Tanggal Serah terima kendaraan', 'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing', 'customerInvoice.created_at': 'Tanggal Tagih Customer' }
+                scope.dateTypes = {
+                    'created_at': 'Tanggal SPK',
+                    'indent.created_at': 'Tanggal Indent',
+                    'validated_at': 'Tanggal Validasi',
+                    'delivery.generated_at': 'Tanggal Buat Surat Jalan',
+                    'delivery.handover.created_at': 'Tanggal Serah terima kendaraan',
+                    'delivery.handover.confirmed_at': 'Tanggal BAST Serah Terima Kendaraan',
+                    'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing',
+                    'customerInvoice.created_at': 'Tanggal Tagih Customer'
+                }
 
                 ConfigModel.get('gelora.polReg.defaultItems')
                     .then(function(res) {
