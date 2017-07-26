@@ -37,15 +37,15 @@ geloraBase
 
     			_.each(data, function(newPrice) {
 
-    				_.forOwn(newPrice, function(value, key) {
-    					if (value == 'UNCHANGED') {
-    						_.unset(newPrice, key)
-    					}
-    				})
-
     				newPrice.existingPrice = _.find(existingPrices, function(existingPrice) {
     					return existingPrice.model_id == newPrice.model_id
     				})
+
+                    _.forOwn(newPrice, function(value, key) {
+                        if (value == 'UNCHANGED') {
+                            _.set(newPrice, key, newPrice.existingPrice[key])
+                        }
+                    })
 
     				newPrice.model = _.find(vm.models, function(model) {
     					return model.id == newPrice.model_id
