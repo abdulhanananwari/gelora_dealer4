@@ -35,7 +35,7 @@
                         <td>{{salesOrder.delivery.generated_at | fromDateTimeString }}</td>
                         <td>
                             <span ng-show="salesOrder.leasingOrder.invoice_generated_at">Cetak: {{ salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</span><br>
-                            <span ng-show="salesOrder.leasingOrder.leasing_invoice_batch_id"><a href="/credit-sales/redirect-app/leasing-invoice-batch/?id={{salesOrder.leasingOrder.leasing_invoice_batch_id}}">Batch</a></span>
+                            <span ng-show="salesOrder.leasingOrder.leasing_invoice_batch_id"><a href="/credit-sales/redirect-app/leasing-invoice-batch/{{salesOrder.leasingOrder.leasing_invoice_batch_id}}">Batch</a></span>
                         </td>
                         <td>
                             <span><a ng-if="salesOrder.polReg.md_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-md-submission-batch/' + salesOrder.polReg.md_submission_batch_id}}">MD</a></span>
