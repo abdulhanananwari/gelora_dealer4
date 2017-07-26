@@ -1,44 +1,41 @@
 geloraPurchaseSimple
-	.controller('UnitShowController', function(
-		$state,
-		UnitModel) {
+        .controller('UnitShowController', function (
+                $state,
+                UnitModel) {
 
-		var vm = this
+            var vm = this
 
-		vm.params = {
-			transformer: 'UnitCostTransformer',
-		}
+            vm.store = function (unit) {
 
-		vm.store = function(unit) {
+                if (!unit.id) {
 
-			if (!unit.id) {
+                    UnitModel.store(unit)
+                            .then(function (res) {
+                                alert('Unit berhasil disimpan')
+                                $state.go('unitShow', {id: res.data.data.id})
+                            })
 
-				UnitModel.store(unit)
-				.then(function(res) {
-					alert('Unit berhasil disimpan')
-					$state.go('unitShow', {id: res.data.data.id})
-				})
+                } else {
 
-			} else {
+                    UnitModel.update(unit.id, unit)
+                            .then(function (res) {
+                                vm.unit = res.data.data
+                                alert('Unit berhasil diupdate')
+                            })
+                }
+            }
 
-				UnitModel.update(unit.id, unit)
-				.then(function(res) {
-					vm.unit = res.data.data
-					alert('Unit berhasil diupdate')
-				})
-			}
-		}
+            if ($state.params.id) {
 
-		if ($state.params.id) {
+                UnitModel.get($state.params.id)
+                        .then(function (res) {
+                            vm.unit = res.data.data
+                        })
 
-			UnitModel.get($state.params.id)
-			.then(function(res) {
-				vm.unit = res.data.data
-			})
-
-		} else {
-			vm.unit = {
-				current_status: 'UNRECEIVED'
-			}
-		}
-	})
+            } else {
+                
+                vm.unit = {
+                    current_status: 'UNRECEIVED'
+                }
+            }
+        })

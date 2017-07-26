@@ -5,7 +5,6 @@ geloraPurchaseSimple
 		var vm = this
 
 		vm.params = {
-			transformer: 'UnitCostTransformer',
 			cost_of_good: 'null'
 		}
 

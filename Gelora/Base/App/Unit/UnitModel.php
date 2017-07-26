@@ -11,7 +11,7 @@ class UnitModel extends Model {
     
     protected $guarded = ['created_at', 'updated_at'];
     
-    public $dates = ['sj_date', 'nd_date', 'pdi_at', 'received_at'];
+    public $dates = ['sj_date', 'nd_date', 'pdi_at', 'received_at', 'cost_of_good_entered_at'];
     
     // Managers
     
