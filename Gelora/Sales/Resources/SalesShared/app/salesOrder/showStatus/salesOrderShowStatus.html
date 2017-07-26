@@ -26,6 +26,14 @@
         </div>
     </div>
 </div>
+<div class="well" ng-if="ctrl.salesOrder && ctrl.salesOrder.validated_at">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Validasi: {{ ctrl.salesOrder.validated_at }} oleh {{ ctrl.salesOrder.validator.name }}</h4>
+        </div>
+    </div>
+    <button class="btn btn-warning btn-block" ng-click="ctrl.action.unvalidate(ctrl.salesOrder)">Batalkan Validasi</button>
+</div>
 <div class="well" ng-hide="ctrl.salesOrder.delivery.generated_at">
     <div class="row">
         <div class="col-sm-12">
@@ -35,14 +43,6 @@
             <button ng-hide="ctrl.salesOrder.indent.creator.timestamp" class="btn btn-block btn-warning" ng-click="ctrl.action.indent(ctrl.salesOrder.indent.note)">Unit Indent</button>
         </div>
     </div>
-</div>
-<div class="well" ng-if="ctrl.salesOrder && ctrl.salesOrder.validated_at">
-    <div class="row">
-        <div class="col-sm-12">
-            <h4>Validasi: {{ ctrl.salesOrder.validated_at }}</h4>
-        </div>
-    </div>
-    <button class="btn btn-warning btn-block" ng-click="ctrl.action.unvalidate(ctrl.salesOrder)">Batalkan Validasi</button>
 </div>
 <div class="well" ng-if="ctrl.salesOrder">
     <div class="row">
