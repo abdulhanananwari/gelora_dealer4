@@ -62,7 +62,7 @@ geloraSalesShared
             'PENUTUP',
         ]
 
-        vm.fields = _.map(fields, function(field) {
+        vm.fields = _.map(fields.sort(), function(field) {
             return {
                 checked: false,
                 name: field
