@@ -15,7 +15,7 @@ class FirstJoinPromoString {
     
     public function retrieve() {
         
-        if (is_array($this->salesOrder->getAttribute('leasingOrder.joinPromos'))) {
+        if (is_array($this->salesOrder->getAttribute('leasingOrder.joinPromos')) && !empty($this->salesOrder->getAttribute('leasingOrder.joinPromos'))) {
 
             $joinPromoSubDoc = new SubDocument($this->salesOrder->getAttribute('leasingOrder.joinPromos')[0]);
             $paymentDate = $joinPromoSubDoc->get('transaction.created_at') ? $joinPromoSubDoc->toCarbon('transaction.created_at')->toDateString() : '';

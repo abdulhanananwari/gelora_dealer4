@@ -5,6 +5,12 @@ namespace Gelora\Sales\App\SalesOrder\Transformers;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
 class SalesOrderReportTransformer {
+    
+    protected $fields;
+    
+    public function __construct($fields) {
+        $this->fields = $fields;
+    }
 
     public function transformCollection(\Illuminate\Database\Eloquent\Collection $collection) {
 
@@ -16,7 +22,7 @@ class SalesOrderReportTransformer {
     }
 
     public function transform(SalesOrderModel $salesOrder) {
-        
+
         $data = [
             'ID' => $salesOrder->_id,
             'TANGGAL SPK' => $salesOrder->created_at->toDateString(),
@@ -63,6 +69,12 @@ class SalesOrderReportTransformer {
             'TANGGAL DO' => $salesOrder->getAttribute('delivery.unit.created_at') ? $salesOrder->getAttribute('delivery.unit.created_at')->toDateString() : '',
             'PENUTUP' => $salesOrder->getAttribute('closer.name'),
         ];
+        
+        foreach ($data as $key => $value) {
+            if (!in_array($key, $this->fields)) {
+                unset($data[$key]);
+            }
+        }
 
         return $data;
     }
