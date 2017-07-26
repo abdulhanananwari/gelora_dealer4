@@ -13,11 +13,11 @@
 <div class="row">
     <div class="col-xs-3">
         <p><strong>Kepada Yth,</strong></p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.name') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.address') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.kecamatan') }} / {{ $viewData['salesOrder']->getAttribute('customer.kelurahan') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.kode_pos') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('customer.phone_number') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('registration.name') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('registration.address') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('registration.kecamatan') }} / {{ $viewData['salesOrder']->getAttribute('registration.kelurahan') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('registration.kode_pos') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('registration.phone_number') }}</p>
     </div>
     <div class="col-xs-3">
         <p>Penerima:</p>
