@@ -26,7 +26,6 @@ class OnUpdate {
 
         return \Validator::make($this->leasing->toArray(), [
             'subLeasings' => 'array',
-            'mbd_transfer_formula' => 'string'
         ]);
     }
 
