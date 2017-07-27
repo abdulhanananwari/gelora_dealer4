@@ -17,7 +17,7 @@
         <!-- <label>Status SPK</label>
         <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select> -->
         <label>Status</label>
-        <div class="dropdown">
+        <!-- <div class="dropdown">
             <button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown">Status
             </button>
             <ul class="dropdown-menu">
@@ -28,7 +28,8 @@
                     </p>
                 </li>
             </ul>
-        </div>
+        </div> -->
+        <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#statuses-filter-modal">Status</button>
         <br>
         <label>Penerimaan Barang</label>
         <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#registration-items-filter-modal">Barang</button>
@@ -111,6 +112,48 @@
                                         </td>
                                         <td>
                                             <input type="radio" name="filter-outgoing-receipt-{{item}}" value="incomplete" ng-model="filter.registration_item_outgoing[item]">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="statuses-filter-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-toggle="modal" data-target="#registration-items-filter-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Filter Berdasarkan Status</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Belum</th>
+                                        <th>Sudah</th>
+                                        <th>Reset</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="status in statuses">
+                                        <td>{{ status.name }}</td>
+                                        <td>
+                                            <input type="radio" name="filter-statuses-{{status.code}}" value="no" ng-model="status.checked" ng-click="statusFunctions.changed()">
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="filter-statuses-{{status.code}}" value="yes" ng-model="status.checked" ng-click="statusFunctions.changed()">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-xs btn-danger" ng-click="statusFunctions.unset(status)">Reset</button>
                                         </td>
                                     </tr>
                                 </tbody>

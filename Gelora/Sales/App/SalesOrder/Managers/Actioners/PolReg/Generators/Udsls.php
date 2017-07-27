@@ -29,10 +29,9 @@ class Udsls {
         if ($salesOrder->payment_type == 'credit') {
             $data['Tenor'] = $leasingOrder->tenor;
             $data['DP Leasing'] = $leasingOrder->dp_po;
-            
         } else {
-            $data['DP Leasing'] = '0';
             $data['Tenor'] = '0';
+            $data['DP Leasing'] = '0';
         }
         if (!is_null($cddb->tanggal_penjualan)) {
             $data['Tanggal Penjualan'] = $cddb->tanggal_penjualan;
@@ -47,6 +46,7 @@ class Udsls {
         $data['No HP'] = $salesOrder['registration.phone_number'];
         $data['Email'] = $salesOrder['registration.email'];
         $data['Cicilan'] = ($salesOrder->payment_type == 'credit' ? $leasingOrder->cicilan : 0);
+        $data['KPB Barcode ID'] = '';
 
         $string = '';
         foreach ($data as $key => $value) {
