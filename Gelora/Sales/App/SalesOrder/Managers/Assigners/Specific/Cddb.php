@@ -24,7 +24,19 @@ class Cddb {
         if (in_array($customerCode, ['G'])) {
             $cddb['status_kepemilikan_rumah'] = 'N';
         }
-        
+        if (in_array($customerCode, ['G','J'])) {
+            $cddb['hobi'] = 'N';
+            $cddb['jenis_kelamin'] = 'N';
+            $cddb['agama'] = 'N';
+            $cddb['pekerjaan'] = 'N';
+            $cddb['pengeluaran'] = 'N';
+            $cddb['pendidikan'] = 'N';
+            $cddb['merk_motor_yang_dimiliki_sekarang'] = 'N';
+            $cddb['jenis_motor_yang_dimiliki_sekarang'] = 'N';
+            $cddb['sepeda_motor_digunakan_untuk'] = 'N';
+            $cddb['yang_menggunakan_sepeda_motor'] = 'N';
+            $cddb['karakteristik_konsumen'] = 'N';
+        }
         if (!$cddb['no_hp']) {
             $cddb['status_no_hp'] = 'N';
         }
