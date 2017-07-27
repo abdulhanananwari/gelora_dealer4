@@ -21,6 +21,10 @@ geloraSalesShared
 			return $http.post(LinkFactory.dealer.sales.salesOrderExtra.base + id, salesOrder)
 		}
 
+		salesOrderExtraShared.delete = function(id) {
+			return $http.delete(LinkFactory.dealer.sales.salesOrderExtra.base + id)
+		}
+
 		salesOrderExtraShared.attach = {
 			selectedLeasingOrder: function(id, leasingOrder) {
 				return $http.post(LinkFactory.dealer.sales.salesOrderExtra.base + 'attach/selected-leasing-order/' + id, {leasing_order_id: leasingOrder.id})

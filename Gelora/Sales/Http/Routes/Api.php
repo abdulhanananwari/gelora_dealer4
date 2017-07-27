@@ -120,6 +120,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
     Route::group(['prefix' => 'sales-order-extra'], function() {
         Route::post('/', ['uses' => 'SalesOrderExtraController@store']);
         Route::post('{id}', ['uses' => 'SalesOrderExtraController@update']);
+        Route::delete('{id}', ['uses' => 'SalesOrderExtraController@delete']);
     });
 
     Route::group(['prefix' => 'cancelled-sales-order'], function() {
