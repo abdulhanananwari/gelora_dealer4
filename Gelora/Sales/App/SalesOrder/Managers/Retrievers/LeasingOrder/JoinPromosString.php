@@ -20,10 +20,15 @@ class JoinPromosString {
         if (is_array($this->salesOrder->getAttribute('leasingOrder.joinPromos'))) {
 
             foreach ($this->salesOrder->getAttribute('leasingOrder.joinPromos') as $joinPromo) {
-                $joinPromoSubDoc = new SubDocument($joinPromo);
-                $paymentDate = $joinPromoSubDoc->get('transaction.created_at') ? $joinPromoSubDoc->toCarbon('transaction.created_at')->toDateString() : '';
 
-                $joinPromoString = $joinPromo ? $joinPromoString . $joinPromo['amount'] . '|' . $joinPromo['transfer_amount'] . '(' . $paymentDate . ')' . ';' : '';         
+                $joinPromoSubDoc = new SubDocument($joinPromo);
+
+                $paymentDate = $joinPromoSubDoc->get('transaction.created_at') ? $joinPromoSubDoc->toCarbon('transaction.created_at')->toDateString() : 'UNPAID';
+
+                $joinPromoString = $joinPromoString .
+                    $joinPromoSubDoc->amount . '|' . 
+                    $joinPromoSubDoc->transfer_amount .
+                    '(' . $paymentDate . ')' . ';';         
             }
         }
 

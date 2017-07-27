@@ -66,22 +66,8 @@ geloraSalesShared
                         scope.defaultItems = res.data.data
                     })
 
-
-                scope.checkedStatusCodes = {}
-                scope.checkStatus = function(code) {
-                    if (!_.get(scope.checkedStatusCodes[code], 'checked')) {
-                        scope.checkedStatusCodes[code] = {
-                            status_code: code,
-                            checked: true
-                        }
-                    } else {
-                        scope.checkedStatusCodes[code] = {
-                            status_code: code,
-                            checked: false
-                        }
-                    }
-
-                    scope.filter.statuses = _.flatMap(_.filter(scope.checkedStatusCodes, { checked: true }), 'status_code').join(',')
+                scope.statusChanged = function(code) {
+                    scope.filter.statuses = _.flatMap(_.filter(scope.statuses, { checked: true }), 'status_code').join(',')
                 }
 
                 scope.loadDrivers = function() {
