@@ -114,9 +114,7 @@ class QueryBuilder {
             }
         }
 
-
         $this->queryCustomerArea($query, $request);
-        $this->queryStatus($query, $request);
         $this->queryStatuses($query, $request);
 
         $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
@@ -140,108 +138,71 @@ class QueryBuilder {
         return $query;
     }
 
-    protected function queryStatus($query, \Illuminate\Http\Request $request) {
-
-//        if ($request->has('status')) {
-//            switch ($request->get('status')) {
-//                case 'unvalidated':
-//                    $query->whereNull('validated_at');
-//                    break;
-//                case 'unvalidated':
-//                    $query->whereNull('validated_at');
-//                    break;
-//                case 'indent':
-//                    $query->whereNotNull('indent.created_at')->whereNull('delivery.generated_at');
-//                    break;
-//                case 'validated':
-//                    $query->whereNotNull('validated_at')->whereNull('delivery.generated_at');
-//                    break;
-//                case 'delivery_generated':
-//                    $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
-//                    break;
-//                case 'delivery_handover_created':
-//                    $query->whereNotNull('delivery.handover.created_at')->whereNull('delivery.handoverConfirmation.created_at');
-//                    break;
-//                case 'delivery_handover_confirmation_created':
-//                    $query->whereNotNull('delivery.handoverConfirmation.created_at');
-//                    break;
-//                case 'financial_closed':
-//                    $query->whereNotNull('financial_closed_at');
-//                    break;
-//                case 'financial_unclosed':
-//                    $query->whereNull('financial_closed_at');
-//                    break;
-//                case 'delivery_generated_and_not_invoiced':
-//                    $query->whereNotNull('delivery.generated_at')->whereNull('leasingOrder.invoice_generated_at');
-//                    break;
-//                case 'invoice_generated_and_not_batched':
-//                    $query->whereNotNull('leasingOrder.invoice_generated_at')->whereNull('leasingOrder.leasing_invoice_batch_id');
-//                    break;
-//                case 'invoice_batched_and_not_paid':
-//                    $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
-//                    break;
-//                case 'main_receivable_paid':
-//                    $query->whereNotNull('leasingOrder.payment_at');
-//                    break;
-//                default;
-//                    break;
-//            }
-//        }
-//
-//        return $query;
-    }
-
     protected function queryStatuses($query, \Illuminate\Http\Request $request) {
 
         if ($request->has('statuses')) {
 
             $statuses = explode(',', $request->get('statuses'));
 
-            if (in_array('validated', $statuses)) {
-                $query->whereNotNull('validated_at');
-            }
+            foreach ($statuses as $status) {
+                $statusArray = explode(':', $status);
 
-            if (in_array('unvalidated', $statuses)) {
-                $query->whereNull('validated_at');
+                if ($statusArray[1] == 'no') {
+                    $query->whereNull($statusArray[0]);
+                } else if ($statusArray[1] == 'yes') {
+                    $query->whereNotNull($statusArray[0]);
+                }
             }
-            if (in_array('unvalidated_and_indent', $statuses)) {
-                $query->whereNull('validated_at')->whereNotNull('indent.created_at')->whereNull('delivery.generated_at');
-            }
-            if (in_array('leasing_order_invoice_batched', $statuses)) {
-                $query->whereNotNull('leasingOrder.leasing_invoice_batch_id');
-            }
-            if (in_array('delivery_generated', $statuses)) {
-                $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
-            }
-            if (in_array('delivery_handover_created', $statuses)) {
-                $query->whereNotNull('delivery.handover.created_at')->whereNull('delivery.handoverConfirmation.created_at');
-            }
-            if (in_array('delivery_handover_confirmed', $statuses)) {
-                $query->whereNotNull('delivery.handoverConfirmation.created_at');
-            }
-            if (in_array('financial_closed', $statuses)) {
-                $query->whereNotNull('financial_closed_at');
-            }
-            if (in_array('financial_unclosed', $statuses)) {
-                $query->whereNull('financial_closed_at');
-            }
-            if (in_array('delivery_generated_and_not_invoiced', $statuses)) {
-                $query->whereNotNull('delivery.generated_at')->whereNull('leasingOrder.invoice_generated_at');
-            }
-            if (in_array('invoice_generated_and_not_batched', $statuses)) {
-                $query->whereNotNull('leasingOrder.invoice_generated_at')->whereNull('leasingOrder.leasing_invoice_batch_id');
-            }
-            if (in_array('invoice_batched_and_not_paid', $statuses)) {
-                $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
-            }
-            if (in_array('main_receivable_paid', $statuses)) {
-                $query->whereNotNull('leasingOrder.payment_at');
-            }
-            if (in_array('polreg_cddb_string_generated', $statuses)) {
-                $query->whereNotNull('polReg.strings.created_at');
-            }
-            if (in_array('polreg_md_submission_batched', $statuses)) {
-                $query->whereNotNull('polReg.md_submission_batch_id');
+        }
+
+        return $query;
+    }
+
+    protected function queryStatus($query, \Illuminate\Http\Request $request) {
+
+        if ($request->has('status')) {
+            switch ($request->get('status')) {
+                case 'unvalidated':
+                    $query->whereNull('validated_at');
+                    break;
+                case 'unvalidated':
+                    $query->whereNull('validated_at');
+                    break;
+                case 'indent':
+                    $query->whereNotNull('indent.created_at')->whereNull('delivery.generated_at');
+                    break;
+                case 'validated':
+                    $query->whereNotNull('validated_at')->whereNull('delivery.generated_at');
+                    break;
+                case 'delivery_generated':
+                    $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
+                    break;
+                case 'delivery_handover_created':
+                    $query->whereNotNull('delivery.handover.created_at')->whereNull('delivery.handoverConfirmation.created_at');
+                    break;
+                case 'delivery_handover_confirmation_created':
+                    $query->whereNotNull('delivery.handoverConfirmation.created_at');
+                    break;
+                case 'financial_closed':
+                    $query->whereNotNull('financial_closed_at');
+                    break;
+                case 'financial_unclosed':
+                    $query->whereNull('financial_closed_at');
+                    break;
+                case 'delivery_generated_and_not_invoiced':
+                    $query->whereNotNull('delivery.generated_at')->whereNull('leasingOrder.invoice_generated_at');
+                    break;
+                case 'invoice_generated_and_not_batched':
+                    $query->whereNotNull('leasingOrder.invoice_generated_at')->whereNull('leasingOrder.leasing_invoice_batch_id');
+                    break;
+                case 'invoice_batched_and_not_paid':
+                    $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
+                    break;
+                case 'main_receivable_paid':
+                    $query->whereNotNull('leasingOrder.payment_at');
+                    break;
+                default;
+                    break;
             }
         }
 
@@ -249,3 +210,52 @@ class QueryBuilder {
     }
 
 }
+
+//
+//            if (in_array('validated', $statuses)) {
+//                $query->whereNotNull('validated_at');
+//            }
+//
+//            if (in_array('unvalidated', $statuses)) {
+//                $query->whereNull('validated_at');
+//            }
+//            
+//            if (in_array('unvalidated_and_indent', $statuses)) {
+//                $query->whereNull('validated_at')->whereNotNull('indent.created_at')->whereNull('delivery.generated_at');
+//            }
+//            if (in_array('leasing_order_invoice_batched', $statuses)) {
+//                $query->whereNotNull('leasingOrder.leasing_invoice_batch_id');
+//            }
+//            if (in_array('delivery_generated', $statuses)) {
+//                $query->whereNotNull('delivery.generated_at')->whereNull('delivery.handover.created_at');
+//            }
+//            if (in_array('delivery_handover_created', $statuses)) {
+//                $query->whereNotNull('delivery.handover.created_at')->whereNull('delivery.handoverConfirmation.created_at');
+//            }
+//            if (in_array('delivery_handover_confirmed', $statuses)) {
+//                $query->whereNotNull('delivery.handoverConfirmation.created_at');
+//            }
+//            if (in_array('financial_closed', $statuses)) {
+//                $query->whereNotNull('financial_closed_at');
+//            }
+//            if (in_array('financial_unclosed', $statuses)) {
+//                $query->whereNull('financial_closed_at');
+//            }
+//            if (in_array('delivery_generated_and_not_invoiced', $statuses)) {
+//                $query->whereNotNull('delivery.generated_at')->whereNull('leasingOrder.invoice_generated_at');
+//            }
+//            if (in_array('invoice_generated_and_not_batched', $statuses)) {
+//                $query->whereNotNull('leasingOrder.invoice_generated_at')->whereNull('leasingOrder.leasing_invoice_batch_id');
+//            }
+//            if (in_array('invoice_batched_and_not_paid', $statuses)) {
+//                $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
+//            }
+//            if (in_array('main_receivable_paid', $statuses)) {
+//                $query->whereNotNull('leasingOrder.payment_at');
+//            }
+//            if (in_array('polreg_cddb_string_generated', $statuses)) {
+//                $query->whereNotNull('polReg.strings.created_at');
+//            }
+//            if (in_array('polreg_md_submission_batched', $statuses)) {
+//                $query->whereNotNull('polReg.md_submission_batch_id');
+//            }
