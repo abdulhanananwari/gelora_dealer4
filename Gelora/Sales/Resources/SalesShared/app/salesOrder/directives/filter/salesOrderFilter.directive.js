@@ -50,6 +50,7 @@ geloraSalesShared
                     'invoice_generated_and_not_batched' : 'Sudah Cetak Tagihan Leasing & Belum Kirim Leasing',
                     'leasing_order_invoice_batched': 'Sudah Kirim Leasing',
                     'polreg_cddb_string_generated': 'Sudah Generate CDDB',
+                    'polreg_md_submission_batched': 'Sudah di Batch Pengajuan Faktur',
                 }
 
                 scope.statuses = _.map(statuses, function(value, key) {

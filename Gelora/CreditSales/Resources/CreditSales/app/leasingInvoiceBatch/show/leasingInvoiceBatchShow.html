@@ -46,6 +46,7 @@
                     <th>No PO</th>
                     <th>No Aplikasi</th>
                     <th>Memo Leasing</th>
+                    <th>Buka</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="salesOrder in ctrl.leasingInvoiceBatch.salesOrders">
@@ -57,6 +58,7 @@
                         <td>{{ salesOrder.leasingOrder.po_number }}</td>
                         <td>{{ salesOrder.leasingOrder.application_number }}</td>
                         <td>{{ salesOrder.leasingOrder.note }}</td>
+                        <td><a class="btn btn-block btn-xs btn-primary" href="/sales/redirect-app/sales-order/?id={{ salesOrder.id }}">Buka</a></td>
                     </tr>
                 </tbody>
             </table>
