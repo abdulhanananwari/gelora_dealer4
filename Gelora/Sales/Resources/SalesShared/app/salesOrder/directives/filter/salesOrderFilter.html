@@ -23,7 +23,7 @@
             <ul class="dropdown-menu">
                 <li ng-repeat='status in statuses'>
                     <p style="padding-left: 10px; padding-right: 10px;">
-                        <input type="checkbox" class="form-not-applied" ng-model="status.checked">
+                        <input type="checkbox" class="form-not-applied" ng-model="status.checked" ng-change="statusChanged()">
                         <label>{{ status.name }}</label>
                     </p>
                 </li>
