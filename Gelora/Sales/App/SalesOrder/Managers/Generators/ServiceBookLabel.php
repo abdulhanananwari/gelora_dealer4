@@ -62,8 +62,8 @@ class ServiceBookLabel {
         $this->pdf->Image($this->barcodeFile, null, null, 60, 7, 'PNG');
         $this->pdf->Cell(0, $rowHeight, 'NO MESIN: ' . str_replace(' ', '', $this->unit->getAttribute('engine_number')), 0, 2);
         $this->pdf->Cell(0, $rowHeight, 'NO RANGKA: ' . $this->unit->getAttribute('chasis_number'), 0, 2);
-        $this->pdf->Cell(0, $rowHeight, 'NAMA: ' . $this->salesOrder->getAttribute('customer.name'), 0, 2);
-        $this->pdf->Cell(0, $rowHeight, 'ALAMAT: ' . $this->salesOrder->getAttribute('customer.address'), 0, 2);
+        $this->pdf->Cell(0, $rowHeight, 'NAMA: ' . $this->salesOrder->getAttribute('registration.name'), 0, 2);
+        $this->pdf->Cell(0, $rowHeight, 'ALAMAT: ' . $this->salesOrder->getAttribute('registration.address'), 0, 2);
         $this->pdf->Cell(0, $rowHeight, 'Type: ' . $this->unit->getAttribute('type_name'), 0, 2);
         $this->pdf->Cell(0, $rowHeight, $this->dealerCode, 0, 2);
     }
