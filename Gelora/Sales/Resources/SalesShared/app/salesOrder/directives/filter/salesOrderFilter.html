@@ -17,19 +17,23 @@
         <!-- <label>Status SPK</label>
         <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select> -->
         <label>Status</label>
-        <div class="dropdown dropdown-scroll">
-            <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">Status <span class="caret"></span>
+        <div class="dropdown">
+            <button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown">Status
             </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li ng-repeat='(code, name) in statuses'>
-                    <a ng-click="checkStatus(code)">
-                        <input ng-click="checkStatus(code)" type="checkbox" class="form-not-applied" ng-model="checkedStatusCodes[code].checked">{{ name }}
-                    </a>
+            <ul class="dropdown-menu">
+                <li ng-repeat='status in statuses'>
+                    <p style="padding-left: 10px; padding-right: 10px;">
+                        <input type="checkbox" class="form-not-applied" ng-model="status.checked">
+                        <label>{{ status.name }}</label>
+                    </p>
                 </li>
             </ul>
         </div>
+        <br>
         <label>Penerimaan Barang</label>
         <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#registration-items-filter-modal">Barang</button>
+        <br>
+        <area-selector provinsi="filter.customer_area.provinsi" kota="filter.customer_area.kota" kecamatan="filter.customer_area.kecamatan" kelurahan="filter.customer_area.kelurahan" kode-pos="filter.customer_area.kode_pos"></area-selector>
     </div>
     <div class="col-sm-4">
         <label>Leasing</label>

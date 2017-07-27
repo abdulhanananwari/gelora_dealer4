@@ -4,7 +4,7 @@ geloraBaseShared
 		var baseLinkFactory = {}
 
         var hostname = window.location.hostname
-        var env = hostname.substring(0, 3) == '192' ? 'dev' : 'prod';
+        var env = (hostname == 'localvagrant' || hostname.substring(0, 3) == '192') ? 'dev' : 'prod';
 
         var domains = {
             accounts: 'https://accounts.xolura.com/',
