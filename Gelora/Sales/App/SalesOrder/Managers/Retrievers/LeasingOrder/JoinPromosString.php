@@ -22,7 +22,8 @@ class JoinPromosString {
             foreach ($this->salesOrder->getAttribute('leasingOrder.joinPromos') as $joinPromo) {
                 $joinPromoSubDoc = new SubDocument($joinPromo);
                 $paymentDate = $joinPromoSubDoc->get('transaction.created_at') ? $joinPromoSubDoc->toCarbon('transaction.created_at')->toDateString() : '';
-                $joinPromoString = $joinPromoString . $joinPromo['transfer_amount'] . '(' . $paymentDate . ')' . ';' ;         
+
+                $joinPromoString = $joinPromo ? $joinPromoString . $joinPromo['amount'] . '|' . $joinPromo['transfer_amount'] . '(' . $paymentDate . ')' . ';' : '';         
             }
         }
 

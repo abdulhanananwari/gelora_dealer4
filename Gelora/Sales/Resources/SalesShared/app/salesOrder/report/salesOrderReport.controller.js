@@ -56,6 +56,7 @@ geloraSalesShared
             'KODE TYPE MOTOR',
             'NAMA WARNA MOTOR',
             'KODE WARNA MOTOR',
+            'TAHUN PERAKITAN',
             'NOMOR RANGKA',
             'NOMOR MESIN',
             'TANGGAL DO',
