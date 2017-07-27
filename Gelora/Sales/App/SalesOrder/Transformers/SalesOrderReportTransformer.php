@@ -64,6 +64,7 @@ class SalesOrderReportTransformer {
             'KODE TYPE MOTOR' => $salesOrder->getAttribute('delivery.unit.type_code'),
             'NAMA WARNA MOTOR' => $salesOrder->getAttribute('delivery.unit.color_name'),
             'KODE WARNA MOTOR' => $salesOrder->getAttribute('delivery.unit.color_code'),
+            'TAHUN PERAKITAN' => $salesOrder->getAttribute('delivery.unit.assembly_year'),
             'NOMOR RANGKA' => $salesOrder->getAttribute('delivery.unit.chasis_number'),
             'NOMOR MESIN' => $salesOrder->getAttribute('delivery.unit.engine_number'),
             'TANGGAL DO' => $salesOrder->getAttribute('delivery.unit.created_at') ? $salesOrder->getAttribute('delivery.unit.created_at')->toDateString() : '',
