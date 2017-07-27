@@ -44,7 +44,8 @@ geloraSalesShared
             vm.salesOrder.cddb.no_ktp = vm.salesOrder.registration.ktp;
             vm.salesOrder.cddb.entity_id = vm.salesOrder.registration.id;
             vm.salesOrder.cddb.alamat_surat = vm.salesOrder.registration.address;
-            vm.salesOrder.cddb.no_hp = vm.salesOrder.customer.phone_number;
+            vm.salesOrder.cddb.no_hp = vm.salesOrder.registration.phone_number;
+            vm.salesOrder.cddb.tanggal_lahir = moment(vm.salesOrder.registration.dob, "YYYY-MM-DD").format("DDMMYYYY");
 
             var kelurahan = _.invert(vm.areaOptions.kelurahan_surat.options)[vm.salesOrder.registration.kelurahan]
             if (kelurahan) {

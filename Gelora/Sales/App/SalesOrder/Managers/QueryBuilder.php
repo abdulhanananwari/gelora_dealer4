@@ -130,10 +130,10 @@ class QueryBuilder {
     protected function queryCustomerArea($query, \Illuminate\Http\Request $request) {
 
         if ($request->has('customer_area')) {
-
-            $params = json_decode($request->get('customer_area'));
-            foreach ($params as $key => $value) {
-                $query->where('customer.' . $key, $value);
+            $params = explode(',', $request->get('customer_area'));
+            foreach ($params as $param) {
+                $paramArray = explode(':', $param);
+                $query->where('customer.' . $paramArray[0], $paramArray[1]);
             }
         }
 

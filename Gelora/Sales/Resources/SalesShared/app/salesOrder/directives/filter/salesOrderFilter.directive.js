@@ -70,6 +70,13 @@ geloraSalesShared
                     scope.filter.statuses = _.flatMap(_.filter(scope.statuses, { checked: true }), 'code').join(',')
                 }
 
+                scope.$watch('rawCustomerArea', function(newValue) {
+                    var strings = _.map(newValue, function(value, key) {
+                        return key + ":" + value
+                    })
+                    scope.filter.customer_area = strings.join(',')
+                }, true)
+
                 scope.loadDrivers = function() {
 
                     if (scope.drivers) { return }

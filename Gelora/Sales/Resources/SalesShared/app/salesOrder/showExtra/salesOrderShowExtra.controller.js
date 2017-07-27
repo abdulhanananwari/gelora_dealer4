@@ -42,6 +42,14 @@ geloraSalesShared
 
         vm.deleteFocused = function(salesOrderExtra) {
 
+            if (confirm('Yakin mau hapus?')) {
+
+                SalesOrderExtraSharedModel.delete(salesOrderExtra.id)
+                    .then(function() {
+                        load()
+                    })
+            }
+
         }
 
         vm.createHandover = function(salesOrderExtra) {
