@@ -9,6 +9,7 @@
                 <thead>
                     <tr>
                         <th>Customer Name</th>
+                        <th>Nama STNK</th>
                         <th>Type Motor</th>
                         <th>Warna Motor</th>
                         <th>Sales</th>
@@ -25,6 +26,7 @@
                 <tbody>
                     <tr ng-repeat="salesOrder in ctrl.salesOrders">
                         <td>{{salesOrder.customer.name}}</td>
+                        <td>{{salesOrder.registration.name}}</td>
                         <td>{{salesOrder.vehicle.name}}</td>
                         <td>{{salesOrder.vehicle.variant.name}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
