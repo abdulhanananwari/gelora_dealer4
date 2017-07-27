@@ -67,7 +67,7 @@ geloraSalesShared
                     })
 
                 scope.statusChanged = function(code) {
-                    scope.filter.statuses = _.flatMap(_.filter(scope.statuses, { checked: true }), 'status_code').join(',')
+                    scope.filter.statuses = _.flatMap(_.filter(scope.statuses, { checked: true }), 'code').join(',')
                 }
 
                 scope.loadDrivers = function() {
