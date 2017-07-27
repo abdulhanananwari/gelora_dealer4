@@ -21,9 +21,23 @@ geloraSalesShared
 
                 scope.customerTypes = ['Perorangan', 'Badan Usaha']
 
-                scope.paymentTypes = { 'credit': 'Kredit', 'cash': 'Kas' }
+                scope.paymentTypes = {
+                    'credit': 'Kredit',
+                    'cash': 'Kas'
+                }
 
-                scope.statuses = {
+                scope.dateTypes = {
+                    'created_at': 'Tanggal SPK',
+                    'indent.created_at': 'Tanggal Indent',
+                    'validated_at': 'Tanggal Validasi',
+                    'delivery.generated_at': 'Tanggal Buat Surat Jalan',
+                    'delivery.handover.created_at': 'Tanggal Serah terima kendaraan',
+                    'delivery.handover.confirmed_at': 'Tanggal BAST Serah Terima Kendaraan',
+                    'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing',
+                    'customerInvoice.created_at': 'Tanggal Tagih Customer'
+                }
+
+                var statuses = {
                     'unvalidated_and_indent': 'Belum Validasi & Indent Unit',
                     'unvalidated': 'Belum Validasi',
                     'validated': 'Validasi',
@@ -38,16 +52,14 @@ geloraSalesShared
                     'polreg_cddb_string_generated': 'Sudah Generate CDDB',
                 }
 
-                scope.dateTypes = {
-                    'created_at': 'Tanggal SPK',
-                    'indent.created_at': 'Tanggal Indent',
-                    'validated_at': 'Tanggal Validasi',
-                    'delivery.generated_at': 'Tanggal Buat Surat Jalan',
-                    'delivery.handover.created_at': 'Tanggal Serah terima kendaraan',
-                    'delivery.handover.confirmed_at': 'Tanggal BAST Serah Terima Kendaraan',
-                    'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing',
-                    'customerInvoice.created_at': 'Tanggal Tagih Customer'
-                }
+                scope.statuses = _.map(statuses, function(value, key) {
+                    return {
+                        code: key,
+                        name: value,
+                        checked: false
+                    }
+                })
+
 
                 ConfigModel.get('gelora.polReg.defaultItems')
                     .then(function(res) {

@@ -114,6 +114,34 @@ class QueryBuilder {
             }
         }
 
+
+        $this->queryCustomerArea($query, $request);
+        $this->queryStatus($query, $request);
+        $this->queryStatuses($query, $request);
+
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        if ($request->has('order_by')) {
+            $query->whereNotNull($request->get('order_by'));
+        }
+
+        return $query;
+    }
+
+    protected function queryCustomerArea($query, \Illuminate\Http\Request $request) {
+
+        if ($request->has('customer_area')) {
+
+            $params = json_decode($request->get('customer_area'));
+            foreach ($params as $key => $value) {
+                $query->where('customer.' . $key, $value);
+            }
+        }
+
+        return $query;
+    }
+
+    protected function queryStatus($query, \Illuminate\Http\Request $request) {
+
         if ($request->has('status')) {
             switch ($request->get('status')) {
                 case 'unvalidated':
@@ -159,27 +187,20 @@ class QueryBuilder {
                     break;
             }
         }
-        
-        $this->queryStatuses($query, $request);
-
-        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
-        if ($request->has('order_by')) {
-            $query->whereNotNull($request->get('order_by'));
-        }
 
         return $query;
     }
 
     protected function queryStatuses($query, \Illuminate\Http\Request $request) {
-        
+
         if ($request->has('statuses')) {
-            
+
             $statuses = explode(',', $request->get('statuses'));
-            
+
             if (in_array('validated', $statuses)) {
                 $query->whereNotNull('validated_at');
             }
-            
+
             if (in_array('unvalidated', $statuses)) {
                 $query->whereNull('validated_at');
             }
@@ -197,7 +218,7 @@ class QueryBuilder {
             }
             if (in_array('delivery_handover_confirmed', $statuses)) {
                 $query->whereNotNull('delivery.handoverConfirmation.created_at');
-            }            
+            }
             if (in_array('financial_closed', $statuses)) {
                 $query->whereNotNull('financial_closed_at');
             }
@@ -207,20 +228,21 @@ class QueryBuilder {
             if (in_array('delivery_generated_and_not_invoiced', $statuses)) {
                 $query->whereNotNull('delivery.generated_at')->whereNull('leasingOrder.invoice_generated_at');
             }
-            if (in_array('invoice_generated_and_not_batched', $statuses)){
+            if (in_array('invoice_generated_and_not_batched', $statuses)) {
                 $query->whereNotNull('leasingOrder.invoice_generated_at')->whereNull('leasingOrder.leasing_invoice_batch_id');
             }
-            if (in_array('invoice_batched_and_not_paid', $statuses)){
+            if (in_array('invoice_batched_and_not_paid', $statuses)) {
                 $query->whereNotNull('leasingOrder.leasing_invoice_batch_id')->whereNull('leasingOrder.payment_at');
             }
-            if (in_array('main_receivable_paid', $statuses)){
+            if (in_array('main_receivable_paid', $statuses)) {
                 $query->whereNotNull('leasingOrder.payment_at');
             }
             if (in_array('polreg_cddb_string_generated', $statuses)) {
                 $query->whereNotNull('polReg.strings.created_at');
             }
         }
-        
+
         return $query;
     }
+
 }
