@@ -39,12 +39,12 @@
             <tr>
                 <td style="width: 20%">Nama Konsumen</td>
                 <td style="width: 5%">:</td>
-                <td style="width: 50%">{{$viewData['leasingOrder']->customer['name']}}</td>
+                <td style="width: 50%">{{$viewData['leasingOrder']->registration['name']}}</td>
             </tr>
             <tr>
                 <td>Alamat</td>
                 <td>:</td>
-                <td>{{ $viewData['leasingOrder']->customer['address'] }}</td>
+                <td>{{ $viewData['leasingOrder']->registration['address'] }}</td>
             </tr>
             <tr>
                 <td>Merk</td>
