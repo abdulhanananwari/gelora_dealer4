@@ -9,7 +9,7 @@
             <tr>
                 <td>Telah Terima Dari</td>
                 <td>:</td>
-                <td>{{$viewData['leasingOrder']->registration['name'] }}</td>
+                <td>{{$viewData['leasingOrder']->customer['name'] }} / {{$viewData['leasingOrder']->registration['name'] }}</td>
             </tr>
             <tr>
                 <td>Uang Sejumlah</td>
