@@ -10,6 +10,7 @@
                 <thead>
                     <tr>
                         <th>Dibuat Oleh</th>
+                        <th>Catatan</th>
                         <th>Tanggal Dibuat</th>
                         <th>Tanggal Ditutup</th>
                         <th>Buka</th>
@@ -18,6 +19,7 @@
                 <tbody>
                     <tr ng-repeat="registrationBatch in ctrl.registrationBatches">
                         <td>{{ registrationBatch.creator.name }}</td>
+                        <td>{{ registrationBatch.note }}</td>
                         <td>{{ registrationBatch.created_at | fromDateTimeString }}</td>
                         <td>{{ registrationBatch.closed_at | fromDateTimeString}}</td>
                         <td><a ui-sref="agencyInvoiceShow({id:registrationBatch.id})">Buka</a></td>

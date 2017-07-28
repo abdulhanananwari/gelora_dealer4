@@ -36,6 +36,8 @@ class LeasingBpkbSubmissionBatchController extends Controller {
             $query->where('subLeasing.name', $request->get('sub_leasing_name'));
         }
 
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        
         if ($request->has('paginate')) {
 
             $registrationBatch = $query->paginate((int) $request->get('paginate', 20));
