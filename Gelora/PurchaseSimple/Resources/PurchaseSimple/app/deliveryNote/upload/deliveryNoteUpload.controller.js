@@ -36,6 +36,7 @@ geloraPurchaseSimple
                         type_code: result[9],
                         color_code: result[10],
                         subcode: result[11],
+                        cost_of_good: result[13] ? _.toInteger(result[13]) : null,
                         current_status: 'UNRECEIVED'
                     }
 

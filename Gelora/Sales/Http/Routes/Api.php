@@ -76,6 +76,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('main-receivable-payment/', ['uses' => 'LeasingOrderController@mainReceivablePayment']);
                 Route::post('join-promo-payment/', ['uses' => 'LeasingOrderController@joinPromoPayment']);
 
+                Route::post('order-confirmation/', ['uses' => 'LeasingOrderController@orderConfirmation']);
                 Route::post('po-complete/', ['uses' => 'LeasingOrderController@poComplete']);
             });
 

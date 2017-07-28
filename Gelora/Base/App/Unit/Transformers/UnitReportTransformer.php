@@ -35,9 +35,14 @@ class UnitReportTransformer {
                 $unitArray['pdi_man'] = $unit->retrieve()->pdiManName();
             }
 
+            if (\SolAuthClient::hasAccess('VIEW_COST_OF_GOOD')) {
+                $unitArray['cost_of_good'] = $unit->cost_of_good;
+            }
+
             $unitsArray[] = $unitArray;
         }
-        
+
+
         return $unitsArray;
     }
 

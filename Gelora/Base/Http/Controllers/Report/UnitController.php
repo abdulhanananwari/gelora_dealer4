@@ -32,7 +32,7 @@ class UnitController extends Controller {
         $filename = 'units';
 
         $infoArray = $request->except('jwt');
-
+        
         $outputBuffer = $this->initializeCsv($filename);
 
         $this->createHeader($infoArray, $outputBuffer);

@@ -28,6 +28,7 @@ class LeasingOrder {
             'po_file_uuid' => $leasingOrder->po_file_uuid,
             'memo_file_uuid' => $leasingOrder->memo_file_uuid,
             'po_completer' => $leasingOrder->po_completer,
+            'order_confirmer' => $leasingOrder->order_confirmer,
             'due_uuid' => $leasingOrder->due_uuid,
             'leasing_invoice_batch_id' => $leasingOrder->leasing_invoice_batch_id,
             'payment_transaction_uuid' => $leasingOrder->payment_transaction_uuid,
