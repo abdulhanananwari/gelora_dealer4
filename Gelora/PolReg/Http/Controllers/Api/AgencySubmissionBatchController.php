@@ -35,6 +35,8 @@ class AgencySubmissionBatchController extends Controller {
             $query->where('agent.id', (int) $request->get('agent_id'));
         }
 
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        
         if ($request->has('paginate')) {
 
             $registrationBatch = $query->paginate((int) $request->get('paginate', 20));
