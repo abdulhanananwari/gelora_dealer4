@@ -13,7 +13,8 @@ class LeasingBpkbSubmissionBatchTransformer extends Fractal\TransformerAbstract 
         
         return [
             'id' => $registrationLeasingBpkbSubmissionBatch->_id,
-            '_id' => $registrationLeasingBpkbSubmissionBatch->_id,
+            
+            'note' => $registrationLeasingBpkbSubmissionBatch->note,
             
             'mainLeasing' => $registrationLeasingBpkbSubmissionBatch->mainLeasing,
             'subLeasing' => $registrationLeasingBpkbSubmissionBatch->subLeasing,
