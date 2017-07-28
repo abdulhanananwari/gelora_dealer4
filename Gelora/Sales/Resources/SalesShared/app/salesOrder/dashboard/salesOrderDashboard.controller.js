@@ -52,8 +52,6 @@ geloraSalesShared
 
                 do {
 
-                    console.log(on)
-
                     grouped.byDate.push({
                         date: moment(on).startOf('day').format(),
                         salesOrders: _.filter(salesOrders, { 'delivery_generated_on': on })
@@ -66,26 +64,8 @@ geloraSalesShared
 
                 return grouped.byDate
             },
-            byMainLeasing: function(salesOrders) {
-
-                grouped.byMainLeasing = []
-
-                keyParameters.mainLeasings = _.uniq(_.map(salesOrders, 'main_leasing_name'))
-
-                _.each(keyParameters.mainLeasings, function(leasingName) {
-
-                    grouped.byMainLeasing.push({
-                        main_leasing_name: leasingName,
-                        salesOrders: _.filter(salesOrders, { 'main_leasing_name': leasingName })
-                    })
-
-                })
-
-                return grouped.byMainLeasing
-            },
             all: function(salesOrders) {
                 this.byDate(salesOrders)
-                this.byMainLeasing(salesOrders)
             }
         }
 
@@ -156,25 +136,45 @@ geloraSalesShared
                 })
                 cashCreditShare.render()
             },
-            leasingShare: function(salesOrders) {
+            leasingShare: function() {
+
+                var mainLeasings = _.uniqBy(vm.salesOrders, 'main_leasing_name')
 
                 var leasingShare = new CanvasJS.Chart("leasing-share", {
                     data: [{
                         type: "doughnut",
-                        dataPoints: _.map(grouped.byMainLeasing, function(value) {
+                        dataPoints: _.map(mainLeasings, function(mainLeasing) {
                             return {
-                                indexLabel: value.main_leasing_name,
-                                y: value.salesOrders.length
+                                indexLabel: mainLeasing['main_leasing_name'],
+                                y: _.filter(vm.salesOrders, {main_leasing_name: mainLeasing['main_leasing_name']}).length
                             }
                         })
                     }],
                 })
                 leasingShare.render()
             },
+            salesPositionShare: function() {
+
+                var positions = _.uniqBy(vm.salesOrders, 'sales_personnel_position_text')
+
+                var salesPositionShare = new CanvasJS.Chart("sales-position-share", {
+                    data: [{
+                        type: "doughnut",
+                        dataPoints: _.map(positions, function(position) {
+                            return {
+                                indexLabel: position['sales_personnel_position_text'],
+                                y: _.filter(vm.salesOrders, {sales_personnel_position_text: position['sales_personnel_position_text']}).length
+                            }
+                        })
+                    }],
+                })
+                salesPositionShare.render()
+            },
             all: function() {
                 this.totalDaily()
                 this.leasingShare()
                 this.cashCreditShare()
+                this.salesPositionShare()
             }
         }
 
