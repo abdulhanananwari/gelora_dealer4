@@ -41,7 +41,7 @@
                                 <small>
                                     <span ng-show="salesOrder.delivery.generated_at">SJ: {{salesOrder.delivery.generated_at | fromDateTimeString }}</span><br>
                                     <span ng-show="salesOrder.delivery.handover.created_at">ST: {{salesOrder.delivery.handover.created_at | fromDateTimeString }}</span><br>
-                                    <span ng-show="salesOrder.delivery.handover.confirmed_at">BAST: {{salesOrder.delivery.handover.confirmed_at | fromDateTimeString }}</span><br>
+                                    <span ng-show="salesOrder.delivery.handoverConfirmation.created_at">BAST: {{salesOrder.delivery.handoverConfirmation.created_at | fromDateTimeString }}</span><br>
                                 </small>
                             </p>
                         </td>
