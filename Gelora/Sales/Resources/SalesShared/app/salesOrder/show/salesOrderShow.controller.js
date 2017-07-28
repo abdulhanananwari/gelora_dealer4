@@ -61,9 +61,10 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            mediatorFeePayment: function(salesOrder, uuid) {
+            mediatorFeePayment: function(salesOrder, transaction) {
+                console.log(transaction)
 
-                SalesOrderModel.specificUpdate.mediatorFeePayment(salesOrder.id, { transaction_uuid: uuid })
+                SalesOrderModel.specificUpdate.mediatorFeePayment(salesOrder.id, transaction)
                     .then(function(res) {
                         alert('Berhasil mengupdate SPK')
                         vm.salesOrder = res.data.data
