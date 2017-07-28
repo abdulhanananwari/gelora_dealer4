@@ -23,6 +23,7 @@
                         <th>Tgl ND</th>
                         <th>No SJ</th>
                         <th>Tgl SJ</th>
+                        <th>HPP</th>
                         <th>Status</th>
                         <th>Hapus</th>
                     </tr>
@@ -40,6 +41,7 @@
                         <td>{{object.nd_date}}</td>
                         <td>{{object.sj_number}}</td>
                         <td>{{object.sj_date}}</td>
+                        <td>{{object.cost_of_good | number }}</td>
                         <td>
                             <span>{{object.status}}</span>
                             <span ng-if="object.status == 1">Sukses. ID: {{object.response.data.id}}</span>

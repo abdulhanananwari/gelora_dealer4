@@ -39,7 +39,6 @@ class UnitTransformer extends Fractal\TransformerAbstract {
             'updated_at' => $unit->updated_at->toDateTimeString(),
         ];
 
-
         if (\SolAuthClient::hasAccess('VIEW_COST_OF_GOOD')) {
             $data['cost_of_good'] = $unit->cost_of_good;
             $data['cost_of_good_entered_at'] = $unit->cost_of_good_entered_at ? $unit->cost_of_good_entered_at->toDateTimeString() : null;
