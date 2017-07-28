@@ -20,6 +20,8 @@
                         </tbody>
                     </table>
                 </div>
+                <label>Catatan</label>
+                <input type="textbox" ng-model="ctrl.registrationBatch.note">
             </div>
             <div class="col-sm-3">
                <file-manager-upload ng-hide="ctrl.registrationBatch.closed_at" path="polreg" subpath="agency-invoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
