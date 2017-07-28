@@ -13,7 +13,8 @@ class AgencyInvoiceTransformer extends Fractal\TransformerAbstract {
 
         return [
             'id' => $registrationAgencyInvoice->_id,
-            '_id' => $registrationAgencyInvoice->_id,
+            
+            'note' => $registrationAgencyInvoice->note,
             
             'agent' => $registrationAgencyInvoice->agent,
             'file_uuid' => $registrationAgencyInvoice->file_uuid,

@@ -12,6 +12,7 @@ class AgencySubmissionBatchTransformer extends Fractal\TransformerAbstract {
     public function transform(AgencySubmissionBatchModel $registrationAgencySubmissionBatch) {
         return [
             'id' => $registrationAgencySubmissionBatch->_id,
+            
             'agency_note' => $registrationAgencySubmissionBatch->agency_note,
             'internal_note' => $registrationAgencySubmissionBatch->internal_note,
             'agent' => $registrationAgencySubmissionBatch->agent,

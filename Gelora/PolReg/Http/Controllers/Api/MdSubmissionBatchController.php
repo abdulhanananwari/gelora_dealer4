@@ -51,6 +51,21 @@ class MdSubmissionBatchController extends Controller {
         return $this->formatItem($registrationBatch);
     }
 
+    public function update($id, Request $request) {
+
+        $registrationBatch = $this->registrationBatch->find($id);
+        $registrationBatch->assign()->fromRequest($request);
+
+        $validation = $registrationBatch->validate()->onUpdate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $registrationBatch->save();
+
+        return $this->formatItem($registrationBatch);
+    }
+
     public function close($id, Request $request) {
 
         $registrationBatch = $this->registrationBatch->find($id);
