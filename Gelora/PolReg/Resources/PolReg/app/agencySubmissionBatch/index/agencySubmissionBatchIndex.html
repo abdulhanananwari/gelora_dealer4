@@ -10,6 +10,7 @@
                 <thead>
                     <tr>
                         <th>Dibuat Oleh</th>
+                        <th>Catatan</th>
                         <th>Biro Jasa</th>
                         <th>Tanggal Dibuat</th>
                         <th>Tanggal Ditutup</th>
@@ -19,6 +20,7 @@
                 <tbody>
                     <tr ng-repeat="registrationBatch in ctrl.registrationBatches">
                         <td>{{ registrationBatch.creator.name }}</td>
+                        <td>{{ registrationBatch.note }}</td>
                         <td>{{ registrationBatch.agent.name }} ({{ registrationBatch.agent.id }})</td>
                         <td>{{ registrationBatch.created_at | fromDateTimeString}}</td>
                         <td>{{ registrationBatch.closed_at | fromDateTimeString}}</td>
