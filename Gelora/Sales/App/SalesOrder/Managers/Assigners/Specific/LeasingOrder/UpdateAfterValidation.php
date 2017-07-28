@@ -19,6 +19,7 @@ class UpdateAfterValidation {
         $leasingOrder->fill([
             'customer' => $request->get('customer'),
             'registration' => $request->get('registration'),
+            'application_number' => $request->get('application_number'),
             'po_number' => $request->get('po_number'),
             'po_file_uuid' => $request->get('po_file_uuid'),
             'leasing_invoice_batch_id' => $request->get('leasing_invoice_batch_id'),
