@@ -24,6 +24,9 @@ class MdSubmissionBatchController extends Controller {
         } else if ($request->get('status') == 'active') {
             $query->whereNull('closed_at');
         }
+        
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        
         if ($request->has('paginate')) {
 
             $registrationBatch = $query->paginate((int) $request->get('paginate', 20));
