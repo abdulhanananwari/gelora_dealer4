@@ -45,6 +45,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                 Route::post('plafond', ['uses' => 'SpecificUpdateController@plafond']);
                 Route::post('note', ['uses' => 'SpecificUpdateController@insertNote']);
                 Route::post('registration', ['uses' => 'SpecificUpdateController@registration']);
+                Route::post('mediator-fee-payment', ['uses' => 'SpecificUpdateController@mediatorFeePayment']);
                 Route::delete('customer-invoice', ['uses' => 'SpecificUpdateController@deleteCustomerInvoice']);
             });
 

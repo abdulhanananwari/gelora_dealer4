@@ -46,7 +46,10 @@ geloraSalesShared
             },
             deleteCustomerInvoice: function(id, params) {
                 return $http.delete(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/customer-invoice/', {}, { params: params })
-            }
+            },
+            mediatorFeePayment: function(id, body) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/specific-update/mediator-fee-payment/', body)
+            },
         }
 
         salesOrder.leasingOrder = {

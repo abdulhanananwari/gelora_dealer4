@@ -132,19 +132,23 @@
             <label>Mediator Fee</label>
             <input type="text" ng-model="ctrl.salesOrder.mediator_fee" fcsa-number="{ preventInvalidInput: true }">
             <div ng-show="ctrl.salesOrder.mediator_fee > 0">
-                <entity-finder-modal search-only="true" selected-entity="selectedMediatorEntity" on-entity-selected="
-                        ctrl.salesOrder.mediator=_.pick(selectedMediatorEntity,['name','phone_number','email','address']);
-                        ctrl.salesOrder.mediator.entity_id=selectedMediatorEntity.id">
-                </entity-finder-modal>
-                <br>
+                <span ng-hide="ctrl.salesOrder.validated_at">                    
+                    <entity-finder-modal search-only="true" selected-entity="selectedMediatorEntity" on-entity-selected="
+                            ctrl.salesOrder.mediator=_.pick(selectedMediatorEntity,['id','name','phone_number','email','address']);
+                            ctrl.salesOrder.mediator.entity_id=selectedMediatorEntity.id">
+                    </entity-finder-modal>
+                    <file-manager-upload displayed-input='{{ ctrl.fileManager.mediatorIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.mediatorIdentification.additionalData }}' validations='{{ ctrl.fileManager.mediatorIdentification.validations }}' uploaded-file="uploadedMediatorIdentification" on-file-uploaded="ctrl.salesOrder.mediator.id_file_uuid=uploadedMediatorIdentification.uuid;ctrl.store(ctrl.salesOrder);">
+                    </file-manager-upload>
+                    <br>
+                </span>
                 <label>Nama Mediator (Lengkap Sesuai KTP)</label>
                 <input type="text" ng-model="ctrl.salesOrder.mediator.name">
                 <label>Nomor KTP Mediator</label>
                 <input type="text" ng-model="ctrl.salesOrder.mediator.ktp">
-                <file-manager-upload displayed-input='{{ ctrl.fileManager.mediatorIdentification.displayedInput }}' additional-data='{{ ctrl.fileManager.mediatorIdentification.additionalData }}' validations='{{ ctrl.fileManager.mediatorIdentification.validations }}' uploaded-file="uploadedMediatorIdentification" on-file-uploaded="ctrl.salesOrder.mediator.id_file_uuid=uploadedMediatorIdentification.uuid;ctrl.store(ctrl.salesOrder);">
-                </file-manager-upload>
                 <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.mediator.id_file_uuid}}">
                 </file-manager-show>
+                <transaction-create ng-show="ctrl.salesOrder.delivery.handoverConfirmation.created_at && !ctrl.salesOrder.mediator.payment.creator.timestamp" related-entity-id="{{ ctrl.salesOrder.mediator.id}}" related-entity-name="{{ ctrl.salesOrder.mediator.name}}" related-entity-phone-number="{{ ctrl.salesOrder.mediator.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="SalesOrderMediator" transactable-id="{{ctrl.salesOrder.id}}" amount-type="-" amount="{{ ctrl.salesOrder.mediator_fee}}" transaction="mediatorTransaction" setting="ctrl.transactionCreatorModal.setting" on-created="ctrl.postValidationUpdate.mediatorFeePayment(ctrl.salesOrder,mediatorTransaction.uuid)"></transaction-create>
+                <label ng-show="ctrl.salesOrder.mediator.payment.creator.timestamp">Dibayarkan oleh {{ ctrl.salesOrder.mediator.payment.creator.name }} ({{ctrl.salesOrder.mediator.payment.creator.timestamp * 1000 | fromDateTimeString }}) ({{ctrl.salesOrder.mediator.payment.transaction_uuid}})</label>
             </div>
         </div>
     </div>

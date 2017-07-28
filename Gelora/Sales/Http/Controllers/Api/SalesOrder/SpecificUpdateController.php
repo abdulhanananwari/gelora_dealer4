@@ -95,5 +95,19 @@ class SpecificUpdateController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
+    
+    public function mediatorFeePayment($id, Request $request) {
+        
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->mediatorFeePayment($request);
+
+        $validation = $salesOrder->validate()->specific()->mediatorFeePayment();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->financial()->onMediatorFeePayment();
+        return $this->formatItem($salesOrder);
+    }
 
 }
