@@ -6,6 +6,8 @@
             <div class="col-sm-3">
                 <leasing-selector ng-if="!ctrl.registrationBatch.closed_at" selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.registrationBatch.mainLeasing=mainLeasing;ctrl.registrationBatch.subLeasing=subLeasing;"></leasing-selector>
                 <br>
+                <label>Catatan</label>
+                <input type="textbox" ng-model="ctrl.registrationBatch.note">
             </div>
             <div class="col-sm-3">
                 <div style="width: 100%;" class="table-responsive">
@@ -30,8 +32,6 @@
                         </tbody>
                     </table>
                 </div>
-                <label>Catatan</label>
-                <input type="textbox" ng-model="ctrl.registrationBatch.note">
             </div>
             <div class="col-sm-3">
                 <file-manager-upload path="polreg" subpath="leasing-bpkb-submission-batch" fileable-type="LeasingBpkbSubmissionBatch" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedLeasingBpkb" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedLeasingBpkb.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
