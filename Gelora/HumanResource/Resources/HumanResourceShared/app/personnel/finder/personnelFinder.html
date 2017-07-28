@@ -10,7 +10,7 @@
                 <label>Name</label>
                 <input type="text" ng-model="filter.name" name="name">
                 <label>Team</label>
-                <select ng-options="team.id as team.name for team in teams" ng-model="filter.team_id"></select>
+                <select ng-options="team.id as team.name for team in teams" ng-model="filter.team_id" ng-click="load.teams()"></select>
                 <div class="row">
                     <div class="col-sm-6">
                         <label>Hasil Per Halaman</label>

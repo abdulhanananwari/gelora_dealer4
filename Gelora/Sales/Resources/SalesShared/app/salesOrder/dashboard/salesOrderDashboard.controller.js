@@ -52,6 +52,8 @@ geloraSalesShared
 
                 do {
 
+                    console.log(on)
+
                     grouped.byDate.push({
                         date: moment(on).startOf('day').format(),
                         salesOrders: _.filter(salesOrders, { 'delivery_generated_on': on })

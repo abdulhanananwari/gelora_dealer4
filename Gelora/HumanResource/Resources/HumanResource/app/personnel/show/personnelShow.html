@@ -6,11 +6,13 @@
             <div class="col-sm-6">
                 <entity-finder-modal ng-if="!ctrl.personnel.id"
                     selected-entity="ctrl.personnel.entity"
-                    on-entity-selected="ctrl.personnel.entity_id=ctrl.personnel.entity.id;
-                    ctrl.personnel.phone_number=ctrl.personnel.entity.phone_number;">
+                    on-entity-selected="
+                        ctrl.personnel.entity_id=ctrl.personnel.entity.id;
+                        ctrl.personnel.phone_number=ctrl.personnel.entity.phone_number;
+                        ctrl.personnel.name=ctrl.personnel.entity.name;">
                 </entity-finder-modal>
                 <br>
-                <label>Nama</label>
+                <label>Nama (dari master)</label>
                 <input type="text" ng-model="ctrl.personnel.entity.name" readonly>
             </div>
             <div class="col-sm-6">
@@ -24,6 +26,8 @@
                 <input type="text" ng-model="ctrl.personnel.user.email" readonly>
             </div>
         </div>
+        <label>Nama</label>
+        <input type="text" ng-model="ctrl.personnel.name">
         <label>Posisi</label>
         <select ng-options="key as value for (key, value) in ctrl.positions" ng-model="ctrl.personnel.position"></select>
         <label>Team</label>
