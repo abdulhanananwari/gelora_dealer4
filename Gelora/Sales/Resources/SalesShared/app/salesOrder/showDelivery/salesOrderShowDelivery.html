@@ -33,11 +33,12 @@
                 <input type="text" ng-model="ctrl.salesOrder.delivery.driver.name" ng-readonly="ctrl.salesOrder.delivery.driver.id">
                 <span ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at">
                     <select ng-options="driver as driver.name for driver in ctrl.drivers" ng-model="ctrl.salesOrder.delivery.driver"></select>
-                    <button ng-hide="ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-warning" ng-click="ctrl.delivery.updateAfterHandoverCreated(ctrl.salesOrder)">Update</button>
                 </span>
                 <div ng-hide="ctrl.salesOrder.delivery.handover.created_at">
+                    <button class="btn btn-block btn-warning" ng-click="ctrl.delivery.update(ctrl.salesOrder)">Update</button><br>
                     <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
                     <br>
+
                 </div>
                 <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateServiceBookBarcodeLabel(ctrl.salesOrder)">Cetak Barcode Buku Servis</button>
                 <label ng-show="ctrl.salesOrder.delivery.delivery_note_generated_count">
