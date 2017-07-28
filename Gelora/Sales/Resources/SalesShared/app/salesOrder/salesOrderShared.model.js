@@ -66,6 +66,9 @@ geloraSalesShared
             assignFromLeasingOrder: function(id, leasingOrderId, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id: leasingOrderId }, { params: params })
             },
+            orderConfirmation: function(id, body) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/order-confirmation/', body)
+            },
             poComplete: function(id, body) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/po-complete/', body)
             }

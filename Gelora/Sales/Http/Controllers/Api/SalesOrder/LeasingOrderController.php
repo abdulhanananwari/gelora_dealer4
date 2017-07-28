@@ -89,6 +89,20 @@ class LeasingOrderController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
 
+    public function orderConfirmation($id, Request $request) {
+
+        $salesOrder = $this->salesOrder->find($id);
+
+        $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->leasingOrder()->onOrderConfirmation($request->get('order_confirmation'), $request->get('note'));
+
+        return $this->formatItem($salesOrder);
+    }
+
     public function poComplete($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);

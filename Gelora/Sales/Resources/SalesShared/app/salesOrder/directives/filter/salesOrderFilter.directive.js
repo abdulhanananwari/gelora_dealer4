@@ -39,6 +39,8 @@ geloraSalesShared
 
                 var statuses = {
                     'validated_at': 'Validasi',
+                    'leasingOrder.order_confirmer.timestamp': 'ACC Lisan Leasing',
+                    'leasingOrder.po_completer.timestamp': 'PO Lengkap',
                     'delivery.generated_at': 'Buat Surat Jalan',
                     'delivery.handover.created_at': 'Serah Terima Kendaraan',
                     'delivery.handover.confirmed_at': 'BAST Serah Terima Kendaraan',

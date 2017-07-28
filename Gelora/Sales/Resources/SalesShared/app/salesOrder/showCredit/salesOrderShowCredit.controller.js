@@ -104,8 +104,15 @@ geloraSalesShared
                         $state.reload()
                     })
             },
-            poComplete: function(salesOrder, po_complete) {
-                SalesOrderModel.leasingOrder.poComplete(salesOrder.id, { po_complete: po_complete })
+            orderConfirmation: function(salesOrder, orderConfirmation) {
+                var note = prompt('Catatan ACC Lisan')
+                SalesOrderModel.leasingOrder.orderConfirmation(salesOrder.id, { order_confirmation: orderConfirmation , note: note })
+                    .then(function(res) {
+                        vm.salesOrder = res.data.data
+                    })
+            },
+            poComplete: function(salesOrder, poComplete) {
+                SalesOrderModel.leasingOrder.poComplete(salesOrder.id, { po_complete: poComplete })
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })
