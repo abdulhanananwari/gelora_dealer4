@@ -7,8 +7,6 @@ geloraSalesShared
 
         $scope._ = _
 
-        vm.currentStateName = $state.current.name
-
         vm.salesOrder = {
             id: $state.params.id,
             sales_condition: 'isi',
@@ -62,7 +60,15 @@ geloraSalesShared
                         alert('Berhasil mengupdate SPK')
                         vm.salesOrder = res.data.data
                     })
-            }
+            },
+            mediatorFeePayment: function(salesOrder, uuid) {
+
+                SalesOrderModel.specificUpdate.mediatorFeePayment(salesOrder.id, { transaction_uuid: uuid })
+                    .then(function(res) {
+                        alert('Berhasil mengupdate SPK')
+                        vm.salesOrder = res.data.data
+                    })
+            },
         }
 
         if ($state.params.id) {
@@ -123,6 +129,13 @@ geloraSalesShared
                     // fileSize: 2048
                 })
             }
+        }
 
+
+        vm.transactionCreatorModal = {
+            setting: [
+                { property: 'amount', readonly: true, shown: true },
+                { property: 'autoPrint', set: true },
+            ]
         }
     })

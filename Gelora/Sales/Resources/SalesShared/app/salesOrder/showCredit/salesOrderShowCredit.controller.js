@@ -133,7 +133,8 @@ geloraSalesShared
 
         vm.transactionCreatorModal = {
             setting: [
-                { property: 'amount', readonly: true, shown: true }
+                { property: 'amount', readonly: true, shown: true },
+                { property: 'autoPrint', set: true },
             ]
         }
 
