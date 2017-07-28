@@ -36,7 +36,7 @@ class DeliveryController extends SalesOrderController {
     public function update($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->delivery($request);
+        $salesOrder->assign()->specific()->delivery()->update($request);
 
         $validation = $salesOrder->validate()->delivery()->onUpdate();
         if ($validation !== true) {
@@ -48,7 +48,21 @@ class DeliveryController extends SalesOrderController {
         return $this->formatItem($salesOrder);
     }
     
+    public function updateAfterHandoverCreated($id, Request $request) {
 
+        $salesOrder = $this->salesOrder->find($id);
+        $salesOrder->assign()->specific()->delivery()->updateAfterHandoverCreated($request);
+
+        $validation = $salesOrder->validate()->delivery()->onUpdateAfterHandoverCreated();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $salesOrder->action()->onUpdate();
+
+        return $this->formatItem($salesOrder);
+    }
+    
     public function scan($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);

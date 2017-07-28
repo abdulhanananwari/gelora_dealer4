@@ -22,9 +22,11 @@
                         </tbody>
                     </table>
                 </div>
+                <label>Catatan</label>
+                <input type="textbox" ng-model="ctrl.registrationBatch.note">
             </div>
             <div class="col-sm-6">
-                <button ng-if="!ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
+                <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
                 <button ng-if="ctrl.registrationBatch.id && !ctrl.registrationBatch.closed_at && ctrl.registrationBatch.salesOrders.length > 0" class="btn btn-block btn-primary" ng-click="ctrl.close(ctrl.registrationBatch)">Tutup</button>
                 <div ng-if="ctrl.registrationBatch.closed_at">
                     <label>Email</label>

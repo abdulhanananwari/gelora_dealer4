@@ -24,6 +24,9 @@ class MdSubmissionBatchController extends Controller {
         } else if ($request->get('status') == 'active') {
             $query->whereNull('closed_at');
         }
+        
+        $query->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'desc'));
+        
         if ($request->has('paginate')) {
 
             $registrationBatch = $query->paginate((int) $request->get('paginate', 20));
@@ -47,6 +50,21 @@ class MdSubmissionBatchController extends Controller {
         $registrationBatch = $this->registrationBatch;
 
         $registrationBatch->action()->onCreate();
+
+        return $this->formatItem($registrationBatch);
+    }
+
+    public function update($id, Request $request) {
+
+        $registrationBatch = $this->registrationBatch->find($id);
+        $registrationBatch->assign()->fromRequest($request);
+
+        $validation = $registrationBatch->validate()->onUpdate();
+        if ($validation !== true) {
+            return $this->formatErrors($validation);
+        }
+
+        $registrationBatch->save();
 
         return $this->formatItem($registrationBatch);
     }
