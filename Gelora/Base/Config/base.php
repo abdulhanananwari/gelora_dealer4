@@ -69,6 +69,11 @@ return [
                 'type' => 'unique'
             ],
                 [
+                'name' => 'Kode AHASS',
+                'code' => 'AHASS_CODE',
+                'type' => 'unique'
+            ],
+                [
                 'name' => 'Bank',
                 'code' => 'BANK',
                 'type' => 'unique'

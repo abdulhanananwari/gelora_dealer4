@@ -84,6 +84,9 @@ geloraSalesShared
             update: function(id, delivery) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/', delivery)
             },
+            updateAfterHandoverCreated: function(id, delivery) {
+                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/after-handover-created/', delivery)
+            },
             scan: function(id, unit) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/delivery/scan/', { unit_id: unit.id })
             },

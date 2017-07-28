@@ -14,7 +14,7 @@ geloraPolReg
 
                 LeasingBpkbSubmissionBatchModel.update(registrationBatch.id, registrationBatch)
                     .then(function(res) {
-
+                        alert('Batch Berhasil Diupdate')
                         assignData(res)
                     })
 
@@ -22,6 +22,7 @@ geloraPolReg
 
                 LeasingBpkbSubmissionBatchModel.store(registrationBatch)
                     .then(function(res) {
+                        alert('Batch Berhasil Disimpan')
                         $state.go('leasingBpkbSubmissionBatchShow', { id: res.data.data.id })
                     })
 
