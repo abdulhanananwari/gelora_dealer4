@@ -43,7 +43,7 @@ geloraSalesShared
                     'leasingOrder.po_completer.timestamp': 'PO Lengkap',
                     'delivery.generated_at': 'Buat Surat Jalan',
                     'delivery.handover.created_at': 'Serah Terima Kendaraan',
-                    'delivery.handover.confirmed_at': 'BAST Serah Terima Kendaraan',
+                    'delivery.handoverConfirmation.created_at': 'BAST Serah Terima Kendaraan',
                     'leasingOrder.invoice_generated_at': 'Cetak Tagih Leasing',
                     'leasingOrder.leasing_invoice_batch_id': 'Kirim Tagih Leasing',
                     'customerInvoice.created_at': 'Cetak Tagihan Customer',
