@@ -39,6 +39,8 @@ class Cddb {
         }
         if (!$cddb['no_hp']) {
             $cddb['status_no_hp'] = 'N';
+        }else{
+            $cddb['status_no_hp'] = 1;
         }
         
         $this->salesOrder->cddb = $cddb;
