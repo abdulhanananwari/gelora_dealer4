@@ -14,8 +14,8 @@ class OnUpdate {
 
     public function validate() {
         
-        if (!is_null($this->salesOrder->subDocument()->delivery()->handover['created_at'])) {
-            return ['Penerimaan sudah dibuat sebelumnya'];
+        if ($this->salesOrder->getAttribute('delivery.handover.created_at')) {
+            return ['Serah terima sudah dibuat. Tidak dapat merubah SJ.'];
         }
 
         return true;

@@ -58,6 +58,14 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
+            updateAfterHandoverCreated: function(salesOrder) {
+
+                SalesOrderModel.delivery.updateAfterHandoverCreated(salesOrder.id, salesOrder.delivery)
+                    .then(function(res) {
+                        alert('SJ berhasil update')
+                        vm.salesOrder = res.data.data
+                    })
+            },
             generateDeliveryNote: function() {
                 window.open(LinkFactory.dealer.sales.salesOrder.delivery.views + 'generate-delivery-note/' + vm.salesOrder.id + '?' + $.param({ jwt: JwtValidator.encodedJwt }));
             },
@@ -90,11 +98,14 @@ geloraSalesShared
                     })
             },
             handoverConfirmation: function(salesOrder, handoverConfirmation, params) {
-                SalesOrderModel.delivery.handoverConfirmation(salesOrder.id, handoverConfirmation, params)
-                    .then(function(res) {
-                        alert('Serah terima unit berhasil dikonfirmasi')
-                        vm.salesOrder = res.data.data
-                    })
+                if (confirm('Yakin mau BAST SJ?')) {
+
+                    SalesOrderModel.delivery.handoverConfirmation(salesOrder.id, handoverConfirmation, params)
+                        .then(function(res) {
+                            alert('Serah terima unit berhasil dikonfirmasi')
+                            vm.salesOrder = res.data.data
+                        })
+                }
             },
             cancel: function(salesOrder) {
                 SalesOrderModel.delivery.cancel(salesOrder.id)

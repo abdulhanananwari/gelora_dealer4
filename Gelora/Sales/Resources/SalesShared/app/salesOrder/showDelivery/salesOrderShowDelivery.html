@@ -27,19 +27,19 @@
                 <br>
                 <button ng-show="selectedUnit" class="btn btn-block btn-danger" ng-click="ctrl.delivery.generate(ctrl.salesOrder,selectedUnit)">Generate Surat Jalan</button>
             </div>
-            <div ng-show="ctrl.salesOrder.delivery.generated_at && !ctrl.salesOrder.delivery.handover_at">
+            <div ng-show="ctrl.salesOrder.delivery.generated_at">
                 <h4>Surat Jalan</h4>
                 <label>Supir</label>
                 <input type="text" ng-model="ctrl.salesOrder.delivery.driver.name" ng-readonly="ctrl.salesOrder.delivery.driver.id">
-                <span ng-show="!ctrl.salesOrder.delivery.delivery_note_generator.timestamp">
+                <span ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at">
                     <select ng-options="driver as driver.name for driver in ctrl.drivers" ng-model="ctrl.salesOrder.delivery.driver"></select>
-                    <button class="btn btn-block btn-warning" ng-click="ctrl.delivery.update(ctrl.salesOrder)">Update</button><br>
+                    <button ng-hide="ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-warning" ng-click="ctrl.delivery.updateAfterHandoverCreated(ctrl.salesOrder)">Update</button>
                 </span>
                 <div ng-hide="ctrl.salesOrder.delivery.handover.created_at">
                     <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
-                    <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateServiceBookBarcodeLabel(ctrl.salesOrder)">Cetak Barcode Buku Servis</button>
                     <br>
                 </div>
+                <button class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateServiceBookBarcodeLabel(ctrl.salesOrder)">Cetak Barcode Buku Servis</button>
                 <label ng-show="ctrl.salesOrder.delivery.delivery_note_generated_count">
                     SJ sudah dicetak {{ ctrl.salesOrder.delivery.delivery_note_generated_count }} kali, terakhir pada {{ ctrl.salesOrder.delivery.delivery_note_generator.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.delivery_note_generator.name }}
                 </label>
@@ -86,12 +86,12 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h4>KTP Penerima</h4>
-                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handover.created_at" path="sales-order/delivery" subpath="ktp" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedKtpFile" on-file-uploaded="ctrl.salesOrder.delivery.handover.receiver.id_file_uuid=uploadedKtpFile.uuid"></file-manager-upload>
+                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" path="sales-order/delivery" subpath="ktp" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedKtpFile" on-file-uploaded="ctrl.salesOrder.delivery.handover.receiver.id_file_uuid=uploadedKtpFile.uuid"></file-manager-upload>
                             <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover.receiver.id_file_uuid}}"></file-manager-show>
                         </div>
                         <div class="col-sm-6">
                             <h4>Foto Serah Terima</h4>
-                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handover.created_at" path="sales-order/delivery" subpath="handover" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedHandover" on-file-uploaded="ctrl.salesOrder.delivery.handover.file_uuid=uploadedHandover.uuid"></file-manager-upload>
+                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" path="sales-order/delivery" subpath="handover" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedHandover" on-file-uploaded="ctrl.salesOrder.delivery.handover.file_uuid=uploadedHandover.uuid"></file-manager-upload>
                             <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover.file_uuid}}"></file-manager-show>
                         </div>
                     </div>
@@ -102,9 +102,10 @@
                     <div ng-if="ctrl.salesOrder.delivery.handover.created_at">
                         <label>Serah terima dibuat oleh: {{ ctrl.salesOrder.delivery.handover.creator.name }} ({{ ctrl.salesOrder.delivery.handover.creator.timestamp * 1000 | fromDateTimeString:'YYYY-MM-DD HH:mm' }})</label>
                         <br>
-                        <!-- <label>Catatan Konfirmasi Serah Terima (BAST)</label>
-                        <input type="note" ng-model="handoverConfirmation.note"> -->
-                        <button ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" class="btn btn-block btn-danger" ng-click="ctrl.delivery.handoverConfirmation(ctrl.salesOrder, handoverConfirmation)">Konfirmasi Serah Terima (BAST)</button>
+                        <span ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at">
+                        	<button class="btn btn-block btn-warning" ng-click="ctrl.delivery.updateAfterHandoverCreated(ctrl.salesOrder)">Update</button>
+                        	<button class="btn btn-block btn-danger" ng-click="ctrl.delivery.handoverConfirmation(ctrl.salesOrder, handoverConfirmation)">Konfirmasi Serah Terima (BAST)</button>
+                        </span>
                         <label ng-show="ctrl.salesOrder.delivery.handoverConfirmation.created_at">Konfirmasi serah terima dibuat oleh: {{ ctrl.salesOrder.delivery.handoverConfirmation.creator.name }} ({{ ctrl.salesOrder.delivery.handoverConfirmation.creator.timestamp * 1000| fromDateTimeString:'YYYY-MM-DD HH:mm' }})</label>
                     </div>
                 </div>

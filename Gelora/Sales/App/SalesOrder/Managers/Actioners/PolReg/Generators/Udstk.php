@@ -35,7 +35,7 @@ class Udstk {
 
         $data['Jenis Penjualan'] = ($salesOrder['payment_type'] == 'cash' ? '1' : '2');
 
-        $data['Kode Dealer'] = $tenatInfo->DEALER_CODE;
+        $data['Kode Dealer'] = $tenatInfo->AHASS_CODE;
 
 
         $string = '';
