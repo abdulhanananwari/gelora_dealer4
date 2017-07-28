@@ -41,7 +41,7 @@
                                 <small>
                                     <span ng-show="salesOrder.delivery.generated_at">SJ: {{salesOrder.delivery.generated_at | fromDateTimeString }}</span><br>
                                     <span ng-show="salesOrder.delivery.handover.created_at">ST: {{salesOrder.delivery.handover.created_at | fromDateTimeString }}</span><br>
-                                    <span ng-show="salesOrder.delivery.handover.confirmed_at">BAST: {{salesOrder.delivery.handover.confirmed_at | fromDateTimeString }}</span><br>
+                                    <span ng-show="salesOrder.delivery.handoverConfirmation.created_at">BAST: {{salesOrder.delivery.handoverConfirmation.created_at | fromDateTimeString }}</span><br>
                                 </small>
                             </p>
                         </td>
@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="modal fade" id="spk-filter-modal" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
