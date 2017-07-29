@@ -14,6 +14,6 @@ Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $midd
     });
 
     Route::group(['prefix' => 'leasing-invoice-batch'], function() {
-        Route::get('{id}/generate-leasing-invoice-batch', ['uses' => 'LeasingInvoiceBatchController@generateLeasingInvoice']);
+        Route::get('{id}/generate-leasing-invoice-batch', ['uses' => 'LeasingInvoiceBatchController@generateLeasingInvoice','middleware' => 'auth.jwt_tumr:GENERATE_LEASING_INVOICE_BATCH']);
     });
 });
