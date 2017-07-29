@@ -47,10 +47,12 @@ class PersonnelController extends Controller {
 
             $personnel = $query->first();
             return $this->formatItem($personnel);
+            
         } else if ($request->has('paginate')) {
 
             $personnels = $query->paginate((int) $request->get('paginate', 20));
-            return $this->formatCollection($personnels);
+            return $this->formatCollection($personnels, [], $personnels);
+            
         } else {
 
             $personnels = $query->get();
