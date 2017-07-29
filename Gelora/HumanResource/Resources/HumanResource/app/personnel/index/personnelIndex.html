@@ -14,7 +14,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="personnel in ctrl.personnels">
-                        <td>{{ personnel.entity.name }}</td>
+                        <td>{{ personnel.name }}</td>
                         <td>{{ personnel.position }}</td>
                         <td><a ui-sref="personnelShow({id:personnel.id})">Buka</a></td>
                     </tr>

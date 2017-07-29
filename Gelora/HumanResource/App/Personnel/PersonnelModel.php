@@ -21,5 +21,11 @@ class PersonnelModel extends Model {
     public function validate() {
         return new Managers\Validator($this);
     }
+    
+    // Relationships
+    
+    public function team() {
+        return $this->belongsTo('\Gelora\HumanResource\App\Team\TeamModel', 'team_id');
+    }
 
 }

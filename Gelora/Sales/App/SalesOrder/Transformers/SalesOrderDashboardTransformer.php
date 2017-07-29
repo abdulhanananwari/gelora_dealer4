@@ -12,13 +12,15 @@ class SalesOrderDashboardTransformer extends Fractal\TransformerAbstract {
         $data = [
             'id' => $salesOrder->id,
             'created_at' => $salesOrder->created_at->toDateTimeString(),
-            'delivery_generated_at' => $salesOrder->subDocument()->delivery()->toCarbon('generated_at', true),
-            'delivery_handover_created_at' => $salesOrder->subDocument()->delivery()->toCarbon('handover.created_at', true),
+            'delivery_generated_at' => $salesOrder->getAttribute('delivery.generated_at') ? $salesOrder->getAttribute('delivery.generated_at')->toDateTimeString() : null,
+            'delivery_handover_created_at' => $salesOrder->getAttribute('delivery.handover.created_at') ? $salesOrder->getAttribute('delivery.handover.created_at')->toDateTimeString() : null,
             'main_leasing_name' => $salesOrder->subDocument()->leasingOrder()->get('mainLeasing.name'),
             'sub_leasing_name' => $salesOrder->subDocument()->leasingOrder()->get('subLeasing.name'),
             'payment_type' => $salesOrder->payment_type,
             'unit_type_name' => $salesOrder->getAttribute('unit.type_name'),
             'unit_type_code' => $salesOrder->getAttribute('unit.type_code'),
+            'sales_pesonnel_team_name' => $salesOrder->getAttribute('salesPersonnel.team.name'),
+            'sales_personnel_position_text' => $salesOrder->getAttribute('salesPersonnel.position_text'),
         ];
 
         return $data;

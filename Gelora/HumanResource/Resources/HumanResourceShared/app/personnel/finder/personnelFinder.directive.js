@@ -1,43 +1,76 @@
 geloraHumanResourceShared
-        .directive('personnelFinder', function (
-                PersonnelModel, TeamModel,
-                $state, $timeout) {
+    .directive('personnelFinder', function(
+        PersonnelModel, TeamModel,
+        $state, $timeout) {
 
-            return {
-                templateUrl: '/gelora/human-resource-shared/app/personnel/finder/personnelFinder.html',
-                scope: {
-                    selectedPersonnel: '=',
-                    onPersonnelSelected: '&'
-                },
-                link: function (scope, element, attrs) {
+        return {
+            templateUrl: '/gelora/human-resource-shared/app/personnel/finder/personnelFinder.html',
+            scope: {
+                selectedPersonnel: '=',
+                onPersonnelSelected: '&'
+            },
+            link: function(scope, element, attrs) {
 
-                    scope.modalId = Math.random().toString(36).substring(2, 7)
+                _.mixin({
+                    'deepPick': function(object, keys) {
 
-                    scope.search = function (filter) {
+                        var obj = {}
 
-                        PersonnelModel.index(filter)
-                                .then(function (res) {
-                                    scope.personnels = res.data.data
-                                    scope.meta = res.data.meta
-                                })
+                        _.each(keys, function(key) {
+                            _.set(obj, key, _.get(object, key))
+                        })
 
+                        return obj
                     }
+                })
 
-                    scope.select = function (personnel) {
+                scope.modalId = Math.random().toString(36).substring(2, 7)
 
-                        scope.selectedPersonnel = personnel;
-                        $timeout(function () {
-                            scope.onPersonnelSelected();
-                        }, 250);
+                scope.filter = {
+                    paginate: 10,
+                    with: 'team'
+                }
 
-                        $('#personnel-finder-modal-' + scope.modalId).modal('hide');
-                    }
+                scope.search = function(filter) {
 
-                    TeamModel.index()
-                            .then(function (res) {
-                                scope.teams = res.data.data
-                            })
+                    PersonnelModel.index(filter)
+                        .then(function(res) {
+                            scope.personnels = res.data.data
+                            scope.meta = res.data.meta
+                        })
 
                 }
+
+                scope.select = function(personnel) {
+
+                    if (personnel.team) { personnel.team = personnel.team.data }
+
+                    scope.selectedPersonnel = _.deepPick(personnel, ['id',
+                        'entity.id', 'entity.name', 'entity_id',
+                        'user.id', 'user.name', 'user_id',
+                        'team_id', 'team.name', 'team.id', 'team.leader.name', 'team.leader.id',
+                        'name', 'email', 'phone_number',
+                        'registration_code', 'position', 'position_text'
+                    ])
+
+                    $timeout(function() {
+                        scope.onPersonnelSelected();
+                    }, 250);
+
+                    $('#personnel-finder-modal-' + scope.modalId).modal('hide');
+                }
+
+                scope.load = {
+                    teams: function() {
+
+                        TeamModel.index()
+                            .then(function(res) {
+                                scope.teams = res.data.data
+                            })
+                    },
+                    
+                }
+
             }
-        })
+        }
+    })

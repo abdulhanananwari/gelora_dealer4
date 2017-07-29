@@ -13,8 +13,8 @@ class MediatorFeePayment {
     }
 
     public function assign(\Illuminate\Http\Request $request) {
-        
-        $this->salesOrder->setAttribute('mediator.payment.transaction_uuid', $request->get('transaction_uuid'));
+
+        $this->salesOrder->setAttribute('mediator.payment.transaction', $request->only('id', 'uuid', 'amount'));
 
         return $this->salesOrder;
     }

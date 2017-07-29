@@ -9,6 +9,8 @@ return [
         'Office' => 'Office',
         'Channel' => 'Channel',
         'ChannelLeasing' => 'Channel Leasing',
+        'SeniorCounter' => 'Counter Senior',
+        'JuniorCounter' => 'Counter Junior',
     ],
     
     'defaultTumrs' => ['VIEW_SALES_PLAFOND', 'VIEW_PLAFOND']

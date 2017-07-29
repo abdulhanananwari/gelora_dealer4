@@ -18,6 +18,10 @@ class MediatorFeePayment {
             return ['Pembayaran mediator sudah dibuat sebelumnya'];
         }
 
+        if (!$this->salesOrder->getAttribute('mediator.payment.transaction.id')) {
+            return ['Transaksi tidak tersimpan'];
+        }
+
         return true;
     }
 

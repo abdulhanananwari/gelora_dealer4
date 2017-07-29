@@ -32,6 +32,7 @@ class OnCreateOrUpdate {
     protected function validateAttributes() {
 
         return \Validator::make($this->personnel->toArray(), [
+                    'name' => 'required',
                     'entity' => 'required',
                     'position' => 'required',
         ]);
