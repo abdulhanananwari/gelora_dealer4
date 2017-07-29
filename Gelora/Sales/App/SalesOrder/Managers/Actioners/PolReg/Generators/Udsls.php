@@ -44,7 +44,7 @@ class Udsls {
         $data['Jenis Kartu'] = ($cddb->jenis_kartu == '1' ? "ASIMO" : "RACING");
         $data['Sms Broadcast'] = ($cddb->sms_broadcast == '1' ? "Y" : "N");
         $data['No HP'] = $salesOrder['registration.phone_number'];
-        $data['Email'] = $salesOrder['registration.email'];
+        $data['Email'] = '';
         $data['Cicilan'] = ($salesOrder->payment_type == 'credit' ? $leasingOrder->cicilan : 0);
         $data['KPB Barcode ID'] = '';
 
