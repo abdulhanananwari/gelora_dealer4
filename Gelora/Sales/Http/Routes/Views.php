@@ -6,25 +6,25 @@ $middlewares = ['wala.jwt.request.parser', 'wala.jwt.request.validation',
 Route::group(['prefix' => 'views', 'namespace' => 'Views', 'middleware' => $middlewares], function() {
 
     Route::group(['prefix' => 'sales-order'], function() {
-        Route::get('financial/generate-customer-invoice/{id}', ['uses' => 'SalesOrderController@generateCustomerInvoice']);
+        Route::get('financial/generate-customer-invoice/{id}', ['uses' => 'SalesOrderController@generateCustomerInvoice','middleware' => 'auth.jwt_tumr:GENERATE_CUSTOMER_INVOICE']);
         
-        Route::get('delivery/generate-delivery-note/{id}', ['uses' => 'SalesOrderController@generateDeliveryNote']);
+        Route::get('delivery/generate-delivery-note/{id}', ['uses' => 'SalesOrderController@generateDeliveryNote','middleware' => 'auth.jwt_tumr:GENERATE_DELIVERY_NOTE']);
         
-        Route::get('pol-reg/generate-receipt-item-handover/{id}', ['uses' => 'SalesOrderController@generateReceiptItemHandover']);
+        Route::get('pol-reg/generate-receipt-item-handover/{id}', ['uses' => 'SalesOrderController@generateReceiptItemHandover','middleware' => 'auth.jwt_tumr:GENERATE_RECEIPT_ITEM_HANDOVER']);
         
-        Route::get('leasing-order/generate-leasing-order-invoice/{id}', ['uses' => 'SalesOrderController@generateLeasingOrderInvoice']);
-        Route::get('leasing-order/generate-extra-document-invoice/{id}', ['uses' => 'SalesOrderController@generateExtraDocumentInvoice']);
+        Route::get('leasing-order/generate-leasing-order-invoice/{id}', ['uses' => 'SalesOrderController@generateLeasingOrderInvoice','middleware' => 'auth.jwt_tumr:GENERATE_LEASING_ORDER_INVOICE']);
+        Route::get('leasing-order/generate-extra-document-invoice/{id}', ['uses' => 'SalesOrderController@generateExtraDocumentInvoice','middleware' => 'auth.jwt_tumr:GENERATE_LEASING_ORDER_INVOICE']);
 
         Route::group(['prefix' => '{id}', 'namespace' => 'SalesOrder'], function() {
             Route::group(['prefix' => 'document'], function() {
-                Route::get('spk', ['uses' => 'DocumentController@spk']);
-                Route::get('service-book-barcode-label', ['uses' => 'DocumentController@serviceBookBarcodeLabel']);
+                Route::get('spk', ['uses' => 'DocumentController@spk','middleware' => 'auth.jwt_tumr:GENERATE_DOCUMENT_SPK']);
+                Route::get('service-book-barcode-label', ['uses' => 'DocumentController@serviceBookBarcodeLabel','middleware' => 'auth.jwt_tumr:GENERATE_BARCODE_LABEL']);
             });
         });
     });
     
     Route::group(['prefix' => 'sales-order-extra'], function() {
-        Route::get('{id}/generate-receipt-handover', ['uses' => 'SalesOrderExtraController@generateReceiptHandover']);
+        Route::get('{id}/generate-receipt-handover', ['uses' => 'SalesOrderExtraController@generateReceiptHandover','middleware' => 'auth.jwt_tumr:GENERATE_RECEIPT_SOE_HANDOVER']);
     });
 });
 
