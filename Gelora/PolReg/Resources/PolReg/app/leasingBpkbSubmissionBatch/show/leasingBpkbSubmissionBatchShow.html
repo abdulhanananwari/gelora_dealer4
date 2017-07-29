@@ -65,8 +65,12 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="salesOrder in ctrl.registrationBatch.salesOrders">
-                        <td>{{salesOrder.customer.name}}</td>
-                        <td>{{salesOrder.customer.address}}</td>
+                        <td>
+                            {{salesOrder.customer.name}}
+                            <br>
+                            <small>({{salesOrder.registration.name}})</small>
+                        </td>
+                        <td>{{salesOrder.registration.address}}</td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
                         <td>{{salesOrder.unit.data.type_name}}</td>
                         <td>{{salesOrder.unit.data.color_name}}</td>
