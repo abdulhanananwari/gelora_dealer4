@@ -7,11 +7,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
     Route::group(['prefix' => 'sales-order'], function() {
 
-        Route::get('/', ['uses' => 'SalesOrderController@index']);
-        Route::get('{id}', ['uses' => 'SalesOrderController@get']);
+        Route::get('/', ['uses' => 'SalesOrderController@index', 'middleware' => 'auth.jwt_tumr:VIEW_SALES_ORDER'
+        ]);
+        Route::get('{id}', ['uses' => 'SalesOrderController@get', 'middleware' => 'auth.jwt_tumr:VIEW_SALES_ORDER'
+        ]);
 
-        Route::post('/', ['uses' => 'SalesOrderController@store']);
-        Route::post('{id}', ['uses' => 'SalesOrderController@update']);
+        Route::post('/', ['uses' => 'SalesOrderController@store', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER'
+        ]);
+        Route::post('{id}', ['uses' => 'SalesOrderController@update', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER'
+        ]);
 
         Route::post('{id}/calculate', ['uses' => 'SalesOrderController@calculate']);
 
