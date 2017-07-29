@@ -170,11 +170,30 @@ geloraSalesShared
                 })
                 salesPositionShare.render()
             },
+            teamShare: function() {
+
+                var teams = _.uniqBy(vm.salesOrders, 'sales_personnel_team_name')
+
+                var salesPositionShare = new CanvasJS.Chart("team-share", {
+                    data: [{
+                        type: "doughnut",
+                        dataPoints: _.map(teams, function(team) {
+                            return {
+                                indexLabel: team['sales_personnel_team_name'],
+                                y: _.filter(vm.salesOrders, {sales_personnel_team_name: team['sales_personnel_team_name']}).length
+                            }
+                        })
+                    }],
+                })
+                salesPositionShare.render()
+            },
             all: function() {
                 this.totalDaily()
                 this.leasingShare()
                 this.cashCreditShare()
                 this.salesPositionShare()
+                this.teamShare()
+
             }
         }
 

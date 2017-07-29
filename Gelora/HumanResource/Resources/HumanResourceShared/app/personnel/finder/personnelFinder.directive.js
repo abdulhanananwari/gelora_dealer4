@@ -49,6 +49,7 @@ geloraHumanResourceShared
                         'entity.id', 'entity.name', 'entity_id',
                         'user.id', 'user.name', 'user_id',
                         'team_id', 'team.name', 'team.id', 'team.leader.name', 'team.leader.id',
+                        'team.leader.entity_id', 'team.leader.user_id',
                         'name', 'email', 'phone_number',
                         'registration_code', 'position', 'position_text'
                     ])
