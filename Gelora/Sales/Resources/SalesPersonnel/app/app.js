@@ -18,7 +18,7 @@ var geloraSalesPersonnel = angular
         return appFactory;
     })
     .run(function(BaseLinkFactory, LinkFactory) {
-
+        
         LinkFactory.dealer.sales.prospect = {
             base: BaseLinkFactory.apps.dealer.sales + 'api-sales-personnel/prospect/',
         }

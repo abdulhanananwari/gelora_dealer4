@@ -14,7 +14,8 @@ class FromRequestOnUpdate {
     
     public function assign(\Illuminate\Http\Request $request) {
         
-        $this->leasing->fill($request->only('subLeasings','generateDocuments', 'code', 'mbd_transfer_formula'));
+        $this->leasing->fill($request->only('subLeasings',
+                'generateDocuments', 'code', 'mbd_transfer_formula', 'leasingPersonnels'));
         
         return $this->leasing;
     }

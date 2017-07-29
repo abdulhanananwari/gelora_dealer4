@@ -1,7 +1,7 @@
 geloraDealerCreditSales
 	.controller('LeasingShowController', function(
 		$state,
-		LeasingModel, LeasingPromoModel, LeasingPersonnelModel, LeasingProgramModel) {
+		LeasingModel) {
 
 		var vm = this
 
@@ -15,16 +15,6 @@ geloraDealerCreditSales
 			.success(function(data) {
 				vm.leasing = data.data
 			})				
-
-			LeasingProgramModel.index({'mainLeasing.id': $state.params.id})
-			.success(function(data) {
-				vm.leasingPrograms = data.data
-			})
-
-			LeasingPersonnelModel.index({'main_leasing_id': $state.params.id})
-			.success(function(data) {
-				vm.leasingPersonnels = data.data
-			})
 		}
 
 		vm.store = function(leasing) {
@@ -47,9 +37,14 @@ geloraDealerCreditSales
 				})
 			}
 		}
-	
 
 		vm.remove = function(subLeasing) {
 			_.remove(vm.leasing.subLeasings, subLeasing)
+		}
+
+		vm.leasingPersonnel = {
+			remove: function(personnel) {
+				_.remove(vm.leasing.leasingPersonnels, personnel)
+			}
 		}
 	})

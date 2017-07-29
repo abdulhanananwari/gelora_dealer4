@@ -16,8 +16,6 @@ class GeloraSalesProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/Database/MigrationsMongo/' => database_path('migrations-mongo/gelora/sales'),
                 ], 'migrations');
-        
-        $router->aliasMiddleware('salesPersonnelAccess', Http\Middlewares\SalesPersonnelAccess::class);
     }
 
     public function register() {

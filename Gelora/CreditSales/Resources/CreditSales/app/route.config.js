@@ -25,44 +25,11 @@ geloraDealerCreditSales
   			pageTitle: 'Dealer | Credit Sales | Leasing'
 		})
 
-		.state('leasingPersonnelShow', {
-			url: '/leasingPersonnel/show/:id/:mainLeasingId',
-  			templateUrl: 'app/leasingPersonnel/show/leasingPersonnelShow.html',
-  			controller: 'LeasingPersonnelShowController as ctrl',
-  			pageTitle: 'Dealer | Credit Sales | Leasing Personnel'
-		})
-
-		.state('leasingProgramShow', {
-			url: '/leasingProgram/show/:id/:mainLeasingId',
-  			templateUrl: 'app/leasingProgram/show/leasingProgramShow.html',
-  			controller: 'LeasingProgramShowController as ctrl',
-  			pageTitle: 'Dealer | Credit Sales | Leasing Program'
-		})
-		.state('leasingProgramIndex', {
-			url: '/leasingProgram/index/',
-  			templateUrl: 'app/leasingProgram/index/leasingProgramIndex.html',
-  			controller: 'LeasingProgramIndexController as ctrl',
-  			pageTitle: 'Dealer | Credit Sales | Leasing Program'
-		})
-		.state('leasingProgramUpload', {
-			url: '/leasingProgram/upload/',
-  			templateUrl: 'app/leasingProgram/upload/leasingProgramUpload.html',
-  			controller: 'LeasingProgramUploadController as ctrl',
-  			pageTitle: 'Dealer | Credit Sales | Leasing Program'
-		})
-
-
 		.state('leasingOrderShow', {
 			url: '/leasingOrder/show/:id/:mainLeasingId/:salesOrderId',
   			templateUrl: 'app/leasingOrder/show/leasingOrderShow.html',
   			controller: 'LeasingOrderShowController as ctrl',
   			pageTitle: 'Dealer | Credit Sales | Leasing Order'
-		})
-		.state('leasingOrderShowFinancial', {
-			url: '/leasingOrder/show/financial/:id',
-  			templateUrl: 'app/leasingOrder/showFinancial/leasingOrderShowFinancial.html',
-  			controller: 'LeasingOrderShowFinancialController as ctrl',
-  			pageTitle: 'Dealer | Credit Sales | Leasing Order Financial'
 		})
 		.state('leasingOrderIndex', {
 			url: '/leasingOrder/index/:id/:mainLeasingId',
@@ -70,6 +37,7 @@ geloraDealerCreditSales
   			controller: 'LeasingOrderIndexController as ctrl',
   			pageTitle: 'Dealer | Credit Sales | Leasing Order'
 		})
+
 		.state('leasingInvoiceBatchIndex', {
 			url: '/leasingInvoiceBatch/index/',
   			templateUrl: 'app/leasingInvoiceBatch/index/leasingInvoiceBatchIndex.html',
@@ -82,6 +50,7 @@ geloraDealerCreditSales
   			controller: 'LeasingInvoiceBatchShowController as ctrl',
   			pageTitle: 'Dealer | Credit Sales | Leasing Invoice Batch'
 		})
+
 		.state('leasingOrderReport', {
 			url: '/leasingOrder/report/',
   			templateUrl: 'app/leasingOrder/report/leasingOrderReport.html',

@@ -14,21 +14,7 @@
                 <input type="text" ng-model="filter.until" class="date">
             </div>
         </div>
-        <!-- <label>Status SPK</label>
-        <select ng-options="code as name for (code,name) in statuses" ng-model="filter.status"></select> -->
         <label>Status</label>
-        <!-- <div class="dropdown">
-            <button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown">Status
-            </button>
-            <ul class="dropdown-menu">
-                <li ng-repeat='status in statuses'>
-                    <p style="padding-left: 10px; padding-right: 10px;">
-                        <input type="checkbox" class="form-not-applied" ng-model="status.checked" ng-change="statusChanged()">
-                        <label>{{ status.name }}</label>
-                    </p>
-                </li>
-            </ul>
-        </div> -->
         <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#statuses-filter-modal">Status</button>
         <br>
         <label>Penerimaan Barang</label>
@@ -47,11 +33,11 @@
         <select ng-click="loadDrivers()" ng-options="driver.user_id as driver.name for driver in drivers" ng-model="filter.driver_id"></select>
     </div>
     <div class="col-sm-4">
-        <label>Jenis kustomer</label>
+        <label>Jenis Kustomer</label>
         <select ng-options="customerType as customerType for customerType in customerTypes" ng-model="filter.customer_type"></select>
         <label>Jenis pembayaran</label>
         <select ng-options="key as value for (key, value) in paymentTypes" ng-model="filter.payment_type"></select>
-        <label>Type dan warna motor</label>
+        <label>Type dan Warna Motor</label>
         <vehicle-model-finder2 selected-model="selectedModel" on-change="filter.type_name=selectedModel.name;
             filter.color_name=selectedModel.variant.name">
         </vehicle-model-finder2>
