@@ -6,6 +6,6 @@ $middleware = ['wala.jwt.autoParse.parser', 'wala.jwt.autoParse.validation',
 Route::group(['prefix' => 'report', 'namespace' => 'Report', 'middleware' => $middleware], function() {
 
     Route::group(['prefix' => 'sales-order'], function() {
-        Route::get('/', ['uses' => 'SalesOrderController@index','middleware' => 'auth.jwt_tumr:WRITE_REPORT_SALES_ORDER']);
+        Route::get('/', ['uses' => 'SalesOrderController@index', 'middleware' => 'auth.jwt_tumr:GENERATE_SALES_ORDER_REPORT']);
     });
 });

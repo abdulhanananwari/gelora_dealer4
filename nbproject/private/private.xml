@@ -4,10 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="gelora_dealer"/>
         <group>
-            <file>file:/D:/Dev/Vagrant/gelora_dealer4/Gelora/HumanResource/Config/HumanResource.php</file>
-            <file>file:/D:/Dev/Vagrant/gelora_dealer4/Gelora/HumanResource/Http/Routes/Trigger.php</file>
-            <file>file:/D:/Dev/Vagrant/gelora_dealer4/Gelora/Sales/App/SalesOrder/Transformers/SalesOrderDashboardTransformer.php</file>
-            <file>file:/D:/Dev/Vagrant/gelora_dealer4/Gelora/HumanResource/App/Personnel/Managers/Validators/OnCreateOrUpdate.php</file>
+            <file>file:/D:/Dev/Vagrant/gelora_dealer4/Gelora/Sales/Resources/SalesPersonnel/app/app.js</file>
         </group>
     </open-files>
 </project-private>

@@ -19,9 +19,9 @@ geloraInventoryManagement
         movementOrderModel.update = function(id, movementOrder) {
             return $http.post(LinkFactory.dealer.inventoryManagement.movementOrder + id, movementOrder)
         }
-        
+
         movementOrderModel.close = function(id) {
-            return $http.post(LinkFactory.dealer.inventoryManagement.movementOrder + 'close/' + id)
+            return $http.post(LinkFactory.dealer.inventoryManagement.movementOrder + id + '/close/')
         }
 
 
