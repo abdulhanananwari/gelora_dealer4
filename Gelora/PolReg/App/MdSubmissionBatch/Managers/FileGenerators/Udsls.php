@@ -14,17 +14,14 @@ class Udsls {
 
     public function fileGenerate() {
 
-        $registrations = $this->registrationBatch->registrations;
-
-        $file = tmpfile();
+        $string = '';
 
         foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
-            fwrite($file, $salesOrder->subDocument()->polReg()->strings['udsls']['string']);
-            fwrite($file, "\n");
+            $string = $string . $salesOrder->subDocument()->polReg()->strings['udsls']['string'];
+            $string = $string . "\n";
         }
 
-        fseek($file, 0);
-        return $file;
+        return $string;
     }
 
 }

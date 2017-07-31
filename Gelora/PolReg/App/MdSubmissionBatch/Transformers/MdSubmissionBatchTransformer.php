@@ -26,6 +26,9 @@ class MdSubmissionBatchTransformer extends Fractal\TransformerAbstract {
             'created_at' => $registrationMdSubmissionBatch->created_at->toDateTimeString(),
             'created_at_for_humans' => $registrationMdSubmissionBatch->created_at->toFormattedDateString(),
             'creator' => (array) $registrationMdSubmissionBatch->creator,
+            
+            'strings' => (array) $registrationMdSubmissionBatch->strings,
+            'email_subject' => $registrationMdSubmissionBatch->email_subject
         ];
     }
 
