@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-2" ng-repeat="preset in presets">
+        <button class="btn btn-sm btn-block btn-primary" ng-click="set(preset)">{{ preset.name }}</button>
+        <br>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-sm btn-block btn-warning" data-toggle="modal" data-target="#spk-filter-preset-manage-modal">Atur</button>
+        <br>
+    </div>
+</div>
+<div class="modal fade" id="spk-filter-preset-manage-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Filter</strong></h4>
+            </div>
+            <div class="modal-body">
+                <h4>Edit</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="text" ng-model="focusedPreset.name">
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-block btn-primary" ng-click="savePreset(focusedPreset.name, filter)">Simpan</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="table-responsive">
+                	<table class="table">
+                		<thead>
+                			<tr>
+                				<td>Nama</td>
+                				<td>Edit</td>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr ng-repeat="preset in presets">
+                				<td>{{preset.name}}</td>
+                				<td><button class="btn btn-warning btn-xs btn-block" ng-click="edit(preset)">Edit</button></td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
