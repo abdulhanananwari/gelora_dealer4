@@ -14,15 +14,14 @@ class Cddb {
 
     public function fileGenerate() {
 
-        $file = tmpfile();
+        $string = '';
 
         foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
-            fwrite($file, $salesOrder->subDocument()->polReg()->strings['cddb']['string']);
-            fwrite($file, "\n");
+            $string = $string . $salesOrder->subDocument()->polReg()->strings['cddb']['string'];
+            $string = $string . "\n";
         }
-
-        fseek($file, 0);
-        return $file;
+        
+        return $string;
     }
 
 }
