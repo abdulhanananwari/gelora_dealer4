@@ -30,14 +30,16 @@
                 	<table class="table">
                 		<thead>
                 			<tr>
-                				<td>Nama</td>
-                				<td>Edit</td>
+                				<th>Nama</th>
+                				<th>Edit</th>
+                                <th>Remove</th>
                 			</tr>
                 		</thead>
                 		<tbody>
                 			<tr ng-repeat="preset in presets">
                 				<td>{{preset.name}}</td>
                 				<td><button class="btn btn-warning btn-xs btn-block" ng-click="edit(preset)">Edit</button></td>
+                                <td><button class="btn btn-danger btn-xs btn-block" ng-click="remove(preset)">Hapus</button></td>
                 			</tr>
                 		</tbody>
                 	</table>

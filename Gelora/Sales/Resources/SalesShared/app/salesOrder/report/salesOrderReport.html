@@ -1,29 +1,29 @@
 <div class="row">
     <div class="col-sm-12">
         <h4>Laporan Penjualan</h4>
-        <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#report-filter-modal">Filter Report Penjualan</button>
+        <sales-order-filter-preset filter="ctrl.filter" on-set="ctrl.download(ctrl.filter, true)"></sales-order-filter-preset>
+        <!-- <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#report-filter-modal">Filter Report Penjualan</button>
+         -->
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" data-target="#filter-dropdown">Filter</a>
+      </h4>
+            </div>
+            <div id="filter-dropdown" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <sales-order-filter filter="ctrl.filter"></sales-order-filter>
+                    <button class="btn btn-block btn-info" ng-click="ctrl.download(ctrl.filter)">Download Report</button>
+                </div>
+            </div>
+        </div>
         <hr>
         <h4>Fields</h4>
         <div class="row">
-            <div class="col-sm-2" ng-repeat="field in ctrl.fields">
+            <div class="col-sm-2" ng-repeat="field in ctrl.filter.fieldObjects">
                 <input type="checkbox" class="form-not-applied" ng-model="field.checked">
                 <label>{{ field.name }}</label>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="report-filter-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><strong>Filter</strong></h4>
-            </div>
-            <div class="modal-body">
-                <sales-order-filter filter="ctrl.filter"></sales-order-filter>
-                <button class="btn btn-block btn-info" ng-click="ctrl.download(ctrl.filter)">Download Report</button>
-            </div>
-        </div>
-    </div>
-</div>
-
