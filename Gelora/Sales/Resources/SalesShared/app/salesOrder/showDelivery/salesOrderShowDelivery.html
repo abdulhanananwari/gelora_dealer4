@@ -34,7 +34,7 @@
                 <select ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" ng-options="driver as driver.name for driver in ctrl.drivers" ng-model="ctrl.salesOrder.delivery.driver"></select>
                 <button ng-hide="ctrl.salesOrder.delivery.handover.created_at" class="btn btn-block btn-warning" ng-click="ctrl.delivery.update(ctrl.salesOrder)">Update</button>
                 <br>
-                <button ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
+                <button ng-hide="ctrl.salesOrder.polReg.md_submission_batch_id" class="btn btn-block btn-primary" ng-click="ctrl.delivery.generateDeliveryNote(ctrl.salesOrder)">Cetak Surat Jalan</button>
                 <label ng-show="ctrl.salesOrder.delivery.delivery_note_generated_count">
                     SJ sudah dicetak {{ ctrl.salesOrder.delivery.delivery_note_generated_count }} kali, terakhir pada {{ ctrl.salesOrder.delivery.delivery_note_generator.timestamp * 1000 | date:'medium' }} oleh {{ ctrl.salesOrder.delivery.delivery_note_generator.name }}
                 </label>
