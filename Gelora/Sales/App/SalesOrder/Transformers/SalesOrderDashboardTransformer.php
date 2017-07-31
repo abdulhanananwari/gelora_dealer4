@@ -19,7 +19,7 @@ class SalesOrderDashboardTransformer extends Fractal\TransformerAbstract {
             'payment_type' => $salesOrder->payment_type,
             'unit_type_name' => $salesOrder->getAttribute('unit.type_name'),
             'unit_type_code' => $salesOrder->getAttribute('unit.type_code'),
-            'sales_pesonnel_team_name' => $salesOrder->getAttribute('salesPersonnel.team.name'),
+            'sales_personnel_team_name' => $salesOrder->getAttribute('salesPersonnel.team.name'),
             'sales_personnel_position_text' => $salesOrder->getAttribute('salesPersonnel.position_text'),
         ];
 
