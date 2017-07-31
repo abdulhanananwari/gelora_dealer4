@@ -28,7 +28,6 @@
         <table class="table" border="1">
             <thead>
                 <tr>
-                    <th class="col-xs-1">No</th>
                     <th>Nama</th>
                     <th>Tipe</th>
                     <th>No Mesin</th>
@@ -42,11 +41,10 @@
             <tbody>
                 @foreach($viewData['leasingInvoiceBatch']->getSalesOrders() as $salesOrder)
                 <tr>
-                    <td>{{ $salesOrder->getAttribute('customer.name') }}</td>
+                    <td>{{ $salesOrder->getAttribute('registration.name') }}</td>
                     <td>{{ $salesOrder->getAttribute('delivery.unit.type_name') }}</td>
+                    <td>{{ $salesOrder->getAttribute('delivery.unit.engine_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('delivery.unit.chasis_number') }}</td>
-                    <td>{{ $salesOrder->getAttribute('delivery.unit.engine_number') }}</td>
-                    <td>{{ $salesOrder->getAttribute('delivery.unit.engine_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.application_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.po_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.tenor') }}</td>
