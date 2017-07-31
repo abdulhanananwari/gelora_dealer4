@@ -58,10 +58,25 @@ geloraInventoryManagement
                         name: "salesmans",
                         axisYType: "secondary",
                         color: "#014D65",
+                        toolTipContent: '{colorString}',
                         dataPoints: _.orderBy(_.map(typeCodes, function(typeCode) {
+
+                            var colors = _.map(_.uniqBy(_.filter(vm.units,  { type_code: typeCode['type_code']}), 'color_code'), function(color) {
+                                color.count = _.filter(vm.units,  { type_code: typeCode['type_code'], color_code: color['color_code'] }).length
+                                return color
+                            })
+
+                            var colorString = ''
+                            _.each(colors, function(color) {
+                                colorString = colorString + color.color_name  + ' (' + color.color_code + ') : ' + color.count + '<br>'
+                            })
+
+                            console.log(colorString)
+
                             return {
                                 label: typeCode['type_name'],
-                                y: _.filter(vm.units, { type_code: typeCode['type_code'] }).length
+                                y: _.filter(vm.units, { type_code: typeCode['type_code'] }).length,
+                                colorString: colorString
                             }
                         }), 'y')
                     }],
