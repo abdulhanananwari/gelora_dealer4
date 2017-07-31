@@ -143,10 +143,13 @@ geloraSalesShared
                 var leasingShare = new CanvasJS.Chart("leasing-share", {
                     data: [{
                         type: "doughnut",
+                        toolTipContent: "{y} unit ({percentage} %)",
                         dataPoints: _.map(mainLeasings, function(mainLeasing) {
+                            var y = _.filter(vm.salesOrders, { main_leasing_name: mainLeasing['main_leasing_name'] }).length 
                             return {
                                 indexLabel: mainLeasing['main_leasing_name'],
-                                y: _.filter(vm.salesOrders, {main_leasing_name: mainLeasing['main_leasing_name']}).length
+                                y: y,
+                                percentage: _.round(y / vm.salesOrders.length, 1)  * 100
                             }
                         })
                     }],
@@ -160,10 +163,13 @@ geloraSalesShared
                 var salesPositionShare = new CanvasJS.Chart("sales-position-share", {
                     data: [{
                         type: "doughnut",
+                        toolTipContent: "{y} unit ({percentage} %)",
                         dataPoints: _.map(positions, function(position) {
+                            var y = _.filter(vm.salesOrders, { sales_personnel_position_text: position['sales_personnel_position_text'] }).length
                             return {
                                 indexLabel: position['sales_personnel_position_text'],
-                                y: _.filter(vm.salesOrders, {sales_personnel_position_text: position['sales_personnel_position_text']}).length
+                                y: y,
+                                percentage: _.round(y / vm.salesOrders.length, 1)  * 100
                             }
                         })
                     }],
@@ -177,12 +183,49 @@ geloraSalesShared
                 var salesPositionShare = new CanvasJS.Chart("team-share", {
                     data: [{
                         type: "doughnut",
+                        toolTipContent: "{y} unit ({percentage} %)",
                         dataPoints: _.map(teams, function(team) {
+                            var y = _.filter(vm.salesOrders, { sales_personnel_team_name: team['sales_personnel_team_name'] }).length
                             return {
-                                indexLabel: team['sales_personnel_team_name'],
-                                y: _.filter(vm.salesOrders, {sales_personnel_team_name: team['sales_personnel_team_name']}).length
+                                indexLabel: team['sales_personnel_team_name'] + "#percent%",
+                                y: y,
+                                percentage: _.round(y / vm.salesOrders.length, 1) * 100
                             }
                         })
+                    }],
+                })
+                salesPositionShare.render()
+            },
+            salesmanShare: function() {
+
+                var salesmans = _.uniqBy(vm.salesOrders, 'sales_personnel_name')
+
+                var salesPositionShare = new CanvasJS.Chart("salesman-share", {
+                    axisX: {
+                        interval: 1,
+                        gridThickness: 0,
+                        labelFontSize: 10,
+                        labelFontStyle: "normal",
+                        labelFontWeight: "normal",
+                        labelFontFamily: "Lucida Sans Unicode"
+
+                    },
+                    axisY2: {
+                        interlacedColor: "rgba(1,77,101,.2)",
+                        gridColor: "rgba(1,77,101,.1)"
+
+                    },
+                    data: [{
+                        type: "bar",
+                        name: "salesmans",
+                        axisYType: "secondary",
+                        color: "#014D65",
+                        dataPoints: _.orderBy(_.map(salesmans, function(salesman) {
+                            return {
+                                label: salesman['sales_personnel_name'],
+                                y: _.filter(vm.salesOrders, { sales_personnel_name: salesman['sales_personnel_name'] }).length
+                            }
+                        }), 'y')
                     }],
                 })
                 salesPositionShare.render()
@@ -193,6 +236,7 @@ geloraSalesShared
                 this.cashCreditShare()
                 this.salesPositionShare()
                 this.teamShare()
+                this.salesmanShare()
 
             }
         }
