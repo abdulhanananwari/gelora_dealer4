@@ -14,7 +14,7 @@ geloraSalesShared
 
             vm.filter.jwt = JwtValidator.encodedJwt
             vm.filter.fields = _.map(vm.filter.fieldObjects, function(value, key) {
-                if (value == true) {
+                if (value == true || value == 'true') {
                     return key
                 }
             }).join(',')
