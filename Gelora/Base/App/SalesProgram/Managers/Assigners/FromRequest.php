@@ -15,7 +15,7 @@ class FromRequest {
     public function assign(\Illuminate\Http\Request $request) {
         
         $this->salesProgram->fill($request->only('code', 'name', 'value','valid_from','valid_until',
-                'active'));
+                'active', 'note'));
         
         return $this->salesProgram;
     }
