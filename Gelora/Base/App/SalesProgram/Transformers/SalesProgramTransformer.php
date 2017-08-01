@@ -14,6 +14,7 @@ class SalesProgramTransformer extends Fractal\TransformerAbstract {
             'code' => $salesProgram->code,
             'name' => $salesProgram->name,
             'value' => $salesProgram->value,
+            'note' => $salesProgram->note,
             
             'active' => (bool) $salesProgram->active,
             'valid_from' =>  $salesProgram->valid_from ? $salesProgram->valid_from->toDateString() : null,

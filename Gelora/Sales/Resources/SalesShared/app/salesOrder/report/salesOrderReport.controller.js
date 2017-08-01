@@ -8,14 +8,27 @@ geloraSalesShared
 
         vm.download = function(filter) {
 
+            console.log(_.filter(vm.filter.fieldObjects, function(value) {
+                return value == true
+            }))
+
             vm.filter.jwt = JwtValidator.encodedJwt
+            vm.filter.fields = _.map(vm.filter.fieldObjects, function(value, key) {
+                if (value == true) {
+                    return key
+                }
+            }).join(',')
 
-            vm.filter.fields = _.flatMap(_.filter(vm.fields, { checked: true }), 'name').join(',')
+            console.log(vm.filter.fieldObjects)
 
-            window.open(LinkFactory.dealer.sales.salesOrder.report + '?' + $.param(vm.filter))
+            var paramString = $.param(_.omit(vm.filter, ['fieldObjects']))
+
+            console.log(paramString)
+
+            window.open(LinkFactory.dealer.sales.salesOrder.report + '?' + paramString)
         }
 
-        var fields = [
+        vm.fields = [
             'ID',
             'TANGGAL SPK',
             'TANGGAL SJ',
@@ -52,20 +65,21 @@ geloraSalesShared
             'ID SALES',
             'NAMA SALES',
             'TANGGAL TUTUP',
-            'NAMA TYPE MOTOR',
-            'KODE TYPE MOTOR',
-            'NAMA WARNA MOTOR',
-            'KODE WARNA MOTOR',
+            'NAMA PILIHAN TYPE MOTOR',
+            'KODE PILIHAN TYPE MOTOR',
+            'NAMA PILIHAN WARNA MOTOR',
+            'KODE PILIHAN WARNA MOTOR',
             'TAHUN PERAKITAN',
             'NOMOR RANGKA',
             'NOMOR MESIN',
             'TANGGAL DO',
             'PENUTUP',
+            'NAMA TEAM SALES'
         ]
 
-        vm.fields = _.map(fields.sort(), function(field) {
+        vm.filter.fieldObjects = _.map(vm.fields.sort(), function(field) {
             return {
-                checked: false,
+                checked: 'false',
                 name: field
             }
         })
