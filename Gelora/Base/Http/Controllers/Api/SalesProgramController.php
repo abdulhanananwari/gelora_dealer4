@@ -22,10 +22,8 @@ class SalesProgramController extends Controller {
         $query = $this->salesProgram->newQuery();
         
         if ($request->get('active') == 'true') {
-            $query->where('valid_from', '<=', \Carbon\Carbon::now())
-                    ->where('valid_until', '>=', \Carbon\Carbon::now());
-            
-//            $query->where('active', (bool) $request->get('active'));
+            $query->where('valid_from', '<=', \Carbon\Carbon::now()->startOfDay())
+                    ->where('valid_until', '>=', \Carbon\Carbon::now()->endOfDay());
         }
         
         $salesPrograms = $query->get();
