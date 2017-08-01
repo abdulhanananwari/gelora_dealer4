@@ -6,18 +6,16 @@ use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 use MongoDB\BSON\ObjectID;
 
 class PolReg {
-    
-    public static function transform (SalesOrderModel $salesOrder) {
-        
+
+    public static function transform(SalesOrderModel $salesOrder) {
+
         $polReg = $salesOrder->subDocument()->polReg();
-        
+
         $transformed = [
             'agency_note' => $polReg->agency_note,
-            
             'faktur_number' => $polReg->faktur_number,
             'pol_reg' => $polReg->pol_reg,
             'bpkb_number' => $polReg->bpkb_number,
-            
             'items' => (array) $polReg->items,
             'costs' => (array) $polReg->costs,
             
@@ -29,7 +27,8 @@ class PolReg {
             'agency_invoice_id' => $polReg->agency_invoice_id ? (string) (new ObjectID($polReg->agency_invoice_id)) : null,
             'leasing_bpkb_submission_batch_id' => $polReg->leasing_bpkb_submission_batch_id ? (string) (new ObjectID($polReg->leasing_bpkb_submission_batch_id)) : null,
         ];
-        
+
         return $transformed;
     }
+
 }

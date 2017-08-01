@@ -45,10 +45,10 @@
             </div>
             <div class="modal-body">
                 <label>Biaya</label>
-                <input type="text" ng-model="selectedCost.amount">
+                <input type="number" ng-model="selectedCost.amount">
                 <input type="checkbox" class="form-not-applied" ng-model="selectedCost.charge_to_customer" ng-change="selectedCost.amount_to_charge_to_customer=selectedCost.amount">
                 <label>Biayakan Ke Kustomer</label>
-                <input type="text" ng-if="selectedCost.charge_to_customer" ng-model="selectedCost.amount_to_charge_to_customer" placeholder="Biaya yg dibebankan ke konsumen">
+                <input type="number" ng-if="selectedCost.charge_to_customer" ng-model="selectedCost.amount_to_charge_to_customer" placeholder="Biaya yg dibebankan ke konsumen">
                 <button class="btn btn-block btn-success" ng-click="costStore(selectedCost)">Simpan</button>
             </div>
         </div>

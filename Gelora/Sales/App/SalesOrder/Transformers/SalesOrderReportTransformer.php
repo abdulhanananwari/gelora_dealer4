@@ -40,6 +40,8 @@ class SalesOrderReportTransformer {
             'NOMOR TELEPON KIRIM' => $salesOrder->getAttribute('deliveryRequest.phone_number'),
             'EXTRA' => $salesOrder->retrieve()->salesOrderExtraString(),
             'NOMOR PO' => $salesOrder->getAttribute('leasingOrder.po_number'),
+            'NOMOR APLIKASI' => $salesOrder->getAttribute('leasingOrder.application_number'),
+            'TANGGAL PO' => $salesOrder->getAttribute('leasingOrder.po_date') ? $salesOrder->getAttribute('leasingOrder.po_date')->toDateString() : null,
             'LEASING UTAMA' => $salesOrder->getAttribute('leasingOrder.mainLeasing.name'),
             'LEASING CABANG' => $salesOrder->getAttribute('leasingOrder.subLeasing.name'),
             'TANGGAL CETAK TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.invoice_generated_at') ? $salesOrder->getAttribute('leasingOrder.invoice_generated_at')->toDateString() : null,

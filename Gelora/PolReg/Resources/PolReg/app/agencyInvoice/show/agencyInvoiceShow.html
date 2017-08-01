@@ -24,7 +24,7 @@
                 <input type="textbox" ng-model="ctrl.registrationBatch.note">
             </div>
             <div class="col-sm-3">
-               <file-manager-upload ng-hide="ctrl.registrationBatch.closed_at" path="polreg" subpath="agency-invoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
+                <file-manager-upload ng-hide="ctrl.registrationBatch.closed_at" path="polreg" subpath="agency-invoice" fileable-type="AgencyInvoice" fileable-id="{{ ctrl.registrationBatch.id }}" resize-height-width="1300x1300" uploaded-file="uploadedAgencyInvoice" on-file-uploaded="ctrl.registrationBatch.file_uuid=uploadedAgencyInvoice.uuid;ctrl.store(ctrl.registrationBatch)"></file-manager-upload>
                 <file-manager-show display-type="img" file-uuid="{{ctrl.registrationBatch.file_uuid}}"></file-manager-show>
             </div>
             <div class="col-sm-3">
@@ -48,6 +48,8 @@
                         </tbody>
                     </table>
                 </div>
+                <transaction-create related-entity-id="{{ ctrl.registrationBatch.agent.id }}" related-entity-name="{{ ctrl.registrationBatch.agent.name }}" related-entity-phone-number="{{ ctrl.registrationBatch.agent.phone_number }}" transactable-app="Gelora.Dealer" transactable-type="AgencyInvoice" transactable-id="{{ctrl.registrationBatch.id}}" amount-type="-"></transaction-create>
+                <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="AgencyInvoice" transactable-id="{{ctrl.registrationBatch.id}}"></transaction-due-list>
             </div>
             <div class="col-sm-3">
                 <button ng-if="!ctrl.registrationBatch.closed_at" class="btn btn-block btn-primary" ng-click="ctrl.store(ctrl.registrationBatch)">Simpan</button>
@@ -85,7 +87,7 @@
                             <button class="btn btn-xs btn-block btn-primary" ng-click="salesOrder.showPolRegCost=!salesOrder.showPolRegCost">Biaya</button>
                             <registration-cost ng-show="salesOrder.showPolRegCost" sales-order="salesOrder"></registration-cost>
                         </td>
-                        <td><a href="{{'/sales/redirect-app/sales-order/?id=' + salesOrder.id}}"  target="_blank">Buka Penjualan</a></td>
+                        <td><a href="{{'/sales/redirect-app/sales-order/?id=' + salesOrder.id}}" target="_blank">Buka Penjualan</a></td>
                     </tr>
                 </tbody>
             </table>

@@ -10,7 +10,7 @@ class SalesOrderModel extends Model {
     protected $collection = 'sales_orders';
     protected $guarded = ['created_at', 'updated_at'];
     public $dates = ['locked_at', 'validated_at', 'financial_closed_at',
-        'leasingOrder.invoice_generated_at',
+        'leasingOrder.invoice_generated_at', 'leasingOrder.po_date',
         'delivery.generated_at', 'delivery.unit.created_at', 'delivery.handover.created_at',
         'customerInvoice.created_at'];
 

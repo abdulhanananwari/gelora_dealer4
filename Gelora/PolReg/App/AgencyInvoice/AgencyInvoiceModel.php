@@ -24,6 +24,10 @@ class AgencyInvoiceModel extends Model {
         return new Managers\Assigner($this);
     }
 
+    public function calculate() {
+        return new Managers\Calculator($this);
+    }
+
     // Relateds
 
     public function getSalesOrders() {
