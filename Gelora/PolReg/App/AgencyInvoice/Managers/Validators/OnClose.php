@@ -51,7 +51,7 @@ class OnClose {
             $sum += $salesOrder->calculate()->PolRegDealerCost();
         }
 
-        if ($transactionSum != $sum) {
+        if (abs($transactionSum) != $sum) {
             return ['Jumlah di transaction tidak sesuai dengan jumlah batch. Batch: ' . number_format($sum) . ' Transaction: ' . number_format($transactionSum)];
         }
 
