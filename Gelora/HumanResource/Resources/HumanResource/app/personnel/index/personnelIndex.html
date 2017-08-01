@@ -17,7 +17,7 @@
                     <tr ng-repeat="personnel in ctrl.personnels">
                         <td>{{ personnel.name }}</td>
                         <td>{{ personnel.position }}</td>
-                        <td><a href="teamShow({ id:personnel.team_id })">{{ personnel.team.data.name }}</a></td>
+                        <td><a ui-sref="teamShow({ id:personnel.team_id })">{{ personnel.team.data.name }}</a></td>
                         <td><a ui-sref="personnelShow({id:personnel.id})">Buka</a></td>
                     </tr>
                 </tbody>
