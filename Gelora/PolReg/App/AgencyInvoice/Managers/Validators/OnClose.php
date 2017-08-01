@@ -37,14 +37,7 @@ class OnClose {
 
     protected function validateTransaction() {
 
-        $transactions = \SolTransaction::transaction()->index()
-                ->filter('transactable_type', 'AgencyInvoice')
-                ->filter('transactable_id', $this->registrationBatch->id)
-                ->filter('transactable_app', config('app.name'))
-                ->run();
-        
-        $transactionSum = collect($transactions)->sum('amount');
-        
+        $transactionSum = $this->registrationBatch->calculate()->balances()['total'];
         
         $sum = 0;
         foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
