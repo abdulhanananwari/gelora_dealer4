@@ -19,6 +19,11 @@ class OnClose {
             return $attrsValidation->errors()->all();
         }
 
+        $transactionValidation = $this->validateTransaction();
+        if ($transactionValidation !== true) {
+            return $transactionValidation;
+        }
+
         return true;
     }
 
@@ -28,6 +33,29 @@ class OnClose {
                     'agent' => 'required',
                     'file_uuid' => 'required'
         ]);
+    }
+
+    protected function validateTransaction() {
+
+        $transactions = \SolTransaction::transaction()->index()
+                ->filter('transactable_type', 'AgencyInvoice')
+                ->filter('transactable_id', $this->registrationBatch->id)
+                ->filter('transactable_app', config('app.name'))
+                ->run();
+        
+        $transactionSum = collect($transactions)->sum('amount');
+        
+        
+        $sum = 0;
+        foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
+            $sum += $salesOrder->calculate()->PolRegDealerCost();
+        }
+
+        if ($transactionSum != $sum) {
+            return ['Jumlah di transaction tidak sesuai dengan jumlah batch. Batch: ' . number_format($sum) . ' Transaction: ' . number_format($transactionSum)];
+        }
+
+        return true;
     }
 
 }
