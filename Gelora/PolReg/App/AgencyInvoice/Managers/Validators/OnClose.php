@@ -19,6 +19,11 @@ class OnClose {
             return $attrsValidation->errors()->all();
         }
 
+        $transactionValidation = $this->validateTransaction();
+        if ($transactionValidation !== true) {
+            return $transactionValidation;
+        }
+
         return true;
     }
 
@@ -28,6 +33,22 @@ class OnClose {
                     'agent' => 'required',
                     'file_uuid' => 'required'
         ]);
+    }
+
+    protected function validateTransaction() {
+
+        $transactionSum = $this->registrationBatch->calculate()->balances()['total'];
+        
+        $sum = 0;
+        foreach ($this->registrationBatch->getSalesOrders() as $salesOrder) {
+            $sum += $salesOrder->calculate()->PolRegDealerCost();
+        }
+
+        if (abs($transactionSum) != $sum) {
+            return ['Jumlah di transaction tidak sesuai dengan jumlah batch. Batch: ' . number_format($sum) . ' Transaction: ' . number_format($transactionSum)];
+        }
+
+        return true;
     }
 
 }

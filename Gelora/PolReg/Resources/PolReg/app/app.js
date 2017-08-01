@@ -3,7 +3,7 @@ var geloraPolReg = angular
 		'Solumax.Loading', 'Solumax.ErrorInterceptor', 'Solumax.JwtManager', 'Solumax.CsvUploader',
 		'Solumax.TenantDatabaseConnection', 'Solumax.FileManager', 'Solumax.Entity', 'Solumax.PageTitle',
 		'Solumax.Calculator', 'Solumax.Setting', 'Solumax.Pagination', 'Gelora.CreditSalesShared', 'Gelora.SalesShared',
-		'Gelora.BaseShared', 'Gelora.Vehicle.Shared', 'Gelora.PolRegShared'])
+		'Gelora.BaseShared', 'Gelora.Vehicle.Shared', 'Gelora.PolRegShared',  'Solumax.TransactionPlugins'])
 	.factory('AppFactory', function() {
 
 		var appFactory = {};

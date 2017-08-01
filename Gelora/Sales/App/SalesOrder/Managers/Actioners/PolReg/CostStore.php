@@ -16,7 +16,7 @@ class CostStore {
 
         $cost = [
             'name' => $request->get('name'),
-            'amount' => $request->get('amount'),
+            'amount' => (int) $request->get('amount'),
             'charge_to_customer' => $request->get('charge_to_customer'),
             'creator' => $this->salesOrder->assignEntityData(),
         ];

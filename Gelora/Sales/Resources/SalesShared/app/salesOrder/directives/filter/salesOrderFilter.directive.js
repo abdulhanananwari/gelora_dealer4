@@ -49,7 +49,10 @@ geloraSalesShared
                     'leasingOrder.payment_at': 'Pembayaran Tagihan Leasing',
                     'customerInvoice.created_at': 'Cetak Tagihan Customer',
                     'polReg.strings.created_at': 'Generate CDDB',
-                    'polReg.md_submission_batch_id': 'Kirim Batch Faktur MD'
+                    'polReg.md_submission_batch_id': 'Batch Faktur ke MD',
+                    'polReg.agency_submission_batch_id': 'Batch Penyerahan ke Biro Jasa',
+                    'polReg.agency_invoice_id': 'Batch Tagihan dari Biro Jasa',
+                    'polReg.leasing_bpkb_submission_batch_id': 'Batch BPKB ke Leasing',
                 }
 
                 scope.statuses = _.map(statuses, function(value, key) {

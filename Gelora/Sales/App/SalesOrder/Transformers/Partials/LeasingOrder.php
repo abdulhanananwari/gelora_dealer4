@@ -13,6 +13,7 @@ class LeasingOrder {
         $transformed = [
             'application_number' => $leasingOrder->application_number,
             'po_number' => $leasingOrder->po_number,
+            'po_date' => $salesOrder->getAttribute('leasingOrder.po_date') ? $salesOrder->getAttribute('leasingOrder.po_date')->toDateString() : null,
             'mainLeasing' => (object) $leasingOrder->mainLeasing,
             'subLeasing' => (object) $leasingOrder->subLeasing,
             'customer' => (object) $leasingOrder->customer,
