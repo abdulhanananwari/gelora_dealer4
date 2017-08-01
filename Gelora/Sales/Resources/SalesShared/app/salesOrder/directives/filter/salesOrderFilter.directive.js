@@ -45,7 +45,8 @@ geloraSalesShared
                     'delivery.handover.created_at': 'Serah Terima Kendaraan',
                     'delivery.handoverConfirmation.created_at': 'BAST Serah Terima Kendaraan',
                     'leasingOrder.invoice_generated_at': 'Cetak Tagih Leasing',
-                    'leasingOrder.leasing_invoice_batch_id': 'Kirim Tagih Leasing',
+                    'leasingOrder.leasing_invoice_batch_id': 'Kirim Tagihan Leasing',
+                    'leasingOrder.payment_at': 'Pembayaran Tagihan Leasing',
                     'customerInvoice.created_at': 'Cetak Tagihan Customer',
                     'polReg.strings.created_at': 'Generate CDDB',
                     'polReg.md_submission_batch_id': 'Kirim Batch Faktur MD'
