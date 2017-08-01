@@ -2,7 +2,34 @@
     <div class="col-sm-12">
         <h4>Penjualan</h4>
         <hr>
-        <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#spk-filter-modal">SPK Filter</button>
+        <sales-order-filter-preset filter="ctrl.filter" on-set="ctrl.load(ctrl.filter, true)"></sales-order-filter-preset>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" data-target="#filter-dropdown">Filter</a>
+                </h4>
+            </div>
+            <div id="filter-dropdown" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Nama Customer</label>
+                            <input type="text" ng-model="ctrl.filter.customer_name">
+                            <label>Nama STNK</label>
+                            <input type="text" ng-model="ctrl.filter.registration_name">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Nomor Telepon Customer</label>
+                            <input type="text" ng-model="ctrl.filter.customer_phone_number" name="phone_number">
+                        </div>
+                    </div>
+                    <hr>
+                    <sales-order-filter filter="ctrl.filter"></sales-order-filter>
+                    <button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter, true)">Cari</button>
+                    <button class="btn btn-block btn-danger" ng-click="ctrl.resetFilter()">Reset Filter</button>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="table-responsive">
             <table class="table">
@@ -66,33 +93,5 @@
             </table>
         </div>
         <pagination pagination="ctrl.meta.pagination" page="ctrl.filter.page" on-load-page="ctrl.load(ctrl.filter)"></pagination>
-    </div>
-</div>
-<div class="modal fade" id="spk-filter-modal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><strong>Filter</strong></h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label>Nama Customer</label>
-                        <input type="text" ng-model="ctrl.filter.customer_name">
-                        <label>Nama STNK</label>
-                        <input type="text" ng-model="ctrl.filter.registration_name">
-                    </div>
-                    <div class="col-sm-6">
-                        <label>Nomor Telepon Customer</label>
-                        <input type="text" ng-model="ctrl.filter.customer_phone_number" name="phone_number">
-                    </div>
-                </div>
-                <hr>
-                <sales-order-filter filter="ctrl.filter"></sales-order-filter>
-                <button class="btn btn-block btn-info" ng-click="ctrl.load(ctrl.filter, true)">Cari</button>
-                <button class="btn btn-block btn-danger" ng-click="ctrl.resetFilter()">Reset Filter</button>
-            </div>
-        </div>
     </div>
 </div>

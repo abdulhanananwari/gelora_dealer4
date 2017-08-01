@@ -21,18 +21,18 @@ class UnitController extends Controller {
         $this->unit = new \Gelora\Base\App\Unit\UnitModel();
 
         $this->transformer = new \Gelora\Base\App\Unit\Transformers\UnitTransformer();
+
+        if (request()->has('transformer')) {
+            $transformer = '\\Gelora\\Base\\App\\Unit\\Transformers\\' . request()->get('transformer');
+            $this->transformer = new $transformer;
+        }
+
         $this->dataName = 'units';
     }
 
     public function index(Request $request) {
 
         $query = $this->unit->queryBuilder()->build($request);
-
-        if ($request->has('transformer')) {
-            // Dicheck dulu punya akses ga untuk liat harga check access dulu
-            $transformer = '\\Gelora\\Base\\App\\Unit\\Transformers\\' . $request->get('transformer');
-            $this->transformer = new $transformer;
-        }
 
         if ($request->has('paginate')) {
             $units = $query->paginate((int) $request->get('paginate', 20));

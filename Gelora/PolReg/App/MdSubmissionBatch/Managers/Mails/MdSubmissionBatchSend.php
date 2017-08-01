@@ -29,21 +29,16 @@ class MdSubmissionBatchSend extends Mailable {
      */
     public function build() {
 
-        //Generate file//
-        $cddbFile = $this->registrationBatch->fileGenerate()->cddb();
-        $udstkFile = $this->registrationBatch->fileGenerate()->udstk();
-        $udslsFile = $this->registrationBatch->fileGenerate()->udsls();
-        
         $viewData = [
-            'subject' => $this->registrationBatch->retrieve()->emailSubject()
+            'subject' => $this->registrationBatch->email_subject
         ];
 
         $email = $this
                 ->text('gelora.polReg::emails.registrationMdSubmissionBatch.send')
                 ->subject($this->registrationBatch->retrieve()->emailSubject())
-                ->attachData(fread($cddbFile, 1024), $this->registrationBatch->retrieve()->emailSubject() . '.CDDB')
-                ->attachData(fread($udstkFile, 1024), $this->registrationBatch->retrieve()->emailSubject() . '.UDSTK')
-                ->attachData(fread($udslsFile, 1024), $this->registrationBatch->retrieve()->emailSubject() . '.UDSLS')
+                ->attachData($this->registrationBatch->getAttribute('strings.cddb'), $this->registrationBatch->email_subject . '.CDDB')
+                ->attachData($this->registrationBatch->getAttribute('strings.udstk'), $this->registrationBatch->email_subject . '.UDSTK')
+                ->attachData($this->registrationBatch->getAttribute('strings.udsls'), $this->registrationBatch->email_subject . '.UDSLS')
                 ->with(['viewData' => $viewData]);
 
         return $email;

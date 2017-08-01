@@ -18,6 +18,12 @@ geloraInventoryManagement
   			controller: 'UnitIndexController as ctrl',
   			pageTitle: 'Dealer | Inventory Management | Daftar Unit'
 		})
+		.state('unitDashboard', {
+			url: '/unit/dashboard',
+  			templateUrl: 'app/unit/dashboard/unitDashboard.html',
+  			controller: 'UnitDashboardController as ctrl',
+  			pageTitle: 'Dealer | Inventory Management | Daftar Unit'
+		})
 
 		.state('unitMove', {
 			url: '/unit/move/:chasisNumber',
