@@ -58,7 +58,7 @@ geloraInventoryManagement
                         name: "salesmans",
                         axisYType: "secondary",
                         color: "#014D65",
-                        toolTipContent: '{colorString}',
+                        toolTipContent: '{infoString}',
                         dataPoints: _.orderBy(_.map(typeCodes, function(typeCode) {
 
                             var colors = _.map(_.uniqBy(_.filter(vm.units,  { type_code: typeCode['type_code']}), 'color_code'), function(color) {
@@ -66,17 +66,21 @@ geloraInventoryManagement
                                 return color
                             })
 
-                            var colorString = ''
+                            var count = _.filter(vm.units, { type_code: typeCode['type_code'] }).length
+
+                            var infoString = typeCode['type_name']  + ' (' + typeCode['type_code'] + ')' + '<br>'
+                            infoString = infoString + 'TOTAL UNIT: ' + count  + '<br>'
+
                             _.each(colors, function(color) {
-                                colorString = colorString + color.color_name  + ' (' + color.color_code + ') : ' + color.count + '<br>'
+                                infoString = infoString + color.color_name  + ' (' + color.color_code + ') : ' + color.count + '<br>'
                             })
 
-                            console.log(colorString)
+                            console.log(infoString)
 
                             return {
                                 label: typeCode['type_name'],
-                                y: _.filter(vm.units, { type_code: typeCode['type_code'] }).length,
-                                colorString: colorString
+                                y: count,
+                                infoString: infoString
                             }
                         }), 'y')
                     }],
