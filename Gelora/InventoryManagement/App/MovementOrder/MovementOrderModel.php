@@ -29,7 +29,7 @@ class MovementOrderModel extends Model {
     public function getUnits() {
         
         $unitIds = [];
-        foreach($this->unit_ids as $unitId) {
+        foreach((array) $this->unit_ids as $unitId) {
             $unitIds[] = new ObjectID($unitId);
         }
         
