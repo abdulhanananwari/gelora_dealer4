@@ -45,6 +45,8 @@ geloraSalesShared
             'NOMOR TELEPON KIRIM',
             'EXTRA',
             'NOMOR PO',
+            'NOMOR APLIKASI',
+            'TANGGAL PO',
             'LEASING UTAMA',
             'LEASING CABANG',
             'TANGGAL CETAK TAGIHAN LEASING',

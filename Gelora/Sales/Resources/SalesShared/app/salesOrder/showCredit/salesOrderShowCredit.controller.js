@@ -9,6 +9,11 @@ geloraSalesShared
 
         vm.appType = AppFactory.type
 
+        $('.date').datepicker({
+            dateFormat: "yy-mm-dd",
+        });
+
+
         SalesOrderModel.get($state.params.id)
             .then(function(res) {
                 vm.salesOrder = res.data.data
