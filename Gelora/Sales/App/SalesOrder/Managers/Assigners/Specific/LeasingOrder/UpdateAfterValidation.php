@@ -14,21 +14,14 @@ class UpdateAfterValidation {
 
     public function assign(\Illuminate\Http\Request $request) {
 
-        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
+        $fillables = $request->only('customer', 'registration', 'application_number', 'po_number', 'po_file_uuid', 'leasing_invoice_batch_id', 'note', 'po_date');
 
-        $leasingOrder->fill([
-            'customer' => $request->get('customer'),
-            'registration' => $request->get('registration'),
-            'application_number' => $request->get('application_number'),
-            'po_number' => $request->get('po_number'),
-            'po_file_uuid' => $request->get('po_file_uuid'),
-            'leasing_invoice_batch_id' => $request->get('leasing_invoice_batch_id'),
-            'note' => $request->get('note'),
-        ]);
-
-        $this->salesOrder->leasingOrder = $leasingOrder;
+        foreach ($fillables as $key => $value) {
+            if (!empty($value)) {
+                $this->salesOrder->setAttribute('leasingOrder.' . $key, $value);
+            }
+        }
 
         return $this->salesOrder;
     }
-
 }

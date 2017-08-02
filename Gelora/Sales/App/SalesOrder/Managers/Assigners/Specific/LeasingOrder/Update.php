@@ -12,16 +12,19 @@ class Update {
         $this->salesOrder = $salesOrder;
     }
 
-    public function assign($leasingOrder) {
+    public function assign(\Illuminate\Http\Request $request) {
 
         // Copy dulu data JP
         $joinPromos = $this->salesOrder->getAttribute('leasingOrder.joinPromos');
 
-        $this->salesOrder->leasingOrder = $leasingOrder;
+        $this->salesOrder->assign()->specific()->leasingOrder()->updateAfterValidation($request);
 
-        if (isset($leasingOrder['po_date']) && !empty($leasingOrder['po_date'])) {
-            $this->salesOrder->setAttribute('leasingOrder.po_date',
-                \Carbon\Carbon::createFromFormat('Y-m-d', $leasingOrder['po_date']));
+        $fillables = $request->only('on_the_road', 'dp_po', 'dp_bayar', 'tenor', 'cicilan', 'vehicle', 'joinPromos');
+
+        foreach ($fillables as $key => $value) {
+            if (!empty($value)) {
+                $this->salesOrder->setAttribute('leasingOrder.' . $key, $value);
+            }
         }
 
         // Kalau user ga punya akses liat JP, balikin data JP dengan yang lama
