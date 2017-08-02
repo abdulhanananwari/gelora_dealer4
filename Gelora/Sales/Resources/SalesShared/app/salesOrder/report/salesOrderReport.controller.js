@@ -9,17 +9,17 @@ geloraSalesShared
         vm.download = function(filter) {
 
             vm.filter.jwt = JwtValidator.encodedJwt
-            vm.filter.fields = _.map(vm.filter.fieldObjects, function(value, key) {
-                if (value == true || value == 'true') {
-                    return key
-                }
-            }).join(',')
 
-            var paramString = $.param(_.omit(vm.filter, ['fieldObjects']))
+            var paramString = $.param(vm.filter)
 
             console.log(paramString)
 
             window.open(LinkFactory.dealer.sales.salesOrder.report + '?' + paramString)
+        }
+
+        vm.consoleLog = function(key, value) {
+            console.log(key)
+            console.log(value)
         }
 
         vm.fields = [
@@ -72,13 +72,6 @@ geloraSalesShared
             'PENUTUP',
             'NAMA TEAM SALES'
         ]
-
-        vm.filter.fieldObjects = _.map(vm.fields.sort(), function(field) {
-            return {field: {
-                checked: 'false',
-                name: field
-            }}
-        })
 
 
     })

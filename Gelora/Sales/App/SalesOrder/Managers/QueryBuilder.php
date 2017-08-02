@@ -141,16 +141,20 @@ class QueryBuilder {
     protected function queryStatuses($query, \Illuminate\Http\Request $request) {
 
         if ($request->has('statuses')) {
+            
+            if (is_string($request->get('statuses'))) {
+                $statuses = json_decode($request->get('statuses'), true);
+            } else {
+                $statuses = $request->get('statuses');
+            }
 
-            $statuses = explode(',', $request->get('statuses'));
+            foreach ($statuses as $key => $value) {
+                $key = str_replace('->', '.', $key);
 
-            foreach ($statuses as $status) {
-                $statusArray = explode(':', $status);
-
-                if ($statusArray[1] == 'no') {
-                    $query->whereNull($statusArray[0]);
-                } else if ($statusArray[1] == 'yes') {
-                    $query->whereNotNull($statusArray[0]);
+                if ($value == 'no') {
+                    $query->whereNull($key);
+                } else if ($value == 'yes') {
+                    $query->whereNotNull($key);
                 }
             }
         }

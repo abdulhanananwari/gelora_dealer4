@@ -18,9 +18,9 @@
         <hr>
         <h4>Fields</h4>
         <div class="row">
-            <div class="col-sm-2" ng-repeat="(key,value) in ctrl.fields">
-                <input type="checkbox" class="form-not-applied" ng-model="ctrl.filter.fieldObjects[value].checked" ng-true-value="'true'" ng-false-value="'false'">
-                <label>{{ value }}</label>
+            <div class="col-sm-2" ng-repeat="(key,field) in ctrl.fields">
+                <input type="checkbox" class="form-not-applied" ng-model="ctrl.filter.fields[field]" ng-true-value="'true'" ng-false-value="'false'" ng-click='ctrl.consoleLog(value)'>
+                <label>{{ field }}</label>
             </div>
         </div>
     </div>

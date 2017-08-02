@@ -39,29 +39,21 @@ geloraSalesShared
 
                 scope.statuses = {
                     'validated_at': 'Validasi',
-                    'leasingOrder.order_confirmer.timestamp': 'ACC Lisan Leasing',
-                    'leasingOrder.po_completer.timestamp': 'PO Lengkap',
-                    'delivery.generated_at': 'Buat Surat Jalan',
-                    'delivery.handover.created_at': 'Serah Terima Kendaraan',
-                    'delivery.handoverConfirmation.created_at': 'BAST Serah Terima Kendaraan',
-                    'leasingOrder.invoice_generated_at': 'Cetak Tagih Leasing',
-                    'leasingOrder.leasing_invoice_batch_id': 'Kirim Tagihan Leasing',
-                    'leasingOrder.payment_at': 'Pembayaran Tagihan Leasing',
-                    'customerInvoice.created_at': 'Cetak Tagihan Customer',
-                    'polReg.strings.created_at': 'Generate CDDB',
-                    'polReg.md_submission_batch_id': 'Batch Faktur ke MD',
-                    'polReg.agency_submission_batch_id': 'Batch Penyerahan ke Biro Jasa',
-                    'polReg.agency_invoice_id': 'Batch Tagihan dari Biro Jasa',
-                    'polReg.leasing_bpkb_submission_batch_id': 'Batch BPKB ke Leasing',
+                    'leasingOrder->order_confirmer->timestamp': 'ACC Lisan Leasing',
+                    'leasingOrder->po_completer->timestamp': 'PO Lengkap',
+                    'delivery->generated_at': 'Buat Surat Jalan',
+                    'delivery->handover->created_at': 'Serah Terima Kendaraan',
+                    'delivery->handoverConfirmation->created_at': 'BAST Serah Terima Kendaraan',
+                    'leasingOrder->invoice_generated_at': 'Cetak Tagih Leasing',
+                    'leasingOrder->leasing_invoice_batch_id': 'Kirim Tagihan Leasing',
+                    'leasingOrder->payment_at': 'Pembayaran Tagihan Leasing',
+                    'customerInvoice->created_at': 'Cetak Tagihan Customer',
+                    'polReg->strings->created_at': 'Generate CDDB',
+                    'polReg->md_submission_batch_id': 'Batch Faktur ke MD',
+                    'polReg->agency_submission_batch_id': 'Batch Penyerahan ke Biro Jasa',
+                    'polReg->agency_invoice_id': 'Batch Tagihan dari Biro Jasa',
+                    'polReg->leasing_bpkb_submission_batch_id': 'Batch BPKB ke Leasing',
                 }
-
-                // scope.statuses = _.map(statuses, function(value, key) {
-                //     return {
-                //         code: key,
-                //         name: value,
-                //     }
-                // })
-
 
                 ConfigModel.get('gelora.polReg.defaultItems')
                     .then(function(res) {
@@ -69,18 +61,8 @@ geloraSalesShared
                     })
 
                 scope.statusFunctions = {
-                    changed: function(code) {
-                        console.log(code)
-                        // scope.filter.statuses = _.flatMap(_.filter(scope.statuses, function(status) {
-                        //     return !_.isUndefined(status.checked)
-                        // }), function(checkedStatus) {
-                        //     return checkedStatus.code + ':' + checkedStatus.checked
-                        // }).join(',')
-                        // console.log(scope.filter.statuses)
-                    },
-                    unset: function(status) {
-                        _.unset(status, 'checked')
-                        scope.statusFunctions.changed()
+                    unset: function(code) {
+                        _.unset(scope.filter, 'statuses.' + code)
                     },
                 }
 
@@ -105,22 +87,3 @@ geloraSalesShared
             }
         }
     })
-
-
-
-
-// var statuses = {
-//     'unvalidated_and_indent': 'Belum Validasi & Indent Unit',
-//     'unvalidated': 'Belum Validasi',
-//     'validated': 'Validasi',
-//     'delivery_generated': 'Sudah Buat Surat Jalan',
-//     'delivery_handover_created': 'Sudah Serah Terima Kendaraan',
-//     'delivery_handover_confirmed': 'Sudah BAST Serah Terima Kendaraan',
-//     'financial_unclosed': 'Konsumen Yang Belum Lunas (financial_closed kosong)',
-//     'financial_closed': 'Konsumen Yang Sudah Lunas (financial_closed isi)',
-//     'delivery_generated_and_not_invoiced': 'Sudah Buat Surat Jalan & Belum Cetak Tagihan Leasing',
-//     'invoice_generated_and_not_batched': 'Sudah Cetak Tagihan Leasing & Belum Kirim Leasing',
-//     'leasing_order_invoice_batched': 'Sudah Kirim Leasing',
-//     'polreg_cddb_string_generated': 'Sudah Generate CDDB',
-//     'polreg_md_submission_batched': 'Sudah di Batch Pengajuan Faktur',
-// }
