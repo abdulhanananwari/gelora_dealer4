@@ -144,13 +144,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="status in statuses">
-                                        <td>{{ status.name }}</td>
+                                    <tr ng-repeat="(code, name) in statuses">
+                                        <td>{{ name }}</td>
                                         <td>
-                                            <input type="radio" name="filter-statuses-{{status.code}}" value="no" ng-model="status.checked" ng-click="statusFunctions.changed()">
+                                            <input type="radio" name="filter-statuses-{{code}}" value="no" ng-model="filter.statuses[code]" ng-click="statusFunctions.changed(code)">
                                         </td>
                                         <td>
-                                            <input type="radio" name="filter-statuses-{{status.code}}" value="yes" ng-model="status.checked" ng-click="statusFunctions.changed()">
+                                            <input type="radio" name="filter-statuses-{{code}}" value="yes"  ng-model="filter.statuses[code]" ng-click="statusFunctions.changed(code)">
                                         </td>
                                         <td>
                                             <button class="btn btn-xs btn-danger" ng-click="statusFunctions.unset(status)">Reset</button>

@@ -37,7 +37,7 @@ geloraSalesShared
                     'customerInvoice.created_at': 'Tanggal Tagih Customer'
                 }
 
-                var statuses = {
+                scope.statuses = {
                     'validated_at': 'Validasi',
                     'leasingOrder.order_confirmer.timestamp': 'ACC Lisan Leasing',
                     'leasingOrder.po_completer.timestamp': 'PO Lengkap',
@@ -55,12 +55,12 @@ geloraSalesShared
                     'polReg.leasing_bpkb_submission_batch_id': 'Batch BPKB ke Leasing',
                 }
 
-                scope.statuses = _.map(statuses, function(value, key) {
-                    return {
-                        code: key,
-                        name: value,
-                    }
-                })
+                // scope.statuses = _.map(statuses, function(value, key) {
+                //     return {
+                //         code: key,
+                //         name: value,
+                //     }
+                // })
 
 
                 ConfigModel.get('gelora.polReg.defaultItems')
@@ -69,13 +69,14 @@ geloraSalesShared
                     })
 
                 scope.statusFunctions = {
-                    changed: function() {
-                        scope.filter.statuses = _.flatMap(_.filter(scope.statuses, function(status) {
-                            return !_.isUndefined(status.checked)
-                        }), function(checkedStatus) {
-                            return checkedStatus.code + ':' + checkedStatus.checked
-                        }).join(',')
-                        console.log(scope.filter.statuses)
+                    changed: function(code) {
+                        console.log(code)
+                        // scope.filter.statuses = _.flatMap(_.filter(scope.statuses, function(status) {
+                        //     return !_.isUndefined(status.checked)
+                        // }), function(checkedStatus) {
+                        //     return checkedStatus.code + ':' + checkedStatus.checked
+                        // }).join(',')
+                        // console.log(scope.filter.statuses)
                     },
                     unset: function(status) {
                         _.unset(status, 'checked')
