@@ -22,11 +22,12 @@ class LeasingOrderController extends Controller {
         $query = $this->leasingOrder->newQuery();
 
         if ($request->get('leasing_personnel_access') == 'true') {
+            
+            $leasings = \Gelora\CreditSales\App\Leasing\LeasingModel::
+                    where('leasingPersonnels.id', (int) \ParsedJwt::getByKey('sub'))
+                    ->get(['mainLeasing.id']);
 
-            $leasingPersonnel = \Gelora\CreditSales\App\LeasingPersonnel\LeasingPersonnelModel::
-                    where('user.id', \ParsedJwt::getByKey('sub'))->first();
-
-            $query->where('mainLeasing.id', $leasingPersonnel['leasing']['mainLeasing']['id']);
+            $query->whereIn('mainLeasing.id', $leasings->pluck('mainLeasing.id'));
         }
 
         if ($request->has('sales_order_id')) {

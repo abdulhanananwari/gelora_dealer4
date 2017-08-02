@@ -23,13 +23,9 @@ class LeasingController extends Controller {
         $query = $this->leasing->newQuery();
 
         if ($request->get('leasing_personnel_access') == 'true') {
-
-            $leasingPersonnel = \Gelora\CreditSales\App\LeasingPersonnel\LeasingPersonnelModel::
-                    where('user.id', \ParsedJwt::getByKey('sub'))->first();
-
-            $query->where('mainLeasing.id', $leasingPersonnel['leasing']['mainLeasing']['id']);
+            $query->where('leasingPersonnels.id', (int) \ParsedJwt::getByKey('sub'));
         }
-
+        
         $leasings = $query->get();
 
         return $this->formatCollection($leasings);

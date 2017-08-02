@@ -13,15 +13,6 @@ class SpkController extends SalesOrderController {
         parent::__construct();
     }
 
-    public function generate($id, Request $request) {
-
-        $salesOrder = $this->salesOrder->find($id);
-
-        $x = $salesOrder->generate()->spkPdf();
-
-        return response()->json(['url' => $x->getFullUrl()]);
-    }
-
     public function email($id) {
 
         $salesOrder = $this->salesOrder->find($id);

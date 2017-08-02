@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <meta http-equiv="Content-Security-Policy" content="connect-src * blob: *; default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data:;">
+        <meta http-equiv="Content-Security-Policy" content="connect-src * blob: *; default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:;">
         <meta name="mobile-web-app-capable" content="yes">
 
         <title ng-bind="pageTitle"></title>
