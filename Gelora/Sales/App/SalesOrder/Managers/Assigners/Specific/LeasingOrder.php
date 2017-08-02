@@ -5,19 +5,20 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Assigners\Specific;
 use Solumax\PhpHelper\App\ManagerBase as Manager;
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class LeasingOrder extends Manager  {
-    
+class LeasingOrder extends Manager {
+
     protected $salesOrder;
-    
+
     public function __construct(SalesOrderModel $salesOrder) {
         $this->salesOrder = $salesOrder;
     }
-    
-    public function assign() {      
+
+    public function assign() {
         return $this;
     }
-     public function __call($name, $arguments) {
-        return $this->managerCaller($name, $arguments, $this->salesOrder,
-                __NAMESPACE__, 'LeasingOrder', 'assign');
+
+    public function __call($name, $arguments) {
+        return $this->managerCaller($name, $arguments, $this->salesOrder, __NAMESPACE__, 'LeasingOrder', 'assign');
     }
+
 }
