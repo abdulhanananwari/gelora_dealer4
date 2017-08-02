@@ -24,7 +24,7 @@ class SalesOrderController extends Controller {
     }
 
     public function index(Request $request) {
-
+        
         $query = $this->salesOrder->newQuery();
 
         $query = $this->salesOrder->queryBuilder()->build($query, $request);

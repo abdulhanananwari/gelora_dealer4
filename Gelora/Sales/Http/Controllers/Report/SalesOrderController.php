@@ -25,8 +25,7 @@ class SalesOrderController extends Controller {
 
         $salesOrders = $query->get();
         
-        $fields = explode(',', $request->get('fields'));
-        $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderReportTransformer($fields);
+        $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderReportTransformer($request->get('fields'));
 
         if ($request->get('dashboard') == 'true') {
             return $this->formatData($this->transformer->transformCollection($salesOrders));

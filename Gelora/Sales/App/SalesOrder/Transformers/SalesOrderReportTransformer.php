@@ -76,7 +76,7 @@ class SalesOrderReportTransformer {
         ];
         
         foreach ($data as $key => $value) {
-            if (!in_array($key, $this->fields)) {
+            if (!isset($this->fields[$key]) || $this->fields[$key] == 'false') {
                 unset($data[$key]);
             }
         }

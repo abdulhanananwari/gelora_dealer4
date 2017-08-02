@@ -8,24 +8,18 @@ geloraSalesShared
 
         vm.download = function(filter) {
 
-            console.log(_.filter(vm.filter.fieldObjects, function(value) {
-                return value == true
-            }))
-
             vm.filter.jwt = JwtValidator.encodedJwt
-            vm.filter.fields = _.map(vm.filter.fieldObjects, function(value, key) {
-                if (value == true || value == 'true') {
-                    return key
-                }
-            }).join(',')
 
-            console.log(vm.filter.fieldObjects)
-
-            var paramString = $.param(_.omit(vm.filter, ['fieldObjects']))
+            var paramString = $.param(vm.filter)
 
             console.log(paramString)
 
             window.open(LinkFactory.dealer.sales.salesOrder.report + '?' + paramString)
+        }
+
+        vm.consoleLog = function(key, value) {
+            console.log(key)
+            console.log(value)
         }
 
         vm.fields = [
@@ -78,13 +72,6 @@ geloraSalesShared
             'PENUTUP',
             'NAMA TEAM SALES'
         ]
-
-        vm.filter.fieldObjects = _.map(vm.fields.sort(), function(field) {
-            return {
-                checked: 'false',
-                name: field
-            }
-        })
 
 
     })
