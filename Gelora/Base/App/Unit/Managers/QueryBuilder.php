@@ -100,7 +100,7 @@ class QueryBuilder {
             $query->where('sj_number', $request->get('sj_number'));
         }
         if ($request->has('nd_number')) {
-            $query->where('nd_number', (int) $request->get('nd_number'));
+            $query->where('nd_number', $request->get('nd_number'));
         }
         if ($request->has('color_name')) {
             $query->where('color_name', $request->get('color_name'));
