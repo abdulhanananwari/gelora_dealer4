@@ -81,7 +81,7 @@ geloraSalesShared
                         intervalType: "day"
                     },
                     data: [{
-                        type: "line",
+                        type: "spline",
                         name: "Kredit",
                         showInLegend: true,
                         dataPoints: _.map(grouped.byDate, function(value) {
@@ -93,7 +93,7 @@ geloraSalesShared
                         lineColor: '#f4602a',
                         markerColor: '#f4602a'
                     }, {
-                        type: "line",
+                        type: "spline",
                         name: "Tunai",
                         showInLegend: true,
                         dataPoints: _.map(grouped.byDate, function(value) {
@@ -102,10 +102,10 @@ geloraSalesShared
                                 y: _.filter(value.salesOrders, { 'payment_type': 'cash' }).length
                             }
                         }),
-                        lineColor: '#08109b',
-                        markerColor: '#08109b'
+                        lineColor: 'red',
+                        markerColor: 'red'
                     }, {
-                        type: "line",
+                        type: "spline",
                         name: "Total",
                         showInLegend: true,
                         dataPoints: _.map(grouped.byDate, function(value) {
@@ -114,8 +114,8 @@ geloraSalesShared
                                 y: value.salesOrders.length
                             }
                         }),
-                        lineColor: 'red',
-                        markerColor: 'red'
+                        lineColor: '#08109b',
+                        markerColor: '#08109b'
                     }, ],
                 });
                 totalDaily.render()
@@ -125,12 +125,13 @@ geloraSalesShared
                 var cashCreditShare = new CanvasJS.Chart("cash-credit-share", {
                     data: [{
                         type: "doughnut",
+                        toolTipContent: "{y} Unit",
                         dataPoints: [{
                             indexLabel: 'Tunai',
-                            y: _.filter(vm.salesOrders, { 'payment_type': 'cash' }).length
+                            y: _.filter(vm.salesOrders, { 'payment_type': 'cash' }).length,
                         }, {
                             indexLabel: 'Kredit',
-                            y: _.filter(vm.salesOrders, { 'payment_type': 'credit' }).length
+                            y: _.filter(vm.salesOrders, { 'payment_type': 'credit' }).length,
                         }]
                     }],
                 })
@@ -143,13 +144,13 @@ geloraSalesShared
                 var leasingShare = new CanvasJS.Chart("leasing-share", {
                     data: [{
                         type: "doughnut",
-                        toolTipContent: "{y} unit ({percentage} %)",
+                        toolTipContent: "{y} Unit ({percentage} %)",
                         dataPoints: _.map(mainLeasings, function(mainLeasing) {
-                            var y = _.filter(vm.salesOrders, { main_leasing_name: mainLeasing['main_leasing_name'] }).length 
+                            var y = _.filter(vm.salesOrders, { main_leasing_name: mainLeasing['main_leasing_name'] }).length
                             return {
                                 indexLabel: mainLeasing['main_leasing_name'],
                                 y: y,
-                                percentage: _.round(y / vm.salesOrders.length, 1)  * 100
+                                percentage: _.round(y / vm.salesOrders.length, 1) * 100
                             }
                         })
                     }],
@@ -169,7 +170,7 @@ geloraSalesShared
                             return {
                                 indexLabel: position['sales_personnel_position_text'],
                                 y: y,
-                                percentage: _.round(y / vm.salesOrders.length, 1)  * 100
+                                percentage: _.round(y / vm.salesOrders.length, 1) * 100
                             }
                         })
                     }],
@@ -187,7 +188,7 @@ geloraSalesShared
                         dataPoints: _.map(teams, function(team) {
                             var y = _.filter(vm.salesOrders, { sales_personnel_team_name: team['sales_personnel_team_name'] }).length
                             return {
-                                indexLabel: team['sales_personnel_team_name'] + "#percent%",
+                                indexLabel: team['sales_personnel_team_name'],
                                 y: y,
                                 percentage: _.round(y / vm.salesOrders.length, 1) * 100
                             }
@@ -203,7 +204,6 @@ geloraSalesShared
                 var salesPositionShare = new CanvasJS.Chart("salesman-share", {
                     axisX: {
                         interval: 1,
-                        gridThickness: 0,
                         labelFontSize: 10,
                         labelFontStyle: "normal",
                         labelFontWeight: "normal",
@@ -211,21 +211,91 @@ geloraSalesShared
 
                     },
                     axisY2: {
-                        interlacedColor: "rgba(1,77,101,.2)",
+
+                        gridColor: "rgba(1,77,101,.1)"
+                    },
+                    data: [{
+                        type: "stackedBar",
+                        showInLegend: true,
+                        name: "Cash",
+                        toolTipContent: 'Cash: {y}',
+                        axisYType: "secondary",
+                        color: "#014D65",
+                        dataPoints: _.orderBy(_.map(salesmans, function(salesman) {
+                            var inType = _.filter(vm.salesOrders, { sales_personnel_name: salesman['sales_personnel_name'] })
+                            return {
+                                label: salesman['sales_personnel_name'],
+                                y: _.filter(inType, { 'payment_type': 'cash' }).length,
+                                total_type: inType.length
+                            }
+                        }), 'total_type')
+                    }, {
+                        type: "stackedBar",
+                        showInLegend: true,
+                        name: "Credit",
+                        toolTipContent: 'Credit: {y}',
+                        axisYType: "secondary",
+                        color: "#e62739",
+                        dataPoints: _.orderBy(_.map(salesmans, function(salesman) {
+                            var inType = _.filter(vm.salesOrders, { sales_personnel_name: salesman['sales_personnel_name'] })
+                            return {
+                                label: salesman['sales_personnel_name'],
+                                y: _.filter(inType, { 'payment_type': 'credit' }).length,
+                                total_type: inType.length
+                            }
+                        }), 'total_type')
+                    }],
+                })
+                salesPositionShare.render()
+            },
+            typeShare: function() {
+
+                var types = _.uniqBy(vm.salesOrders, 'unit_type_code')
+
+
+                var salesPositionShare = new CanvasJS.Chart("type-share", {
+                    axisX: {
+                        interval: 1,
+                        gridThickness: 0,
+                        labelFontSize: 10,
+                        labelFontStyle: "normal",
+                        labelFontWeight: "normal",
+
+                    },
+                    axisY2: {
                         gridColor: "rgba(1,77,101,.1)"
 
                     },
                     data: [{
-                        type: "bar",
-                        name: "salesmans",
+                        type: "stackedBar",
+                        showInLegend: true,
+                        name: "Cash",
+                        toolTipContent: 'Cash: {y}',
                         axisYType: "secondary",
                         color: "#014D65",
-                        dataPoints: _.orderBy(_.map(salesmans, function(salesman) {
+                        dataPoints: _.orderBy(_.map(types, function(type) {
+                            var inType = _.filter(vm.salesOrders, { unit_type_code: type['unit_type_code'] })
                             return {
-                                label: salesman['sales_personnel_name'],
-                                y: _.filter(vm.salesOrders, { sales_personnel_name: salesman['sales_personnel_name'] }).length
+                                label: type['unit_type_name'],
+                                y: _.filter(inType, { 'payment_type': 'cash' }).length,
+                                total_type: inType.length
                             }
-                        }), 'y')
+                        }), 'total_type')
+                    }, {
+                        type: "stackedBar",
+                        showInLegend: true,
+                        name: "Credit",
+                        toolTipContent: 'Credit: {y}',
+                        axisYType: "secondary",
+                        color: "#e62739",
+                        dataPoints: _.orderBy(_.map(types, function(type) {
+                            var inType = _.filter(vm.salesOrders, { unit_type_code: type['unit_type_code'] })
+                            return {
+                                label: type['unit_type_name'],
+                                y: _.filter(inType, { 'payment_type': 'credit' }).length,
+                                total_type: inType.length
+                            }
+                        }), 'total_type')
                     }],
                 })
                 salesPositionShare.render()
@@ -237,6 +307,7 @@ geloraSalesShared
                 this.salesPositionShare()
                 this.teamShare()
                 this.salesmanShare()
+                this.typeShare()
 
             }
         }
