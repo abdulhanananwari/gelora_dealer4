@@ -39,11 +39,12 @@
             <div class="col-sm-2">
                 <h4>Cetak Document Tagihan Leasing</h4>
                 <input type="checkbox" class="form-not-applied" ng-model="ctrl.leasing.generateDocuments.invoice_dp">
-                <label>Invoice DP</label><br>
+                <label>Invoice DP</label>
+                <br>
                 <input type="checkbox" class="form-not-applied" ng-model="ctrl.leasing.generateDocuments.invoice_jp">
-                <label>Invoice JP</label><br>
+                <label>Invoice JP</label>
+                <br>
                 <input type="textbox" ng-show="ctrl.leasing.generateDocuments.invoice_jp" ng-model="ctrl.leasing.generateDocuments.invoice_jp_text">
-
                 <input type="checkbox" class="form-not-applied" ng-model="ctrl.leasing.generateDocuments.agreement_bpkb">
                 <label>Agreement BPKB</label>
             </div>
@@ -58,7 +59,7 @@
         <hr>
         <div ng-if="ctrl.leasing.created_at">
             <h4>Leasing Personnel</h4>
-            <a class="btn btn-block btn-warning" ui-sref="leasingPersonnelShow({mainLeasingId:ctrl.leasing.mainLeasing.id})">Tambah Data Leasing Personal</a>
+            <account-finder-modal selected-user="user" on-user-selected="ctrl.leasing.leasingPersonnels.push(user)"></account-finder-modal>
             <br>
             <div class="table-responsive">
                 <table class="table">
@@ -71,69 +72,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="leasingPersonnel in ctrl.leasingPersonnels">
-                            <td>{{leasingPersonnel.user.name}}</td>
-                            <td>{{leasingPersonnel.user.email}}</td>
-                            <td>{{leasingPersonnel.access.can_input_leasing_order}}</td>
-                            <td><a ui-sref="leasingPersonnelShow({id:leasingPersonnel.id})">Buka</a></td>
+                        <tr ng-repeat="leasingPersonnel in ctrl.leasing.leasingPersonnels">
+                            <td>{{leasingPersonnel.name}}</td>
+                            <td>{{leasingPersonnel.email}}</td>
+                            <td>
+                                <input type="checkbox" class="form-not-applied" ng-model="leasingPersonnel.access.can_input_leasing_order">
+                            </td>
+                            <td>
+                                <button class="btn btn-xs btn-danger" ng-click="ctrl.leasingPersonnel.remove(leasingPersonnel)">Hapus</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <hr>
-        
-        <!-- <div ng-if="ctrl.leasing.created_at">
-            <h4>Program</h4>
-            <a class="btn btn-block btn-warning" ui-sref="leasingProgramShow({mainLeasingId:ctrl.leasing.mainLeasing.id})">Tambah Program Baru</a>
-            <br>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Leasing</th>
-                            <th>Kendaraan</th>
-                            <th>Tenor</th>
-                            <th>DP</th>
-                            <th>Jumlah Program</th>
-                            <th>Buka</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="leasingProgram in ctrl.leasingPrograms">
-                            <td>{{ leasingProgram.leasing.mainLeasing.name }}</td>
-                            <td>
-                                <span ng-if="leasingProgram.vehicle_model_selection_type == 'group'">
-									{{ leasingProgram.vehicle_model_group }}
-								</span>
-                                <span ng-if="leasingProgram.vehicle_model_selection_type == 'single'">
-									{{ leasingProgram.vehicle.name }} | {{ leasingProgram.vehicle.code	 }} 
-								</span>
-                            </td>
-                            <td>
-                                <span ng-if="leasingProgram.tenor_selection_type == 'range'">
-									{{ leasingProgram.min_tenor + ' - ' + leasingProgram.max_tenor }}
-								</span>
-                                <span ng-if="leasingProgram.tenor_selection_type == 'single'">
-									{{ leasingProgram.tenor }}
-								</span>
-                            </td>
-                            <td>
-                                <span ng-if="leasingProgram.dp_selection_type == 'range'">
-									{{ leasingProgram.min_dp + ' - ' + leasingProgram.min_dp }}
-								</span>
-                                <span ng-if="leasingProgram.dp_selection_type == 'single'">
-									{{ leasingProgram.dp }}
-								</span>
-                            </td>
-                            <td>{{ leasingProgram.programs.length || 0 }}</td>
-                            <td>
-                                <a ui-sref="leasingProgramShow({id:leasingProgram._id})" target="_blank">Buka</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div> -->
     </div>
 </div>

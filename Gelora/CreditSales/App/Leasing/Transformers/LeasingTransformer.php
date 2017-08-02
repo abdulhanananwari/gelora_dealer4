@@ -9,7 +9,7 @@ class LeasingTransformer extends Fractal\TransformerAbstract {
 
     public function transform(LeasingModel $leasing) {
 
-        return [
+        $data = [
             'id' => $leasing->_id,
             
             'code' => $leasing->code,
@@ -22,6 +22,10 @@ class LeasingTransformer extends Fractal\TransformerAbstract {
 
             'created_at' => $leasing->created_at->toDateTimeString(),
         ];
+        
+        $data['leasingPersonnels'] = Partials\LeasingPersonnels::transformCollection($leasing);
+        
+        return $data;
     }
 
 }

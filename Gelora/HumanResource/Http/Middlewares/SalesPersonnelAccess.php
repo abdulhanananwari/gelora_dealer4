@@ -1,6 +1,6 @@
 <?php
 
-namespace Gelora\Sales\Http\Middlewares;
+namespace Gelora\HumanResource\Http\Middlewares;
 
 use Closure;
 
@@ -34,7 +34,7 @@ class SalesPersonnelAccess {
         if ($strict && is_null($salesPersonnel['personnel'])) {
             return response('Data sales tidak ditemukan', 403);
         }
-        
+
         $request->merge(array_merge($request->all(), [
             'sales_personnel_access' => $salesPersonnel,
         ]));

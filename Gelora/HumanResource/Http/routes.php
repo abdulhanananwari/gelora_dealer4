@@ -3,6 +3,7 @@
 Route::group(['prefix' => 'human-resource', 'namespace' => 'Gelora\HumanResource\Http\Controllers'], function() {
     
     include('Routes/Api.php');
+    include('Routes/ApiSalesPersonnel.php');
     include('Routes/Trigger.php');
     
 });
