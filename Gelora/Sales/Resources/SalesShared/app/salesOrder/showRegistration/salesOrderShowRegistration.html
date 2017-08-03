@@ -14,9 +14,12 @@
             </div>
             <div class="col-sm-4">
                 <registration-handover sales-order="ctrl.salesOrder"></registration-handover>
+
+                <p class="text-center" ng-show="ctrl.paymentUnreceived"><strong>Kekurangan: Rp {{ ctrl.paymentUnreceived | number }}</strong></p>
+                <button class="btn btn-success btn-block hidden-print" ng-click="ctrl.calculatePaymentUnreceived(true)">Hitung Kekurangan</button><br>
             </div>
             <div class="col-sm-4">
-                <registration-cost sales-order="ctrl.salesOrder"></registration-cost>
+                <registration-cost ng-show="ctrl.salesOrder.polReg.agency_invoice_id" sales-order="ctrl.salesOrder"></registration-cost>
             </div>
         </div>
     </div>
