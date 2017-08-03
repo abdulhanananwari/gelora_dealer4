@@ -22,7 +22,7 @@ geloraSalesShared
 
         SalesOrderModel.get($state.params.id)
             .then(function(res) {
-                
+
                 vm.salesOrder = res.data.data
 
                 if (!vm.salesOrder.cddb.propinsi_surat) {
@@ -47,13 +47,50 @@ geloraSalesShared
             vm.salesOrder.cddb.no_hp = vm.salesOrder.registration.phone_number;
             vm.salesOrder.cddb.tanggal_lahir = moment(vm.salesOrder.registration.dob, "YYYY-MM-DD").format("DDMMYYYY");
 
-            var kelurahan = _.invert(vm.areaOptions.kelurahan_surat.options)[vm.salesOrder.registration.kelurahan]
-            if (kelurahan) {
-                vm.salesOrder.cddb.kelurahan_surat = kelurahan; vm.salesOrder.cddb.kelurahan_surat_name = vm.areaOptions.kelurahan_surat.options[vm.salesOrder.cddb.kelurahan_surat]
-                vm.salesOrder.cddb.kecamatan_surat = vm.salesOrder.cddb.kelurahan_surat.substring(0,6); vm.salesOrder.cddb.kecamatan_surat_name = vm.areaOptions.kecamatan_surat.options[vm.salesOrder.cddb.kecamatan_surat]
-                vm.salesOrder.cddb.kota_surat = vm.salesOrder.cddb.kecamatan_surat.substring(0,4); vm.salesOrder.cddb.kota_surat_name = vm.areaOptions.kota.options[vm.salesOrder.cddb.kota_surat]
-                vm.filterKodePos(vm.salesOrder.cddb.kelurahan_surat_name)
+
+            vm.assignKotaKecamatanKelurahan()
+        }
+
+        vm.assignKotaKecamatanKelurahan = function() {
+
+            if (_.isEmpty(vm.salesOrder.cddb.kota_surat)) {
+                alert('Tidak bisa mengcopy kota, kecamatan dan kelurahan. Kota surat di CDDB harus diinput dulu manual untuk bisa otomatis copy Kecamatan dan Kelurahan')
+                return
             }
+
+            var kecamatans = _.filter(vm.areaOptions.kecamatan_surat.transformed, function(val) {
+                return (val.code.substr(0, 4) == vm.salesOrder.cddb.kota_surat) && (val.name == vm.salesOrder.registration.kecamatan)
+            })
+
+
+            if (kecamatans.length != 1) {
+                alert('Tidak bisa mencari otomatis kecamatan. Lanjutkan manual')
+                vm.filterKecamatanSurat(vm.salesOrder.cddb.kota_surat)
+                return
+            }
+
+            var kecamatan = _.first(kecamatans)
+
+            vm.salesOrder.cddb.kecamatan_surat = kecamatan.code
+            vm.salesOrder.cddb.kecamatan_surat_name = kecamatan.name
+
+
+            var kelurahans = _.filter(vm.areaOptions.kelurahan_surat.transformed, function(val) {
+                return (val.code.substr(0, 6) == kecamatan.code) && (val.name == vm.salesOrder.registration.kelurahan)
+            })
+
+
+            if (kelurahans.length != 1) {
+                alert('Tidak bisa mencari otomatis kelurahan. Lanjutkan manual')
+                vm.filterKelurahanSurat(kecamatan.code)
+                return
+            }
+
+            var kelurahan = _.first(kelurahans)
+            vm.salesOrder.cddb.kelurahan_surat = kelurahan.code
+            vm.salesOrder.cddb.kelurahan_surat_name = kelurahan.name
+
+            vm.filterKodePos(vm.salesOrder.cddb.kelurahan_surat)
         }
 
         vm.filterKecamatanSurat = function(kota) {
@@ -79,6 +116,7 @@ geloraSalesShared
         }
 
         vm.filterKodePos = function(kelurahan) {
+            console.log(kelurahan)
             vm.salesOrder.cddb.kode_pos_surat = vm.areaOptions.kode_pos.options[kelurahan]
         }
 
@@ -86,7 +124,29 @@ geloraSalesShared
 
             ConfigModel.get('gelora.cdb.area')
                 .then(function(res) {
+
                     vm.areaOptions = res.data.data
+
+                    vm.areaOptions.kota.transformed = _.map(vm.areaOptions.kota.options, function(val, key) {
+                        return {
+                            code: key,
+                            name: val
+                        }
+                    })
+
+                    vm.areaOptions.kecamatan_surat.transformed = _.map(vm.areaOptions.kecamatan_surat.options, function(val, key) {
+                        return {
+                            code: key,
+                            name: val
+                        }
+                    })
+
+                    vm.areaOptions.kelurahan_surat.transformed = _.map(vm.areaOptions.kelurahan_surat.options, function(val, key) {
+                        return {
+                            code: key,
+                            name: val
+                        }
+                    })
                 })
 
             ConfigModel.get('gelora.cdb.cdb')

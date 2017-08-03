@@ -101,6 +101,12 @@ geloraSalesAdmin
                         controller: 'SalesOrderReportController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Sales Order Report'
                     })
+                    .state('salesOrderReportLeasingOrder', {
+                        url: '/salesOrder/report/leasingOrder',
+                        templateUrl: '/gelora/sales-shared/app/salesOrder/report/leasingOrder/salesOrderReportLeasingOrder.html',
+                        controller: 'SalesOrderReportLeasingOrderController as ctrl',
+                        pageTitle: 'Dealer | Sales Admin | Sales Order Report Leasing Order'
+                    })
                     .state('salesOrderDashboard', {
                         url: '/salesOrder/dashboard',
                         templateUrl: '/gelora/sales-shared/app/salesOrder/dashboard/salesOrderDashboard.html',
