@@ -19,7 +19,7 @@ class Update {
 
         $this->salesOrder->assign()->specific()->leasingOrder()->updateAfterValidation($request);
 
-        $fillables = $request->only('on_the_road', 'dp_po', 'mainLeasing','subLeasing', 'dp_bayar', 'tenor', 'cicilan', 'vehicle', 'joinPromos');
+        $fillables = $request->only('on_the_road', 'dp_po', 'dp_bayar', 'tenor', 'cicilan', 'vehicle', 'joinPromos');
 
         foreach ($fillables as $key => $value) {
             if (!empty($value)) {
