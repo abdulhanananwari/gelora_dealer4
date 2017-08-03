@@ -26,6 +26,10 @@ geloraSalesShared
                             vm.recalculateJoinPromos()
                         })
                 }
+
+                if (vm.salesOrder.leasingOrder.invoice_generated_at) {
+                    vm.action.joinPromoPayment.validate(vm.salesOrder)
+                }
             })
 
         ConfigModel.get('gelora.creditSales.dueDateTypes')
@@ -102,12 +106,23 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            joinPromoPayment: function(salesOrder, joinPromos, transaction) {
-                SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id, joinPromos, transaction)
-                    .then(function(res) {
-                        vm.salesOrder = res.data.data
-                        $state.reload()
-                    })
+            joinPromoPayment: {
+                store: function(salesOrder, joinPromos, transaction) {
+                    SalesOrderModel.leasingOrder.joinPromoPayment.store(salesOrder.id, joinPromos, transaction)
+                        .then(function(res) {
+                            vm.salesOrder = res.data.data
+                            $state.reload()
+                        })
+                },
+                validate: function(salesOrder) {
+                    if (_.isUndefined(vm.joinPromoPaymentValidation)) {
+
+                        SalesOrderModel.leasingOrder.joinPromoPayment.validate(salesOrder.id)
+                            .then(function(res) {
+                                vm.joinPromoPaymentValidation = res.data.data
+                            })
+                    }
+                }
             },
             orderConfirmation: function(salesOrder, orderConfirmation) {
                 var note = prompt('Catatan ACC Lisan')

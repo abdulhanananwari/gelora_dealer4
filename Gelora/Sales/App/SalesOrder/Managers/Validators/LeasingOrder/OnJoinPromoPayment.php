@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnMainReceivablePayment {
+class OnJoinPromoPayment {
 
     protected $salesOrder;
 
@@ -14,8 +14,8 @@ class OnMainReceivablePayment {
 
     public function validate() {
 
-        if ($this->salesOrder->getAttribute('leasingOrder.payment_at')) {
-            return ['Pembayaran sudah diinput sebelumnya'];
+        if ($this->salesOrder->financial_closed_at) {
+            return ['PO tidak dapat di edit karena status financial SPK sudah ditutup'];
         }
 
         return true;

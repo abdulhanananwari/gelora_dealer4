@@ -66,11 +66,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
             Route::group(['prefix' => '{id}/leasing-order'], function() {
 
+                Route::group(['prefix' => 'join-promo-payment', 'namespace' => 'LeasingOrder'], function() {
+                    Route::post('validate', ['uses' => 'JoinPromoPaymentController@validate']);
+                    Route::post('store', ['uses' => 'JoinPromoPaymentController@store', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
+                });
+
                 Route::post('/', ['uses' => 'LeasingOrderController@update', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 Route::post('after-validation', ['uses' => 'LeasingOrderController@updateAfterValidation', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_AFTER_VALIDATION']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 Route::post('main-receivable-payment/', ['uses' => 'LeasingOrderController@mainReceivablePayment', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
-                Route::post('join-promo-payment/', ['uses' => 'LeasingOrderController@joinPromoPayment', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
 
                 Route::post('order-confirmation/', ['uses' => 'LeasingOrderController@orderConfirmation', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 Route::post('po-complete/', ['uses' => 'LeasingOrderController@poComplete', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
@@ -95,7 +99,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             });
 
             Route::group(['prefix' => '{id}/document', 'namespace' => 'Document'], function() {
-                
+
                 Route::group(['prefix' => 'spk'], function() {
                     Route::post('email', ['uses' => 'SpkController@email']);
                 });
@@ -114,7 +118,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
     });
 
     Route::group(['prefix' => 'sales-order-extra'], function() {
-        
+
         Route::post('/', ['uses' => 'SalesOrderExtraController@store', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
         Route::post('{id}', ['uses' => 'SalesOrderExtraController@update', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
         Route::delete('{id}', ['uses' => 'SalesOrderExtraController@delete', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
