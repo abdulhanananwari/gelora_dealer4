@@ -4,7 +4,7 @@ namespace Gelora\Sales\App\SalesOrder\Managers\Validators\LeasingOrder;
 
 use Gelora\Sales\App\SalesOrder\SalesOrderModel;
 
-class OnUpdateAfterValidation {
+class OnJoinPromoPayment {
 
     protected $salesOrder;
 
@@ -16,10 +16,6 @@ class OnUpdateAfterValidation {
 
         if ($this->salesOrder->financial_closed_at) {
             return ['PO tidak dapat di edit karena status financial SPK sudah ditutup'];
-        }
-
-        if ($this->salesOrder->getAttribute('leasingOrder.payment_at')) {
-            return ['PO tidak bisa dirubah karena pembayaran PO sudah dibuat'];
         }
 
         return true;
