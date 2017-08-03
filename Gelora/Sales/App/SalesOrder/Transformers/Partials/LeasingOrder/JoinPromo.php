@@ -23,6 +23,7 @@ class JoinPromo {
             $transaction = [
                 'id' => $joinPromoSubdocument->get('transaction.id'),
                 'uuid' => $joinPromoSubdocument->get('transaction.uuid'),
+                'amount' => (int) $joinPromoSubdocument->get('transaction.amount'),
                 'creator' => $joinPromoSubdocument->get('transaction.creator'),
                 'created_at' => $joinPromoSubdocument->toCarbon('transaction.created_at')->toDateTimeString(),
             ];
