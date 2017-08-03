@@ -23,7 +23,7 @@
                 <input type="email" ng-model="ctrl.salesOrder.customer.email">
                 <label>Alamat</label>
                 <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.customer.address"></textarea>
-                <p><small>Data Sekarang : {{ctrl.salesOrder.customer.kota}},{{ctrl.salesOrder.customer.kecamatan}},{{ctrl.salesOrder.customer.kelurahan}},{{ctrl.salesOrder.customer.kode_Pos}}</small></p>
+                <area-display entity="ctrl.salesOrder.customer"></area-display>
                 <label>Tanggal Lahir</label>
                 <input type="text" ng-model="ctrl.salesOrder.customer.dob" class="date">
                 <label>No KTP</label>
@@ -56,7 +56,7 @@
                 <input type="text" ng-model="ctrl.salesOrder.registration.phone_number">
                 <label>Alamat</label>
                 <textarea style="height:5em;" rows="5" ng-model="ctrl.salesOrder.registration.address"></textarea>
-                <p><small>Data Sekarang : {{ctrl.salesOrder.registration.kota}},{{ctrl.salesOrder.registration.kecamatan}},{{ctrl.salesOrder.registration.kelurahan}},{{ctrl.salesOrder.registration.kode_Pos}}</small></p>
+                <area-display entity="ctrl.salesOrder.registration"></area-display>
                 <label>Tanggal Lahir</label>
                 <input type="text" ng-model="ctrl.salesOrder.registration.dob" class="date">
                 <label>No KTP</label>

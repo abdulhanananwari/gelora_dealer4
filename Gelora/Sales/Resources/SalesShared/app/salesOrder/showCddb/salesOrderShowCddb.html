@@ -15,56 +15,22 @@
         <input type="text" ng-model="ctrl.salesOrder.cddb.alamat_surat">
         <label>Propinsi</label>
         <input type="text" ng-model="ctrl.salesOrder.cddb.propinsi_surat" readonly>
-        <label>Kota</label>
-        <div class="dropdown dropdown-scroll">
-            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kota_surat_name || 'Pilih Kota' }}
-            </button>
-            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
-                <li role="presentation">
-                    <div class="input-group input-group-sm search-control">
-                        <span class="input-group-addon">
-							<span class="glyphicon glyphicon-search"></span>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kota">
-                    </div>
-                </li>
-                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kota.options | valueHas:filter.kota" ng-click="ctrl.salesOrder.cddb.kota_surat=key;ctrl.salesOrder.cddb.kota_surat_name=value;ctrl.filterKecamatanSurat(ctrl.salesOrder.cddb.kota_surat)"><a>{{ value
-				 }}</a></li>
-            </ul>
-        </div>
-        <label>Kecamatan Surat</label>
-        <div class="dropdown dropdown-scroll">
-            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kecamatan_surat_name || 'Pilih Kecamatan' }}
-            </button>
-            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
-                <li role="presentation">
-                    <div class="input-group input-group-sm search-control">
-                        <span class="input-group-addon">
-							<span class="glyphicon glyphicon-search"></span>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kecamatan">
-                    </div>
-                </li>
-                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kecamatan_surat.options_filtered | valueHas:filter.kecamatan" ng-click="ctrl.salesOrder.cddb.kecamatan_surat=key;ctrl.salesOrder.cddb.kecamatan_surat_name=value;ctrl.filterKelurahanSurat(ctrl.salesOrder.cddb.kecamatan_surat)"><a>{{ value
-				 }}</a></li>
-            </ul>
-        </div>
-        <label>Kelurahan Surat</label>
-        <div class="dropdown dropdown-scroll">
-            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kelurahan_surat_name || 'Pilih Kelurahan' }}
-            </button>
-            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
-                <li role="presentation">
-                    <div class="input-group input-group-sm search-control">
-                        <span class="input-group-addon">
-							<span class="glyphicon glyphicon-search"></span>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kelurahan">
-                    </div>
-                </li>
-                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kelurahan_surat.options_filtered | valueHas:filter.kelurahan" ng-click="ctrl.salesOrder.cddb.kelurahan_surat=key;ctrl.salesOrder.cddb.kelurahan_surat_name=value;ctrl.filterKodePos(value)"><a>{{ value
-				 }}</a></li>
-            </ul>
+        <div class="row">
+            <div class="col-xs-8">
+                <label>Kota</label>
+                <input type="text" ng-model="ctrl.salesOrder.cddb.kota_surat_name">
+                <input type="text" ng-model="ctrl.salesOrder.cddb.kota_surat">
+                <label>Kecamatan</label>
+                <input type="text" ng-model="ctrl.salesOrder.cddb.kecamatan_surat_name">
+                <input type="text" ng-model="ctrl.salesOrder.cddb.kecamatan_surat">
+                <label>Kelurahan</label>
+                <input type="text" ng-model="ctrl.salesOrder.cddb.kelurahan_surat_name">
+                <input type="text" ng-model="ctrl.salesOrder.cddb.kelurahan_surat">
+            </div>
+            <div class="col-xs-4">
+                <p>Data Penjualan</p>
+                <area-display entity="{area:ctrl.area}"></area-display>
+            </div>
         </div>
         <label>Kode Pos Surat</label>
         <input type="text" ng-model="ctrl.salesOrder.cddb.kode_pos_surat">
