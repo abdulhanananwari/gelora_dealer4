@@ -67,7 +67,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
             Route::group(['prefix' => '{id}/leasing-order'], function() {
 
                 Route::group(['prefix' => 'join-promo-payment', 'namespace' => 'LeasingOrder'], function() {
-                    Route::post('validate', ['uses' => 'JoinPromoPaymentController@validate']);
+                    Route::post('validate', ['uses' => 'JoinPromoPaymentController@validate', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                     Route::post('store', ['uses' => 'JoinPromoPaymentController@store', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 });
                 Route::group(['prefix' => 'main-receivable-payment', 'namespace' => 'LeasingOrder'], function() {

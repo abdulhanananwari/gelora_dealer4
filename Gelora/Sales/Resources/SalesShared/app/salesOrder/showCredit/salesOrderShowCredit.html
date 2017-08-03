@@ -115,9 +115,10 @@
                                 <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !joinPromo.transaction.created_at && ctrl.joinPromoPaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
                                 joinPromo.transaction.uuid=createdTransaction.uuid;ctrl.action.joinPromoPayment.store(ctrl.salesOrder,ctrl.salesOrder.leasingOrder.joinPromos,createdTransaction)" setting="ctrl.transactionCreatorModal.setting.jp"></transaction-create>
                                 <span ng-show="joinPromo.transaction.created_at">
-                                    <p class="small-info">Dibuat oleh : {{joinPromo.transaction.creator.name}}</p>
+                                    <p class="small-info">Dibuat oleh: {{joinPromo.transaction.creator.name}}</p>
                                     <p class="small-info">{{joinPromo.transaction.created_at}}</p>
-                                    <p class="small-info">Transaction ID : {{joinPromo.transaction.id}}</p>
+                                    <p class="small-info">Transaction ID: {{joinPromo.transaction.id}}</p>
+                                    <p class="small-info">Jumlah Pencairaan: {{joinPromo.transaction.amount | number }}</p>
                                 </span>
                                 <button ng-show="!ctrl.salesOrder.validated_at" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.splice(ctrl.salesOrder.leasingOrder.joinPromos.indexOf(joinPromo),1)" class="btn btn-block btn-danger btn-xs">Hapus</button>
                             </td>
