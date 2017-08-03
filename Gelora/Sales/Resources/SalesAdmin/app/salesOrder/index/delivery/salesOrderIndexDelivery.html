@@ -3,47 +3,27 @@
         <h4>Pengiriman Pending</h4>
         <hr>
         <select ng-options="driver.id as driver.name for driver in ctrl.drivers" ng-model="ctrl.filter.driver_id"></select>
-        <button class="btn btn-block btn-warning" ng-click="ctrl.load(ctrl.filter)">Update</button>
+        <button class="btn btn-block btn-warning" ng-click="ctrl.load(ctrl.filter)">Cari</button>
         <br>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Customer Name</th>
-                        <th>Type</th>
-                        <th>Unit</th>
-                        <th>Sales</th>
-                        <th>Tanggal</th>
-                        <th>Tanggal SJ</th>
-                        <th>Tanggal Serah Terima</th>
-                        <th>Buka</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="salesOrder in ctrl.salesOrders">
-                        <td>
-                            {{salesOrder.customer.name}}
-                            <br>
-                            <small>({{salesOrder.registration.name}})</small>
-                        </td>
-                        <td>
-                            {{salesOrder.delivery.unit.type_name}}
-                            <br>
-                            <small>{{salesOrder.delivery.unit.color_name}}</small>
-                        </td>
-                        <td>
-                            {{salesOrder.delivery.unit.chasis_number}}
-                            <br>
-                            <small>{{salesOrder.delivery.unit.engine_number}}</small>
-                        </td>
-                        <td>{{salesOrder.salesPersonnel.entity.name}}</td>
-                        <td>{{salesOrder.created_at | fromDateTimeString}}</td>
-                        <td>{{salesOrder.delivery.generated_at }}</td>
-                        <td>{{salesOrder.delivery.handover.created_at }}</td>
-                        <td><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Buka</a></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="panel panel-primary" ng-repeat="salesOrder in ctrl.salesOrders">
+            <div class="panel-heading">
+                <a ui-sref="salesOrderShowDelivery({id:salesOrder.id})" target="_blank" style="color: white;"><strong>{{salesOrder.customer.name}}  <small>  ({{salesOrder.registration.name}})</small></strong></a>
+            </div>
+            <div class="panel-body">
+                <p>
+                    {{salesOrder.delivery.unit.type_name}}
+                    <small>{{salesOrder.delivery.unit.color_name}}</small>
+                </p>
+                <p>
+                    {{salesOrder.delivery.unit.chasis_number}}
+                    <small>{{salesOrder.delivery.unit.engine_number}}</small>
+                </p>
+                <p>Sales: {{salesOrder.salesPersonnel.entity.name}}</p>
+                <p>SJ Dibuat: {{salesOrder.delivery.generated_at }}</p>
+                <p>Serah Terima: {{salesOrder.delivery.handover.created_at }}</p>
+                <whatsapp-messenger phone="{{ salesOrder.customer.phone_number }}">Customer</whatsapp-messenger>
+                <whatsapp-messenger phone="{{ salesOrder.salesPersonnel.phone_number }}">Sales</whatsapp-messenger>
+            </div>
         </div>
     </div>
 </div>
