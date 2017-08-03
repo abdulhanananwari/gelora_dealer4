@@ -24,6 +24,7 @@ class JoinPromoPayment {
                 $joinPromoSubdocument->set('transaction', [
                     'id' => $transaction['id'],
                     'uuid' => $transaction['uuid'],
+                    'amount' => $transaction['amount'],
                     'created_at' => new \MongoDB\BSON\UTCDateTime(\Carbon\Carbon::now()->timestamp * 1000),
                     'creator' => $this->salesOrder->assignEntityData(),
                 ]);
