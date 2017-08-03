@@ -1,0 +1,97 @@
+
+        <label>Kota</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kota_surat_name || 'Pilih Kota' }}
+            </button>
+            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
+                <li role="presentation">
+                    <div class="input-group input-group-sm search-control">
+                        <span class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kota">
+                    </div>
+                </li>
+                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kota.options | valueHas:filter.kota" ng-click="ctrl.salesOrder.cddb.kota_surat=key;ctrl.salesOrder.cddb.kota_surat_name=value;ctrl.filterKecamatanSurat(ctrl.salesOrder.cddb.kota_surat)"><a>{{ value
+				 }}</a></li>
+            </ul>
+        </div>
+        <label>Kecamatan Surat</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kecamatan_surat_name || 'Pilih Kecamatan' }}
+            </button>
+            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
+                <li role="presentation">
+                    <div class="input-group input-group-sm search-control">
+                        <span class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kecamatan">
+                    </div>
+                </li>
+                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kecamatan_surat.options_filtered | valueHas:filter.kecamatan" ng-click="ctrl.salesOrder.cddb.kecamatan_surat=key;ctrl.salesOrder.cddb.kecamatan_surat_name=value;ctrl.filterKelurahanSurat(ctrl.salesOrder.cddb.kecamatan_surat)"><a>{{ value
+				 }}</a></li>
+            </ul>
+        </div>
+        <label>Kelurahan Surat</label>
+        <div class="dropdown dropdown-scroll">
+            <button class="btn btn-sm btn-block dropdown-toggle" type="button" id="kota-dropdown" data-toggle="dropdown">{{ ctrl.salesOrder.cddb.kelurahan_surat_name || 'Pilih Kelurahan' }}
+            </button>
+            <ul class="dropdown-menu dropdown" role="menu" aria-labelledby="kota-dropdown">
+                <li role="presentation">
+                    <div class="input-group input-group-sm search-control">
+                        <span class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Cari" ng-model="filter.kelurahan">
+                    </div>
+                </li>
+                <li role="presentation" ng-repeat="(key, value) in ctrl.areaOptions.kelurahan_surat.options_filtered | valueHas:filter.kelurahan" ng-click="ctrl.salesOrder.cddb.kelurahan_surat=key;ctrl.salesOrder.cddb.kelurahan_surat_name=value;ctrl.filterKodePos(value)"><a>{{ value
+				 }}</a></li>
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+            
+        vm.assignKotaKecamatanKelurahan = function() {
+
+            if (_.isEmpty(vm.salesOrder.cddb.kota_surat)) {
+                alert('Tidak bisa mengcopy kota, kecamatan dan kelurahan. Kota surat di CDDB harus diinput dulu manual untuk bisa otomatis copy Kecamatan dan Kelurahan')
+                return
+            }
+
+            var kecamatans = _.filter(vm.areaOptions.kecamatan_surat.transformed, function(val) {
+                return (val.code.substr(0, 4) == vm.salesOrder.cddb.kota_surat) && (val.name == vm.salesOrder.registration.kecamatan)
+            })
+
+
+            if (kecamatans.length != 1) {
+                alert('Tidak bisa mencari otomatis kecamatan. Lanjutkan manual')
+                vm.filterKecamatanSurat(vm.salesOrder.cddb.kota_surat)
+                return
+            }
+
+            var kecamatan = _.first(kecamatans)
+
+            vm.salesOrder.cddb.kecamatan_surat = kecamatan.code
+            vm.salesOrder.cddb.kecamatan_surat_name = kecamatan.name
+
+
+            var kelurahans = _.filter(vm.areaOptions.kelurahan_surat.transformed, function(val) {
+                return (val.code.substr(0, 6) == kecamatan.code) && (val.name == vm.salesOrder.registration.kelurahan)
+            })
+
+
+            if (kelurahans.length != 1) {
+                alert('Tidak bisa mencari otomatis kelurahan. Lanjutkan manual')
+                vm.filterKelurahanSurat(kecamatan.code)
+                return
+            }
+
+            var kelurahan = _.first(kelurahans)
+            vm.salesOrder.cddb.kelurahan_surat = kelurahan.code
+            vm.salesOrder.cddb.kelurahan_surat_name = kelurahan.name
+
+            vm.filterKodePos(vm.salesOrder.cddb.kelurahan_surat)
+        }
+        </script>

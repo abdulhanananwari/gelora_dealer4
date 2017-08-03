@@ -47,51 +47,23 @@ geloraSalesShared
             vm.salesOrder.cddb.no_hp = vm.salesOrder.registration.phone_number;
             vm.salesOrder.cddb.tanggal_lahir = moment(vm.salesOrder.registration.dob, "YYYY-MM-DD").format("DDMMYYYY");
 
+            vm.area = vm.salesOrder.registration.area
 
-            vm.assignKotaKecamatanKelurahan()
-        }
-
-        vm.assignKotaKecamatanKelurahan = function() {
-
-            if (_.isEmpty(vm.salesOrder.cddb.kota_surat)) {
-                alert('Tidak bisa mengcopy kota, kecamatan dan kelurahan. Kota surat di CDDB harus diinput dulu manual untuk bisa otomatis copy Kecamatan dan Kelurahan')
-                return
+            var variables = {
+                'kota_surat': 'kota.code',
+                'kota_surat_name': 'kota.name',
+                'kecamatan_surat': 'kecamatan.code',
+                'kecamatan_surat_name': 'kecamatan.name',
+                'kelurahan_surat': 'kelurahan.code',
+                'kelurahan_surat_name': 'kelurahan.name'
             }
-
-            var kecamatans = _.filter(vm.areaOptions.kecamatan_surat.transformed, function(val) {
-                return (val.code.substr(0, 4) == vm.salesOrder.cddb.kota_surat) && (val.name == vm.salesOrder.registration.kecamatan)
+            _.each(variables, function(key, variable) {
+                vm.salesOrder.cddb[variable] = _.get(vm.area, key)
             })
 
-
-            if (kecamatans.length != 1) {
-                alert('Tidak bisa mencari otomatis kecamatan. Lanjutkan manual')
-                vm.filterKecamatanSurat(vm.salesOrder.cddb.kota_surat)
-                return
-            }
-
-            var kecamatan = _.first(kecamatans)
-
-            vm.salesOrder.cddb.kecamatan_surat = kecamatan.code
-            vm.salesOrder.cddb.kecamatan_surat_name = kecamatan.name
-
-
-            var kelurahans = _.filter(vm.areaOptions.kelurahan_surat.transformed, function(val) {
-                return (val.code.substr(0, 6) == kecamatan.code) && (val.name == vm.salesOrder.registration.kelurahan)
-            })
-
-
-            if (kelurahans.length != 1) {
-                alert('Tidak bisa mencari otomatis kelurahan. Lanjutkan manual')
-                vm.filterKelurahanSurat(kecamatan.code)
-                return
-            }
-
-            var kelurahan = _.first(kelurahans)
-            vm.salesOrder.cddb.kelurahan_surat = kelurahan.code
-            vm.salesOrder.cddb.kelurahan_surat_name = kelurahan.name
-
-            vm.filterKodePos(vm.salesOrder.cddb.kelurahan_surat)
+            // vm.assignKotaKecamatanKelurahan()
         }
+
 
         vm.filterKecamatanSurat = function(kota) {
 
