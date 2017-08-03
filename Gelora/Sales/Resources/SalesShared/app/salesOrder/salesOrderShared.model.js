@@ -59,10 +59,6 @@ geloraSalesShared
             updateAfterValidation: function(id, leasingOrder) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/after-validation', leasingOrder)
             },
-
-            mainReceivablePayment: function(id, leasingOrder) {
-                return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/main-receivable-payment', leasingOrder)
-            },
             assignFromLeasingOrder: function(id, leasingOrderId, params) {
                 return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/assign-from-leasing-order/', { leasing_order_id: leasingOrderId }, { params: params })
             },
@@ -78,6 +74,14 @@ geloraSalesShared
                 },
                 store: function(id, joinPromos, transaction) {
                     return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/join-promo-payment/store', { joinPromos: joinPromos, transaction: transaction })
+                },
+            },
+            mainReceivablePayment: {
+                validate: function(id, leasingOrder) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/main-receivable-payment/validate', leasingOrder)
+                },
+                store: function(id, leasingOrder) {
+                    return $http.post(LinkFactory.dealer.sales.salesOrder.base + id + '/leasing-order/main-receivable-payment/store', leasingOrder)
                 },
             }
         }

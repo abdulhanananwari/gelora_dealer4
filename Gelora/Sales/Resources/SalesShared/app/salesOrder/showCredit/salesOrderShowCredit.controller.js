@@ -29,6 +29,7 @@ geloraSalesShared
 
                 if (vm.salesOrder.leasingOrder.invoice_generated_at) {
                     vm.action.joinPromoPayment.validate(vm.salesOrder)
+                    vm.action.mainReceivablePayment.validate(vm.salesOrder)
                 }
             })
 
@@ -100,11 +101,20 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            mainReceivablePayment: function(salesOrder) {
-                SalesOrderModel.leasingOrder.mainReceivablePayment(salesOrder.id, salesOrder.leasingOrder)
-                    .then(function(res) {
-                        vm.salesOrder = res.data.data
-                    })
+            mainReceivablePayment: {
+                store: function(salesOrder) {
+                    SalesOrderModel.leasingOrder.mainReceivablePayment.store(salesOrder.id, salesOrder.leasingOrder)
+                        .then(function(res) {
+                            vm.salesOrder = res.data.data
+                        })
+                },
+                validate: function(salesOrder) {
+                    SalesOrderModel.leasingOrder.mainReceivablePayment.validate(salesOrder.id)
+                        .then(function(res) {
+                            vm.mainReceivablePaymentValidation = res.data.data
+                        })
+
+                }
             },
             joinPromoPayment: {
                 store: function(salesOrder, joinPromos, transaction) {
