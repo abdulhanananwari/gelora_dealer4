@@ -66,16 +66,20 @@
                         <td>
                             <p>
                                 <small>
-                                    <span ng-show="salesOrder.delivery.generated_at">SJ: {{salesOrder.delivery.generated_at | fromDateTimeString }}</span><br>
+                                    <span ng-show="salesOrder.delivery.generated_at">SJ: {{salesOrder.delivery.generated_at | fromDateTimeString }} ({{ salesOrder.delivery.driver.name }})</span><br>
                                     <span ng-show="salesOrder.delivery.handover.created_at">ST: {{salesOrder.delivery.handover.created_at | fromDateTimeString }}</span><br>
                                     <span ng-show="salesOrder.delivery.handoverConfirmation.created_at">BAST: {{salesOrder.delivery.handoverConfirmation.created_at | fromDateTimeString }}</span><br>
                                 </small>
                             </p>
                         </td>
                         <td>
-                            <span ng-show="salesOrder.leasingOrder.invoice_generated_at">Cetak: {{ salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</span>
-                            <br>
-                            <span ng-show="salesOrder.leasingOrder.leasing_invoice_batch_id"><a href="/credit-sales/redirect-app/leasing-invoice-batch/{{salesOrder.leasingOrder.leasing_invoice_batch_id}}">Batch</a></span>
+                            <p><small>
+                                <span ng-show="salesOrder.leasingOrder.po_completer.timestamp">PO Lengkap: {{ salesOrder.leasingOrder.po_completer.timestamp * 1000 | fromDateTimeString }}</span>
+                                <br>
+                                <span ng-show="salesOrder.leasingOrder.invoice_generated_at">Cetak: {{ salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</span>
+                                <br>
+                                <span ng-show="salesOrder.leasingOrder.leasing_invoice_batch_id"><a href="/credit-sales/redirect-app/leasing-invoice-batch/{{salesOrder.leasingOrder.leasing_invoice_batch_id}}">Batch</a></span>
+                            </small></p>
                         </td>
                         <td>
                             <span><a ng-if="salesOrder.polReg.md_submission_batch_id" href="{{'/pol-reg/redirect-app/registration-md-submission-batch/' + salesOrder.polReg.md_submission_batch_id}}">MD</a></span>
