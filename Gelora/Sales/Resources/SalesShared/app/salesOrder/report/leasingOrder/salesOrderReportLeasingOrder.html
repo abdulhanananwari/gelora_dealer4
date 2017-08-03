@@ -21,7 +21,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>No Rangka</th>
+                        <th>Leasing</th>
                         <th>No Mesin</th>
                         <th>Nama Pemohon</th>
                         <th>Nama STNK</th>
@@ -37,7 +37,10 @@
                 </thead>
                 <tbody ng-repeat="salesOrder in ctrl.salesOrders">
                     <tr class="text-danger">
-                        <td>{{salesOrder.delivery.unit.chasis_number}}</td>
+                        <td>
+                            <span>{{salesOrder.leasingOrder.mainLeasing.name}}</span><br>
+                            <span>{{salesOrder.leasingOrder.subLeasing.name}}</span><br>
+                        </td>
                         <td>{{salesOrder.delivery.unit.engine_number}}</td>
                         <td>{{salesOrder.customer.name}}</td>
                         <td>{{salesOrder.registration.name}}</td>
