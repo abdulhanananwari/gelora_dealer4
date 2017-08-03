@@ -15,7 +15,7 @@ class SalesPersonnelAccess {
      */
     public function handle($request, Closure $next, $strict = false) {
 
-        $cacheName = \ParsedJwt::getByKey('selected_tenant_id') . '_' . \ParsedJwt::getByKey('sub') . '_sales_data';
+        $cacheName = 'sales_data_' . \ParsedJwt::getByKey('selected_tenant_id') . '_' . \ParsedJwt::getByKey('sub');
 
         $salesPersonnel = \Cache::remember($cacheName, 60, function() {
 
