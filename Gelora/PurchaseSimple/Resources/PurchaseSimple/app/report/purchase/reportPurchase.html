@@ -7,13 +7,13 @@
 	</div>
 	<div class="col-sm-4">
 		<label>No Surat Jalan </label>
-		<input type="text" ng-model="ctrl.filter.no_sj">
+		<input type="text" ng-model="ctrl.filter.sj_number">
 		<label>No Nota Debet</label>
-		<input type="text" ng-model="ctrl.filter.no_nd">
+		<input type="text" ng-model="ctrl.filter.nd_number">
 	</div>
 	<div class="col-sm-4">
 		<label>Status Unit</label>
-		<select ng-options="status.code as status.name for status in ctrl.statuses" ng-model="ctrl.filter.current_status"></select>
+		<select ng-options="status.code as status.name for status in ctrl.statuses" ng-model="ctrl.filter.status"></select>
 		<label>Lokasi Unit</label>
 		<dealer-location-finder location="location" on-location-selected="ctrl.filter.location_id=location.id"></dealer-location-finder>
 	</div>

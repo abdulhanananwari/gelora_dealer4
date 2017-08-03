@@ -9,7 +9,7 @@ class UnitReportTransformer {
     public function transform(\Illuminate\Support\Collection $units) {
 
         $unitsArray = [];
-        $keys = ['brand', 'type_name', 'type_code', 'color_name', 'color_code', 'engine_number', 'chasis_number', 'assembly_year', 'purchase_id', 'no_sj', 'no_nd', 'received_at', 'pdi_at', 'created_at'];
+        $keys = ['brand', 'type_name', 'type_code', 'color_name', 'color_code', 'engine_number', 'chasis_number', 'assembly_year', 'purchase_id', 'sj_number', 'nd_number', 'received_at', 'pdi_at', 'created_at'];
         foreach ($units as $unit) {
 
             $unitArray = [];

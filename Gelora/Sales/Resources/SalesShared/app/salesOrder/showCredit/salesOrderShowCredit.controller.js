@@ -102,8 +102,8 @@ geloraSalesShared
                         vm.salesOrder = res.data.data
                     })
             },
-            joinPromoPayment: function(salesOrder,joinPromos,transaction) {
-                SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id,joinPromos,transaction)
+            joinPromoPayment: function(salesOrder, joinPromos, transaction) {
+                SalesOrderModel.leasingOrder.joinPromoPayment(salesOrder.id, joinPromos, transaction)
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                         $state.reload()
@@ -111,7 +111,7 @@ geloraSalesShared
             },
             orderConfirmation: function(salesOrder, orderConfirmation) {
                 var note = prompt('Catatan ACC Lisan')
-                SalesOrderModel.leasingOrder.orderConfirmation(salesOrder.id, { order_confirmation: orderConfirmation , note: note })
+                SalesOrderModel.leasingOrder.orderConfirmation(salesOrder.id, { order_confirmation: orderConfirmation, note: note })
                     .then(function(res) {
                         vm.salesOrder = res.data.data
                     })
@@ -137,10 +137,18 @@ geloraSalesShared
         }
 
         vm.transactionCreatorModal = {
-            setting: [
-                { property: 'amount', readonly: true, shown: true },
-                { property: 'autoPrint', set: true },
-            ]
+            jp: {
+                setting: [
+                    { property: 'amount', readonly: false, shown: true },
+                    { property: 'autoPrint', set: true },
+                ]
+            },
+            mainReceivable: {
+                setting: [
+                    { property: 'amount', readonly: true, shown: true },
+                    { property: 'autoPrint', set: true },
+                ]
+            }
         }
 
 

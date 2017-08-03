@@ -16,6 +16,15 @@ class QueryBuilder {
 
         $query = $this->unit->newQuery();
 
+        if ($request->has('from')) {
+            $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('from'))->startOfDay();
+            $query->where('created_at', '>=', $from);
+        }
+
+        if ($request->has('until')) {
+            $until = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('until'))->endOfDay();
+            $query->where('created_at', '<=', $until);
+        }
         if ($request->has('model_ids')) {
             $query->whereIn('model_id', explode(',', $request->get('model_ids')));
         }
@@ -86,6 +95,12 @@ class QueryBuilder {
 
         if ($request->has('type_name')) {
             $query->where('type_name', $request->get('type_name'));
+        }
+        if ($request->has('sj_number')) {
+            $query->where('sj_number', $request->get('sj_number'));
+        }
+        if ($request->has('nd_number')) {
+            $query->where('nd_number', $request->get('nd_number'));
         }
         if ($request->has('color_name')) {
             $query->where('color_name', $request->get('color_name'));
