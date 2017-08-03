@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-sm-3">
         <h5>Leasing</h5>
-        <leasing-selector ng-if="ctrl.salesOrder.id && !ctrl.salesOrder.leasingOrder.payment_at" selected-main-leasing="ctrl.salesOrder.leasingOrder.mainLeasing" selected-sub-leasing="ctrl.salesOrder.leasingOrder.subLeasing"></leasing-selector>
+        <leasing-selector ng-if="ctrl.salesOrder.id && !ctrl.salesOrder.leasingOrder.invoice_generated_at" selected-main-leasing="ctrl.salesOrder.leasingOrder.mainLeasing" selected-sub-leasing="ctrl.salesOrder.leasingOrder.subLeasing"></leasing-selector>
         <br>
         <label>Leasing ID</label>
         <input type="text" ng-model="ctrl.salesOrder.leasingOrder.mainLeasing.id" readonly>
