@@ -121,32 +121,11 @@ geloraSalesAdmin
                     })
 
 
-                    .state('salesOrderCustomerInvoiceIndex', {
-                        url: '/salesOrder/customerInvoiceIndex/',
-                        templateUrl: 'app/salesOrder/customerInvoiceIndex/salesOrderCustomerInvoiceIndex.html',
-                        controller: 'SalesOrderCustomerInvoiceIndexController as ctrl',
-                        pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Invoice Pending'
-
-                    })
                     .state('salesOrderIndexDelivery', {
                         url: '/salesOrder/indexDelivery',
                         templateUrl: 'app/salesOrder/index/delivery/salesOrderIndexDelivery.html',
                         controller: 'SalesOrderIndexDeliveryController as ctrl',
                         pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Invoice Pending'
-
-                    })
-                    .state('salesOrderIndexIndent', {
-                        url: '/salesOrder/indexIndent',
-                        templateUrl: 'app/salesOrder/index/indent/salesOrderIndexIndent.html',
-                        controller: 'SalesOrderIndexIndentController as ctrl',
-                        pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Indent'
-
-                    })
-                    .state('SalesOrderIndexLeasingPayment', {
-                        url: '/salesOrder/indexLeasingPayment',
-                        templateUrl: 'app/salesOrder/index/leasingPayment/salesOrderIndexLeasingPayment.html',
-                        controller: 'SalesOrderIndexLeasingPaymentController as ctrl',
-                        pageTitle: 'Dealer | Sales Admin | Daftar Kustomer Indent'
 
                     })
 

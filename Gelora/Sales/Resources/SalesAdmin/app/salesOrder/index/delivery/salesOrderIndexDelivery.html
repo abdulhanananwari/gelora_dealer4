@@ -6,30 +6,40 @@
         <button class="btn btn-block btn-warning" ng-click="ctrl.load(ctrl.filter)">Update</button>
         <br>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Customer Name</th>
-                        <th>Type Motor</th>
-                        <th>Warna Motor</th>
+                        <th>Type</th>
+                        <th>Unit</th>
                         <th>Sales</th>
                         <th>Tanggal</th>
-                        <th>Kunci</th>
-                        <th>Validasi</th>
-                        <th>Pengiriman</th>a
+                        <th>Tanggal SJ</th>
+                        <th>Tanggal Serah Terima</th>
                         <th>Buka</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="salesOrder in ctrl.salesOrders">
-                        <td>{{salesOrder.customer.name}}</td>
-                        <td>{{salesOrder.vehicle.name}}</td>
-                        <td>{{salesOrder.vehicle.variant.name}}</td>
+                        <td>
+                            {{salesOrder.customer.name}}
+                            <br>
+                            <small>({{salesOrder.registration.name}})</small>
+                        </td>
+                        <td>
+                            {{salesOrder.delivery.unit.type_name}}
+                            <br>
+                            <small>{{salesOrder.delivery.unit.color_name}}</small>
+                        </td>
+                        <td>
+                            {{salesOrder.delivery.unit.chasis_number}}
+                            <br>
+                            <small>{{salesOrder.delivery.unit.engine_number}}</small>
+                        </td>
                         <td>{{salesOrder.salesPersonnel.entity.name}}</td>
                         <td>{{salesOrder.created_at | fromDateTimeString}}</td>
-                        <td>{{salesOrder.locked_at | fromDateTimeString }}</td>
-                        <td>{{salesOrder.validated_at | fromDateTimeString }}</td>
-                        <td>{{salesOrder.delivery.generated_at | fromDateTimeString }}</td>
+                        <td>{{salesOrder.delivery.generated_at }}</td>
+                        <td>{{salesOrder.delivery.handover.created_at }}</td>
                         <td><a ui-sref="salesOrderShowDelivery({id:salesOrder.id})">Buka</a></td>
                     </tr>
                 </tbody>
