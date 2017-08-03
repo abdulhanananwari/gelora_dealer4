@@ -13,7 +13,7 @@ class OnMainReceivablePayment {
     }
 
     public function validate() {
-        
+
         if ($this->salesOrder->getAttribute('leasingOrder.payment_at')) {
             return ['Pembayaran sudah diinput sebelumnya'];
         }

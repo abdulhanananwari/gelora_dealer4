@@ -119,7 +119,6 @@
                                     <p class="small-info">{{joinPromo.transaction.created_at}}</p>
                                     <p class="small-info">Transaction ID : {{joinPromo.transaction.id}}</p>
                                 </span>
-                                <span ng-show="ctrl.joinPromoPaymentValidation.status==false" ng-repeat="validation in ctrl.joinPromoPaymentValidation.validation">{{validation}}</span>
                                 <button ng-show="!ctrl.salesOrder.validated_at" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.splice(ctrl.salesOrder.leasingOrder.joinPromos.indexOf(joinPromo),1)" class="btn btn-block btn-danger btn-xs">Hapus</button>
                             </td>
                         </tr>

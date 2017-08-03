@@ -57,38 +57,7 @@ class LeasingOrderController extends SalesOrderController {
 
         return $this->formatItem($salesOrder);
     }
-
-    public function mainReceivablePayment($id, Request $request) {
-
-        $salesOrder = $this->salesOrder->find($id);
-
-        $salesOrder->assign()->specific()->leasingOrder()->mainReceivablePayment($request);
-
-        $validation = $salesOrder->validate()->leasingOrder()->onMainReceivablePayment();
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }
-
-        $salesOrder->action()->leasingOrder()->onMainReceivablePayment();
-
-        return $this->formatItem($salesOrder);
-    }
-
-    public function joinPromoPayment($id, Request $request) {
-
-        $salesOrder = $this->salesOrder->find($id);
-        $salesOrder->assign()->specific()->leasingOrder()->joinPromoPayment($request->get('joinPromos'), $request->get('transaction'));
-
-        $validation = $salesOrder->validate()->leasingOrder()->onUpdateAfterValidation();
-        if ($validation !== true) {
-            return $this->formatErrors($validation);
-        }
-
-        $salesOrder->save();
-
-        return $this->formatItem($salesOrder);
-    }
-
+    
     public function orderConfirmation($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);
