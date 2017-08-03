@@ -46,7 +46,17 @@ class SalesOrderReportTransformer {
             'LEASING CABANG' => $salesOrder->getAttribute('leasingOrder.subLeasing.name'),
             'TANGGAL CETAK TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.invoice_generated_at') ? $salesOrder->getAttribute('leasingOrder.invoice_generated_at')->toDateString() : null,
             'TANGGAL KIRIM TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.leasing_invoice_batch_id') ? ($salesOrder->leasingInvoiceBatch->getAttribute('closed_at') ? $salesOrder->leasingInvoiceBatch->getAttribute('closed_at')->toDateString() : null) : null,
-            // 'TANGGAL KIRIM TAGIHAN LEASING' => $salesOrder->getAttribute('leasingOrder.leasingInvoiceBatch.closed_at') ? $salesOrder->getAttribute('leasingOrder.leasingInvoiceBatch.closed_at')->toDateString() : null,
+            'KOTA STNK' => $salesOrder->getAttribute('registration.kota'),
+            'KECAMATAN STNK' => $salesOrder->getAttribute('registration.kecamatan'),
+            'KELURAHAN STNK' => $salesOrder->getAttribute('registration.kelurahan'),
+            'KODE POS STNK' => $salesOrder->getAttribute('registration.kode_pos'),
+
+            'KOTA ( UNTUK FAKTUR )' => $salesOrder->getAttribute('cddb.kota_surat_name'),
+            'KECAMATAN ( UNTUK FAKTUR )' => $salesOrder->getAttribute('cddb.kecamatan_surat_name'),
+            'KELURAHAN ( UNTUK FAKTUR ) ' => $salesOrder->getAttribute('cddb.kelurahan_surat_name'),
+            'ALAMAT ( UNTUK FAKTUR )' => $salesOrder->getAttribute('cddb.alamat_surat'),
+            'KODE POS ( UNTUK FAKTUR )' => $salesOrder->getAttribute('cddb.kode_pos_surat'),
+
             'PIUTANG LEASING' => $salesOrder->getAttribute('leasingOrder.leasing_payable'),
             'SUBSIDI LEASING' => $salesOrder->retrieve()->leasingOrder()->firstJoinPromoString(),
             'JOIN PROMO' => $salesOrder->retrieve()->leasingOrder()->joinPromosString(),
