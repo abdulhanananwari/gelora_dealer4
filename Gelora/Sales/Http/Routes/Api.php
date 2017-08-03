@@ -70,12 +70,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
                     Route::post('validate', ['uses' => 'JoinPromoPaymentController@validate']);
                     Route::post('store', ['uses' => 'JoinPromoPaymentController@store', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 });
+                Route::group(['prefix' => 'main-receivable-payment', 'namespace' => 'LeasingOrder'], function() {
+                    Route::post('validate', ['uses' => 'MainReceivablePaymentController@validate','middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER' ]);
+                    Route::post('store', ['uses' => 'MainReceivablePaymentController@store', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
+                });
 
                 Route::post('/', ['uses' => 'LeasingOrderController@update', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 Route::post('after-validation', ['uses' => 'LeasingOrderController@updateAfterValidation', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_AFTER_VALIDATION']);
                 Route::post('assign-from-leasing-order/', ['uses' => 'LeasingOrderController@assignFromLeasingOrder', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
-                Route::post('main-receivable-payment/', ['uses' => 'LeasingOrderController@mainReceivablePayment', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
-
+                
                 Route::post('order-confirmation/', ['uses' => 'LeasingOrderController@orderConfirmation', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
                 Route::post('po-complete/', ['uses' => 'LeasingOrderController@poComplete', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER']);
             });
