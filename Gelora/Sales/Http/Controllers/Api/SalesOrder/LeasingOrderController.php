@@ -12,7 +12,7 @@ class LeasingOrderController extends SalesOrderController {
     public function __construct() {
         parent::__construct();
     }
-
+    
     public function update($id, Request $request) {
 
         $salesOrder = $this->salesOrder->find($id);

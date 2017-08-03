@@ -70,7 +70,16 @@ geloraSalesShared
             'NOMOR MESIN',
             'TANGGAL DO',
             'PENUTUP',
-            'NAMA TEAM SALES'
+            'NAMA TEAM SALES',
+            'KOTA STNK',
+            'KECAMATAN STNK',
+            'KELURAHAN STNK',
+            'KOTA ( UNTUK FAKTUR )',
+            'KECAMATAN ( UNTUK FAKTUR )',
+            'KELURAHAN ( UNTUK FAKTUR ) ',
+            'ALAMAT (UNTUK FAKTUR )',
+            'KODE POS STNK',
+            'KODE POS ( UNTUK FAKTUR )'
         ]
 
 

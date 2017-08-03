@@ -36,6 +36,9 @@ class SalesOrderController extends Controller {
             case 'dashboard':
                 $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SalesOrderDashboardTransformer();
                 break;
+            case 'SubData\LeasingOrder':
+                $this->transformer = new \Gelora\Sales\App\SalesOrder\Transformers\SubData\LeasingOrderTransformer();
+                break;
             default:
                 break;
         }
