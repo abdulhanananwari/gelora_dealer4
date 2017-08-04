@@ -4,7 +4,8 @@ return [
     
     'defaultCosts' => [
         'Notice Pajak',
-        'Jasa',
+        'Jasa Kena Pajak',
+        'Jasa Tidak Kena Pajak',
         'Pajak Progresif',
         'Acc Tahun',
     ],
