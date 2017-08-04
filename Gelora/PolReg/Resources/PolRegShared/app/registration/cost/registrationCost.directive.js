@@ -32,9 +32,6 @@ geloraPolRegShared
                         name: name
                     }
                 }
-                scope.total = function(){
-                    _.sumBy(salesOrder.polReg.costs, 'amount')
-                }
             }
         }
 
