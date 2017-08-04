@@ -156,14 +156,10 @@ class SpkPdf {
         $this->pdf->SetX($width * 2 / 3);
 
         // Image
-        if (isset($registration->id_file_uuid) && $registration->id_file_uuid) {
-            $file = \SolFileManager::model()
-                    ->where('uuid', $registration->id_file_uuid)
-                    ->first();
-            $this->pdf->Cell(0, 10, 'ID untuk STNK', 0, 2);
 
-            list($imageWidth, $imageHeight) = getimagesize($file->getFullUrl());
-            $this->pdf->Image($file->getFullUrl(), null, null, ($imageHeight > $imageWidth ? null : ($width / 4)), ($imageHeight > $imageWidth ? ($width / 4) : null));
+        if (isset($registration->ktp_file_url) && $registration->ktp_file_url) {
+            list($imageWidth, $imageHeight) = getimagesize($registration->ktp_file_url);
+            $this->pdf->Image($registration->ktp_file_url, null, null, ($imageHeight > $imageWidth ? null : ($width / 4)), ($imageHeight > $imageWidth ? ($width / 4) : null));
         }
 
         $this->pdf->SetY($maxY);

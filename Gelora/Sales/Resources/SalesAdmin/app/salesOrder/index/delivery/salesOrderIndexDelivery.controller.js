@@ -7,7 +7,7 @@ geloraSalesAdmin
 
         vm.filter = {
             driver_id: JwtValidator.decodedJwt.sub,
-            status: 'delivery_generated'
+            status: JSON.stringify({ 'delivery.generated_at': 'yes', 'delivery.handoverConfirmation.created_at': 'no' })
         }
 
         SettingModel.index({ object_type: 'DRIVERS', single: true })
