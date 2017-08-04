@@ -15,7 +15,7 @@
         <p><strong>Kepada Yth,</strong></p>
         <p>{{ $viewData['salesOrder']->getAttribute('registration.name') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('registration.address') }}</p>
-        <p>{{ $viewData['salesOrder']->getAttribute('registration.kecamatan') }} / {{ $viewData['salesOrder']->getAttribute('registration.kelurahan') }}</p>
+        <p>{{ $viewData['salesOrder']->getAttribute('registration.area.kecamatan.name') }} / {{ $viewData['salesOrder']->getAttribute('registration.area.kelurahan.name') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('registration.kode_pos') }}</p>
         <p>{{ $viewData['salesOrder']->getAttribute('registration.phone_number') }}</p>
     </div>
