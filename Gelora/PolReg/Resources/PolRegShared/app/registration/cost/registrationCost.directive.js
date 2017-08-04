@@ -8,6 +8,7 @@ geloraPolRegShared
                 salesOrder: '=',
             },
             link: function(scope, element, attrs) {
+                scope._ = _
 
                 scope.modalId = Math.random().toString(36).substring(2, 7)
 
@@ -31,7 +32,6 @@ geloraPolRegShared
                         name: name
                     }
                 }
-
             }
         }
 
