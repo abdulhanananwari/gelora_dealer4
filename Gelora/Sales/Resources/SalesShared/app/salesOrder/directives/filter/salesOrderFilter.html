@@ -38,9 +38,7 @@
         <label>Jenis pembayaran</label>
         <select ng-options="key as value for (key, value) in paymentTypes" ng-model="filter.payment_type"></select>
         <label>Type dan Warna Motor</label>
-        <vehicle-model-finder2 selected-model="selectedModel" on-change="filter.type_name=selectedModel.name;
-            filter.color_name=selectedModel.variant.name">
-        </vehicle-model-finder2>
+        <vehicle-model-multiselect selected-model-ids="filter.vehicle_model_ids"></vehicle-model-multiselect>
         <label>Unit</label>
         <dealer-unit-search selected-unit="selectedUnit" on-unit-selected="filter.unit_id=selectedUnit.id"></dealer-unit-search>
     </div>

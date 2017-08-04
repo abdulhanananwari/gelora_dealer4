@@ -62,13 +62,6 @@ class QueryBuilder {
         if ($request->has('sub_leasing_id')) {
             $query->where('leasingOrder.subLeasing.id', (int) $request->get('sub_leasing_id'));
         }
-        if ($request->has('type_name')) {
-            $query->where('unit.type_name', $request->get('type_name'));
-        }
-        if ($request->has('color_name')) {
-            $query->where('unit.color_name', $request->get('color_name'));
-        }
-
         if ($request->has('driver_id')) {
             $query->where('delivery.driver.id', (int) $request->get('driver_id'));
         } else if ($request->has('driver_name')) {
@@ -77,6 +70,16 @@ class QueryBuilder {
 
         if ($request->has('unit_id')) {
             $query->where('unit_id', new ObjectID($request->get('unit_id')));
+        }
+
+        if ($request->has('vehicle_model_ids')) {
+
+            $modelIds = [];
+            foreach (explode(',', $request->get('vehicle_model_ids')) as $modelId) {
+                $modelIds[] = (int) $modelId;
+            }
+            
+            $query->whereIn('vehicle.id', $modelIds);
         }
 
         if ($request->has('registration_item_incoming')) {
