@@ -16,10 +16,10 @@ class OnMainReceivablePayment {
     public function action() {
 
         $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
-
-        $leasingOrder->setDate('payment_at', \Carbon\Carbon::now());
-        $leasingOrder->payment_creator = $this->salesOrder->assignEntityData();
         
+        $leasingOrder->setDate('payment_created_at', \Carbon\Carbon::now());
+        $leasingOrder->payment_creator = $this->salesOrder->assignEntityData();
+
         $this->salesOrder->leasingOrder = $leasingOrder;
         $this->salesOrder->save();
     }

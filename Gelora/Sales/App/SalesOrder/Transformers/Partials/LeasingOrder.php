@@ -33,7 +33,8 @@ class LeasingOrder {
             'due_uuid' => $leasingOrder->due_uuid,
             'leasing_invoice_batch_id' => $leasingOrder->leasing_invoice_batch_id,
             'payment_transaction_uuid' => $leasingOrder->payment_transaction_uuid,
-            'payment_at' => $leasingOrder->toCarbon('payment_at') instanceof \Carbon\Carbon ? $leasingOrder->toCarbon('payment_at')->toDateTimeString() : null,
+            'payment_at' => $leasingOrder->toCarbon('payment_at') instanceof \Carbon\Carbon ? $leasingOrder->toCarbon('payment_at')->toDateString() : null,
+            'payment_created_at' => $leasingOrder->toCarbon('payment_created_at') instanceof \Carbon\Carbon ? $leasingOrder->toCarbon('payment_created_at')->toDateTimeString() : null,
             'payment_creator' => $leasingOrder->payment_creator,
         ];
 
