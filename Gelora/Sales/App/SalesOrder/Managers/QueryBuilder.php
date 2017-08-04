@@ -50,6 +50,9 @@ class QueryBuilder {
         if ($request->has('sales_personnel_entity_id')) {
             $query->where('salesPersonnel.entity.id', (int) $request->get('sales_personnel_entity_id'));
         }
+        if ($request->has('sales_personnel_team_id')) {
+            $query->where('salesPersonnel.team.id', $request->get('sales_personnel_team_id'));
+        }
         if ($request->has('customer_type')) {
             $query->where('customer.type', $request->get('customer_type'));
         }

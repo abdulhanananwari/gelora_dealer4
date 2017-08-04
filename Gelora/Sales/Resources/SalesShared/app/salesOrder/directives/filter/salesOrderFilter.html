@@ -20,15 +20,13 @@
         <label>Penerimaan Barang</label>
         <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#registration-items-filter-modal">Barang</button>
         <br>
-        <area-selector provinsi="rawCustomerArea.provinsi" kota="rawCustomerArea.kota" jenis-kota="jenisKota" kecamatan="rawCustomerArea.kecamatan" kelurahan="rawCustomerArea.kelurahan" kode-pos="rawCustomerArea.kode_pos"></area-selector>
     </div>
     <div class="col-sm-4">
         <label>Leasing</label>
         <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="filter.main_leasing_id=mainLeasing.id;filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
         <label>Sales</label>
         <personnel-finder selected-personnel="salesPersonnel" on-personnel-selected="filter.sales_personnel_entity_id=salesPersonnel.entity.id"></personnel-finder>
-        <br>
-        <input type="text" ng-model="filter.sales_personnel_entity_id">
+        <team-finder selected-team="team" on-team-selected="filter.sales_personnel_team_id=team.id"></personnel-finder>
         <label>Supir</label>
         <select ng-click="loadDrivers()" ng-options="driver.user_id as driver.name for driver in drivers" ng-model="filter.driver_id"></select>
     </div>

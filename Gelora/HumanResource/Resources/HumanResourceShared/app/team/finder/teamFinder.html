@@ -1,0 +1,15 @@
+<div class="dropdown dropdown-scroll" style="margin-bottom: 10px;">
+    <button class="btn btn-default btn-sm btn-block dropdown-toggle" type="button" id="team-finder-dropdown-{{displayId}}" data-toggle="dropdown" ng-click="loadTeams()">{{ selectedTeam.name || 'Cari Team' }}
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="team-finder-dropdown-{{displayId}}">
+        <li role="presentasion">
+            <div class="input-group input-group-sm search-control">
+                <span class="input-group-addon">
+					<span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control" placeholder="Cari Team" ng-model="filter.team">
+            </div>
+        </li>
+        <li role="presentation" ng-click="select(repeatedTeam)" ng-repeat='repeatedTeam in teams | filter:filter.team'><a>{{ repeatedTeam.name }}</a></li>
+    </ul>
+</div>

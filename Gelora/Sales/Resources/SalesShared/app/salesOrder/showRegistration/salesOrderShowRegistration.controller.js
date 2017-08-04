@@ -29,4 +29,12 @@ geloraSalesShared
                 })
         }
 
+        vm.calculatePaymentUnreceived = function() {
+
+            SalesOrderModel.calculate($state.params.id)
+                .then(function(res) {
+                    vm.paymentUnreceived = res.data.data.payment_unreceived
+                })
+        }
+
     })

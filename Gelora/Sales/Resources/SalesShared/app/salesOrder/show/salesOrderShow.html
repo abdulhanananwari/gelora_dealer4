@@ -34,8 +34,7 @@
             <entity-updater-modal entity="ctrl.salesOrder.customer" new-entity-data="ctrl.salesOrder.customer">
             </entity-updater-modal>
             <br>
-            <file-manager-upload file-url="{{ ctrl.salesOrder.customer.ktp_file_url }}" path="sales-order" subpath="customer" fileable-type="SalesOrder" fileable-id="{{ ctrl.salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedCustomerId" on-file-uploaded="ctrl.salesOrder.customer.id_file_uuid=uploadedCustomerId.uuid"></file-manager-upload>
-            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.customer.id_file_uuid}}"></file-manager-show>
+            <img ng-src="{{ ctrl.salesOrder.customer.ktp_file_url }}" class="img-responsive">
         </div>
         <div class="col-sm-6">
             <h5>
@@ -67,8 +66,7 @@
             <entity-updater-modal ng-if="ctrl.salesOrder.registration.id" entity-id="{{ctrl.salesOrder.registration.id}}" new-entity-data="ctrl.salesOrder.registration">
             </entity-updater-modal>
             <br>
-            <file-manager-upload file-url="{{ ctrl.salesOrder.registration.ktp_file_url }}" path="sales-order" subpath="registration" fileable-type="SalesOrder" fileable-id="{{ ctrl.salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedRegistrationId" on-file-uploaded="ctrl.salesOrder.registration.id_file_uuid=uploadedRegistrationId.uuid"></file-manager-upload>
-            <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.registration.id_file_uuid}}"></file-manager-show>
+            <img ng-src="{{ ctrl.salesOrder.registration.ktp_file_url }}" class="img-responsive">
             <button ng-show="ctrl.salesOrder.validated_at" class="btn btn-xs btn-block btn-warning" ng-click="ctrl.postValidationUpdate.registration(ctrl.salesOrder)">Simpan Revisi SPK</button>
         </div>
     </div>
