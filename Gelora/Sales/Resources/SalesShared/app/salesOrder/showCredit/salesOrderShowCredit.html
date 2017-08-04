@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6" ng-show="ctrl.salesOrder.validated_at && !ctrl.salesOrder.leasingOrder.payment_at">
+    <div class="col-sm-6" ng-show="ctrl.salesOrder.validated_at">
         <div class="well">
             <h4>Pencatatan Piutang</h4>
             <span ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
@@ -140,9 +140,11 @@
                     Dibuat Oleh : {{ ctrl.salesOrder.leasingOrder.invoice_generator.name }}( {{ ctrl.salesOrder.leasingOrder.invoice_generated_at }} )
                 </p>
             </span>
-            <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
-            <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
-            <hr>
+            <div ng-hide="ctrl.salesOrder.leasingOrder.payment_created_at">
+                <button class="btn btn-block btn-warning" ng-click="ctrl.generate.invoice(ctrl.salesOrder)">Cetak Invoice</button>
+                <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
+                <hr>
+            </div>
             <span ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !ctrl.salesOrder.leasingOrder.payment_at && !ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id">
                 <label>Pilih Batch Tagihan Ke Leasing</label>
                 <select ng-options="leasingInvoiceBatch.id as ((leasingInvoiceBatch.created_at | fromDateTimeString)  + ' | ' + leasingInvoiceBatch.subLeasing.name) for leasingInvoiceBatch in ctrl.leasingInvoiceBatches" ng-model="leasingInvoiceBatchId" ng-click="ctrl.loadLeasingInvoiceBatches()"></select>
@@ -159,7 +161,9 @@
             <h4>Pembayaran Piutang Leasing</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
             <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && ctrl.mainReceivablePaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.setting.mainReceivable"></transaction-create>
-            <label ng-show="ctrl.salesOrder.leasingOrder.payment_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_at}})</label>
+            <label>Tanggal Pembayaran</label>
+            <input type="text" class="date" ng-model="ctrl.salesOrder.leasingOrder.payment_at">
+            <label ng-show="ctrl.salesOrder.leasingOrder.payment_created_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_created_at}})</label>
         </div>
     </div>
 </div>
