@@ -17,7 +17,7 @@
                         <td>
                             <strong>Total</strong>
                         </td>
-                        <td class="text-danger">{{ _.sumBy(_.map(salesOrder.polReg.costs, 'amount')) | number }}</td>
+                        <td class="text-danger">{{ salesOrder.polReg.total_cost | number }}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
