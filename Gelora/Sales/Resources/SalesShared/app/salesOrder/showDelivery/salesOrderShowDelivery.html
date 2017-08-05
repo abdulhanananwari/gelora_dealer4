@@ -79,12 +79,12 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h4>KTP Penerima</h4>
-                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" path="sales-order/delivery" subpath="ktp" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedKtpFile" on-file-uploaded="ctrl.salesOrder.delivery.handover.receiver.id_file_uuid=uploadedKtpFile.uuid"></file-manager-upload>
+                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" path="sales-order/delivery" subpath="ktp" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedKtpFile" on-file-uploaded="ctrl.salesOrder.delivery.handover.receiver.id_file_uuid=uploadedKtpFile.uuid;ctrl.delivery.updateAfterHandoverCreated(ctrl.salesOrder)"></file-manager-upload>
                             <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover.receiver.id_file_uuid}}"></file-manager-show>
                         </div>
                         <div class="col-sm-6">
                             <h4>Foto Serah Terima</h4>
-                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" path="sales-order/delivery" subpath="handover" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedHandover" on-file-uploaded="ctrl.salesOrder.delivery.handover.file_uuid=uploadedHandover.uuid"></file-manager-upload>
+                            <file-manager-upload ng-hide="ctrl.salesOrder.delivery.handoverConfirmation.created_at" path="sales-order/delivery" subpath="handover" fileable-type="SalesOrder" fileable-id="{{ salesOrder.id }}" resize-height-width="1300x1300" uploaded-file="uploadedHandover" on-file-uploaded="ctrl.salesOrder.delivery.handover.file_uuid=uploadedHandover.uuid;ctrl.delivery.updateAfterHandoverCreated(ctrl.salesOrder)"></file-manager-upload>
                             <file-manager-show display-type="img" file-uuid="{{ctrl.salesOrder.delivery.handover.file_uuid}}"></file-manager-show>
                         </div>
                     </div>

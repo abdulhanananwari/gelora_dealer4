@@ -31,8 +31,8 @@ geloraSalesShared
                     'indent.created_at': 'Tanggal Indent',
                     'validated_at': 'Tanggal Validasi',
                     'delivery.generated_at': 'Tanggal Buat Surat Jalan',
-                    'delivery.handover.created_at': 'Tanggal Serah terima kendaraan',
-                    'delivery.handover.confirmed_at': 'Tanggal BAST Serah Terima Kendaraan',
+                    'delivery.handover.created_at': 'Tanggal Serah Terima Kendaraan',
+                    'delivery.handoverConfirmation.created_at': 'Tanggal BAST Serah Terima Kendaraan',
                     'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing',
                     'customerInvoice.created_at': 'Tanggal Tagih Customer'
                 }

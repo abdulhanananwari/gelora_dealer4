@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <h4>Filter</h4>
+            <vehicle-model-multiselect selected-model-types="ctrl.filter.type_codes"></vehicle-model-multiselect>
+            <br>
+            <button class="btn btn-block btn-warning" ng-click="ctrl.load(ctrl.filter)">Load</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Kode</th>
+                        <th>Warna</th>
+                        <th>Nomor Rangka</th>
+                        <th>Nomor Mesin</th>>
+                        <th>Tahun Rakit</th>
+                        <th>Status</th>
+                        <th>Lokasi</th>
+                        <th>Diterima</th>
+                        <th>PDI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="unit in ctrl.units">
+                        <td>{{unit.type_name}}</td>
+                        <td>{{unit.type_code}}</td>
+                        <td>{{unit.color_name}}</td>
+                        <td>{{unit.chasis_number}}</td>
+                        <td>{{unit.engine_number}}</td>
+                        <td>{{unit.assembly_year}}</td>
+                        <td>{{unit.current_status_text}}</td>
+                        <td>{{unit.currentLocation.data.name}}</td>
+                        <td>{{unit.received_at | date}}</td>
+                        <td>{{unit.pdi_at | date}}</td>
+                    </tr>
+                    </thead>
+            </table>
+        </div>
+        <pagination pagination="ctrl.meta.pagination" page="ctrl.filter.page" on-load-page="ctrl.load(ctrl.filter)"></pagination>
+    </div>
+</div>
