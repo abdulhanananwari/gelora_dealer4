@@ -50,18 +50,16 @@
 
         <table width="100%">
 			<tr>
-				<td>{{\Carbon\Carbon::now()->toDateString()}}</td>
+				<td></td>
 			</tr>
             <tr>
                 <td style="width: 50%;">
+                    <p>Bandung, {{\Carbon\Carbon::now()->toDateString()}}</p>
                     <p>Karyawan Dealer</p>
-                    <br>
-                    <br>
-                    <p>{{ \ParsedJwt::getByKey('name') }}</p>
+                    <p style="padding-top: 4em !important;">{{ \ParsedJwt::getByKey('name') }}</p>
                 </td>
                 <td style="width: 50%;">
-                    <p>Perwakilan Leasing</p>
-                    <br><br><br>
+                    <p style="padding-bottom: 4em !important;">Perwakilan Leasing</p>
                 </td>
             </tr>
         </table>
