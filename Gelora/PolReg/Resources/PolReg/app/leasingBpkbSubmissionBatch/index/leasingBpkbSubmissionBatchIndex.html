@@ -11,6 +11,8 @@
                     <tr>
                         <th>Dibuat Oleh</th>
                         <th>Catatan</th>
+                        <th>Leasing Utama</th>
+                        <th>Leasing Cabang</th>
                         <th>Tanggal Dibuat</th>
                         <th>Tanggal Ditutup</th>
                         <th>Buka</th>
@@ -20,6 +22,8 @@
                     <tr ng-repeat="registrationBatch in ctrl.registrationBatches">
                         <td>{{ registrationBatch.creator.name }}</td>
                         <td>{{ registrationBatch.note }}</td>
+                        <td>{{ registrationBatch.mainLeasing.name }}</td>
+                        <td>{{ registrationBatch.subLeasing.name }}</td>
                         <td>{{ registrationBatch.created_at |fromDateTimeString }}</td>
                         <td>{{ registrationBatch.closed_at | fromDateTimeString}}</td>
                         <td><a ui-sref="leasingBpkbSubmissionBatchShow({id:registrationBatch.id})">Buka</a></td>

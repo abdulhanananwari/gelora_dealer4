@@ -28,27 +28,31 @@
         <table class="table" border="1">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Tipe</th>
                     <th>No Mesin</th>
-                    <th>No Rangka</th>
                     <th>No Aplikasi</th>
                     <th>No PO</th>
                     <th>Tenor</th>
                     <th>DP</th>
+                    <th>Memo Leasing</th>
                 </tr>
             </thead>
             <tbody>
+                <?php $number = 0 ?>
                 @foreach($viewData['leasingInvoiceBatch']->getSalesOrders() as $salesOrder)
+                <?php $number++ ?>
                 <tr>
+                    <td>{{ $number }}</td>
                     <td>{{ $salesOrder->getAttribute('registration.name') }}</td>
                     <td>{{ $salesOrder->getAttribute('delivery.unit.type_name') }}</td>
                     <td>{{ $salesOrder->getAttribute('delivery.unit.engine_number') }}</td>
-                    <td>{{ $salesOrder->getAttribute('delivery.unit.chasis_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.application_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.po_number') }}</td>
                     <td>{{ $salesOrder->getAttribute('leasingOrder.tenor') }}</td>
                     <td>{{ number_format($salesOrder->getAttribute('leasingOrder.dp_po')) }}</td>
+                    <td>{{ $salesOrder->getAttribute('leasingOrder.note') }}</td>
                 </tr>
                 @endforeach
             </tbody>

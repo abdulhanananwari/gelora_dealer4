@@ -45,11 +45,14 @@ class SalesOrderController extends Controller {
 
         $outgoing = $salesOrder->getAttribute('polReg.items.' . $request->get('item_name') . '.outgoing');
         $item = $salesOrder->getAttribute('polReg.items.' . $request->get('item_name'));
+        
+        $tenantInfo = (object) \Setting::where('object_type', 'TENANT_INFO')->first()->data_1;
 
         $viewData = [
             'salesOrder' => $salesOrder,
             'item' => $item,
             'outgoing' => $outgoing,
+            'tenantInfo' => $tenantInfo,
         ];
 
         return view()->make('gelora.sales::polReg.generateReceiptItemHandover')
