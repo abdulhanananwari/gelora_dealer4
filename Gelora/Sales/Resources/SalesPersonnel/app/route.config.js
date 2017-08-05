@@ -13,7 +13,7 @@ geloraSalesPersonnel
                 pageTitle: 'Dealer | Sales Personnel'
             })
 
-        .state('prospectIndex', {
+            .state('prospectIndex', {
                 url: '/prospect/index',
                 templateUrl: '/gelora/sales-shared/app/prospect/index/prospectIndex.html',
                 controller: 'ProspectIndexController as ctrl',
@@ -26,7 +26,7 @@ geloraSalesPersonnel
                 pageTitle: 'Dealer | Sales Personnel | Prospect Show'
             })
 
-        .state('salesOrderIndex', {
+            .state('salesOrderIndex', {
                 url: '/salesOrder/index/:status',
                 templateUrl: '/gelora/sales-shared/app/salesOrder/index/salesOrderIndex.html',
                 controller: 'SalesOrderIndexController as ctrl',
@@ -107,6 +107,13 @@ geloraSalesPersonnel
                 templateUrl: '/gelora/sales-shared/app/salesOrder/dashboard/salesOrderDashboard.html',
                 controller: 'SalesOrderDashboardController as ctrl',
                 pageTitle: 'Dealer | Sales Admin | Sales Order Report'
+            })
+
+            .state('unitCurrentStockIndex', {
+                url: '/unit/currentStock/index',
+                templateUrl: '/gelora/inventory-management-shared/app/unit/currentStockIndex/unitCurrentStockIndex.html',
+                controller: 'UnitCurrentStockIndexController as ctrl',
+                pageTitle: 'Dealer | Sales Admin | Data Unit'
             })
 
     })

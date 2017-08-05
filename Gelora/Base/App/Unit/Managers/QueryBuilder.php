@@ -105,6 +105,10 @@ class QueryBuilder {
         if ($request->has('color_name')) {
             $query->where('color_name', $request->get('color_name'));
         }
+        
+        if ($request->has('model_ids')) {
+            $query->whereIn('model_id', explode(',', $request->get('model_ids')));
+        }
 
         if ($request->has('color_code')) {
             $query->where('color_code', $request->get('color_code'));
