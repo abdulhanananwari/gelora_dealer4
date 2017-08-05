@@ -22,6 +22,9 @@ elixir((mix) => {
     
     mix.scriptsIn('Gelora/InventoryManagement/Resources/InventoryManagement', 'public/gelora/inventory-management/app/all.js');
     mix.copy('Gelora/InventoryManagement/Resources/InventoryManagement', 'public/gelora/inventory-management');
+    
+    mix.scriptsIn('Gelora/InventoryManagement/Resources/InventoryManagementShared', 'public/gelora/inventory-management-shared/app/all.js');
+    mix.copy('Gelora/InventoryManagement/Resources/InventoryManagementShared', 'public/gelora/inventory-management-shared');
 
     mix.scriptsIn('Gelora/Purchase/Resources/Purchase', 'public/gelora/purchase/app/all.js');
     mix.copy('Gelora/Purchase/Resources/Purchase', 'public/gelora/purchase');

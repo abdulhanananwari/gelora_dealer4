@@ -4,9 +4,10 @@ var geloraSalesPersonnel = angular
         'Solumax.Loading', 'Solumax.ErrorInterceptor', 'Solumax.JwtManager',
         'Solumax.TenantDatabaseConnection', 'Solumax.PageTitle', 'Solumax.Calculator',
         'Solumax.Entity', 'Solumax.Pagination', 'Solumax.Messenger',
+        'Gelora.Vehicle.Shared',
         'Solumax.Setting', 'Solumax.FileManager',  'Solumax.TransactionPlugins',
         'Gelora.BaseShared', 'Gelora.SalesShared', 'Gelora.HumanResourceShared',
-        'Gelora.Vehicle.Shared'
+        'Gelora.InventoryManagement.Shared',
     ])
     .factory('AppFactory', function() {
 
