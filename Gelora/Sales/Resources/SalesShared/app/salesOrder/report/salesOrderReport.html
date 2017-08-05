@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-9">
         <h4>Laporan Penjualan</h4>
         <sales-order-filter-preset filter="ctrl.filter"></sales-order-filter-preset>
         <div class="panel panel-success">
@@ -17,12 +17,25 @@
         </div>
         <hr>
         <h4>Fields</h4>
+        <input type="text" placeholder="Filter" ng-model="filter">
         <div class="row">
-            <div class="col-sm-2" ng-repeat="(key,field) in ctrl.fields">
+            <div class="col-xs-6">
+                <button class="btn btn-success btn-xs btn-block" ng-click="ctrl.massUpdate(true)">Centang Semua</button>
+            </div>
+            <div class="col-xs-6">
+                <button class="btn btn-danger btn-xs btn-block" ng-click="ctrl.massUpdate(false)">Buang Semua</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-3" ng-repeat="(key,field) in (ctrl.filteredFields = (ctrl.fields | filter:filter))">
                 <input type="checkbox" class="form-not-applied" ng-model="ctrl.filter.fields[field]" ng-true-value="'true'" ng-false-value="'false'" ng-click='ctrl.consoleLog(value)'>
                 <label>{{ field }}</label>
             </div>
         </div>
+    </div>
+    <div class="col-sm-3">
+        <h4>Laporan Lain</h4>
         <hr>
         <a class="btn btn-block btn-primary" ui-sref="salesOrderReportLeasingOrder">Pencairan Leasing</a>
     </div>
