@@ -56,11 +56,12 @@
                 <table width="100%">
                     <tr>
                         <td style="width: 50%;">
+                            <p>Bandung ,{{\Carbon\Carbon::now()->toDateString()}}</p>
                             <p>Karyawan Dealer</p>
                             <p style="padding-top: 4em !important;">{{ \ParsedJwt::getByKey('name') }}</p>
                         </td>
                         <td style="width: 50%;">
-                            <p>Perwakilan Biro Jasa</p>
+                            <p style="padding-bottom: 4em !important;">Perwakilan Biro Jasa</p>
                         </td>
                     </tr>
                 </table>
