@@ -10,6 +10,7 @@
                 <a ui-sref="salesOrderShowDelivery({id:salesOrder.id})" target="_blank" style="color: white;"><strong>{{salesOrder.customer.name}}  <small>  ({{salesOrder.registration.name}})</small></strong></a>
             </div>
             <div class="panel-body">
+                <p>Alamat : {{salesOrder.registration.address}}</p>
                 <p>
                     {{salesOrder.delivery.unit.type_name}}
                     <small>{{salesOrder.delivery.unit.color_name}}</small>
@@ -18,6 +19,7 @@
                     {{salesOrder.delivery.unit.chasis_number}}
                     <small>{{salesOrder.delivery.unit.engine_number}}</small>
                 </p>
+
                 <p>Sales: {{salesOrder.salesPersonnel.entity.name}}</p>
                 <p>SJ Dibuat: {{salesOrder.delivery.generated_at }}</p>
                 <p>Serah Terima: {{salesOrder.delivery.handover.created_at }}</p>
