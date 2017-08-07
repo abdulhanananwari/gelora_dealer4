@@ -29,9 +29,7 @@
                         <th>No Faktur</th>
                         <th>Nama STNK</th>
                         <th>Alamat STNK</th>
-                        <th>Tipe</th>
                         <th>Kode Tipe</th>
-                        <th>Warna</th>
                         <th>Nomor Rangka</th>
                         <th>Nomor Mesin</th>
                         <th>Catatan</th>
@@ -41,9 +39,7 @@
                         <td>{{ $salesOrder->getAttribute('polReg.faktur_number')}}</td>
                         <td>{{ $salesOrder->getAttribute('registration.name') }}</td>
                         <td>{{ $salesOrder->getAttribute('registration.address') }}</td>
-                        <td>{{ $salesOrder->unit->type_name }}</td>
                         <td>{{ $salesOrder->unit->type_code }}</td>
-                        <td>{{ $salesOrder->unit->color_name }}</td>
                         <td>{{ $salesOrder->unit->chasis_number }}</td>
                         <td>{{ $salesOrder->unit->engine_number }}</td>
                         <td>{{ $salesOrder->getAttribute('polReg.agency_note') }}</td>
