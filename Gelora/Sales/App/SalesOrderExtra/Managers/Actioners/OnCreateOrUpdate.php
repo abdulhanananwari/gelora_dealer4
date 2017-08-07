@@ -13,7 +13,6 @@ class OnCreateOrUpdate {
     }
     
     public function action() {
-
         $this->salesOrderExtra->save();
     }
 }
