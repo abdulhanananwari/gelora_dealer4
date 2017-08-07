@@ -123,10 +123,12 @@ geloraSalesShared
                 var balance = vm.salesOrder.financialBalance.grand_total
 
                 if (vm.salesOrder.payment_type == 'credit') {
-                    balance = balance - vm.salesOrder.financialBalance.leasing_payable
+                    balance = balance - vm.salesOrder.leasingOrder.leasing_payable
                 }
 
-                balance = balance - (vm.transactionDue.balances.transaction_total + vm.transactionDue.balances.receivable_total)
+                console.log(vm.totalTransaction)
+
+                balance = balance - (vm.totalTransaction || 0)
 
                 vm.paymentUnreceived = balance
             }
