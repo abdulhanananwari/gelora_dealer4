@@ -113,7 +113,7 @@
                             </td>
                             <td>
                                 <tumr-access-check module-role="CREATE_LEASING_ORDER_PAYMENT">
-                                    <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !joinPromo.transaction.created_at && ctrl.joinPromoPaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
+                                    <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !joinPromo.transaction.created_at && ctrl.joinPromoPaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}"  date="{{ctrl.salesOrder.leasingOrder.payment_at}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
                                     joinPromo.transaction.uuid=createdTransaction.uuid;ctrl.action.joinPromoPayment.store(ctrl.salesOrder,ctrl.salesOrder.leasingOrder.joinPromos,createdTransaction)" setting="ctrl.transactionCreatorModal.setting.jp">
                                     </transaction-create>
                                 </tumr-access-check>
@@ -164,11 +164,11 @@
             <h4>Pembayaran Piutang Leasing</h4>
             <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
             <tumr-access-check module-role="CREATE_LEASING_ORDER_PAYMENT">
-                <transaction-create ng-show="ctrl.mainReceivablePaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.setting.mainReceivable"></transaction-create>
+                <transaction-create ng-show="ctrl.mainReceivablePaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.setting.mainReceivable" date="{{ctrl.salesOrder.leasingOrder.payment_at}}"></transaction-create>
             </tumr-access-check>
             <label>Tanggal Pembayaran</label>
             <input type="text" class="date" ng-model="ctrl.salesOrder.leasingOrder.payment_at">
-            <label ng-show="ctrl.salesOrder.leasingOrder.payment_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_at}})</label>
+            <label ng-show="ctrl.salesOrder.leasingOrder.payment_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_created_at}})</label>
         </div>
     </div>
 </div>
