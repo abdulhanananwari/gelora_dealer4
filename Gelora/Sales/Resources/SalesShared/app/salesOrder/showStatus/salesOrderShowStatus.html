@@ -33,6 +33,7 @@
         </div>
     </div>
     <button class="btn btn-warning btn-block" ng-click="ctrl.action.unvalidate(ctrl.salesOrder)">Batalkan Validasi</button>
+    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#plafond-show-modal" ng-click="ctrl.loadPlafond()">Plafond</button>
 </div>
 <div class="well" ng-hide="ctrl.salesOrder.delivery.generated_at">
     <div class="row">
@@ -53,6 +54,23 @@
                 <label>Alasan Pembatalan SPK</label>
                 <input type="text" ng-model="cancellation.reason">
                 <button class="btn btn-block btn-danger" ng-click="ctrl.action.cancel(cancellation)" ng-disabled="!cancellation.reason">Batalkan SPK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="plafond-show-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-toggle="modal" data-target="#statuses-filter-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><strong>Plafond</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <price-show base64="{{ctrl.plafondCode}}"></price-show>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

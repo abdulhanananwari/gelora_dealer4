@@ -30,6 +30,10 @@ geloraSalesShared
 
         }
 
+        vm.loadPlafond = function() {
+            vm.plafondCode = vm.salesOrder.plafond
+        }
+
         vm.action = {
             lock: function() {
 
