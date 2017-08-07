@@ -9,13 +9,26 @@ GeloraCreditSalesShared
             scope: {
                 selectedMainLeasing: "=",
                 selectedSubLeasing: "=",
-                onLeasingSelected: "&"
+                onLeasingSelected: "&",
+                emptyAllowed: '='
             },
             link: function(scope, elem, attrs) {
 
                 LeasingModel.index()
                     .then(function(res) {
                         scope.leasings = res.data.data
+
+                        attrs.$observe('emptyAllowed', function(newVal) {
+
+                            if (newVal == 'true') {
+
+                                _.each(scope.leasings, function(leasing) {
+                                    leasing.subLeasings.push({ name: 'Semua' })
+                                })
+
+                                scope.leasings.push({ mainLeasing: { name: 'Semua' } })
+                            }
+                        })
                     })
 
                 scope.select = function(mainLeasing, subLeasing) {
