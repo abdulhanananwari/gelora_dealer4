@@ -126,8 +126,6 @@ geloraSalesShared
                     balance = balance - vm.salesOrder.leasingOrder.leasing_payable
                 }
 
-                console.log(vm.totalTransaction)
-
                 balance = balance - (vm.totalTransaction || 0)
 
                 vm.paymentUnreceived = balance

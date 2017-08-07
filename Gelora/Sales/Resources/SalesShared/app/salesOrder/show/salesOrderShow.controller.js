@@ -62,12 +62,11 @@ geloraSalesShared
                     })
             },
             mediatorFeePayment: function(salesOrder, transaction) {
-                console.log(transaction)
 
                 SalesOrderModel.specificUpdate.mediatorFeePayment(salesOrder.id, transaction)
                     .then(function(res) {
-                        alert('Berhasil mengupdate SPK')
                         vm.salesOrder = res.data.data
+                        window.location.reload(true)
                     })
             },
         }

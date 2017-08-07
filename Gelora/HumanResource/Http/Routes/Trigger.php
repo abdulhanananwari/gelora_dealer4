@@ -3,6 +3,17 @@
 $middleware = ['auth.db.manualOverwrite:tenantId'];
 
 Route::group(['prefix' => '{tenantId}/trigger', 'middleware' => $middleware], function() {
+    
+    Route::get('update-mediator-fee', function() {
+        
+        $salesOrders = Gelora\Sales\App\SalesOrder\SalesOrderModel::get();
+        foreach($salesOrders as $salesOrder) {
+            if (!empty($salesOrder->mediator_fee)) {
+                $salesOrder->mediator_fee = (int) $salesOrder->mediator_fee;
+                $salesOrder->save();
+            }
+        }
+    });
 
     Route::get('update-personnel-name', function(Illuminate\Http\Request $request) {
 

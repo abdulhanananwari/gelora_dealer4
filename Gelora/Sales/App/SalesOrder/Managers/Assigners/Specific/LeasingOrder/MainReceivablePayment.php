@@ -14,18 +14,23 @@ class MainReceivablePayment {
 
     public function assign(\Illuminate\Http\Request $request) {
 
-        $leasingOrder = $this->salesOrder->subDocument()->leasingOrder();
-
-        $leasingOrder->fill($request->only('payment_transaction_uuid'));
+        $this->salesOrder->setAttribute('leasingOrder.payment_transaction_uuid', $request->get('payment_transaction_uuid'));
 
         if ($request->get('payment_at')) {
             $paymentAt = \Carbon\Carbon::createFromFormat('Y-m-d', $request->get('payment_at'));
         } else {
             $paymentAt = \Carbon\Carbon::now();
         }
-        $leasingOrder->setDate('payment_at', $paymentAt);
-
-        $this->salesOrder->leasingOrder = $leasingOrder;
+        $this->salesOrder->setAttribute('leasingOrder.payment_at', $paymentAt);
+        
+        if ($request->has('transaction')) {
+            $this->salesOrder->setAttribute('leasingOrder.paymentTransaction', [
+                'id' => $request->input('transaction.id'),
+                'uuid' => $request->input('transaction.uuid'),
+                'amount' => (int) $request->input('transaction.amount'),
+                'creator' => $this->salesOrder->assignEntityData(),
+            ]);
+        }
 
         return $this->salesOrder;
     }
