@@ -14,8 +14,6 @@ class OnCreateOrUpdate {
     
     public function action() {
 
-    	$this->salesOrderExtra->salesExtra->assign()->fromSalesOrderExtra();
-    	exit($this->salesExtra->sales_extra_id);
         $this->salesOrderExtra->save();
     }
 }
