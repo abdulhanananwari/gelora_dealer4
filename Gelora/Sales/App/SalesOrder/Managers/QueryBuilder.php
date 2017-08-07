@@ -75,6 +75,10 @@ class QueryBuilder {
             $query->where('unit_id', new ObjectID($request->get('unit_id')));
         }
 
+        if ($request->has('mediator_fee')) {
+            $query->where('mediator_fee', $request->get('mediator_fee_type', '='), (int) $request->get('mediator_fee'));
+        }
+
         if ($request->has('vehicle_model_ids')) {
 
             $modelIds = [];

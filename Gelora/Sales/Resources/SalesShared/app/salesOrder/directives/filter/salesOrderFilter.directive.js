@@ -53,6 +53,7 @@ geloraSalesShared
                     'polReg->agency_submission_batch_id': 'Batch Penyerahan ke Biro Jasa',
                     'polReg->agency_invoice_id': 'Batch Tagihan dari Biro Jasa',
                     'polReg->leasing_bpkb_submission_batch_id': 'Batch BPKB ke Leasing',
+                    'mediator->payment->creator->timestamp': 'Pembayaran Fee Mediator',
                 }
 
                 ConfigModel.get('gelora.polReg.defaultItems')

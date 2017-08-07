@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <label>Tanggal</label>
         <br>
         <label>Jenis Tanggal</label>
@@ -21,7 +21,7 @@
         <button class="btn btn-sm btn-block btn-default" data-toggle="modal" data-target="#registration-items-filter-modal">Barang</button>
         <br>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <label>Leasing</label>
         <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="filter.main_leasing_id=mainLeasing.id;filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
         <label>Sales</label>
@@ -30,7 +30,7 @@
         <label>Supir</label>
         <select ng-click="loadDrivers()" ng-options="driver.user_id as driver.name for driver in drivers" ng-model="filter.driver_id"></select>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <label>Jenis Kustomer</label>
         <select ng-options="customerType as customerType for customerType in customerTypes" ng-model="filter.customer_type"></select>
         <label>Jenis pembayaran</label>
@@ -39,6 +39,14 @@
         <vehicle-model-multiselect selected-model-ids="filter.vehicle_model_ids"></vehicle-model-multiselect>
         <label>Unit</label>
         <dealer-unit-search selected-unit="selectedUnit" on-unit-selected="filter.unit_id=selectedUnit.id"></dealer-unit-search>
+    </div>
+    <div class="col-sm-3">
+        <label>Mediator Fee
+            <button class="btn btn-xs btn-primary" ng-click="filter.mediator_fee_type='<'"><</button>
+            <button class="btn btn-xs btn-primary" ng-click="filter.mediator_fee_type='>'">></button>
+            <button class="btn btn-xs btn-primary" ng-click="filter.mediator_fee_type='='">=</button>
+        </label>
+        <input type="number" ng-model="filter.mediator_fee">
     </div>
 </div>
 <hr>
