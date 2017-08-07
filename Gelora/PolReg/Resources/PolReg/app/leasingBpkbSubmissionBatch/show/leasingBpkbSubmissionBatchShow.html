@@ -52,6 +52,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Salesman</th>
@@ -65,6 +66,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="salesOrder in ctrl.registrationBatch.salesOrders">
+                        <td>{{ $index + 1 }}</td>
                         <td>
                             {{salesOrder.customer.name}}
                             <br>

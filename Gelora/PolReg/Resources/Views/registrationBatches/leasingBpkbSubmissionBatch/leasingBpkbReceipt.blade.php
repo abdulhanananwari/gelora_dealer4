@@ -30,8 +30,11 @@
                 <th>Nomor Rangka</th>
                 <th>Nomor Mesin</th>
             </tr>
+            <?php $number = 0 ?>
             @foreach($viewData['registrationBatch']->getSalesOrders() as $salesOrder)
+            <?php $number++ ?>
             <tr>
+                <td>{{ $number }}</td>
                 <td>{{ $salesOrder->getAttribute('polReg.bpkb_number') }}</td>
                 <td>{{ $salesOrder->getAttribute('polReg.pol_reg') }}</td>
                 <td>{{ $salesOrder->getAttribute('customer.name') }}</td>

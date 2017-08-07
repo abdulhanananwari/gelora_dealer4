@@ -26,6 +26,7 @@
 
                 <table width="100%" border="1" style="font-size: 12px !important;">
                     <tr>
+                        <th>No</th>
                         <th>No Faktur</th>
                         <th>Nama STNK</th>
                         <th>Alamat STNK</th>
@@ -34,8 +35,11 @@
                         <th>Nomor Mesin</th>
                         <th>Catatan</th>
                     </tr>
+                    <?php $number = 0 ?>
                     @foreach($viewData['registrationBatch']->getSalesOrders() as $salesOrder)
+                    <?php $number++ ?>
                     <tr>
+                        <td>{{ $number }}</td>
                         <td>{{ $salesOrder->getAttribute('polReg.faktur_number')}}</td>
                         <td>{{ $salesOrder->getAttribute('registration.name') }}</td>
                         <td>{{ $salesOrder->getAttribute('registration.address') }}</td>
