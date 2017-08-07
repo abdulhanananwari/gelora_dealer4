@@ -51,7 +51,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => $middlewa
 
                 Route::post('generate', ['uses' => 'DeliveryController@generate', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY']);
                 Route::post('/', ['uses' => 'DeliveryController@update', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY']);
-                Route::post('after-handover-created', ['uses' => 'DeliveryController@updateAfterHandoverCreated', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY']);
+                Route::post('after-handover-created', ['uses' => 'DeliveryController@updateAfterHandoverCreated', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY_FOR_DRIVER']);
                 Route::post('scan', ['uses' => 'DeliveryController@scan', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY_FOR_DRIVER']);
                 Route::post('travel-start', ['uses' => 'DeliveryController@travelStart', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY_FOR_DRIVER']);
                 Route::post('handover', ['uses' => 'DeliveryController@handover', 'middleware' => 'auth.jwt_tumr:WRITE_SALES_ORDER_DELIVERY_FOR_DRIVER']);
