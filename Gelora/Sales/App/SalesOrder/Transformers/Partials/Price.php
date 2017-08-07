@@ -16,7 +16,7 @@ class Price {
             'discount' => (int) $salesOrder->discount,
             'discount_leasing' => (int) $salesOrder->discount_leasing,
             'total_discount' => (int) $salesOrder->total_discount,
-            'mediator_fee' => $salesOrder->mediator_fee,
+            'mediator_fee' => (int) $salesOrder->mediator_fee,
         ];
         
         return $x;
