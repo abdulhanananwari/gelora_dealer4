@@ -14,6 +14,7 @@ geloraBaseShared
             entity: env == 'dev' ? 'http://' + hostname + ':10777/' : 'https://entity.hondagelora.com/',
             vehicle: 'https://kendaraan.hondagelora.com/',
             transaction: env == 'dev' ? 'http://' + hostname + ':11019/' : 'https://transaction.hondagelora.com/',
+            plafond: env == 'dev' ? 'http://' + hostname + ':30001/' : 'https://plafond.hondagelora.com/',
         }
 
         var apps = {
@@ -215,6 +216,15 @@ geloraBaseShared
                 }
             },
 
+            price: {
+                base: domains.plafond,
+                api: {
+                    price: {
+                        base64: apps.price + 'api/price/base64/',
+                    }
+                },
+            },
+
             transaction: {
                 transaction: {
                     base: domains.transaction + 'api/transaction/'
@@ -228,7 +238,18 @@ geloraBaseShared
                 printer: {
                     transaction: domains.transaction + 'printer/transaction/',
                 }
+            },
+
+
+            price: {
+                base: domains.plafond,
+                api: {
+                    price: {
+                        index: domains.plafond + 'price/api/price/',
+                    }
+                }
             }
+
 
         }
 

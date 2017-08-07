@@ -13,7 +13,7 @@ class JoinPromoPayment {
     }
 
     public function assign($joinPromos, $transaction) {
-        
+
         $joinPromoSubdocuments = [];
         foreach ($joinPromos as $joinPromo) {
 
