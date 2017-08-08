@@ -34,7 +34,9 @@ geloraSalesShared
                     'delivery.handover.created_at': 'Tanggal Serah Terima Kendaraan',
                     'delivery.handoverConfirmation.created_at': 'Tanggal BAST Serah Terima Kendaraan',
                     'leasingOrder.invoice_generated_at': 'Tanggal Tagih Leasing',
-                    'customerInvoice.created_at': 'Tanggal Tagih Customer'
+                    'customerInvoice.created_at': 'Tanggal Tagih Customer',
+                    'leasingOrder.payment_at': 'Pembayaran Leasing',
+                    'leasingOrder.payment_created_at': 'Inputan Pembayaran Leasing',
                 }
 
                 scope.statuses = {

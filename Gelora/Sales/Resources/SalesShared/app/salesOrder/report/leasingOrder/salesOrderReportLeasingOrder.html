@@ -13,49 +13,73 @@
                     <input type="text" ng-model="ctrl.filter.until" class="date">
                 </div>
             </div>
-            <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.filter.main_leasing_id=mainLeasing.id;ctrl.filter.sub_leasing_id=subLeasing.id;"></leasing-selector>
+            <leasing-selector selected-main-leasing="mainLeasing" selected-sub-leasing="subLeasing" force-sub-leasing="true" on-leasing-selected="ctrl.filter.main_leasing_id=mainLeasing.id;ctrl.filter.sub_leasing_id=subLeasing.id;" empty-allowed="true"></leasing-selector>
             <button class="btn btn-primary btn-block" ng-click="ctrl.load(ctrl.filter)">Download</button>
         </div>
-
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>Buka</th>
                         <th>Leasing</th>
                         <th>No Mesin</th>
                         <th>Nama Pemohon</th>
                         <th>Nama STNK</th>
                         <th>Type Motor</th>
-                        <th>Pokok Hutang Leasing</th>
                         <th>Tanggal Tagihan</th>
                         <th>Tanggal Pencairan</th>
-                        <th>JP</th>
+                        <th>Jenis Pembayaran</th>
                         <th>Jumlah Tagihan</th>
                         <th>Jumlah Pencairan</th>
-                        <th>Tanggal Cair</th>
+                        <th>Tanggal Pencairan</th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="salesOrder in ctrl.salesOrders">
                     <tr class="text-danger">
+                        <td><a class="btn btn-block btn-primary btn-xs" ui-sref="salesOrderShowCredit({id:salesOrder.id})" target="_blank">Buka</a></td>
                         <td>
-                            <span>{{salesOrder.leasingOrder.mainLeasing.name}}</span><br>
-                            <span>{{salesOrder.leasingOrder.subLeasing.name}}</span><br>
+                            <span>{{salesOrder.leasingOrder.mainLeasing.name}}</span>
+                            <br>
+                            <span>{{salesOrder.leasingOrder.subLeasing.name}}</span>
+                            <br>
                         </td>
                         <td>{{salesOrder.delivery.unit.engine_number}}</td>
                         <td>{{salesOrder.customer.name}}</td>
                         <td>{{salesOrder.registration.name}}</td>
                         <td>{{salesOrder.delivery.unit.type_name}}</td>
-                        <td>{{salesOrder.leasingOrder.leasing_payable | number }}</td>
                         <td>{{salesOrder.leasingOrder.invoice_generated_at | fromDateTimeString }}</td>
                         <td>{{salesOrder.leasingOrder.payment_at | fromDateTimeString }}</td>
-                        <td colspan="4"></td>
+                        <td>Pokok Hutang </td>
+                        <td colspan="2" class="text-center">{{ salesOrder.leasingOrder.leasing_payable | number }}</td>
+                        <td>{{ salesOrder.leasingOrder.payment_at | fromDateTimeString }}</td>
                     </tr>
-                    <tr  ng-repeat="joinPromo in salesOrder.leasingOrder.joinPromos">
+                    <tr ng-repeat="joinPromo in salesOrder.leasingOrder.joinPromos">
                         <td colspan="8"></td>
                         <td>{{ joinPromo.name }}</td>
-                        <td>{{ joinPromo.transfer_amount | number  }}</td>
-                        <td>{{ joinPromo.transaction.amount | number }}</td>
+                        <td>{{ joinPromo.transfer_amount | number }}</td>
+                        <td>
+                            {{ joinPromo.transaction.amount | number }}
+                            <small class="text-primary">{{ joinPromo.transfer_amount | number }}</small>
+                        </td>
                         <td>{{ joinPromo.transaction.created_at | fromDateTimeString }}</td>
+                    </tr>
+                </tbody>
+                <tbody ng-show="ctrl.totals">
+                    <tr>
+                        <td colspan="11">Pokok Hutang</td>
+                        <td>{{ ctrl.totals.leasingPayable | number }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="11">DPP JP</td>
+                        <td>{{ ctrl.totals.jpTotal | number }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="11">Expektasi Transfer</td>
+                        <td>{{ ctrl.totals.jpTotalTransfer | number }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="11">Transfer Real</td>
+                        <td>{{ ctrl.totals.jpTotalTransferReal | number }}</td>
                     </tr>
                 </tbody>
             </table>

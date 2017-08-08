@@ -26,6 +26,7 @@ class Transaction {
         
         return \SolTransaction::transaction()->index()
                 ->filter('transactable_type', 'SalesOrder')
+                ->filter('transactable_subtype', 'CustomerPayment')
                 ->filter('transactable_id', $this->salesOrder->id)
                 ->filter('transactable_app', config('app.name'))
                 ->run();

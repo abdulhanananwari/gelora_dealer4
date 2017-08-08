@@ -9,6 +9,8 @@ geloraSalesShared
 
         vm.appType = AppFactory.type
 
+        vm._ = _
+
         $('.date').datepicker({
             dateFormat: "yy-mm-dd",
         });
@@ -25,11 +27,6 @@ geloraSalesShared
                             vm.mbdTransferFormula = vm.leasing.mbd_transfer_formula
                             vm.recalculateJoinPromos()
                         })
-                }
-
-                if (vm.salesOrder.leasingOrder.invoice_generated_at) {
-                    vm.action.joinPromoPayment.validate(vm.salesOrder)
-                    vm.action.mainReceivablePayment.validate(vm.salesOrder)
                 }
             })
 
@@ -106,6 +103,7 @@ geloraSalesShared
                     SalesOrderModel.leasingOrder.mainReceivablePayment.store(salesOrder.id, salesOrder.leasingOrder)
                         .then(function(res) {
                             vm.salesOrder = res.data.data
+                            window.location.reload(true)
                         })
                 },
                 validate: function(salesOrder) {
@@ -121,7 +119,7 @@ geloraSalesShared
                     SalesOrderModel.leasingOrder.joinPromoPayment.store(salesOrder.id, joinPromos, transaction)
                         .then(function(res) {
                             vm.salesOrder = res.data.data
-                            $state.reload()
+                            window.location.reload(true)
                         })
                 },
                 validate: function(salesOrder) {

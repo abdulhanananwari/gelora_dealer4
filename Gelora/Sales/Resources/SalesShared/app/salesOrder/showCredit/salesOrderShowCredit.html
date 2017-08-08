@@ -112,23 +112,23 @@
                                 <input ng-disabled="ctrl.salesOrder.leasingOrder.invoice_generated_at" type="text" ng-model="joinPromo.due_day_count">
                             </td>
                             <td>
+                                <div ng-show="joinPromo.transaction.created_at">
+                                    <transaction-show transaction-uuid="{{joinPromo.transaction.uuid}}"></transaction-show>
+                                    <transaction-generate-proof transaction-uuid="{{joinPromo.transaction.uuid}}"></transaction-generate-proof>
+                                </div>
                                 <tumr-access-check module-role="CREATE_LEASING_ORDER_PAYMENT">
-                                    <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !joinPromo.transaction.created_at && ctrl.joinPromoPaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="leasingOrder.joinPromos" transactable-id="{{ctrl.salesOrder.id}}"  date="{{ctrl.salesOrder.leasingOrder.payment_at}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
-                                    joinPromo.transaction.uuid=createdTransaction.uuid;ctrl.action.joinPromoPayment.store(ctrl.salesOrder,ctrl.salesOrder.leasingOrder.joinPromos,createdTransaction)" setting="ctrl.transactionCreatorModal.setting.jp">
+                                    <transaction-create ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !joinPromo.transaction.created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id }}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name }}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="LeasingOrder.JoinPromos" transactable-id="{{ctrl.salesOrder.id}}" date="{{ctrl.salesOrder.leasingOrder.payment_at}}" amount-type="+" amount="{{ joinPromo.transfer_amount }}" transaction="createdTransaction" on-created="
+                                    joinPromo.transaction.uuid=createdTransaction.uuid;ctrl.action.joinPromoPayment.store(ctrl.salesOrder,ctrl.salesOrder.leasingOrder.joinPromos,createdTransaction)" setting="ctrl.transactionCreatorModal.jp.setting">
                                     </transaction-create>
                                 </tumr-access-check>
-                                <span ng-show="joinPromo.transaction.created_at">
-                                    <p class="small-info">Dibuat oleh: {{joinPromo.transaction.creator.name}}</p>
-                                    <p class="small-info">{{joinPromo.transaction.created_at}}</p>
-                                    <p class="small-info">Transaction ID: {{joinPromo.transaction.id}}</p>
-                                    <p class="small-info">Jumlah Pencairan: {{joinPromo.transaction.amount | number }}</p>
-                                </span>
                                 <button ng-show="!ctrl.salesOrder.validated_at" ng-click="ctrl.salesOrder.leasingOrder.joinPromos.splice(ctrl.salesOrder.leasingOrder.joinPromos.indexOf(joinPromo),1)" class="btn btn-block btn-danger btn-xs">Hapus</button>
                             </td>
                         </tr>
-                        <tr class="warning">
-                            <td colspan="2">Total Piutang Leasing</td>
-                            <td colspan="3"><strong>Rp {{ ctrl._.sumBy(ctrl.ctrl.salesOrder.leasingOrder.financial.joinPromos, 'transfer_amount') | number}}</strong></td>
+                        <tr>
+                            <td>Total Piutang Leasing</td>
+                            <td><strong>Rp {{ ctrl._.sumBy(ctrl.salesOrder.leasingOrder.joinPromos, 'amount') | number}}</strong></td>
+                            <td><strong>Rp {{ ctrl._.sumBy(ctrl.salesOrder.leasingOrder.joinPromos, 'transfer_amount') | number}}</strong></td>
+                            <td colspan="3"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -140,7 +140,7 @@
             <h4>Pencatatan Piutang</h4>
             <span ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
                 <p>
-                    Dibuat Oleh : {{ ctrl.salesOrder.leasingOrder.invoice_generator.name }}( {{ ctrl.salesOrder.leasingOrder.invoice_generated_at }} )
+                    Dibuat Oleh : {{ ctrl.salesOrder.leasingOrder.invoice_generator.name }} ({{ ctrl.salesOrder.leasingOrder.invoice_generated_at }})
                 </p>
             </span>
             <div ng-hide="ctrl.salesOrder.leasingOrder.payment_created_at">
@@ -148,7 +148,7 @@
                 <button class="btn btn-block btn-warning" ng-click="ctrl.generate.extraDocumentInvoice(ctrl.salesOrder)">Cetak Tambahan Dokumen Penagihan Ke Leasing </button>
                 <hr>
             </div>
-            <span ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !ctrl.salesOrder.leasingOrder.payment_at && !ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id">
+            <span ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at && !ctrl.salesOrder.leasingOrder.payment_created_at && !ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id">
                 <label>Pilih Batch Tagihan Ke Leasing</label>
                 <select ng-options="leasingInvoiceBatch.id as ((leasingInvoiceBatch.created_at | fromDateTimeString)  + ' | ' + leasingInvoiceBatch.subLeasing.name) for leasingInvoiceBatch in ctrl.leasingInvoiceBatches" ng-model="leasingInvoiceBatchId" ng-click="ctrl.loadLeasingInvoiceBatches()"></select>
                 <button ng-show="leasingInvoiceBatchId" class="btn btn-block btn-info" ng-click="ctrl.salesOrder.leasingOrder.leasing_invoice_batch_id=leasingInvoiceBatchId;ctrl.action.updateAfterValidation(ctrl.salesOrder)">Pilih</button>
@@ -162,9 +162,13 @@
     <div class="col-sm-6" ng-show="ctrl.salesOrder.leasingOrder.invoice_generated_at">
         <div class="well">
             <h4>Pembayaran Piutang Leasing</h4>
-            <transaction-due-list transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" data="ctrl.transactionDue"></transaction-due-list>
+            <div ng-show="ctrl.salesOrder.leasingOrder.payment_transaction_uuid">
+                <transaction-show transaction-uuid="{{ctrl.salesOrder.leasingOrder.payment_transaction_uuid}}"></transaction-show>
+                <transaction-generate-proof transaction-uuid="{{ctrl.salesOrder.leasingOrder.payment_transaction_uuid}}"></transaction-generate-proof>
+            </div>
             <tumr-access-check module-role="CREATE_LEASING_ORDER_PAYMENT">
-                <transaction-create ng-show="ctrl.mainReceivablePaymentValidation.status" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="LeasingOrder" transactable-id="{{ctrl.salesOrder.id}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" on-created="ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.setting.mainReceivable" date="{{ctrl.salesOrder.leasingOrder.payment_at}}"></transaction-create>
+                <transaction-create ng-if="!ctrl.salesOrder.leasingOrder.payment_created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="LeasingOrder.MainReceivable" transactable-id="{{ctrl.salesOrder.id}}" date="{{ctrl.salesOrder.leasingOrder.payment_at}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" val on-created="ctrl.salesOrder.leasingOrder.transaction=transaction;ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.mainReceivable.setting">
+                </transaction-create>
             </tumr-access-check>
             <label>Tanggal Pembayaran</label>
             <input type="text" class="date" ng-model="ctrl.salesOrder.leasingOrder.payment_at">
