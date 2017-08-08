@@ -1,6 +1,7 @@
 geloraSalesShared
     .controller('SalesOrderShowController', function(
         $state, $scope,
+        SolumaxLoading,
         SalesOrderModel) {
 
         var vm = this
@@ -31,7 +32,7 @@ geloraSalesShared
             vm.salesOrder.registration = angular.copy(vm.salesOrder.customer);
         }
 
-        vm.store = function(salesOrder) {
+        vm.store = function(salesOrder, params) {
 
             if (salesOrder.id) {
 
@@ -43,11 +44,21 @@ geloraSalesShared
 
             } else {
 
-                document.dispatchEvent(new CustomEvent("loading"))
+                SolumaxLoading.start()
 
-                SalesOrderModel.store(salesOrder)
+                SalesOrderModel.store(salesOrder, params)
                     .then(function(res) {
+
                         $state.go('salesOrderShow', { id: res.data.data.id })
+
+                    }, function(res) {
+
+                        SolumaxLoading.stop()
+
+                        if (res.userResponse) {
+                            vm.store(salesOrder, res.userResponse)
+                        }
+
                     })
             }
         }

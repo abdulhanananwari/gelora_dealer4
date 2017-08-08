@@ -14,7 +14,8 @@ geloraBaseShared
             entity: env == 'dev' ? 'http://' + hostname + ':10777/' : 'https://entity.hondagelora.com/',
             vehicle: 'https://kendaraan.hondagelora.com/',
             transaction: env == 'dev' ? 'http://' + hostname + ':11019/' : 'https://transaction.hondagelora.com/',
-            plafond: env == 'dev' ? 'http://' + hostname + ':30001/' : 'https://plafond.hondagelora.com/',
+            // plafond: env == 'dev' ? 'http://' + hostname + ':30001/' : 'https://plafond.hondagelora.com/',
+            plafond: env == 'dev' ? 'http://192.168.0.227:30001/' : 'https://plafond.hondagelora.com/',
         }
 
         var apps = {
