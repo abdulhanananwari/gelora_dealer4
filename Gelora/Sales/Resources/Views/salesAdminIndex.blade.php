@@ -42,8 +42,8 @@
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11019/') : 'https://transaction.hondagelora.com/'}}plugins2/all.js"></script>
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':11088/') : 'https://kendaraan.hondagelora.com/'}}shared/all.js"></script>
     <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':10777/') : 'https://entity.hondagelora.com/'}}plugins/v2/all.js"></script>
-    <!-- <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':30001/') : 'https://plafond.hondagelora.com/'}}gelora/price-plugin/app/all.js"></script> -->
-    <script type="text/javascript" src="http://192.168.0.227:30001/gelora/price-plugin/app/all.js"></script>
+    <script type="text/javascript" src="{{ env('APP_ENV') == 'dev' ? ('http:' . explode(':', Request::root())[1] . ':30001/') : 'https://plafond.hondagelora.com/'}}gelora/price-plugin/app/all.js"></script>
+   
 
     <script type="text/javascript" src="app/all.js"></script>
     

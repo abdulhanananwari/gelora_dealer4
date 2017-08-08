@@ -167,12 +167,12 @@
                 <transaction-generate-proof transaction-uuid="{{ctrl.salesOrder.leasingOrder.payment_transaction_uuid}}"></transaction-generate-proof>
             </div>
             <tumr-access-check module-role="CREATE_LEASING_ORDER_PAYMENT">
-                <transaction-create ng-if="!ctrl.salesOrder.leasingOrder.payment_creator.timestamp" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="LeasingOrder.MainReceivable" transactable-id="{{ctrl.salesOrder.id}}" date="{{ctrl.salesOrder.leasingOrder.payment_at}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" val on-created="ctrl.salesOrder.leasingOrder.transaction=transaction;ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.mainReceivable.setting">
+                <transaction-create ng-if="!ctrl.salesOrder.leasingOrder.payment_created_at" related-entity-id="{{ ctrl.salesOrder.leasingOrder.mainLeasing.id}}" related-entity-name="{{ ctrl.salesOrder.leasingOrder.mainLeasing.name}}" related-entity-phone-number="{{ ctrl.salesOrder.leasingOrder.mainLeasing.phone_number}}" transactable-app="Gelora.Dealer" transactable-type="SalesOrder" transactable-subtype="LeasingOrder.MainReceivable" transactable-id="{{ctrl.salesOrder.id}}" date="{{ctrl.salesOrder.leasingOrder.payment_at}}" amount-type="+" amount="{{ ctrl.salesOrder.leasingOrder.on_the_road - ctrl.salesOrder.leasingOrder.dp_po}}" transaction="transaction" val on-created="ctrl.salesOrder.leasingOrder.transaction=transaction;ctrl.salesOrder.leasingOrder.payment_transaction_uuid=transaction.uuid;ctrl.action.mainReceivablePayment.store(ctrl.salesOrder)" setting="ctrl.transactionCreatorModal.mainReceivable.setting">
                 </transaction-create>
             </tumr-access-check>
             <label>Tanggal Pembayaran</label>
             <input type="text" class="date" ng-model="ctrl.salesOrder.leasingOrder.payment_at">
-            <label ng-show="ctrl.salesOrder.leasingOrder.payment_creator.timestamp">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_at}})</label>
+            <label ng-show="ctrl.salesOrder.leasingOrder.payment_created_at">Dibuat oleh: {{ ctrl.salesOrder.leasingOrder.payment_creator.name}} ({{ ctrl.salesOrder.leasingOrder.payment_created_at}})</label>
         </div>
     </div>
 </div>
